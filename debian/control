@@ -1,0 +1,17 @@
+Source: libwx-perl
+Section: perl
+Priority: optional
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Uploaders: Roberto C. Sanchez <roberto@connexer.com>
+Build-Depends: debhelper (>= 5), libalien-wxwidgets-perl, xvfb, xbase-clients, xfonts-base
+Standards-Version: 3.7.3
+Homepage: http://wxperl.sourceforge.net/
+Vcs-Svn: svn://svn.debian.org/pkg-perl/trunk/libwx-perl/
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-perl/trunk/libwx-perl/
+
+Package: libwx-perl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libalien-wxwidgets-perl
+Description: interface to wxWidgets cross-platform GUI toolkit
+ wxPerl is an extension module allowing the creation of GUI (Graphical
+ User Interface) Perl programs using the wxWidgets toolkit.
