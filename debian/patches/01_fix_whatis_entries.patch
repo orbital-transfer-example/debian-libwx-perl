@@ -1,33 +1,44 @@
---- libwx-perl.orig/build/Wx/XSP/Node.pm
-+++ libwx-perl/build/Wx/XSP/Node.pm
-@@ -1,8 +1,6 @@
+Index: libwx-perl/build/Wx/XSP/Node.pm
+===================================================================
+--- libwx-perl.orig/build/Wx/XSP/Node.pm	2008-01-08 11:04:22.000000000 +0200
++++ libwx-perl/build/Wx/XSP/Node.pm	2008-01-08 11:44:09.000000000 +0200
+@@ -1,8 +1,8 @@
  package Wx::XSP::Node;
  
 -=head1 Wx::XSP::Node
--
++=head1 NAME
+ 
 -Base class for the parser output.
-+=head1 Wx::XSP::Node \- Base class for the parser output.
++Wx::XSP::Node - Base class for the parser output.
  
  =cut
  
---- libwx-perl.orig/build/Wx/XSP/Parser.pm
-+++ libwx-perl/build/Wx/XSP/Parser.pm
-@@ -5,7 +5,7 @@
+Index: libwx-perl/build/Wx/XSP/Parser.pm
+===================================================================
+--- libwx-perl.orig/build/Wx/XSP/Parser.pm	2008-01-08 11:04:22.000000000 +0200
++++ libwx-perl/build/Wx/XSP/Parser.pm	2008-01-08 11:44:22.000000000 +0200
+@@ -5,7 +5,9 @@
  use IO::Handle;
  use Wx::XSP::Grammar;
  
 -=head1 Wx::XSP::Parser METHODS
-+=head1 Wx::XSP::Parser \- an XS++ parser
++=head1 NAME
++
++Wx::XSP::Parser - an XS++ parser
  
  =cut
  
---- libwx-perl.orig/build/Wx/XSP/Typemap.pm
-+++ libwx-perl/build/Wx/XSP/Typemap.pm
-@@ -1,6 +1,6 @@
+Index: libwx-perl/build/Wx/XSP/Typemap.pm
+===================================================================
+--- libwx-perl.orig/build/Wx/XSP/Typemap.pm	2008-01-08 11:04:22.000000000 +0200
++++ libwx-perl/build/Wx/XSP/Typemap.pm	2008-01-08 11:44:15.000000000 +0200
+@@ -1,6 +1,8 @@
  package Wx::XSP::Typemap;
  
 -=head1 Wx::XSP::Typemap
-+=head1 Wx::XSP::Typemap \- map types
++=head1 NAME
++
++Wx::XSP::Typemap - map types
  
  =cut
  
