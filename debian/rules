@@ -64,7 +64,9 @@ install-stamp:
 	$(MAKE) install DESTDIR=$(TMP)
 
 	find $(TMP) -type f -name .packlist | xargs rm -f
-	rmdir --ignore-fail-on-non-empty --parents $(TMP)/usr/share/perl5
+	[ ! -d /$(TMP)/usr/share/perl5 ] \
+	    || rmdir --verbose --ignore-fail-on-non-empty --parents \
+	    	$(TMP)/usr/share/perl5
 
 	touch install-stamp
 
