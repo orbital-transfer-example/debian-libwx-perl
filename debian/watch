@@ -7,5 +7,5 @@
 version=3
 
 # <Webpage URL> <string match>
-http://search.cpan.org/dist/Wx/Wx.pm /CPAN/authors/id/M/MB/MBARBON/Wx-(.*)\.tar\.gz
+http://search.cpan.org/dist/Wx/ .+/Wx-v?(\d.*)\.tar\.gz
 
