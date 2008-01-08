@@ -7,6 +7,8 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
+include /usr/share/quilt/quilt.make
+
 # If set to a true value then MakeMaker's prompt function will
 # always return the default without waiting for user input.
 export PERL_MM_USE_DEFAULT=1
@@ -29,7 +31,7 @@ else
 endif
 
 build: build-stamp
-build-stamp:
+build-stamp: $(QUILT_STAMPFN)
 	dh_testdir
 
 	# Add commands to compile the package here
@@ -38,7 +40,7 @@ build-stamp:
 
 	touch build-stamp
 
-clean:
+clean: unpatch
 	dh_testdir
 	dh_testroot
 

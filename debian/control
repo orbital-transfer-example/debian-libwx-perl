@@ -3,7 +3,7 @@ Section: perl
 Priority: optional
 Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: Roberto C. Sanchez <roberto@connexer.com>
-Build-Depends: debhelper (>= 5), libalien-wxwidgets-perl, xvfb, xbase-clients, xfonts-base
+Build-Depends: debhelper (>= 5), quilt, libalien-wxwidgets-perl, xvfb, xbase-clients, xfonts-base
 Standards-Version: 3.7.3
 Homepage: http://wxperl.sourceforge.net/
 Vcs-Svn: svn://svn.debian.org/pkg-perl/trunk/libwx-perl/
