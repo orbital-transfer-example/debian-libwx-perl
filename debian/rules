@@ -62,6 +62,8 @@ install-stamp:
 
 	# Add commands to install the package into debian/$PACKAGE_NAME here
 	$(MAKE) install DESTDIR=$(TMP)
+	mv $(TMP)/usr/bin/wx_overload.pl $(TMP)/usr/bin/wx_overload
+	mv $(TMP)/usr/bin/wx_xspp.pl $(TMP)/usr/bin/wx_xspp
 
 	find $(TMP) -type f -name .packlist | xargs rm -f
 	[ ! -d /$(TMP)/usr/share/perl5 ] \
