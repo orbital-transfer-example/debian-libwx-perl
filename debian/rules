@@ -65,6 +65,7 @@ install-stamp:
 	mv $(TMP)/usr/bin/wx_overload.pl $(TMP)/usr/bin/wx_overload
 	mv $(TMP)/usr/bin/wx_xspp.pl $(TMP)/usr/bin/wx_xspp
 	rename 's/build:://' $(TMP)/usr/share/man/man3/build*
+	rename 's/\.pl//' $(TMP)/usr/share/man/man1/wx_xspp.pl*
 
 	find $(TMP) -type f -name .packlist | xargs rm -f
 	[ ! -d /$(TMP)/usr/share/perl5 ] \
