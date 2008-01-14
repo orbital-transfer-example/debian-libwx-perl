@@ -64,6 +64,7 @@ install-stamp:
 	$(MAKE) install DESTDIR=$(TMP)
 	mv $(TMP)/usr/bin/wx_overload.pl $(TMP)/usr/bin/wx_overload
 	mv $(TMP)/usr/bin/wx_xspp.pl $(TMP)/usr/bin/wx_xspp
+	rename 's/build:://' $(TMP)/usr/share/man/man3/build*
 
 	find $(TMP) -type f -name .packlist | xargs rm -f
 	[ ! -d /$(TMP)/usr/share/perl5 ] \
