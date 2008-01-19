@@ -1,6 +1,5 @@
-libwx-perl (0.80-1) UNRELEASED; urgency=low
+libwx-perl (0.80-1) unstable; urgency=low
 
   * Initial release (Closes: #397533)
 
- -- Roberto C. Sanchez <roberto@connexer.com>  Fri,  4 Jan 2008 10:38:49 -0500
-
+ -- Roberto C. Sanchez <roberto@connexer.com>  Sat, 19 Jan 2008 13:59:49 -0500
