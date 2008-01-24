@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Window.xs 2182 2007-08-18 21:06:34Z mbarbon $
+// RCS-ID:      $Id: Window.xs 2300 2007-12-24 17:02:32Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -67,6 +67,31 @@ wxGetActiveWindow()
 
 MODULE=Wx_Win PACKAGE=Wx::Window
 
+int
+NewControlId( winid )
+    int winid
+  CODE:
+    RETVAL = wxWindowBase::NewControlId();
+  OUTPUT: RETVAL
+
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+
+int
+NextControlId( winid )
+    int winid
+  CODE:
+    RETVAL = wxWindowBase::NextControlId( winid );
+  OUTPUT: RETVAL
+
+int
+PrevControlId( winid )
+    int winid
+  CODE:
+    RETVAL = wxWindowBase::PrevControlId( winid );
+  OUTPUT: RETVAL
+
+#endif
+
 void
 new( ... )
   PPCODE:
@@ -107,15 +132,21 @@ wxWindow::Create( parent, id = wxID_ANY, pos = wxDefaultPosition, size = wxDefau
 void
 wxWindow::CaptureMouse()
 
+#!sub Center
+
 void
 wxWindow::Centre( direction = wxBOTH )
     int direction
+
+#!sub CenterOnparent
 
 void
 wxWindow::CentreOnParent( direction = wxBOTH )
     int direction
 
 #if WXPERL_W_VERSION_GE( 2, 7, 0 )
+
+#!sub CenterOnScreen
 
 void
 wxWindow::CentreOnScreen( direction = wxBOTH )
@@ -850,12 +881,6 @@ wxWindow::SetBackgroundStyle( style )
 
 #endif
 
-void
-wxWindow::SetBackgroundColour( colour )
-    wxColour* colour
-  CODE:
-    THIS->SetBackgroundColour( *colour );
-
 #if WXPERL_W_VERSION_GE( 2, 5, 3 )
 
 void
@@ -911,12 +936,6 @@ void
 wxWindow::SetContainingSizer( sizer )
     wxSizer* sizer
 
-void
-wxWindow::SetCursor( cursor )
-    wxCursor* cursor
-  CODE:
-    THIS->SetCursor( *cursor );
-
 #if WXPERL_W_VERSION_LT( 2, 7, 0 )
 
 wxWindow*
@@ -947,12 +966,6 @@ wxWindow::SetExtraStyle( style )
 
 void
 wxWindow::SetFocus()
-
-void
-wxWindow::SetForegroundColour( colour )
-    wxColour* colour
-  CODE:
-    THIS->SetForegroundColour( *colour );
 
 void
 wxWindow::SetHelpText( text )
@@ -987,12 +1000,6 @@ wxWindow::SetScrollPos( orientation, position, refresh = true )
     int orientation
     int position
     bool refresh
-
-void
-wxWindow::SetFont( font )
-    wxFont* font
-  CODE:
-    THIS->SetFont( *font );
 
 #if WXPERL_W_VERSION_GE( 2, 5, 3 )
 
@@ -1054,12 +1061,16 @@ wxWindow::SetSizeHints( minW, minH, maxW = -1, maxH = -1, incW = -1, incH = -1 )
     int incW
     int incH
 
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+
 void
 wxWindow::SetVirtualSizeHints( minW, minH, maxW = -1, maxH = -1 )
     int minW
     int minH
     int maxW
     int maxH
+
+#endif
 
 void
 wxWindow::SetVirtualSize( ... )
@@ -1234,6 +1245,8 @@ bool
 wxWindow::CanSetTransparent()
 
 #endif
+
+INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/Window.xsp |
 
 INCLUDE: XS/Accelerators.xs
 

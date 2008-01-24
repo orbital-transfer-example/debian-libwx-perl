@@ -4,12 +4,13 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/11/2006
-## RCS-ID:      $Id: RichTextStyleCtrl.xsp 2079 2007-07-08 21:18:04Z mbarbon $
-## Copyright:   (c) 2006 Mattia Barbon
+## RCS-ID:      $Id: RichTextStyleCtrl.xsp 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
 
+#include <wx/checkbox.h>
 #include <wx/richtext/richtextstyles.h>
 
 %module{Wx};
@@ -56,6 +57,8 @@ wxRichTextStyleListBox::new( ... )
     void SetStyleType( wxPliRichTextStyleType styleType );
     wxPliRichTextStyleType GetStyleType() const;
 #endif
+    int ConvertTenthsMMToPixels( wxDC& dc, int units ) const;
+    wxString CreateHTML( wxRichTextStyleDefinition* def ) const;
 };
 
 #if WXPERL_W_VERSION_GE( 2, 7, 2 )

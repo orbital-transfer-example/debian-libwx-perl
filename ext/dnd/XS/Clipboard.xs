@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     13/08/2001
-## RCS-ID:      $Id: Clipboard.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2001-2002, 2004, 2006 Mattia Barbon
+## RCS-ID:      $Id: Clipboard.xs 2274 2007-11-10 22:37:30Z mbarbon $
+## Copyright:   (c) 2001-2002, 2004, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -68,3 +68,10 @@ wxClipboard::SetData( data )
 void
 wxClipboard::UsePrimarySelection( primary = true )
     bool primary
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+bool
+wxClipboard::IsUsingPrimarySelection()
+
+#endif

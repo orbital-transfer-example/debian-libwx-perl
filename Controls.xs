@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Controls.xs 2240 2007-10-07 19:18:51Z mbarbon $
+// RCS-ID:      $Id: Controls.xs 2292 2007-11-25 00:19:19Z mbarbon $
 // Copyright:   (c) 2000-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -50,6 +50,13 @@ wxControl::Command( event )
     wxCommandEvent* event
   CODE:
     THIS->Command( *event );
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+wxString
+wxControl::GetLabelText()
+
+#endif
 
 INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/ControlWithItems.xsp |
 
@@ -109,6 +116,8 @@ INCLUDE: XS/StaticLine.xs
 INCLUDE: XS/StaticText.xs
 INCLUDE: XS/ToggleButton.xs
 INCLUDE: XS/TreeCtrl.xs
+
+INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/TextAttr.xsp |
 
 INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/TextCtrl.xs |
 

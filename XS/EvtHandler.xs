@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     26/11/2000
-## RCS-ID:      $Id: EvtHandler.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2000-2003, 2005 Mattia Barbon
+## RCS-ID:      $Id: EvtHandler.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2000-2003, 2005, 2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -74,10 +74,16 @@ wxEvtHandler::GetPreviousHandler()
 bool
 wxEvtHandler::ProcessEvent( event )
     wxEvent* event
-  CODE:
-    RETVAL = THIS->ProcessEvent( *event );
-  OUTPUT:
-    RETVAL
+  C_ARGS: *event
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+bool
+wxEvtHandler::SafelyProcessEvent( event );
+    wxEvent* event
+  C_ARGS: *event
+
+#endif
 
 void
 wxEvtHandler::SetEvtHandlerEnabled( enabled )

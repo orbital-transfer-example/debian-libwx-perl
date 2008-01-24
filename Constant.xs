@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2266 2007-11-06 22:08:26Z mbarbon $
-// Copyright:   (c) 2000-2007 Mattia Barbon
+// RCS-ID:      $Id: Constant.xs 2315 2008-01-18 21:47:17Z mbarbon $
+// Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -371,10 +371,12 @@ static wxPlINH inherit[] =
     I( ListView,        ListCtrl )
     I( SashWindow,      Window )
     I( ToggleButton,    Control )
+    I( BitmapToggleButton, Control )
     I( Wizard,          Dialog )
     I( WizardPage,      Panel )
     I( WizardPageSimple, WizardPage )
     I( HyperlinkCtrl,   Control )
+    I( NotificationMessage, EvtHandler )
 
     I( ColourDialog,    Dialog )
     I( GenericColourDialog, ColourDialog )
@@ -420,6 +422,8 @@ static wxPlINH inherit[] =
     I( ClientDC,        WindowDC )
     I( BufferedDC,      MemoryDC )
     I( BufferedPaintDC, BufferedDC )
+    I( SVGFileDC,       DC )
+    I( MirrorDC,        DC )
 
     I( BMPHandler,      ImageHandler )
     I( PNGHandler,      ImageHandler )
@@ -470,6 +474,7 @@ static wxPlINH inherit[] =
     I( PlSizer,         Sizer )
     I( GBSizerItem,     SizerItem )
     I( StdDialogButtonSizer, BoxSizer )
+    I( WrapSizer,       BoxSizer )
 
     I( PickerBase,      Control )
     I( ColourPickerCtrl,PickerBase )
@@ -573,7 +578,7 @@ static wxPlINH inherit[] =
     // wxCursor inherits from wxObject
 #elif defined(__WXMOTIF__) || defined(__WXMAC__)
     I( Cursor,          Bitmap )
-#elif !defined(__WXGTK__)
+#elif !defined(__WXGTK__) || WXPERL_W_VERSION_GE( 2, 9, 0 )
     I( Cursor,          GDIObject )
 #endif
 
@@ -705,6 +710,9 @@ static double constant( const char *name, int arg )
 
   switch( fl ) {
   case 'A':
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxAPPLY );                       // dialog
+#endif
 #if WXPERL_W_VERSION_GE( 2, 7, 1 )
     r( wxALPHA_OPAQUE );                // color colour
     r( wxALPHA_TRANSPARENT );           // color colour
@@ -807,7 +815,9 @@ static double constant( const char *name, int arg )
     r( wxBK_BOTTOM );                   // bookctrl
     r( wxBK_LEFT );                     // bookctrl
     r( wxBK_RIGHT );                    // bookctrl
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
     r( wxBK_BUTTONBAR );                // toolbook
+#endif
     r( wxBK_HITTEST_NOWHERE );          // bookctrl
     r( wxBK_HITTEST_ONICON );           // bookctrl
     r( wxBK_HITTEST_ONLABEL );          // bookctrl
@@ -921,11 +931,19 @@ static double constant( const char *name, int arg )
     #define wxCLOSE_BOX 0
 #endif
     r( wxCLOSE_BOX );                   // frame
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxCLOSE );                       // dialog
+#endif
 
     r( wxCentreX );                     // layout constraints
     r( wxCentreY );                     // layout constraints
     r( wxCenterX );                     // layout constraints
     r( wxCenterY );                     // layout constraints
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    r( wxC2S_NAME );                    // color colour
+    r( wxC2S_CSS_SYNTAX );              // color colour
+    r( wxC2S_HTML_SYNTAX );             // color colour
+#endif
     break;
   case 'D':
     r( wxDECORATIVE );                  // font
@@ -1194,6 +1212,9 @@ static double constant( const char *name, int arg )
     r( wxEL_NO_REORDER );               // editablelistbox
     r( wxEL_DEFAULT_STYLE );            // editablelistbox
 #endif
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxEXTEND_LAST_ON_EACH_LINE );    // sizer
+#endif
     break;
   case 'F':
     r( wxFromStart );
@@ -1349,6 +1370,7 @@ static double constant( const char *name, int arg )
     r( wxGROW );                        // sizer
     break;
   case 'H':
+    r( wxHELP );                        // dialog
 #if !defined(__WXMAC__) && !defined(__WXGTK__) && !defined(__WXMOTIF__) \
     && WXPERL_W_VERSION_LE( 2, 5, 2 )
     r( wxHIDE_READONLY );               // filedialog
@@ -2342,6 +2364,12 @@ static double constant( const char *name, int arg )
     r( wxSYS_SHOW_SOUNDS );             // systemsettings
     r( wxSYS_SWAP_BUTTONS );            // systemsettings
 
+    r( wxSYS_SCREEN_NONE );             // systemsettings
+    r( wxSYS_SCREEN_TINY );             // systemsettings
+    r( wxSYS_SCREEN_PDA );              // systemsettings
+    r( wxSYS_SCREEN_SMALL );            // systemsettings
+    r( wxSYS_SCREEN_DESKTOP );          // systemsettings
+
     // capabilities
     r( wxSYS_CAN_DRAW_FRAME_DECORATIONS );
     r( wxSYS_CAN_ICONIZE_FRAME );
@@ -2445,6 +2473,11 @@ static double constant( const char *name, int arg )
 
     r( wxTop );                         // layout constraints
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxTBK_HORZ_LAYOUT );             // toolbook
+    r( wxTBK_BUTTONBAR );               // toolbook
+#endif
+
     // !export: Type_Boolean
     // !export: Type_Float
     // !export: Type_Integer
@@ -2495,6 +2528,8 @@ static double constant( const char *name, int arg )
     r( wxUPDATE_UI_RECURSE );           // window
     r( wxUPDATE_UI_FROMIDLE );          // window
 #endif
+    r( wxUPDATE_UI_PROCESS_ALL );
+    r( wxUPDATE_UI_PROCESS_SPECIFIED );
     r( wxUP );
     break;
   case 'V':
@@ -2519,6 +2554,10 @@ static double constant( const char *name, int arg )
     r( wxWS_EX_CONTEXTHELP );           // window
 #endif
     r( wxWEST );
+    r( wxWINDOW_VARIANT_NORMAL );       // window
+    r( wxWINDOW_VARIANT_SMALL );        // window
+    r( wxWINDOW_VARIANT_MINI );         // window
+    r( wxWINDOW_VARIANT_LARGE );        // window
     break;
   case 'X':
     r( wxXOR );                         // dc
@@ -2579,6 +2618,8 @@ static void wxPli_make_const( const char* name )
     newCONSTSUB( stash, (char*)name, sv );
 }
 
+#if wxUSE_UNICODE
+
 static void wxPli_make_const_str( const char* name, const wxChar* value )
 {
     dTHX;
@@ -2592,6 +2633,28 @@ static void wxPli_make_const_str( const char* name, const wxChar* value )
 
     tmp = get_sv( buffer, 0 );
     wxPli_wxChar_2_sv( aTHX_ value, tmp );
+}
+
+#endif
+
+static void wxPli_make_const_str( const char* name, const char* value )
+{
+    dTHX;
+    char buffer[256];
+    SV* tmp;
+
+    wxPli_make_const( name );
+
+    strcpy( buffer, "Wx::" );
+    strcpy( buffer + 4, name );
+
+    tmp = get_sv( buffer, 0 );
+    sv_setpv( tmp, value );
+}
+
+static void wxPli_make_const_str( const char* name, const wxString& value )
+{
+    wxPli_make_const_str( name, (const wxChar*)value.c_str() );
 }
 
 #define wxPli_make_const_string( v ) \

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.cpp 2263 2007-11-05 23:18:34Z mbarbon $
+// RCS-ID:      $Id: helpers.cpp 2289 2007-11-25 00:05:55Z mbarbon $
 // Copyright:   (c) 2000-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -1289,7 +1289,11 @@ wxVariant wxPli_sv_2_wxvariant( pTHX_ SV* sv )
     } else if( SvNOK( sv ) ) {
         return wxVariant( SvNV( sv ) );
     } else if( SvIOK( sv ) ) {
-        return wxVariant( SvIV( sv ) );
+#if INTSIZE > LONGSIZE
+        return wxVariant( (int)SvIV( sv ) );
+#else
+        return wxVariant( (long)SvIV( sv ) );
+#endif
     }
 
     return wxVariant();

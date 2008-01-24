@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     23/05/2002
-// RCS-ID:      $Id: STC.xs 2057 2007-06-18 23:03:00Z mbarbon $
-// Copyright:   (c) 2002-2004, 2006 Mattia Barbon
+// RCS-ID:      $Id: STC.xs 2294 2007-11-25 00:34:03Z mbarbon $
+// Copyright:   (c) 2002-2004, 2006-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ MODULE=Wx__STC
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: XS/StyledTextCtrl.xs
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp XS/StyledTextCtrl.xs |
 
 INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp XS/StyledTextEvent.xsp |
 

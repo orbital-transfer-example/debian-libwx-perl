@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: ToolBar.xs 2125 2007-08-11 14:41:28Z mbarbon $
+## RCS-ID:      $Id: ToolBar.xs 2293 2007-11-25 00:33:03Z mbarbon $
 ## Copyright:   (c) 2000-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -250,6 +250,28 @@ wxToolBarBase::AddToolNewShort( toolId, label, bitmap, shortHelp = wxEmptyString
     RETVAL = THIS->AddTool( toolId, label, *bitmap, shortHelp, kind );
   OUTPUT: RETVAL
 
+wxToolBarToolBase*
+wxToolBarBase::AddCheckTool( toolId, label, bitmap1, bitmap2, shortHelpString = wxEmptyString, longHelpString = wxEmptyString, clientData = NULL )
+    int toolId
+    wxString label
+    wxBitmap* bitmap1
+    wxBitmap* bitmap2
+    wxString shortHelpString
+    wxString longHelpString
+    wxPliUserDataO* clientData
+  C_ARGS: toolId, label, *bitmap1, *bitmap2, shortHelpString, longHelpString, clientData
+
+wxToolBarToolBase*
+wxToolBarBase::AddRadioTool( toolId, label, bitmap1, bitmap2, shortHelpString = wxEmptyString, longHelpString = wxEmptyString, clientData = NULL )
+    int toolId
+    wxString label
+    wxBitmap* bitmap1
+    wxBitmap* bitmap2
+    wxString shortHelpString
+    wxString longHelpString
+    wxPliUserDataO* clientData
+  C_ARGS: toolId, label, *bitmap1, *bitmap2, shortHelpString, longHelpString, clientData
+
 bool
 wxToolBarBase::DeleteTool( toolId )
     int toolId
@@ -270,6 +292,10 @@ wxToolBarBase::FindById( toolid )
     int toolid
 
 #endif
+
+wxControl*
+wxToolBarBase::FindControl( toolid )
+    int toolid
 
 wxToolBarToolBase*
 wxToolBarBase::FindToolForPosition( x, y )
@@ -390,6 +416,16 @@ wxToolBarBase::InsertToolNewLong( pos, toolId, label, bitmap1, bitmap2 = (wxBitm
   OUTPUT: RETVAL
 
 #endif
+
+void
+wxToolBarBase::ClearTools()
+
+int
+wxToolBarBase::GetToolsCount()
+
+int
+wxToolBarBase::GetToolPos( toolId )
+    int toolId
 
 bool
 wxToolBarBase::Realize()

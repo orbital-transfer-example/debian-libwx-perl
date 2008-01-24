@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     28/08/2002
-## RCS-ID:      $Id: Wizard.xs 2130 2007-08-11 21:30:15Z mbarbon $
-## Copyright:   (c) 2002-2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: Wizard.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2002-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -97,6 +97,50 @@ void
 wxWizard::SetBitmap( bitmap )
     wxBitmap* bitmap
   C_ARGS: *bitmap
+
+#endif
+
+void
+wxWizard::FitToPage( firstPage )
+    wxWizardPage* firstPage
+
+void
+wxWizard::SetBorder( border )
+    int border
+
+bool
+wxWizard::HasNextPage( page )
+    wxWizardPage* page
+
+bool
+wxWizard::HasPrevPage( page )
+    wxWizardPage* page
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+void
+wxWizard::SetBitmapBackgroundColour( colour )
+    wxColour colour
+
+wxColour*
+wxWizard::GetBitmapBackgroundColour()
+  CODE:
+    RETVAL = new wxColour( THIS->GetBitmapBackgroundColour() );
+  OUTPUT: RETVAL
+
+void
+wxWizard::SetBitmapPlacement( placement )
+    int placement
+
+int
+wxWizard::GetBitmapPlacement()
+
+void
+wxWizard::SetMinimumBitmapWidth( w )
+    int w
+
+int
+wxWizard::GetMinimumBitmapWidth()
 
 #endif
 

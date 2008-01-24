@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     30/09/2007
-## RCS-ID:      $Id: GraphicsRenderer.xsp 2233 2007-09-30 20:32:31Z mbarbon $
+## RCS-ID:      $Id: GraphicsRenderer.xsp 2300 2007-12-24 17:02:32Z mbarbon $
 ## Copyright:   (c) 2007 Klaas Hartmann
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -13,6 +13,8 @@
 %module{Wx};
 
 #if wxUSE_GRAPHICS_CONTEXT
+
+#include <wx/graphics.h>
 
 %name{Wx::GraphicsRenderer} class wxGraphicsRenderer
 {

@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2007
-## RCS-ID:      $Id: DataView.pm 2264 2007-11-05 23:23:35Z mbarbon $
+## RCS-ID:      $Id: DataView.pm 2302 2007-12-24 17:23:39Z mbarbon $
 ## Copyright:   (c) 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -30,8 +30,20 @@ SetEvents();
 no strict;
 
 package Wx::DataViewCtrl;    @ISA = qw(Wx::Control);
+package Wx::DataViewTreeCtrl; @ISA = qw(Wx::DataViewCtrl);
 package Wx::DataViewModel;
 package Wx::DataViewIndexListModel; @ISA = qw(Wx::DataViewModel);
 package Wx::PlDataViewIndexListModel; @ISA = qw(Wx::DataViewIndexListModel);
+package Wx::DataViewTreeStore; @ISA = qw(Wx::DataViewModel);
+package Wx::DataViewRenderer;
+package Wx::DataViewTextRenderer; @ISA = qw(Wx::DataViewRenderer);
+package Wx::DataViewDateRenderer; @ISA = qw(Wx::DataViewCustomRenderer);
+package Wx::DataViewCustomRenderer; @ISA = qw(Wx::DataViewRenderer);
+package Wx::DataViewToggleRenderer; @ISA = qw(Wx::DataViewRenderer);
+package Wx::DataViewIconTextRenderer; @ISA = qw(Wx::DataViewCustomRenderer);
+package Wx::DataViewBitmapRenderer; @ISA = qw(Wx::DataViewRenderer);
+package Wx::DataViewTextRendererAttr; @ISA = qw(Wx::DataViewTextRenderer);
+package Wx::DataViewProgressRenderer; @ISA = qw(Wx::DataViewCustomRenderer);
+package Wx::DataViewEvent; @ISA = qw(Wx::NotifyEvent);
 
 1;

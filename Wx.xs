@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 2262 2007-11-05 23:14:40Z mbarbon $
+// RCS-ID:      $Id: Wx.xs 2307 2007-12-24 23:28:08Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -417,6 +417,8 @@ INCLUDE: perl ./script/wx_xspp.pl -t typemap.xsp XS/StandardPaths.xsp |
 
 INCLUDE: perl ./script/wx_xspp.pl -t typemap.xsp XS/Variant.xsp |
 
+INCLUDE: perl ./script/wx_xspp.pl -t typemap.xsp XS/NotificationMessage.xsp |
+
 ##  //FIXME// tricky
 ##if defined(__WXMSW__)
 ##undef XS
@@ -426,7 +428,9 @@ INCLUDE: perl ./script/wx_xspp.pl -t typemap.xsp XS/Variant.xsp |
 MODULE=Wx PACKAGE=Wx
 
 #!irrelevant class wxArray
+#!irrelevant class wxArray<T>
 #!irrelevant class wxArrayString
+#!irrelevant class wxObjArray
 #!irrelevant class wxBrushList
 #!irrelevant class wxClientData
 #!irrelevant class wxClientDataContainer
@@ -473,6 +477,8 @@ MODULE=Wx PACKAGE=Wx
 #!irrelevant class wxStringClientData
 #!irrelevant class wxStringTokenizer
 #!irrelevant class wxThreadHelper
+
+#!equivalent class wxThread to Perl modules thread, thread::shared
 
 #!equivalent class wxArchiveClassFactory to Perl modules Archive::Any, Archive::Zip, Archive::Tar
 #!equivalent class wxArchiveEntry to Perl modules Archive::Any, Archive::Zip, Archive::Tar
@@ -563,3 +569,7 @@ MODULE=Wx PACKAGE=Wx
 
 #!equivalent class wxGLCanvas to Perl module Wx::GLCanvas
 #!equivalent class wxGLContext to Perl module Wx::GLCanvas
+
+#!equivalent class wxDateTime to perl module DateTime, Date::Calc, Date::Manip, Time::Piece
+#!equivalent class wxDateSpan to perl module DateTime, Date::Calc, Date::Manip, Time::Piece
+#!equivalent class wxTimeSpan to perl module DateTime, Date::Calc, Date::Manip, Time::Piece

@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/11/2006
-## RCS-ID:      $Id: AuiNotebook.xsp 2139 2007-08-12 13:33:17Z mbarbon $
+## RCS-ID:      $Id: AuiNotebook.xsp 2274 2007-11-10 22:37:30Z mbarbon $
 ## Copyright:   (c) 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -103,5 +103,18 @@ wxAuiNotebook::new( ... )
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
     const wxAuiManager* GetAuiManager()
         %code{% RETVAL = &THIS->GetAuiManager(); %};
+
+    void AdvanceSelection( bool advance = true );
+    int GetHeightForPageHeight( int pageHeight );
+    int GetTabCtrlHeight() const;
+
+    void SetNormalFont( const wxFont& font );
+    void SetSelectedFont( const wxFont& font );
+    void SetMeasuringFont( const wxFont& font );
+
+    void SetTabCtrlHeight( int height );
+    void SetUniformBitmapSize( const wxSize& size );
+
+    bool ShowWindowMenu();
 #endif
 };

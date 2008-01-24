@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: v_cback.h 2238 2007-10-07 19:14:55Z mbarbon $
+// RCS-ID:      $Id: v_cback.h 2284 2007-11-11 21:29:49Z mbarbon $
 // Copyright:   (c) 2000-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -37,7 +37,7 @@ private:
 #ifdef MULTIPLICITY
     #undef register
     #define register
-    pTHX;
+    pTHXx;
     #undef register
 #endif
 };

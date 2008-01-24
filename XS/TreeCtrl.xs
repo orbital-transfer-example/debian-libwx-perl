@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/02/2001
-## RCS-ID:      $Id: TreeCtrl.xs 2127 2007-08-11 18:52:34Z mbarbon $
+## RCS-ID:      $Id: TreeCtrl.xs 2298 2007-11-25 15:57:03Z mdootson $
 ## Copyright:   (c) 2001-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -107,6 +107,17 @@ wxTreeEvent::GetItem()
     RETVAL = new wxTreeItemId( THIS->GetItem() );
   OUTPUT:
     RETVAL
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+void
+wxTreeCtrl::SetQuickBestSize( q )
+    bool q
+
+bool
+wxTreeCtrl::GetQuickBestSize()
+
+#endif
 
 int
 wxTreeEvent::GetKeyCode()
@@ -271,6 +282,13 @@ wxTreeCtrl::EnsureVisible( item )
     wxTreeItemId* item
   C_ARGS: *item
 
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+void
+wxTreeCtrl::ExpandAll()
+
+#endif
+
 void
 wxTreeCtrl::Expand( item )
     wxTreeItemId* item
@@ -375,6 +393,17 @@ wxTreeCtrl::GetImageList()
   CLEANUP:
     wxPli_object_set_deleteable( aTHX_ ST(0), false );
 
+#if !defined( __WXMSW__ )
+
+wxImageList*
+wxTreeCtrl::GetButtonsImageList()
+  OUTPUT:
+    RETVAL
+  CLEANUP:
+    wxPli_object_set_deleteable( aTHX_ ST(0), false );
+    
+#endif    
+
 int
 wxTreeCtrl::GetIndent()
 
@@ -388,6 +417,27 @@ wxString
 wxTreeCtrl::GetItemText( item )
     wxTreeItemId* item
   C_ARGS: *item
+
+wxColour*
+wxTreeCtrl::GetItemBackgroundColour( item )
+    wxTreeItemId* item
+  CODE:
+    RETVAL = new wxColour( THIS->GetItemBackgroundColour( *item ) );
+  OUTPUT: RETVAL
+
+wxColour*
+wxTreeCtrl::GetItemTextColour( item )
+    wxTreeItemId* item
+  CODE:
+    RETVAL = new wxColour( THIS->GetItemTextColour( *item ) );
+  OUTPUT: RETVAL
+
+wxFont*
+wxTreeCtrl::GetItemFont( item )
+    wxTreeItemId* item
+  CODE:
+    RETVAL = new wxFont( THIS->GetItemFont( *item ) );
+  OUTPUT: RETVAL
 
 wxTreeItemId*
 wxTreeCtrl::GetLastChild( item )
@@ -648,6 +698,14 @@ void
 wxTreeCtrl::SetImageList( list )
     wxImageList* list
 
+#if !defined( __WXMSW__ )
+
+void
+wxTreeCtrl::SetButtonsImageList( list )
+    wxImageList* list
+    
+#endif    
+
 void
 wxTreeCtrl::SetStateImageList( list )
     wxImageList* list
@@ -658,6 +716,13 @@ wxTreeCtrl::AssignImageList( list )
   CODE:
     wxPli_object_set_deleteable( aTHX_ ST(1), false );
     THIS->AssignImageList( list );
+
+void
+wxTreeCtrl::AssignButtonsImageList( list )
+    wxImageList* list
+  CODE:
+    wxPli_object_set_deleteable( aTHX_ ST(1), false );
+    THIS->AssignStateImageList( list );
 
 void
 wxTreeCtrl::AssignStateImageList( list )

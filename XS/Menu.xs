@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Menu.xs 2141 2007-08-12 15:09:36Z mbarbon $
-## Copyright:   (c) 2000-2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: Menu.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -195,6 +195,14 @@ wxMenu::GetHelpString( id )
 wxString
 wxMenu::GetLabel( id )
     int id
+
+#if WXPERL_W_VERSION_GE( 2, 8, 5 )
+
+wxString
+wxMenu::GetLabelText( id )
+    int id
+
+#endif
 
 int
 wxMenu::GetMenuItemCount()
@@ -486,10 +494,14 @@ wxMenuBar::GetLabelTop( id )
 
 #endif
 
-#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+#if WXPERL_W_VERSION_GE( 2, 8, 5 )
 
 wxString
 wxMenuBar::GetMenuLabel( id )
+    int id
+
+wxString
+wxMenuBar::GetMenuLabelText( id )
     int id
 
 #endif
@@ -547,7 +559,7 @@ wxMenuBar::SetLabelTop( pos, label )
 
 #endif
 
-#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+#if WXPERL_W_VERSION_GE( 2, 8, 5 )
 
 void
 wxMenuBar::SetMenuLabel( pos, label )
@@ -614,6 +626,13 @@ wxMenuItem::GetBitmap()
 
 wxString
 wxMenuItem::GetHelp()
+
+#if WXPERL_W_VERSION_LT( 2, 9, 0 ) && !defined(__WXMSW__)
+
+wxString
+wxMenuItem::GetName()
+
+#endif
 
 int
 wxMenuItem::GetId()

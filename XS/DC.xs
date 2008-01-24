@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: DC.xs 2257 2007-11-05 19:24:03Z mbarbon $
+## RCS-ID:      $Id: DC.xs 2301 2007-12-24 17:21:22Z mbarbon $
 ## Copyright:   (c) 2000-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -54,6 +54,26 @@ wxDC::Blit( xdest, ydest, width, height, source, xsrc, ysrc, logicalFunc = wxCOP
     wxCoord ysrc
     int logicalFunc
     bool useMask
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+bool
+wxDC::StretchBlit( xdest, ydest, wdest, hdest, source, xsrc, ysrc, wsrc, hsrc, logicalFunc = wxCOPY, useMask = false, xsrcmask = -1, ysrcmask = -1 )
+    wxCoord xdest
+    wxCoord ydest
+    wxCoord wdest
+    wxCoord hdest
+    wxDC* source
+    wxCoord xsrc
+    wxCoord ysrc
+    wxCoord wsrc
+    wxCoord hsrc
+    int logicalFunc
+    bool useMask
+    wxCoord xsrcmask
+    wxCoord ysrcmask
+
+#endif
 
 void
 wxDC::CalcBoundingBox( x, y )
@@ -372,6 +392,30 @@ wxDC::GetSizeWH()
     PUSHs( sv_2mortal( newSViv( x ) ) );
     PUSHs( sv_2mortal( newSViv( y ) ) );
 
+wxSize*
+wxDC::GetSizeMM()
+  CODE:
+    RETVAL = new wxSize( THIS->GetSizeMM() );
+  OUTPUT:
+    RETVAL
+
+void
+wxDC::GetSizeMMWH()
+  PREINIT:
+    wxCoord x, y;
+  PPCODE:
+    THIS->GetSizeMM( &x, &y );
+    EXTEND( SP, 2 );
+    PUSHs( sv_2mortal( newSViv( x ) ) );
+    PUSHs( sv_2mortal( newSViv( y ) ) );
+
+wxSize*
+wxDC::GetPPI()
+  CODE:
+    RETVAL = new wxSize( THIS->GetPPI() );
+  OUTPUT:
+    RETVAL
+
 wxColour*
 wxDC::GetTextBackground()
   CODE:
@@ -478,13 +522,21 @@ wxDC::MinX()
 wxCoord
 wxDC::MinY()
 
-bool
-wxDC::Ok()
-
 #if WXPERL_W_VERSION_GE( 2, 8, 0 )
 
 bool
 wxDC::IsOk()
+
+bool
+wxDC::Ok()
+  CODE:
+    RETVAL = THIS->IsOk();
+  OUTPUT: RETVAL
+
+#else
+
+bool
+wxDC::Ok()
 
 #endif
 
@@ -495,6 +547,9 @@ void
 wxDC::SetAxisOrientation( xLeftRight, yBottomUp )
     bool xLeftRight
     bool yBottomUp
+
+int
+wxDC::GetDepth()
 
 wxPoint*
 wxDC::GetDeviceOrigin()
@@ -703,6 +758,8 @@ wxClientDC::new( window )
 %typemap{wxBufferedDC*}{simple};
 %typemap{wxBufferedPaintDC*}{simple};
 %typemap{wxAutoBufferedPaintDC*}{simple};
+%typemap{wxMirrorDC*}{simple};
+%typemap{wxDCClipper*}{simple};
 
 %name{Wx::BufferedDC} class wxBufferedDC
 {
@@ -789,5 +846,35 @@ MODULE=Wx PACKAGE=Wx PREFIX=wx
 %}
 
 wxDC* wxAutoBufferedPaintDCFactory( wxWindow* window );
+
+#include <wx/dcmirror.h>
+
+%name{Wx::MirrorDC} class wxMirrorDC
+{
+    wxMirrorDCC( wxDC& dc, bool mirror );
+};
+
+# DECLARE_OVERLOAD( wrgn, Wx::Region )
+
+%name{Wx::DCClipper} class wxDCClipper
+{
+%{
+void
+new( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+        MATCH_REDISP( wxPliOvl_wdc_wrgn, newRegion )
+        MATCH_REDISP( wxPliOvl_wdc_wrec, newRect )
+        MATCH_REDISP( wxPliOvl_wdc_n_n_n_, newXYWH )
+    END_OVERLOAD( Wx::DCClipper::new )
+%}
+
+    %name{newRegion} wxDCClipper( wxDC& dc, const wxRegion& region );
+    %name{newRect} wxDCClipper( wxDC& dc, const wxRect& rect );
+    %name{newXYWH} wxDCClipper( wxDC& dc, int x, int y, int w, int h );
+
+    ## // thread KO
+    ~wxDCClipper();
+};
 
 #endif

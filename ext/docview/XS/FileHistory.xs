@@ -4,7 +4,7 @@
 ## Author:      Simon Flack
 ## Modified by:
 ## Created:     11/09/2002
-## RCS-ID:      $Id: FileHistory.xs 2139 2007-08-12 13:33:17Z mbarbon $
+## RCS-ID:      $Id: FileHistory.xs 2285 2007-11-11 21:31:54Z mbarbon $
 ## Copyright:   (c) 2002, 2004, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -40,6 +40,16 @@ wxFileHistory::RemoveMenu( menu )
     wxMenu* menu
 
 ## Work out the config stuff
+
+void
+wxFileHistory::Load( config )
+    wxConfigBase* config
+  C_ARGS: *config
+
+void
+wxFileHistory::Save( config )
+    wxConfigBase* config
+  C_ARGS: *config
 
 void
 wxFileHistory::AddFilesToMenu( ... )

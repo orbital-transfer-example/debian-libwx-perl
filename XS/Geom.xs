@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Geom.xs 2192 2007-08-21 21:27:40Z mbarbon $
-## Copyright:   (c) 2000-2003, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: Geom.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2000-2003, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -65,6 +65,34 @@ wxSize::SetHeight( height )
 void
 wxSize::SetWidth( width )
     int width
+
+void
+wxSize::IncTo( size )
+    wxSize size
+
+void
+wxSize::DecTo( size )
+    wxSize size
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+SV*
+wxSize::Scale( xscale, yscale )
+    float xscale
+    float yscale
+  CODE:
+    THIS->Scale( xscale, yscale );
+    RETVAL = ST(0);
+  OUTPUT: RETVAL
+
+#endif
+
+bool
+wxSize::IsFullySpecified()
+
+void
+wxSize::SetDefaults( size )
+    wxSize size
 
 MODULE=Wx PACKAGE=Wx::Point
 
@@ -295,6 +323,13 @@ wxRect::Inflate( x, y )
     else
       y = SvIV( ST(2) );
     THIS->Inflate( x, y );
+
+wxRect*
+wxRect::Intersect( rect )
+    wxRect* rect
+  CODE:
+    RETVAL = new wxRect( THIS->Intersect( *rect ) );
+  OUTPUT: RETVAL
 
 bool
 wxRect::Intersects( wxRect* rec )
@@ -541,6 +576,12 @@ wxRegion::Contains( ... )
         MATCH_REDISP( wxPliOvl_wrec, ContainsRect )
     END_OVERLOAD( Wx::Region::Contains )
 
+wxBitmap*
+wxRegion::ConvertToBitmap()
+  CODE:
+    RETVAL = new wxBitmap( THIS->ConvertToBitmap() );
+  OUTPUT: RETVAL
+
 wxRect*
 wxRegion::GetBox()
   CODE:
@@ -601,6 +642,15 @@ wxRegion::Intersect( ... )
 
 bool
 wxRegion::IsEmpty()
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+bool
+wxRegion::IsEqual( region )
+    wxRegion* region
+  C_ARGS: *region
+
+#endif
 
 bool
 wxRegion::SubtractRect( rect )

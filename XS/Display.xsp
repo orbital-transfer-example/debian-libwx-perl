@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     26/09/2007
-## RCS-ID:      $Id: Display.xsp 2241 2007-10-07 19:57:31Z mbarbon $
+## RCS-ID:      $Id: Display.xsp 2308 2007-12-24 23:33:32Z mbarbon $
 ## Copyright:   (c) 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -12,6 +12,7 @@
 
 %module{Wx};
 
+#include <wx/vidmode.h>
 #include <wx/display.h>
 
 #define wxDefaultVideoModePtr (wxVideoMode*)&wxDefaultVideoMode
