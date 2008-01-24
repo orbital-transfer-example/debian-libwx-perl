@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.h 2263 2007-11-05 23:18:34Z mbarbon $
+// RCS-ID:      $Id: helpers.h 2290 2007-11-25 00:06:54Z mbarbon $
 // Copyright:   (c) 2000-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -168,6 +168,11 @@ inline AV* wxPli_avref_2_av( SV* sv )
 
     return NULL;
 }
+
+#define wxPli_push_2ints( i1, i2 ) \
+    EXTEND( SP, 2 );                                                         \
+    PUSHs( sv_2mortal( newSViv( (IV) (i1) ) ) );                             \
+    PUSHs( sv_2mortal( newSViv( (IV) (i2) ) ) );                             \
 
 //
 

@@ -4,8 +4,8 @@
 ## Author:      Graciliano M. P.
 ## Modified by:
 ## Created:     27/02/2003
-## RCS-ID:      $Id: typemap,v 1.2 2004/01/25 08:06:13 mbarbon Exp $
-## Copyright:   (c) 2003-2004 Graciliano M. P.
+## RCS-ID:      $Id: typemap 2317 2008-01-18 22:00:14Z mbarbon $
+## Copyright:   (c) 2003-2004, 2008 Graciliano M. P.
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################

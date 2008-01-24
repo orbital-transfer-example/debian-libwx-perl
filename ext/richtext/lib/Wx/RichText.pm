@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichText.pm 2230 2007-09-26 18:36:09Z mbarbon $
+## RCS-ID:      $Id: RichText.pm 2310 2007-12-31 00:31:49Z mbarbon $
 ## Copyright:   (c) 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -50,5 +50,6 @@ package Wx::RichTextBox;     @ISA = qw(Wx::RichTextCompositeObject);
 package Wx::RichTextParagraphLayoutBox; @ISA = qw(Wx::RichTextBox);
 package Wx::RichTextBuffer;  @ISA = qw(Wx::RichTextParagraphLayoutBox);
 package Wx::SymbolPickerDialog; @ISA = qw(Wx::Dialog);
+package Wx::RichTextStyleOrganiserDialog; @ISA = qw(Wx::Dialog);
 
 1;

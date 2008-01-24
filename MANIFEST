@@ -118,6 +118,7 @@ XS/Choicebook.xsp
 XS/ClassInfo.xs
 XS/CollapsiblePane.xsp
 XS/Colour.xs
+XS/ColourDatabase.xs
 XS/ColourDialog.xs
 XS/ColourPickerCtrl.xsp
 XS/ComboBox.xs
@@ -169,6 +170,7 @@ XS/MessageDialog.xsp
 XS/MimeTypes.xsp
 XS/MultiChoiceDialog.xs
 XS/Notebook.xs
+XS/NotificationMessage.xsp
 XS/OwnerDrawnComboBox.xsp
 XS/Palette.xs
 XS/Panel.xs
@@ -200,7 +202,9 @@ XS/StaticLine.xs
 XS/StaticText.xs
 XS/StatusBar.xs
 XS/Stream.xs
+XS/SVGFileDC.xsp
 XS/TaskBarIcon.xs
+XS/TextAttr.xsp
 XS/TextCtrl.xs
 XS/TextEntryDialog.xs
 XS/Timer.xs
@@ -222,6 +226,7 @@ XS/Validators.xs
 XS/Variant.xsp
 XS/Wave.xs
 XS/Wizard.xs
+XS/Window.xsp
 
 cpp/app.h
 cpp/chkconfig.h
@@ -288,9 +293,16 @@ ext/calendar/XS/DatePickerCtrl.xsp
 ext/dataview/DataView.pm
 ext/dataview/DataView.xs
 ext/dataview/Makefile.PL
+ext/dataview/XS/DataViewColumn.xsp
 ext/dataview/XS/DataViewCtrl.xsp
+ext/dataview/XS/DataViewEvent.xsp
 ext/dataview/XS/DataViewIndexListModel.xsp
+ext/dataview/XS/DataViewItem.xsp
 ext/dataview/XS/DataViewModel.xsp
+ext/dataview/XS/DataViewModelNotifier.xsp
+ext/dataview/XS/DataViewRenderer.xsp
+ext/dataview/XS/DataViewTreeCtrl.xsp
+ext/dataview/XS/DataViewTreeStore.xsp
 ext/dataview/t/01_load.t
 ext/dataview/t/02_inheritance.t
 ext/dataview/typemap
@@ -476,6 +488,7 @@ ext/richtext/XS/RichTextFileHandler.xsp
 ext/richtext/XS/RichTextFormattingDialog.xsp
 ext/richtext/XS/RichTextStyle.xsp
 ext/richtext/XS/RichTextStyleCtrl.xsp
+ext/richtext/XS/RichTextStyleOrganiserDialog.xsp
 ext/richtext/XS/SymbolPickerDialog.xsp
 ext/richtext/lib/Wx/RichText.pm
 ext/richtext/t/01_load.t

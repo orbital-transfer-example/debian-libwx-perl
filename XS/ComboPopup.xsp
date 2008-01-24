@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/08/2007
-## RCS-ID:      $Id: ComboPopup.xsp 2187 2007-08-19 21:16:55Z mbarbon $
+## RCS-ID:      $Id: ComboPopup.xsp 2283 2007-11-11 13:58:13Z mbarbon $
 ## Copyright:   (c) 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -141,6 +141,11 @@ DEF_V_CBACK_BOOL__VOID( wxPlComboPopup, wxComboPopup, LazyCreate );
     bool IsCreated() const;
 
     wxComboCtrlBase* GetComboCtrl();
+
+#!sub Create
+#!sub GetControl
+#!sub GetStringValue
+#!sub Init
 };
 
 #endif

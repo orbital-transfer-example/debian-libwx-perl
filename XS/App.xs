@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: App.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2000-2006 Mattia Barbon
+## RCS-ID:      $Id: App.xs 2303 2007-12-24 17:25:05Z mbarbon $
+## Copyright:   (c) 2000-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -79,6 +79,13 @@ wxApp::Dispatch()
 wxString
 wxApp::GetAppName()
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+wxString
+wxApp::GetAppDisplayName()
+
+#endif
+
 #if defined( __WXMSW__ ) && WXPERL_W_VERSION_LT( 2, 5, 1 )
 
 bool
@@ -126,6 +133,13 @@ wxApp::GetUseBestVisual()
 wxString
 wxApp::GetVendorName()
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+wxString
+wxApp::GetVendorDisplayName()
+
+#endif
+
 void
 wxApp::ExitMainLoop()
 
@@ -157,6 +171,14 @@ void
 wxApp::SetAppName( name )
     wxString name
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+void
+wxApp::SetAppDisplayName( name )
+    wxString name
+
+#endif
+
 #if defined( __WXMSW__ ) && WXPERL_W_VERSION_LT( 2, 5, 0 )
 
 void
@@ -181,6 +203,14 @@ void
 wxApp::SetVendorName( name )
     wxString name
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+void
+wxApp::SetVendorDisplayName( name )
+    wxString name
+
+#endif
+
 void
 wxApp::SetUseBestVisual( flag )
     bool flag
@@ -191,6 +221,7 @@ wxApp::Yield()
     THIS->wxApp::Yield();
 
 #if defined( __WXMSW__ ) && WXPERL_W_VERSION_GE( 2, 5, 0 )
+
 int
 GetComCtl32Version()
   CODE:
@@ -225,3 +256,18 @@ wxLayoutDirection
 wxApp::GetLayoutDirection()
 
 #endif
+
+wxApp*
+GetInstance()
+  CODE:
+    RETVAL = (wxApp*)wxApp::GetInstance();
+  OUTPUT: RETVAL
+
+void
+SetInstance( app )
+    wxApp* app
+  CODE:
+    wxApp::SetInstance( app );
+
+bool
+wxApp::IsMainLoopRunning()

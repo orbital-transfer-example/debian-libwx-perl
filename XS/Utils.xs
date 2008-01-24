@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     09/02/2001
-## RCS-ID:      $Id: Utils.xs 2239 2007-10-07 19:16:59Z mbarbon $
-## Copyright:   (c) 2001-2003, 2005-2007 Mattia Barbon
+## RCS-ID:      $Id: Utils.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2001-2003, 2005-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -76,6 +76,15 @@ wxSplashScreen::new( bitmap, splashStyle, milliseconds, parent, id = wxID_ANY, p
         id, pos, size, style );
   OUTPUT:
     RETVAL
+
+long
+wxSplashScreen::GetSplashStyle()
+
+wxSplashScreenWindow*
+wxSplashScreen::GetSplashWindow()
+
+int
+wxSplashScreen::GetTimeout()
 
 MODULE=Wx PACKAGE=Wx::WindowDisabler
 
@@ -271,10 +280,24 @@ MODULE=Wx PACKAGE=Wx::SystemSettings
 #endif
 
 wxColour*
+GetColour( index )
+    wxSystemColour index
+  CODE:
+    RETVAL = new wxColour( wxSystemSettings_GetSystemColour( index ) );
+  OUTPUT: RETVAL
+
+wxColour*
 GetSystemColour( index )
     wxSystemColour index
   CODE:
     RETVAL = new wxColour( wxSystemSettings_GetSystemColour( index ) );
+  OUTPUT: RETVAL
+
+wxFont*
+GetFont( index )
+    wxSystemFont index
+  CODE:
+    RETVAL = new wxFont( wxSystemSettings_GetSystemFont( index ) );
   OUTPUT: RETVAL
 
 wxFont*
@@ -285,10 +308,23 @@ GetSystemFont( index )
   OUTPUT: RETVAL
 
 int
+GetMetric( index )
+    wxSystemMetric index
+  CODE:
+    RETVAL = wxSystemSettings_GetSystemMetric( index );
+  OUTPUT: RETVAL
+
+int
 GetSystemMetric( index )
     wxSystemMetric index
   CODE:
     RETVAL = wxSystemSettings_GetSystemMetric( index );
+  OUTPUT: RETVAL
+
+wxSystemScreenType
+GetScreenType()
+  CODE:
+    RETVAL = wxSystemSettings::GetScreenType();
   OUTPUT: RETVAL
 
 MODULE=Wx PACKAGE=Wx::TipProvider
@@ -325,6 +361,8 @@ wxTipProvider::SetCurrentTip( number )
 MODULE=Wx PACKAGE=Wx::Thread
 
 #if wxUSE_THREADS
+
+#include <wx/thread.h>
 
 bool
 IsMain()

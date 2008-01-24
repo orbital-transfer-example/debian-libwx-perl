@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     02/12/2000
-## RCS-ID:      $Id: ScrolledWindow.xs 2050 2007-05-13 18:38:33Z mbarbon $
+## RCS-ID:      $Id: ScrolledWindow.xs 2285 2007-11-11 21:31:54Z mbarbon $
 ## Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -157,3 +157,5 @@ wxScrolledWindow::GetViewStart()
     EXTEND( SP, 2 );
     PUSHs( sv_2mortal( newSViv( x ) ) );
     PUSHs( sv_2mortal( newSViv( y ) ) );
+
+#!sub OnDraw

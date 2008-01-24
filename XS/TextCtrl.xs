@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: TextCtrl.xs 2244 2007-10-14 21:36:20Z mbarbon $
+## RCS-ID:      $Id: TextCtrl.xs 2299 2007-11-25 17:30:04Z mbarbon $
 ## Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -12,9 +12,7 @@
 
 %module{Wx};
 
-%{
 #include <wx/textctrl.h>
-%}
 
 %typemap{wxMouseEvent&}{reference};
 %typemap{wxTextAttr*}{simple};
@@ -29,80 +27,6 @@
     long GetURLStart();
     long GetURLEnd();
 };
-
-%name{Wx::TextAttr} class wxTextAttr
-{
-    ## ctor in plain XS
-    ## // thread OK
-%{
-void
-wxTextAttr::DESTROY()
-  CODE:
-    wxPli_thread_sv_unregister( aTHX_ "Wx::TextAttr", THIS, ST(0) );
-    delete THIS;
-
-static void
-wxTextAttr::CLONE()
-  CODE:
-    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
-%}
-
-#if WXPERL_W_VERSION_GE( 2, 7, 0 )
-    void Merge( const wxTextAttr& overlay );
-#endif
-    void SetTextColour( const wxColour& colText );
-    void SetBackgroundColour( const wxColour& colBack );
-    void SetFont( const wxFont& font, long flags = wxTEXT_ATTR_FONT );
-    void SetAlignment( wxTextAttrAlignment alignment );
-    void SetTabs( const wxArrayInt& tabs );
-    void SetLeftIndent( int indent, int subIndent = 0 );
-    void SetRightIndent( int indent );
-    void SetFlags( long flags );
-
-    bool HasTextColour() const;
-    bool HasBackgroundColour() const;
-    bool HasFont() const;
-    bool HasAlignment() const;
-    bool HasTabs() const;
-    bool HasLeftIndent() const;
-    bool HasRightIndent() const;
-    bool HasFlag( long flag ) const;
-
-    const wxColour& GetTextColour() const;
-    const wxColour& GetBackgroundColour() const;
-    const wxFont& GetFont() const;
-    wxTextAttrAlignment GetAlignment() const;
-    long GetLeftIndent() const;
-    long GetLeftSubIndent() const;
-    long GetRightIndent() const;
-    long GetFlags() const;
-    bool IsDefault() const;
-};
-
-%{
-
-wxTextAttr*
-wxTextAttr::new( colText = wxNullColour, colBack = wxNullColour, font = (wxFont*)&wxNullFont )
-    wxColour colText
-    wxColour colBack
-    wxFont* font
-  CODE:
-    if( items == 1 )
-        RETVAL = new wxTextAttr();
-    else
-        RETVAL = new wxTextAttr( colText, colBack, *font );
-  OUTPUT:
-    RETVAL
-
-void
-wxTextAttr::GetTabs()
-  PPCODE:
-    const wxArrayInt& tabs = THIS->GetTabs();
-    PUTBACK;
-    wxPli_intarray_push( aTHX_ tabs );
-    SPAGAIN;
-
-%}
 
 %name{Wx::TextCtrlBase} class wxTextCtrlBase
 {
@@ -166,6 +90,10 @@ wxTextAttr::GetTabs()
     void SetSelection( long from, long to );
     void SelectAll();
     void SetEditable( bool editable );
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    bool AutoComplete( const wxArrayString& choices );
+    bool AutoCompleteFileNames();
+#endif
 };
 
 %{

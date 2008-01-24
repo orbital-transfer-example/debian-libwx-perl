@@ -4,20 +4,21 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Dialog.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2000-2001, 2003-2004, 2006 Mattia Barbon
+## RCS-ID:      $Id: Dialog.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2000-2001, 2003-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
 
 %module{Wx};
 
-%{
 #include <wx/dialog.h>
+#include <wx/sizer.h>
 #include <wx/button.h>
 #include "cpp/dialog.h"
 #include "cpp/overload.h"
-%}
+
+%typemap{wxDialogLayoutAdaptationMode}{simple};
 
 %name{Wx::Dialog} class wxDialog {
 #if WXPERL_W_VERSION_GE( 2, 6, 3 )
@@ -28,6 +29,46 @@
 #endif
 #if WXPERL_W_VERSION_GE( 2, 7, 0 )
     void SetEscapeId( int escapeId );
+#endif
+    wxSizer* CreateTextSizer( const wxString &message );
+    wxSizer* CreateButtonSizer( long flags );
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    wxSizer* CreateSeparatedButtonSizer( long flags );
+#endif
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    wxSizer* CreateStdDialogButtonSizer( long flags );
+#endif
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    void AddMainButtonId( wxWindowID id );
+    bool IsMainButtonId( wxWindowID id ) const;
+%{
+void
+wxDialog::GetMainButtonIds()
+  PPCODE:
+    PUTBACK;
+    wxPli_intarray_push( aTHX_ THIS->GetMainButtonIds() );
+    SPAGAIN;
+%}
+
+    bool CanDoLayoutAdaptation();
+
+    package_static bool IsLayoutAdaptationEnabled();
+    package_static void EnableLayoutAdaptation( bool enable );
+
+    wxWindow* GetContentWindow();
+
+    void SetLayoutAdaptationLevel( int level );
+    int GetLayoutAdaptationLevel() const;
+
+    void SetLayoutAdaptationMode( wxDialogLayoutAdaptationMode mode );
+    wxDialogLayoutAdaptationMode GetLayoutAdaptationMode() const;
+
+    void SetLayoutAdaptationDone( bool adaptationDone );
+    bool GetLayoutAdaptationDone() const;
+
+#ifdef __WXMSW__
+    wxToolBar* GetToolBar() const;
+#endif
 #endif
 };
 
@@ -84,29 +125,12 @@ wxDialog::GetReturnCode()
 wxString
 wxDialog::GetTitle()
 
-void
-wxDialog::Iconize( iconize )
-    bool iconize
-
-bool
-wxDialog::IsIconized()
-
 bool
 wxDialog::IsModal()
 
 # void
 # wxDialog::SetModal( flag )
 #    bool flag
-
-#if (WXPERL_W_VERSION_GE( 2, 4, 1 ) && !defined(__WXMOTIF__)) \
-    || WXPERL_W_VERSION_GE( 2, 5, 1 )
-
-void
-wxDialog::SetShape( region )
-  wxRegion* region
-  C_ARGS: *region
-
-#endif
 
 void
 wxDialog::SetIcon( icon )

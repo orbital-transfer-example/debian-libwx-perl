@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: ComboBox.xs 2153 2007-08-15 17:37:39Z mbarbon $
+## RCS-ID:      $Id: ComboBox.xs 2283 2007-11-11 13:58:13Z mbarbon $
 ## Copyright:   (c) 2000-2004, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -113,6 +113,31 @@ wxComboBox::Copy()
 
 void
 wxComboBox::Cut()
+
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+
+bool
+wxComboBox::CanCopy()
+
+bool
+wxComboBox::CanCut()
+
+bool
+wxComboBox::CanPaste()
+
+void
+wxComboBox::Undo()
+
+void
+wxComboBox::Redo()
+
+bool
+wxComboBox::CanUndo()
+
+bool
+wxComboBox::CanRedo()
+
+#endif
 
 long
 wxComboBox::GetInsertionPoint()

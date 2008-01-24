@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2007
-// RCS-ID:      $Id: DataView.xs 2264 2007-11-05 23:23:35Z mbarbon $
+// RCS-ID:      $Id: DataView.xs 2312 2007-12-31 00:34:47Z mbarbon $
 // Copyright:   (c) 2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -15,12 +15,18 @@
 #include "cpp/wxapi.h"
 #include "cpp/overload.h"
 
+// re-include for client data
+#include <wx/clntdata.h>
+#include "cpp/helpers.h"
+
 #define wxDefaultValidatorPtr (wxValidator*)&wxDefaultValidator
 
 #undef THIS
 
 #include "cpp/constants.h"
 #include "cpp/overload.h"
+
+#define wxNullIconPtr (wxIcon*) &wxNullIcon
 
 // event macros
 #define SEVT( NAME, ARGS )    wxPli_StdEvent( NAME, ARGS )
@@ -45,6 +51,20 @@ INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/Dat
 INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewModel.xsp |
 
 INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewIndexListModel.xsp |
+
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewColumn.xsp |
+
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewEvent.xsp |
+
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewItem.xsp |
+
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewModelNotifier.xsp |
+
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewRenderer.xsp |
+
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeStore.xsp |
+
+INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeCtrl.xsp |
 
 MODULE=Wx__DataView PACKAGE=Wx::DataView
 

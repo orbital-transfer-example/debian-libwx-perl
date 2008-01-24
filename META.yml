@@ -1,34 +1,19 @@
-# http://module-build.sourceforge.net/META-spec.html
-name:         Wx
-version:      0.80
-version_from: Wx.pm
-installdirs:  site
-author:       Mattia Barbon <mbarbon@cpan.org>
-abstract: interface to the wxWidgets cross-platform GUI toolkit
-license: perl
-#requires:
-build_requires:
-  Alien::wxWidgets:      0.25
-  Data::Dumper:             0
-  ExtUtils::MakeMaker:   6.17
-  File::Spec::Functions: 0.82
-  Test::Harness:         2.26
-  Test::More:            0.45
-no_index:
-  directory:
-    - samples
-    - script
-  package:
-    - MY
-    - Parse::Yapp::Driver
-
-# extras.
-configure_requires:
-  Alien::wxWidgets: 0.25
-dynamic_config: 1
-
-distribution_type: module
-generated_by: ExtUtils::MY_Metafile version 0.07, EUMM-6.36.
+--- #YAML:1.0
+name:                Wx
+version:             0.81
+abstract:            interface to the wxWidgets cross-platform GUI toolkit
+license:             perl
+author:              
+    - Mattia Barbon <mbarbon@cpan.org>
+generated_by:        ExtUtils::MakeMaker version 6.42
+distribution_type:   module
+requires:     
+    Alien::wxWidgets:              0.25
+    Data::Dumper:                  0
+    ExtUtils::MakeMaker:           6.17
+    File::Spec::Functions:         0.82
+    Test::Harness:                 2.26
+    Test::More:                    0.45
 meta-spec:
-  version: 1.2
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3

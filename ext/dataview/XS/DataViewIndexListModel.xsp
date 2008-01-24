@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2007
-## RCS-ID:      $Id: DataViewIndexListModel.xsp 2264 2007-11-05 23:23:35Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: DataViewIndexListModel.xsp 2314 2008-01-18 21:44:32Z mbarbon $
+## Copyright:   (c) 2007-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -32,7 +32,7 @@ public:
         m_callback.SetSelf( wxPli_make_object( this, package ), true );
     }
 
-    DEC_V_CBACK_UINT__VOID( GetRowCount );
+//     DEC_V_CBACK_UINT__VOID( GetRowCount );
     DEC_V_CBACK_UINT__VOID_const( GetColumnCount );
     DEC_V_CBACK_WXSTRING__UINT_const( GetColumnType );
     DEC_V_CBACK_VOID__mWXVARIANT_UINT_UINT_const( GetValue );
@@ -43,8 +43,8 @@ DEF_V_CBACK_UINT__VOID_const_pure( wxPlDataViewIndexListModel,
                                    wxDataViewIndexListModel, GetColumnCount );
 DEF_V_CBACK_WXSTRING__UINT_const_pure( wxPlDataViewIndexListModel,
                                        wxDataViewIndexListModel, GetColumnType );
-DEF_V_CBACK_UINT__VOID_pure( wxPlDataViewIndexListModel,
-                             wxDataViewIndexListModel, GetRowCount );
+// DEF_V_CBACK_UINT__VOID_pure( wxPlDataViewIndexListModel,
+//                              wxDataViewIndexListModel, GetRowCount );
 DEF_V_CBACK_VOID__mWXVARIANT_UINT_UINT_const_pure( wxPlDataViewIndexListModel,
                                                    wxDataViewIndexListModel,
                                                    GetValue );
@@ -56,7 +56,7 @@ DEF_V_CBACK_BOOL__WXVARIANT_UINT_UINT_pure( wxPlDataViewIndexListModel,
 
 %name{Wx::DataViewIndexListModel} class wxDataViewIndexListModel
 {
-    unsigned int GetRowCount();
+##    unsigned int GetRowCount();
 
     void GetValue( wxVariant &variant,
                    unsigned int row, unsigned int col ) const;
@@ -73,6 +73,7 @@ DEF_V_CBACK_BOOL__WXVARIANT_UINT_UINT_pure( wxPlDataViewIndexListModel,
 
     unsigned int GetRow( const wxDataViewItem &item ) const;
     wxDataViewItem& GetItem( unsigned int row ) const;
+    void Reset( unsigned int new_size );
 };
 
 %name{Wx::PlDataViewIndexListModel} class wxPlDataViewIndexListModel

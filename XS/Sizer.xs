@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: Sizer.xs 2086 2007-07-21 12:07:12Z mbarbon $
+## RCS-ID:      $Id: Sizer.xs 2301 2007-12-24 17:21:22Z mbarbon $
 ## Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -22,6 +22,7 @@
 %typemap{wxSizerItem*}{simple};
 %typemap{Wx_UserDataO*}{simple};
 %typemap{wxStdDialogButtonSizer*}{simple};
+%typemap{wxWrapSizer*}{simple};
 %typemap{wxButton*}{simple};
 
 %name{Wx::Sizer} class wxSizer
@@ -114,6 +115,60 @@ wxSizer::GetItemNth( index )
   OUTPUT: RETVAL    
 %}
 #endif
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    wxSizerItem* GetItemById( int id, bool recursive = false );
+#endif
+
+    %name{HideSizer} bool Hide( wxSizer *sizer, bool recursive = false );
+    %name{HideWindow} bool Hide( wxWindow *window, bool recursive = false );
+    %name{HideIndex} bool Hide( size_t index );
+%{
+void
+wxSizer::Hide( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+        MATCH_REDISP_COUNT_ALLOWMORE( wxPliOvl_wwin_b, HideWindow, 1 )
+        MATCH_REDISP_COUNT_ALLOWMORE( wxPliOvl_wszr_b, HideSizer, 1 )
+        MATCH_REDISP( wxPliOvl_n, HideIndex )
+    END_OVERLOAD( Wx::Sizer::Hide )
+%}
+
+    %name{IsShownWindow} bool IsShown( wxWindow *window ) const;
+    %name{IsShownSizer} bool IsShown( wxSizer *sizer ) const;
+    %name{IsShownIndex} bool IsShown( size_t index ) const;
+%{
+void
+wxSizer::IsShown( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+        MATCH_REDISP( wxPliOvl_wwin, IsShownWindow )
+        MATCH_REDISP( wxPliOvl_wszr, IsShownSizer )
+        MATCH_REDISP( wxPliOvl_n, IsShownIndex )
+    END_OVERLOAD( Wx::Sizer::IsShown )
+%}
+
+# DECLARE_OVERLOAD( wszi, Wx::SizerItem )
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+    %name{ReplaceWindow} bool Replace( wxWindow *oldwin, wxWindow *newwin,
+                                       bool recursive = false );
+    %name{ReplaceSizer} bool Replace( wxSizer *oldsz, wxSizer *newsz,
+                                      bool recursive = false );
+    %name{ReplaceIndex} bool Replace( size_t index, wxSizerItem *newitem );
+%{
+void
+wxSizer::Replace( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+        MATCH_REDISP_COUNT_ALLOWMORE( wxPliOvl_wwin_wwin_b, ReplaceWindow, 2 )
+        MATCH_REDISP_COUNT_ALLOWMORE( wxPliOvl_wszr_wszr_b, ReplaceSizer, 2 )
+        MATCH_REDISP( wxPliOvl_n_wszi, ReplaceIndex )
+    END_OVERLOAD( Wx::Sizer::Replace )
+%}
+
+#endif
+
     void RecalcSizes();
     void Clear( bool deleteWindows = false );
     void DeleteWindows();
@@ -156,7 +211,9 @@ wxSizer::GetItemNth( index )
 
     void SetSizeHints( wxWindow* window );
 
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
     void SetVirtualSizeHints( wxWindow* window );
+#endif
 
 #if WXPERL_W_VERSION_GE( 2, 6, 2 )
     %name{ShowWindow} bool Show( wxWindow* window, bool show = true, bool recursive = false );
@@ -231,6 +288,23 @@ wxSizer::GetItemNth( index )
     %name{SetMinSizeSize} void SetMinSize( wxSize size );
 #endif
     void DeleteWindows();
+    void DetachSizer();
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    void SetId( int id );
+    int GetId() const;
+#endif
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    const wxRect& GetRect();
+#endif
+    void Show( bool show );
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    void AssignSpacer( int width, int height );
+#else
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    void SetSpacer( int width, int height );
+#endif
+#endif
+    wxSize GetSpacer() const;
 };
 
 #if WXPERL_W_VERSION_GE( 2, 6, 1 )
@@ -254,6 +328,19 @@ wxSizer::GetItemNth( index )
     wxButton *GetNegativeButton() const;
     wxButton *GetCancelButton() const;
     wxButton *GetHelpButton() const;
+};
+
+#endif
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+%name{Wx::WrapSizer} class wxWrapSizer
+{
+    wxWrapSizer( int orient = wxHORIZONTAL,
+                 int flags = wxEXTEND_LAST_ON_EACH_LINE );
+
+    bool InformFirstDirection( int direction, int size,
+                               int availableOtherDir );
 };
 
 #endif

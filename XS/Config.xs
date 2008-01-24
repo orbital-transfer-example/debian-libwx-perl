@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     13/12/2001
-## RCS-ID:      $Id: Config.xs 2132 2007-08-11 21:31:18Z mbarbon $
+## RCS-ID:      $Id: Config.xs 2299 2007-11-25 17:30:04Z mbarbon $
 ## Copyright:   (c) 2001-2002, 2004, 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -172,14 +172,24 @@ wxConfigBase::ReadInt( key, def = 0 )
   OUTPUT:
     RETVAL
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+long
+wxConfigBase::ReadLong( key, def = 0 )
+    wxString key
+    long def
+
 double
-wxConfigBase::ReadFloat( key, def = 0.0 )
+wxConfigBase::ReadDouble( key, def = 0.0 )
     wxString key
     double def
-  CODE:
-    THIS->Read( key, &RETVAL, def );
-  OUTPUT:
-    RETVAL
+
+bool
+wxConfigBase::ReadBool( key, def = false )
+    wxString key
+    bool def
+
+#else
 
 bool
 wxConfigBase::ReadBool( key, def = false )
@@ -189,6 +199,8 @@ wxConfigBase::ReadBool( key, def = false )
     THIS->Read( key, &RETVAL, def );
   OUTPUT:
     RETVAL
+
+#endif
 
 #if WXPERL_W_VERSION_GE( 2, 9, 0 ) && wxUSE_BASE64
 
@@ -304,4 +316,6 @@ wxFileConfig::new( appName = wxEmptyString, vendorName = wxEmptyString, localFil
     wxString globalFilename
     long style
 
-
+void
+wxFileConfig::SetUmask( mode )
+    int mode

@@ -4,14 +4,32 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/12/2001
-## RCS-ID:      $Id: Grid.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2001-2007 Mattia Barbon
+## RCS-ID:      $Id: Grid.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2001-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
 
 #include <wx/grid.h>
 #include "cpp/overload.h"
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+MODULE=Wx PACKAGE=Wx::GridUpdateLocker
+
+wxGridUpdateLocker*
+wxGridUpdateLocker::new( grid = NULL )
+    wxGrid* grid
+
+## // thread KO
+void
+wxGridUpdateLocker::DESTROY()
+
+void
+wxGridUpdateLocker::Create( grid )
+    wxGrid* grid
+
+#endif
 
 MODULE=Wx PACKAGE=Wx::GridCellCoords
 
@@ -107,6 +125,14 @@ void
 wxGrid::AutoSize()
 
 void
+wxGrid::AutoSizeColLabelSize( col )
+    int col
+
+void
+wxGrid::AutoSizeRowLabelSize( col )
+    int col
+
+void
 wxGrid::AutoSizeColumn( col, setAsMin = true )
     int col
     bool setAsMin
@@ -138,6 +164,13 @@ wxGrid::BlockToDeviceRect( topLeft, bottomRight )
 
 bool
 wxGrid::CanDragColSize()
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+bool
+wxGrid::CanDragColMove()
+
+#endif
 
 bool
 wxGrid::CanDragRowSize()
@@ -200,6 +233,13 @@ wxGrid::DisableDragRowSize()
 
 void
 wxGrid::DisableDragColSize()
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+void
+wxGrid::DisableDragColMove()
+
+#endif
 
 void
 wxGrid::EnableCellEditControl( enable = true )
@@ -330,9 +370,25 @@ wxString
 wxGrid::GetColLabelValue( col )
     int col
 
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+int
+wxGrid::GetColPos( colId )
+    int colId
+
+#endif
+
 int
 wxGrid::GetColSize( col )
     int col
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+int
+wxGrid::GetColAt( colPos )
+    int colPos
+
+#endif
 
 void
 wxGrid::GetDefaultCellAlignment()
@@ -466,6 +522,30 @@ wxGrid::GetGridLineColour()
   OUTPUT:
     RETVAL
 
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+wxPen*
+wxGrid::GetDefaultGridLinePen()
+  CODE:
+    RETVAL = new wxPen( THIS->GetDefaultGridLinePen() );
+  OUTPUT: RETVAL
+
+wxPen*
+wxGrid::GetColGridLinePen( col )
+    int col
+  CODE:
+    RETVAL = new wxPen( THIS->GetColGridLinePen( col ) );
+  OUTPUT: RETVAL
+
+wxPen*
+wxGrid::GetRowGridLinePen( row )
+    int row
+  CODE:
+    RETVAL = new wxPen( THIS->GetRowGridLinePen( row ) );
+  OUTPUT: RETVAL
+
+#endif
+
 wxGridTableBase*
 wxGrid::GetTable()
 
@@ -509,6 +589,24 @@ wxGrid::GetRowLabelValue( row )
 int
 wxGrid::GetRowSize( row )
     int row
+
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+
+int
+wxGrid::GetScrollLineX()
+
+int
+wxGrid::GetScrollLineY()
+
+void
+wxGrid::SetScrollLineX( x )
+    int x
+
+void
+wxGrid::SetScrollLineY( y )
+    int y
+
+#endif
 
 void
 wxGrid::GetSelectedCells()
@@ -562,11 +660,24 @@ wxGrid::GetSelectionForeground()
   OUTPUT:
     RETVAL
 
+wxGridSelectionModes
+wxGrid::GetSelectionMode()
+
 int
 wxGrid::GetViewWidth()
 
 void
 wxGrid::HideCellEditControl()
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+void
+wxGrid::HideRowLabels()
+
+void
+wxGrid::HideColLabels()
+
+#endif
 
 bool
 wxGrid::InsertCols( pos = 0, numCols = 1, updateLabels = true )
@@ -732,6 +843,14 @@ void
 wxGrid::SelectRow( row, addToSelected = false )
     int row
     bool addToSelected
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+void
+wxGrid::SetUseNativeColLabels( native = true )
+    bool native
+
+#endif
 
 void
 wxGrid::SetCellAlignment( row, col, horiz, vert )
@@ -922,6 +1041,15 @@ void
 wxGrid::SetColSize( col, height )
     int col
     int height
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+void
+wxGrid::SetColPos( col, pos )
+    int col
+    int pos
+
+#endif
 
 void
 wxGrid::SetGridCursor( row, col )

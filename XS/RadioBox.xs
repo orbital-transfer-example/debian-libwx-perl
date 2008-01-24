@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: RadioBox.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2000-2003, 2006 Mattia Barbon
+## RCS-ID:      $Id: RadioBox.xs 2285 2007-11-11 21:31:54Z mbarbon $
+## Copyright:   (c) 2000-2003, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -103,6 +103,20 @@ wxRadioBox::EnableItem( n, enable )
 int
 wxRadioBox::FindString( string )
     wxString string
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+
+unsigned int
+wxRadioBox::GetColumnCount()
+
+unsigned int
+wxRadioBox::GetRowCount()
+
+int
+wxRadioBox::GetItemFromPoint( pt )
+    wxPoint pt
+
+#endif
 
 wxString
 wxRadioBox::GetString( n )

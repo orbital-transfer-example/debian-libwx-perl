@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 2267 2007-11-06 22:09:56Z mbarbon $
-## Copyright:   (c) 2000-2007 Mattia Barbon
+## RCS-ID:      $Id: Wx.pm 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2000-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.80';
+$VERSION = '0.81';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -147,9 +147,6 @@ sub _load_dll {
 #
 # British vs. American spelling aliases
 #
-*Wx::SystemSettings::GetColour = \&Wx::SystemSettings::GetSystemColour;
-*Wx::SystemSettings::GetFont   = \&Wx::SystemSettings::GetSystemFont;
-*Wx::SystemSettings::GetMetric = \&Wx::SystemSettings::GetSystemMetric;
 *Wx::Window::Center = \&Wx::Window::Centre;
 *Wx::Window::CenterOnParent = \&Wx::Window::CentreOnParent;
 *Wx::Window::CenterOnScreen = \&Wx::Window::CentreOnScreen;

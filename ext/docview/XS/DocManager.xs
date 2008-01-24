@@ -4,7 +4,7 @@
 ## Author:      Simon Flack
 ## Modified by:
 ## Created:     11/09/2002
-## RCS-ID:      $Id: DocManager.xs 2055 2007-06-18 22:05:48Z mbarbon $
+## RCS-ID:      $Id: DocManager.xs 2285 2007-11-11 21:31:54Z mbarbon $
 ## Copyright:   (c) 2002-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -282,17 +282,15 @@ wxDocManager::FileHistoryRemoveMenu( menu )
 
 ## Need wxConfigBase& in typemap
 
-##void
-##wxDocManager::FileHistoryLoad( config )
-##    wxConfigBase config
-##  CODE:
-##    THIS->FileHistoryLoad( config )
-##
-##void
-##wxDocManager::FileHistorySave( config )
-##    wxConfigBase config
-##  CODE:
-##    THIS->FileHistoryLoad( config )
+void
+wxDocManager::FileHistoryLoad( config )
+    wxConfigBase* config
+  C_ARGS: *config
+
+void
+wxDocManager::FileHistorySave( config )
+    wxConfigBase* config
+  C_ARGS: *config
 
 #endif
 

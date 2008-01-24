@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     08/10/2007
-## RCS-ID:      $Id: StandardPaths.xsp 2242 2007-10-08 22:00:21Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: StandardPaths.xsp 2315 2008-01-18 21:47:17Z mbarbon $
+## Copyright:   (c) 2007-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -39,6 +39,9 @@
                                        ResourceCat category = wxStandardPathsBase::ResourceCat_None );
     wxString GetDocumentsDir() const;
     wxString GetTempDir() const;
+#endif
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    void UseAppInfo( int info );
 #endif
 };
 

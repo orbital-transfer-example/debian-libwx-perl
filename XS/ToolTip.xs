@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: ToolTip.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2000-2002, 2004 Mattia Barbon
+## RCS-ID:      $Id: ToolTip.xs 2285 2007-11-11 21:31:54Z mbarbon $
+## Copyright:   (c) 2000-2002, 2004, 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -27,6 +27,22 @@ SetDelay( msecs )
     long msecs
   CODE:
     wxToolTip::SetDelay( msecs );
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+void
+SetAutoPop( msecs )
+    long msecs
+  CODE:
+    wxToolTip::SetAutoPop( msecs );
+
+void
+SetReshow( msecs )
+    long msecs
+  CODE:
+    wxToolTip::SetReshow( msecs );
+
+#endif
 
 wxToolTip*
 wxToolTip::new( string )
