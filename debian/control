@@ -11,7 +11,7 @@ Vcs-Browser: http://svn.debian.org/wsvn/pkg-perl/trunk/libwx-perl/
 
 Package: libwx-perl
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, libalien-wxwidgets-perl
+Depends: ${perl:Depends}, ${shlibs:Depends}, ${misc:Depends}, libalien-wxwidgets-perl
 Description: interface to wxWidgets cross-platform GUI toolkit
  wxPerl is an extension module allowing the creation of GUI (Graphical
  User Interface) Perl programs using the wxWidgets toolkit.
