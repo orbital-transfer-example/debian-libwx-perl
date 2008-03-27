@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Icon.xs 2069 2007-07-08 15:33:40Z mbarbon $
-## Copyright:   (c) 2000-2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: Icon.xs 2330 2008-01-20 09:53:53Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -28,7 +28,7 @@ GetWxPerlIcon( get_small = false )
     if( !RETVAL->Ok() )
         croak( "Unable to load icon" );
 #else
-    char** image = get_small ? wxpl16_xpm : wxpl32_xpm;
+    char** image = (char**)( get_small ? wxpl16_xpm : wxpl32_xpm );
     RETVAL = new wxIcon( image );
 #endif
   OUTPUT:

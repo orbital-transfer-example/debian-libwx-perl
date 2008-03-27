@@ -1,12 +1,12 @@
 #!/usr/bin/perl -w
 #############################################################################
-## Name:        script/wx_overload.pl
+## Name:        script/wxperl_overload
 ## Purpose:     builds overload constants
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     17/08/2001
-## RCS-ID:      $Id: wx_overload.pl 2275 2007-11-10 22:42:19Z mbarbon $
-## Copyright:   (c) 2001-2003, 2005-2007 Mattia Barbon
+## RCS-ID:      $Id: wxperl_overload 2335 2008-01-21 22:58:59Z mbarbon $
+## Copyright:   (c) 2001-2003, 2005-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -15,6 +15,30 @@ use FindBin;
 
 use strict;
 use lib "$FindBin::RealBin/../build";
+
+=head1 NAME
+
+wxperl_overload - create overload declarations for wxPerl extensions
+
+=head1 SYNOPSIS
+
+    # usually invoked from Makefile
+    wxperl_overload <.cpp file> <.h file> files...
+
+    wxperl_overload <.cpp file> <.h file> file.lst
+
+=head1 DOCUMENTATION
+
+This script if usually invoked from an
+C<ExtUtils::MakeMaker>-generated file by using C<WX_OVERLOAD> in
+F<Makefile.PL>.
+
+Scans the files given on the command line or listed in the F<.lst>
+file searching for wxPerl overload declarations.  Writes a F<.h> file
+with matching F<.cpp> file containing the definition for wxPerl
+overload constants.
+
+=cut
 
 use Wx::Overload::Driver;
 

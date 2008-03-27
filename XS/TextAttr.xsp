@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     24/11/2007
-## RCS-ID:      $Id: TextAttr.xsp 2292 2007-11-25 00:19:19Z mbarbon $
-## Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
+## RCS-ID:      $Id: TextAttr.xsp 2341 2008-03-25 22:32:08Z mbarbon $
+## Copyright:   (c) 2000-2003, 2005-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -98,6 +98,7 @@ wxTextAttr::GetTabs()
     bool HasFontEncoding() const;
     void SetFontEncoding( wxFontEncoding encoding );
 
+    ## wxTextAttrEx
     int GetOutlineLevel() const;
     bool HasOutlineLevel() const;
     void SetOutlineLevel( int level );
@@ -158,7 +159,9 @@ wxTextAttr::GetTabs()
     bool IsParagraphStyle() const;
 
     ## wxRichTextAttr
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
     wxFont CreateFont() const;
+#endif
     bool GetFontAttributes( const wxFont& font );
 
     void SetFontSize( int pointSize );

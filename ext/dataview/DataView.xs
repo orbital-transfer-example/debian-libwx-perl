@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2007
-// RCS-ID:      $Id: DataView.xs 2312 2007-12-31 00:34:47Z mbarbon $
-// Copyright:   (c) 2007 Mattia Barbon
+// RCS-ID:      $Id: DataView.xs 2331 2008-01-20 10:20:17Z mbarbon $
+// Copyright:   (c) 2007-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -46,25 +46,25 @@ MODULE=Wx__DataView
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewCtrl.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewCtrl.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewModel.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewModel.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewIndexListModel.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewIndexListModel.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewColumn.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewColumn.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewEvent.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewEvent.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewItem.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewItem.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewModelNotifier.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewModelNotifier.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewRenderer.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewRenderer.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeStore.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeStore.xsp |
 
-INCLUDE: perl ../../script/wx_xspp.pl -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeCtrl.xsp |
+INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeCtrl.xsp |
 
 MODULE=Wx__DataView PACKAGE=Wx::DataView
 
