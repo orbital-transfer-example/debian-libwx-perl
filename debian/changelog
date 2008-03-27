@@ -2,8 +2,9 @@ libwx-perl (0.82-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * Drop patch 01_fix_whatis_entries.patch, now included upstreams.
+  * debian/copyright: shorten upstream download location.
 
- -- gregor herrmann <gregor+debian@comodo.priv.at>  Thu, 27 Mar 2008 21:17:43 +0100
+ -- gregor herrmann <gregor+debian@comodo.priv.at>  Thu, 27 Mar 2008 21:19:31 +0100
 
 libwx-perl (0.81-2) unstable; urgency=low
 
