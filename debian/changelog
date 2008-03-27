@@ -12,8 +12,9 @@ libwx-perl (0.82-1) UNRELEASED; urgency=low
       says) - thanks!
   * Remove debian/{docs,examples} and install samples/* and README.txt
     directly from debian/rules
+  * Add /me to Uploaders.
 
- -- gregor herrmann <gregor+debian@comodo.priv.at>  Thu, 27 Mar 2008 21:21:25 +0100
+ -- gregor herrmann <gregor+debian@comodo.priv.at>  Thu, 27 Mar 2008 21:45:12 +0100
 
 libwx-perl (0.81-2) unstable; urgency=low
 
