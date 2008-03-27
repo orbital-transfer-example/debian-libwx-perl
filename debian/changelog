@@ -4,8 +4,16 @@ libwx-perl (0.82-1) UNRELEASED; urgency=low
   * Drop patch 01_fix_whatis_entries.patch, now included upstreams.
   * debian/copyright: shorten upstream download location.
   * debian/watch: extended regexp for matching upstream releases.
+  * debian/rules:
+    - remove obsolete source and diff targets
+    - add install target to .PHONY
+    - no need to rename {wx_overload,wx_xspp}.pl anymore, upstream has
+      changed the names ("to comply with Debian policy", as the Changes file
+      says) - thanks!
+  * Remove debian/{docs,examples} and install samples/* and README.txt
+    directly from debian/rules
 
- -- gregor herrmann <gregor+debian@comodo.priv.at>  Thu, 27 Mar 2008 21:21:10 +0100
+ -- gregor herrmann <gregor+debian@comodo.priv.at>  Thu, 27 Mar 2008 21:21:25 +0100
 
 libwx-perl (0.81-2) unstable; urgency=low
 

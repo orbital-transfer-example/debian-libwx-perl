@@ -62,10 +62,7 @@ install-stamp:
 
 	# Add commands to install the package into debian/$PACKAGE_NAME here
 	$(MAKE) install DESTDIR=$(TMP)
-	mv $(TMP)/usr/bin/wx_overload.pl $(TMP)/usr/bin/wx_overload
-	mv $(TMP)/usr/bin/wx_xspp.pl $(TMP)/usr/bin/wx_xspp
 	rename 's/build:://' $(TMP)/usr/share/man/man3/build*
-	rename 's/\.pl//' $(TMP)/usr/share/man/man1/wx_xspp.pl*
 
 	find $(TMP) -type f -name .packlist | xargs rm -f
 	[ ! -d /$(TMP)/usr/share/perl5 ] \
@@ -82,8 +79,8 @@ binary-indep: build install
 binary-arch: build install
 	dh_testdir
 	dh_testroot
-	dh_installdocs
-	dh_installexamples
+	dh_installdocs README.txt
+	dh_installexamples samples/*
 	dh_installchangelogs Changes
 	dh_strip
 	dh_compress
@@ -96,8 +93,5 @@ binary-arch: build install
 	dh_md5sums
 	dh_builddeb
 
-source diff:                                                                  
-	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
-
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary
+.PHONY: build clean binary-indep binary-arch binary install
