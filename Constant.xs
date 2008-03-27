@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2315 2008-01-18 21:47:17Z mbarbon $
+// RCS-ID:      $Id: Constant.xs 2341 2008-03-25 22:32:08Z mbarbon $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -531,7 +531,8 @@ static wxPlINH inherit[] =
     I( MemoryDC,        WindowDC )
 #endif
 
-#if defined(__WXMSW__) || defined(__WXGTK__)
+#if defined(__WXMSW__) || defined(__WXGTK__) \
+    || ( defined(__WXMAC__) && WXPERL_W_VERSION_GE( 2, 9, 0 ) )
     I( PaintDC,         ClientDC )
 #else
     I( PaintDC,         WindowDC )
@@ -2462,6 +2463,19 @@ static double constant( const char *name, int arg )
     r( wxTEXT_ATTR_LEFT_INDENT );       // textctrl
     r( wxTEXT_ATTR_RIGHT_INDENT );      // textctrl
     r( wxTEXT_ATTR_TABS );              // textctrl
+#endif
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxTEXT_ATTR_EFFECT_NONE );
+    r( wxTEXT_ATTR_EFFECT_CAPITALS );
+    r( wxTEXT_ATTR_EFFECT_SMALL_CAPITALS );
+    r( wxTEXT_ATTR_EFFECT_STRIKETHROUGH );
+    r( wxTEXT_ATTR_EFFECT_DOUBLE_STRIKETHROUGH );
+    r( wxTEXT_ATTR_EFFECT_SHADOW );
+    r( wxTEXT_ATTR_EFFECT_EMBOSS );
+    r( wxTEXT_ATTR_EFFECT_OUTLINE );
+    r( wxTEXT_ATTR_EFFECT_ENGRAVE );
+    r( wxTEXT_ATTR_EFFECT_SUPERSCRIPT );
+    r( wxTEXT_ATTR_EFFECT_SUBSCRIPT );
 #endif
     r( wxTINY_CAPTION_HORIZ );          // miniframe
     r( wxTINY_CAPTION_VERT );           // miniframe

@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     08/11/2000
-## RCS-ID:      $Id: Brush.xs 2274 2007-11-10 22:37:30Z mbarbon $
-## Copyright:   (c) 2000-2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: Brush.xs 2340 2008-03-25 22:25:07Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -30,7 +30,7 @@ wxBrush*
 newColour( CLASS, colour, style )
     SV* CLASS
     wxColour* colour
-    int style
+    wxBrushStyle style
   CODE:
     RETVAL = new wxBrush( *colour, style );
   OUTPUT:
@@ -40,7 +40,7 @@ wxBrush*
 newName( CLASS, name, style )
     SV* CLASS
     wxString name
-    int style
+    wxBrushStyle style
   CODE:
     RETVAL = new wxBrush( name, style );
   OUTPUT:
@@ -81,7 +81,7 @@ wxBrush::GetStipple()
   OUTPUT:
     RETVAL
 
-int
+wxBrushStyle
 wxBrush::GetStyle()
 
 bool
@@ -138,4 +138,4 @@ wxBrush::SetStipple( stipple )
 
 void
 wxBrush::SetStyle( style )
-    int style
+    wxBrushStyle style

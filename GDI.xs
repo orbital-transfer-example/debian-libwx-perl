@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: GDI.xs 2301 2007-12-24 17:21:22Z mbarbon $
-// Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
+// RCS-ID:      $Id: GDI.xs 2340 2008-03-25 22:25:07Z mbarbon $
+// Copyright:   (c) 2000-2003, 2005-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -20,17 +20,24 @@
 WXPLI_BOOT_ONCE(Wx_GDI);
 #define boot_Wx_GDI wxPli_boot_Wx_GDI
 
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+typedef int wxBrushStyle;
+typedef int wxPenStyle;
+typedef int wxPenJoin;
+typedef int wxPenCap;
+#endif
+
 MODULE=Wx_GDI
 
-INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/Animation.xsp |
+INCLUDE: perl script/wxperl_xspp -t typemap.xsp XS/Animation.xsp |
 INCLUDE: XS/Colour.xs
 INCLUDE: XS/ColourDatabase.xs
 INCLUDE: XS/Font.xs
-INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/ImageList.xs |
+INCLUDE: perl script/wxperl_xspp -t typemap.xsp XS/ImageList.xs |
 INCLUDE: XS/Bitmap.xs
 INCLUDE: XS/Icon.xs
 INCLUDE: XS/Cursor.xs
-INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/DC.xs |
+INCLUDE: perl script/wxperl_xspp -t typemap.xsp XS/DC.xs |
 INCLUDE: XS/Pen.xs
 INCLUDE: XS/Brush.xs
 INCLUDE: XS/Image.xs
@@ -40,9 +47,9 @@ INCLUDE: XS/GraphicsContext.xs
 INCLUDE: XS/GraphicsPath.xs
 INCLUDE: XS/GraphicsMatrix.xs
 INCLUDE: XS/GraphicsObject.xs
-INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/GraphicsRenderer.xsp |
+INCLUDE: perl script/wxperl_xspp -t typemap.xsp XS/GraphicsRenderer.xsp |
 
-INCLUDE: perl script/wx_xspp.pl -t typemap.xsp XS/SVGFileDC.xsp |
+INCLUDE: perl script/wxperl_xspp -t typemap.xsp XS/SVGFileDC.xsp |
 
 MODULE=Wx PACKAGE=Wx PREFIX=wx
 
