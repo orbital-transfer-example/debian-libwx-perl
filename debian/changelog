@@ -12,11 +12,15 @@ libwx-perl (0.82-1) UNRELEASED; urgency=low
     - no need to rename {wx_overload,wx_xspp}.pl anymore, upstream has
       changed the names ("to comply with Debian policy", as the Changes file
       says) - thanks!
+    - fix permissions of some files in /usr/lib/perl5/Wx/
   * Remove debian/{docs,examples} and install samples/* and README.txt
     directly from debian/rules
   * Add /me to Uploaders.
+  * Add patch hashbang.patch: adds proper perl hashbang to scripts in
+    examples/socket/
+  * Rename patch 02_kill_bogus_test.patch to kill_bogus_test.patch.
 
- -- gregor herrmann <gregor+debian@comodo.priv.at>  Thu, 27 Mar 2008 21:45:12 +0100
+ -- gregor herrmann <gregor+debian@comodo.priv.at>  Fri, 28 Mar 2008 01:31:18 +0100
 
 libwx-perl (0.81-2) unstable; urgency=low
 

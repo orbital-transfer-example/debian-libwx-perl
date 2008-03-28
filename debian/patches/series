@@ -1,1 +1,2 @@
-02_kill_bogus_test.patch
+kill_bogus_test.patch
+hashbang.patch

@@ -69,6 +69,9 @@ install-stamp:
 	    || rmdir --verbose --ignore-fail-on-non-empty --parents \
 	    	$(TMP)/usr/share/perl5
 
+	# fix permissions
+	find $(TMP)/usr/lib/perl5/Wx -type f -perm /755 -print0 | xargs -r0 chmod 664
+	chmod 664 $(CURDIR)/samples/README.txt
 	touch install-stamp
 
 # Build architecture-independent files here.
