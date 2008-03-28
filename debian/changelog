@@ -1,9 +1,10 @@
-libwx-perl (0.82-1) UNRELEASED; urgency=low
+libwx-perl (0.82-1) unstable; urgency=low
 
-  TODO: lintian has weird executable-not-elf-or-script warnings
-  
   * New upstream release.
   * Drop patch 01_fix_whatis_entries.patch, now included upstreams.
+  * Add patch hashbang.patch: adds proper perl hashbang to scripts in
+    examples/socket/
+  * Rename patch 02_kill_bogus_test.patch to kill_bogus_test.patch.
   * debian/copyright: shorten upstream download location.
   * debian/watch: extended regexp for matching upstream releases.
   * debian/rules:
@@ -16,11 +17,8 @@ libwx-perl (0.82-1) UNRELEASED; urgency=low
   * Remove debian/{docs,examples} and install samples/* and README.txt
     directly from debian/rules
   * Add /me to Uploaders.
-  * Add patch hashbang.patch: adds proper perl hashbang to scripts in
-    examples/socket/
-  * Rename patch 02_kill_bogus_test.patch to kill_bogus_test.patch.
 
- -- gregor herrmann <gregor+debian@comodo.priv.at>  Fri, 28 Mar 2008 01:31:18 +0100
+ -- gregor herrmann <gregor+debian@comodo.priv.at>  Fri, 28 Mar 2008 01:55:29 +0100
 
 libwx-perl (0.81-2) unstable; urgency=low
 
