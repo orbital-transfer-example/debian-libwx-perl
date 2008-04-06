@@ -29,15 +29,17 @@ ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 else
         CFLAGS += -O2
 endif
+CC=gcc-4.2
+CXX=g++-4.2
 
 build: build-stamp
 build-stamp: $(QUILT_STAMPFN)
 	dh_testdir
 
 	# Add commands to compile the package here
-	$(PERL) Makefile.PL INSTALLDIRS=vendor
-	$(MAKE)
-	xvfb-run $(MAKE) test
+	CC="$(CC)" CXX="$(CXX)" $(PERL) Makefile.PL INSTALLDIRS=vendor
+	CC="$(CC)" CXX="$(CXX)" $(MAKE)
+	CC="$(CC)" CXX="$(CXX)" xvfb-run $(MAKE) test
 
 	touch build-stamp
 
@@ -48,7 +50,7 @@ clean: unpatch
 	dh_clean build-stamp install-stamp
 	
 	# Add commands to clean up after the build process here
-	[ ! -f Makefile ] || $(MAKE) realclean
+	[ ! -f Makefile ] || CC="$(CC)" CXX="$(CXX)" $(MAKE) realclean
 	
 	dh_clean ext/richtext/Makefile.old ext/dataview/Makefile.old \
 	    ext/aui/Makefile.old \
@@ -61,7 +63,7 @@ install-stamp:
 	dh_clean -k
 
 	# Add commands to install the package into debian/$PACKAGE_NAME here
-	$(MAKE) install DESTDIR=$(TMP)
+	CC="$(CC)" CXX="$(CXX)" $(MAKE) install DESTDIR=$(TMP)
 	rename 's/build:://' $(TMP)/usr/share/man/man3/build*
 
 	find $(TMP) -type f -name .packlist | xargs rm -f
