@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: Sizer.xs 2301 2007-12-24 17:21:22Z mbarbon $
-## Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
+## RCS-ID:      $Id: Sizer.xs 2393 2008-05-14 20:54:52Z mbarbon $
+## Copyright:   (c) 2000-2003, 2005-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -333,6 +333,8 @@ wxSizer::Replace( ... )
 #endif
 
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+#include <wx/wrapsizer.h>
 
 %name{Wx::WrapSizer} class wxWrapSizer
 {

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2252 2007-10-17 22:55:25Z mbarbon $
+// RCS-ID:      $Id: wxapi.h 2382 2008-04-27 16:51:03Z mbarbon $
 // Copyright:   (c) 2002-2003, 2005-2007 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -74,6 +74,7 @@ WXPL_EXTERN_C_END
 #undef eof
 #undef form
 #undef vform
+#undef setbuf
 #endif
 #undef do_open
 #undef do_close

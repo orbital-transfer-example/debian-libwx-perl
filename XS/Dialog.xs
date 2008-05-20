@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Dialog.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## RCS-ID:      $Id: Dialog.xs 2382 2008-04-27 16:51:03Z mbarbon $
 ## Copyright:   (c) 2000-2001, 2003-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -66,7 +66,7 @@ wxDialog::GetMainButtonIds()
     void SetLayoutAdaptationDone( bool adaptationDone );
     bool GetLayoutAdaptationDone() const;
 
-#ifdef __WXMSW__
+#if defined(__WXMSW__) && defined(__POCKETPC__)
     wxToolBar* GetToolBar() const;
 #endif
 #endif

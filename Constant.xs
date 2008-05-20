@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2341 2008-03-25 22:32:08Z mbarbon $
+// RCS-ID:      $Id: Constant.xs 2393 2008-05-14 20:54:52Z mbarbon $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -115,6 +115,7 @@
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
 #include <wx/editlbox.h>
 #include <wx/filectrl.h>
+#include <wx/wrapsizer.h>
 #endif
 
 #if WXPERL_W_VERSION_GE( 2, 7, 0 ) && !WXWIN_COMPATIBILITY_2_6
@@ -832,6 +833,7 @@ static double constant( const char *name, int arg )
     r( wxBORDER_STATIC );               // window
     r( wxBORDER_SUNKEN );               // window
     r( wxBORDER_THEME );                // window
+    r( wxBORDER_NONE );                 // window
 
     r( wxBACKWARD );                    // sizer
     break;
@@ -850,8 +852,8 @@ static double constant( const char *name, int arg )
 #if WXPERL_W_VERSION_GE( 2, 7, 2 )
     r( wxCC_SPECIAL_DCLICK );           // comboctrl
     r( wxCC_STD_BUTTON );               // comboctrl
-    r( wxCP_DEFAULT_STYLE );            // collpasiblepane
-    r( wxCP_NO_TLW_RESIZE );            // collpasiblepane
+    r( wxCP_DEFAULT_STYLE );            // collapsiblepane
+    r( wxCP_NO_TLW_RESIZE );            // collapsiblepane
 #endif
     r( wxCENTER );                      // dialog sizer
     r( wxCENTRE );                      // dialog sizer
