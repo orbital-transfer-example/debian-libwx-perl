@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/12/2001
-## RCS-ID:      $Id: GridCellAttr.xs 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: GridCellAttr.xs 2377 2008-04-26 02:14:14Z mdootson $
 ## Copyright:   (c) 2001-2002, 2004, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -147,3 +147,11 @@ wxGridCellAttr::SetRenderer( renderer )
   CODE:
     renderer->IncRef();
     THIS->SetRenderer( renderer );
+    
+bool
+wxGridCellAttr::GetOverflow()
+
+void
+wxGridCellAttr::SetOverflow( allow = true )
+    bool allow
+

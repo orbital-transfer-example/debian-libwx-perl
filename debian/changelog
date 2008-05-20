@@ -1,3 +1,9 @@
+libwx-perl (0.83-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Roberto C. Sanchez <roberto@connexer.com>  Tue, 20 May 2008 16:20:12 -0400
+
 libwx-perl (0.82-2) unstable; urgency=low
 
   * Build-Depend and Depend on libalien-wxwidgets-perl (>= 0.33-3), which can

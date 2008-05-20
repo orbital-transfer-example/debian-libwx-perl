@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Window.xs 2339 2008-03-10 23:39:34Z mbarbon $
+// RCS-ID:      $Id: Window.xs 2391 2008-05-14 20:40:24Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -255,13 +255,14 @@ wxWindow::ConvertPixelsSizeToDialog( size )
 bool
 wxWindow::Destroy()
 
-#if defined( __WXMSW__ ) || defined( __WXPERL_FORCE__ )
+#if    defined( __MSW__ ) \
+    || ( WXPERL_W_VERSION_GE( 2, 9, 0 ) && !defined( __WXGTK__ ) )
 
 void
 wxWindow::DragAcceptFiles( accept )
     bool accept
 
-#endif // __WXMSW__
+#endif
 
 void
 wxWindow::Enable( enable = true )

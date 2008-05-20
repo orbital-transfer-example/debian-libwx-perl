@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichTextCtrl.xsp 2341 2008-03-25 22:32:08Z mbarbon $
+## RCS-ID:      $Id: RichTextCtrl.xsp 2393 2008-05-14 20:54:52Z mbarbon $
 ## Copyright:   (c) 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -411,11 +411,11 @@ wxPlConstants richtextctrl_module( &richtextctrl_constant );
 #endif
 
     %name{WriteImageFile} bool WriteImage( const wxString& filename,
-                                           int bitmapType );
+                                           wxBitmapType bitmapType );
     %name{WriteImageBitmap} bool WriteImage( const wxBitmap& bitmap,
-                                         int bitmapType = wxBITMAP_TYPE_PNG );
+                                  wxBitmapType bitmapType = wxBITMAP_TYPE_PNG );
     %name{WriteImageImage} bool WriteImage( const wxImage& image,
-                                        int bitmapType = wxBITMAP_TYPE_PNG );
+                                  wxBitmapType bitmapType = wxBITMAP_TYPE_PNG );
 
     %name{SetBasicStyleRich} void SetBasicStyle( const wxRichTextAttr& style );
     %name{SetBasicStyleEx} void SetBasicStyle( const wxTextAttrEx& style );
