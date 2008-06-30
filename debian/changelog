@@ -2,8 +2,9 @@ libwx-perl (0.84-1) unstable; urgency=low
 
   * New upstream release
   * Update to Standards-Version 3.8.0 (no changes)
+  * Change from Build-Depends on the obsolete xbase-clients to x11-xkb-utils
 
- -- Roberto C. Sanchez <roberto@connexer.com>  Mon, 30 Jun 2008 18:11:54 -0400
+ -- Roberto C. Sanchez <roberto@connexer.com>  Mon, 30 Jun 2008 19:24:25 -0400
 
 libwx-perl (0.83-1) unstable; urgency=low
 
