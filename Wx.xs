@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 2331 2008-01-20 10:20:17Z mbarbon $
+// RCS-ID:      $Id: Wx.xs 2409 2008-06-29 19:16:20Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -271,6 +271,12 @@ Load()
 
     if( wxPerlAppCreated || wxTopLevelWindows.GetCount() > 0 )
         return;
+
+    // not on first column to avoid tripping up xsubpp
+  #ifdef DEBUGGING
+    // avoid crash on exit in Fedora (and other DEBUGGING Perls)
+    PL_use_safe_putenv = 1;
+  #endif
 
     int argc = 0;
 #if wxUSE_UNICODE && WXPERL_W_VERSION_GE( 2, 5, 3 )
