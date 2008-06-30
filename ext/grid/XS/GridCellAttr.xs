@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/12/2001
-## RCS-ID:      $Id: GridCellAttr.xs 2377 2008-04-26 02:14:14Z mdootson $
-## Copyright:   (c) 2001-2002, 2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: GridCellAttr.xs 2402 2008-05-19 21:43:32Z mbarbon $
+## Copyright:   (c) 2001-2002, 2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################

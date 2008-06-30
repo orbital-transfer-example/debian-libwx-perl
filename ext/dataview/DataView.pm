@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2007
-## RCS-ID:      $Id: DataView.pm 2382 2008-04-27 16:51:03Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: DataView.pm 2402 2008-05-19 21:43:32Z mbarbon $
+## Copyright:   (c) 2007-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################

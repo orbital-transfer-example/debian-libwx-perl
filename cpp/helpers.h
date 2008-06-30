@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.h 2337 2008-03-09 17:18:50Z mbarbon $
+// RCS-ID:      $Id: helpers.h 2405 2008-06-29 18:43:07Z mbarbon $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -294,9 +294,11 @@ class WXDLLEXPORT wxGBPosition; class WXDLLEXPORT wxGBSpan;
 wxGBPosition wxPli_sv_2_wxgbposition( pTHX_ SV* scalar );
 wxGBSpan wxPli_sv_2_wxgbspan( pTHX_ SV* scalar );
 #endif
-class WXDLLEXPORT wxPosition;
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+class wxPosition;
 wxPosition wxPli_sv_2_wxposition( pTHX_ SV* scalar );
 wxVariant wxPli_sv_2_wxvariant( pTHX_ SV* scalar );
+#endif
 
 wxKeyCode wxPli_sv_2_keycode( pTHX_ SV* scalar );
 
