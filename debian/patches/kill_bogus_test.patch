@@ -1,6 +1,6 @@
---- libwx-perl.orig/t/zz_distrib.t
-+++ libwx-perl/t/zz_distrib.t
-@@ -9,10 +9,10 @@
+--- a/t/zz_distrib.t
++++ b/t/zz_distrib.t
+@@ -9,10 +9,10 @@ plan skip_all => "Module::Info required 
  plan skip_all => "Run disttest to see the result of this test"
      unless -f 'META.yml';
  
