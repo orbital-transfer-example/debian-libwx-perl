@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
  gregor herrmann <gregor+debian@comodo.priv.at>
-Build-Depends: debhelper (>= 5), quilt, libalien-wxwidgets-perl (>= 0.33-3), xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl, libio-string-perl, libmodule-info-perl
+Build-Depends: debhelper (>= 5), quilt, libalien-wxwidgets-perl (>= 0.33-3), xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl, libio-string-perl, libmodule-info-perl
 Standards-Version: 3.8.0
 Homepage: http://wxperl.sourceforge.net/
 Vcs-Svn: svn://svn.debian.org/pkg-perl/trunk/libwx-perl/
