@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 2409 2008-06-29 19:16:20Z mbarbon $
+// RCS-ID:      $Id: Wx.xs 2457 2008-08-31 15:49:17Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -69,6 +69,9 @@ void WXDLLEXPORT wxEntryCleanup();
 IMPLEMENT_APP_NO_MAIN(wxPliApp);
 static bool wxPerlAppCreated = false;
 static bool wxPerlInitialized = false;
+#if !wxUSE_UNICODE
+bool wxPli_always_utf8;
+#endif
 
 #undef THIS
 
@@ -273,7 +276,7 @@ Load()
         return;
 
     // not on first column to avoid tripping up xsubpp
-  #ifdef DEBUGGING
+  #if defined(DEBUGGING) && !defined(PERL_USE_SAFE_PUTENV)
     // avoid crash on exit in Fedora (and other DEBUGGING Perls)
     PL_use_safe_putenv = 1;
   #endif
@@ -322,6 +325,14 @@ UnLoad()
     if( wxPerlInitialized && !wxPerlAppCreated )
         wxEntryCleanup();
     wxPerlInitialized = false;
+
+void
+SetAlwaysUTF8( always_utf8 = true )
+    bool always_utf8
+  CODE:
+#if !wxUSE_UNICODE
+    wxPli_always_utf8 = always_utf8;
+#endif
 
 #if WXPERL_W_VERSION_GE( 2, 5, 1 )
 

@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     08/11/2000
-## RCS-ID:      $Id: ScrollBar.xs 2285 2007-11-11 21:31:54Z mbarbon $
-## Copyright:   (c) 2000-2001, 2003-2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: ScrollBar.xs 2435 2008-08-05 18:05:54Z mbarbon $
+## Copyright:   (c) 2000-2001, 2003-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -77,7 +77,7 @@ void
 wxScrollBar::SetThumbPosition( viewStart )
     int viewStart
 
-#if !defined(__WXMAC__)
+#if !defined(__WXMAC__) && !defined(__WXMOTIF__)
 
 void
 wxScrollBar::SetPageSize( size )

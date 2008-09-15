@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2402 2008-05-19 21:43:32Z mbarbon $
+// RCS-ID:      $Id: wxapi.h 2441 2008-08-12 22:34:09Z mbarbon $
 // Copyright:   (c) 2002-2003, 2005-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -78,6 +78,7 @@ WXPL_EXTERN_C_END
 #endif
 #undef do_open
 #undef do_close
+#undef utf8_length
 
 #if __VISUALC__
 #pragma warning ( disable: 4800 )

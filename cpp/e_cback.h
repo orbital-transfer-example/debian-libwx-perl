@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: e_cback.h 2057 2007-06-18 23:03:00Z mbarbon $
-// Copyright:   (c) 2000-2001, 2005 Mattia Barbon
+// RCS-ID:      $Id: e_cback.h 2454 2008-08-31 11:12:47Z mbarbon $
+// Copyright:   (c) 2000-2001, 2005, 2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -31,6 +31,7 @@ public:
 
     void Handler( wxEvent& event );
 private:
+    bool m_is_method;
     SV* m_method;
     SV* m_self;
 };

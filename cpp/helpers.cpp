@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.cpp 2330 2008-01-20 09:53:53Z mbarbon $
+// RCS-ID:      $Id: helpers.cpp 2434 2008-08-05 17:55:18Z mbarbon $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -366,7 +366,7 @@ void* wxPli_sv_2_object( pTHX_ SV* scalar, const char* classname )
     }
 
     if( !SvROK( scalar ) )
-        croak( "the invocant must be a reference" );
+        croak( "variable is not an object: it must have type %s", classname );
 
     if( !classname || sv_derived_from( scalar, CHAR_P classname ) ) 
     {

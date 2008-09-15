@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: ComboBox.xs 2283 2007-11-11 13:58:13Z mbarbon $
-## Copyright:   (c) 2000-2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: ComboBox.xs 2435 2008-08-05 18:05:54Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -114,7 +114,7 @@ wxComboBox::Copy()
 void
 wxComboBox::Cut()
 
-#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+#if WXPERL_W_VERSION_GE( 2, 6, 0 ) && !defined(__WXMOTIF__)
 
 bool
 wxComboBox::CanCopy()
