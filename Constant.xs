@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2393 2008-05-14 20:54:52Z mbarbon $
+// RCS-ID:      $Id: Constant.xs 2443 2008-08-13 21:08:46Z mbarbon $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -157,6 +157,39 @@
 
 #if WXPERL_W_VERSION_LT( 2, 9, 0 )
 #define wxBORDER_THEME wxBORDER_DEFAULT
+#define wxBRUSHSTYLE_INVALID -1
+#define wxBRUSHSTYLE_SOLID wxSOLID
+#define wxBRUSHSTYLE_TRANSPARENT wxTRANSPARENT
+#define wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE wxSTIPPLE_MASK_OPAQUE
+#define wxBRUSHSTYLE_STIPPLE_MASK wxSTIPPLE_MASK
+#define wxBRUSHSTYLE_STIPPLE wxSTIPPLE
+#define wxBRUSHSTYLE_BDIAGONAL_HATCH wxBDIAGONAL_HATCH
+#define wxBRUSHSTYLE_CROSSDIAG_HATCH wxCROSSDIAG_HATCH
+#define wxBRUSHSTYLE_FDIAGONAL_HATCH wxFDIAGONAL_HATCH
+#define wxBRUSHSTYLE_CROSS_HATCH wxCROSS_HATCH
+#define wxBRUSHSTYLE_HORIZONTAL_HATCH wxHORIZONTAL_HATCH
+#define wxBRUSHSTYLE_VERTICAL_HATCH wxVERTICAL_HATCH
+#define wxBRUSHSTYLE_FIRST_HATCH wxFIRST_HATCH
+#define wxBRUSHSTYLE_LAST_HATCH wxLAST_HATCH
+#define wxPENSTYLE_INVALID -1
+#define wxPENSTYLE_SOLID wxSOLID
+#define wxPENSTYLE_DOT wxDOT
+#define wxPENSTYLE_LONG_DASH wxLONG_DASH
+#define wxPENSTYLE_SHORT_DASH wxSHORT_DASH
+#define wxPENSTYLE_DOT_DASH wxDOT_DASH
+#define wxPENSTYLE_USER_DASH wxUSER_DASH
+#define wxPENSTYLE_TRANSPARENT wxTRANSPARENT
+#define wxPENSTYLE_STIPPLE_MASK_OPAQUE wxSTIPPLE_MASK_OPAQUE
+#define wxPENSTYLE_STIPPLE_MASK wxSTIPPLE_MASK
+#define wxPENSTYLE_STIPPLE wxSTIPPLE
+#define wxPENSTYLE_BDIAGONAL_HATCH wxBDIAGONAL_HATCH
+#define wxPENSTYLE_CROSSDIAG_HATCH wxCROSSDIAG_HATCH
+#define wxPENSTYLE_FDIAGONAL_HATCH wxFDIAGONAL_HATCH
+#define wxPENSTYLE_CROSS_HATCH wxCROSS_HATCH
+#define wxPENSTYLE_HORIZONTAL_HATCH wxHORIZONTAL_HATCH
+#define wxPENSTYLE_VERTICAL_HATCH wxVERTICAL_HATCH
+#define wxPENSTYLE_FIRST_HATCH wxFIRST_HATCH
+#define wxPENSTYLE_LAST_HATCH wxLAST_HATCH
 #endif
 
 #define wxNavigateBackward  wxNavigationKeyEvent::IsBackward
@@ -754,6 +787,7 @@ static double constant( const char *name, int arg )
     r( wxANIMATION_TYPE_ANI );          // animation
     r( wxANIMATION_TYPE_ANY );          // animation
     r( wxANIMATION_TYPE_GIF );          // animation
+    r( wxANIMATION_TYPE_INVALID );      // animation
     r( wxAC_DEFAULT_STYLE );            // animationctrl
     r( wxAC_NO_AUTORESIZE );            // animationctrl
 #endif
@@ -782,6 +816,29 @@ static double constant( const char *name, int arg )
     r( wxBITMAP_TYPE_PCX );             // bitmap icon image
     r( wxBITMAP_TYPE_ANY );             // bitmap icon image
     r( wxBITMAP_TYPE_TIF );             // bitmap icon image
+    r( wxBITMAP_TYPE_ANI );             // bitmap icon image
+    r( wxBITMAP_TYPE_GIF_RESOURCE );    // bitmap icon image
+    r( wxBITMAP_TYPE_ICON );            // bitmap icon image
+    r( wxBITMAP_TYPE_ICON_RESOURCE );   // bitmap icon image
+    r( wxBITMAP_TYPE_IFF );             // bitmap icon image
+    r( wxBITMAP_TYPE_INVALID );         // bitmap icon image
+    r( wxBITMAP_TYPE_JPEG_RESOURCE );   // bitmap icon image
+    r( wxBITMAP_TYPE_MACCURSOR );       // bitmap icon image
+    r( wxBITMAP_TYPE_MACCURSOR_RESOURCE ); // bitmap icon image
+    r( wxBITMAP_TYPE_PCX_RESOURCE );    // bitmap icon image
+    r( wxBITMAP_TYPE_PICT );            // bitmap icon image
+    r( wxBITMAP_TYPE_PICT_RESOURCE );   // bitmap icon image
+    r( wxBITMAP_TYPE_PNG_RESOURCE );    // bitmap icon image
+    r( wxBITMAP_TYPE_PNM_RESOURCE );    // bitmap icon image
+    r( wxBITMAP_TYPE_RESOURCE );        // bitmap icon image
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    r( wxBITMAP_TYPE_TGA );             // bitmap icon image
+#endif
+    r( wxBITMAP_TYPE_TIF_RESOURCE );    // bitmap icon image
+    r( wxBITMAP_TYPE_XBM_DATA );        // bitmap icon image
+    r( wxBITMAP_TYPE_XPM_DATA );        // bitmap icon image
+
+    r( wxBI_EXPAND );
 
     r( wxBOLD );                        // font
     r( wxBOTH );                        // window dialog frame
@@ -791,6 +848,7 @@ static double constant( const char *name, int arg )
     r( wxBU_BOTTOM );                   // button
     r( wxBU_AUTODRAW );                 // button
     r( wxBU_RIGHT );                    // button
+    r( wxBU_NOAUTODRAW );               // button
 
     r( wxBU_EXACTFIT );                 // button
 
@@ -801,6 +859,9 @@ static double constant( const char *name, int arg )
 
 #if WXPERL_W_VERSION_GE( 2, 7, 0 )
     r( wxBROWSER_NEW_WINDOW );
+#endif
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxBROWSER_NOBUSYCURSOR );
 #endif
 #if WXPERL_W_VERSION_GE( 2, 5, 5 )
     r( wxBUFFER_VIRTUAL_AREA );         // dc
@@ -824,6 +885,7 @@ static double constant( const char *name, int arg )
     r( wxBK_HITTEST_ONICON );           // bookctrl
     r( wxBK_HITTEST_ONLABEL );          // bookctrl
     r( wxBK_HITTEST_ONITEM );           // bookctrl
+    r( wxBK_HITTEST_ONPAGE );           // bookctrl
 #endif
     r( wxBORDER_DEFAULT );              // window
     r( wxBORDER_DOUBLE );               // window
@@ -836,6 +898,42 @@ static double constant( const char *name, int arg )
     r( wxBORDER_NONE );                 // window
 
     r( wxBACKWARD );                    // sizer
+
+    r( wxBLIT_00220326 );               // dc
+    r( wxBLIT_007700E6 );               // dc
+    r( wxBLIT_00990066 );               // dc
+    r( wxBLIT_00AA0029 );               // dc
+    r( wxBLIT_00DD0228 );               // dc
+    r( wxBLIT_BLACKNESS );              // dc
+    r( wxBLIT_DSTINVERT );              // dc
+    r( wxBLIT_MERGEPAINT );             // dc
+    r( wxBLIT_NOTSCRCOPY );             // dc
+    r( wxBLIT_NOTSRCERASE );            // dc
+    r( wxBLIT_SRCAND );                 // dc
+    r( wxBLIT_SRCCOPY );                // dc
+    r( wxBLIT_SRCERASE );               // dc
+    r( wxBLIT_SRCINVERT );              // dc
+    r( wxBLIT_SRCPAINT );               // dc
+    r( wxBLIT_WHITENESS );              // dc
+
+    r( wxBRUSHSTYLE_BDIAGONAL_HATCH );  // brush
+    r( wxBRUSHSTYLE_CROSSDIAG_HATCH );  // brush
+    r( wxBRUSHSTYLE_CROSS_HATCH );      // brush
+    r( wxBRUSHSTYLE_FDIAGONAL_HATCH );  // brush
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxBRUSHSTYLE_FIRST_HATCH );      // brush
+#endif
+    r( wxBRUSHSTYLE_HORIZONTAL_HATCH ); // brush
+    r( wxBRUSHSTYLE_INVALID );          // brush
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxBRUSHSTYLE_LAST_HATCH );       // brush
+#endif
+    r( wxBRUSHSTYLE_SOLID );            // brush
+    r( wxBRUSHSTYLE_STIPPLE );          // brush
+    r( wxBRUSHSTYLE_STIPPLE_MASK );     // brush
+    r( wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE ); // brush
+    r( wxBRUSHSTYLE_TRANSPARENT );      // brush
+    r( wxBRUSHSTYLE_VERTICAL_HATCH );   // brush
     break;
   case 'C':
     r( wxCANCEL );                      // dialog
@@ -879,6 +977,10 @@ static double constant( const char *name, int arg )
 #if WXPERL_W_VERSION_GE( 2, 5, 3 )
     r( wxCHB_BOTTOM );                  // choicebook
     r( wxCHB_TOP );                     // choicebook
+    r( wxCHB_ALIGN_MASK );              // choicebook
+    r( wxCHB_DEFAULT );                 // choicebook
+    r( wxCHB_LEFT );                    // choicebook
+    r( wxCHB_RIGHT );                   // choicebook
 #endif
 
 #if WXPERL_W_VERSION_GE( 2, 7, 0 )
@@ -923,6 +1025,19 @@ static double constant( const char *name, int arg )
     r( wxCURSOR_SPRAYCAN );             // cursor
     r( wxCURSOR_WAIT );                 // cursor
     r( wxCURSOR_WATCH );                // cursor
+    r( wxCURSOR_BLANK );                // cursor
+    r( wxCURSOR_DEFAULT );              // cursor
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+#ifdef __WXMAC__
+    r( wxCURSOR_COPY_ARROW );           // cursor
+#endif
+#ifdef __X__
+    r( wxCURSOR_BASED_ARROW_DOWN );     // cursor
+    r( wxCURSOR_BASED_ARROW_UP );       // cursor
+    r( wxCURSOR_CROSS_REVERSE );        // cursor
+    r( wxCURSOR_DOUBLE_ARROW );         // cursor
+#endif
+#endif
 
     r( wxCROSSDIAG_HATCH );             // brush pen
     r( wxCROSS_HATCH );                 // brush pen
@@ -1205,7 +1320,10 @@ static double constant( const char *name, int arg )
 #endif
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
     r( wxEXEC_BLOCK );                  // execute
+    r( wxEXEC_NOEVENTS );               // execute
 #endif
+    r( wxEXEC_MAKE_GROUP_LEADER );      // execute
+
     r( wxEAST );
 
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
@@ -1232,6 +1350,10 @@ static double constant( const char *name, int arg )
     r( wxFD_FILE_MUST_EXIST );          // filedialog
     r( wxFD_MULTIPLE );                 // filedialog
     r( wxFD_CHANGE_DIR );               // filedialog
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    r( wxFD_DEFAULT_STYLE );            // filedialog
+    r( wxFD_PREVIEW );                  // filedialog
+#endif
 
 #if WXPERL_W_VERSION_LT( 2, 7, 0 ) || WXWIN_COMPATIBILITY_2_6
     r( wxFILE_MUST_EXIST );
@@ -1245,8 +1367,6 @@ static double constant( const char *name, int arg )
     r( wxFLEX_GROWMODE_SPECIFIED );     // sizer
     r( wxFLEX_GROWMODE_ALL );           // sizer
 #endif
-    r( wxFONTENCODING_DEFAULT );        // font
-    r( wxFONTENCODING_SYSTEM );         // font
     r( wxFRAME_FLOAT_ON_PARENT );       // frame
     r( wxFRAME_NO_WINDOW_MENU );        // frame
     r( wxFRAME_NO_TASKBAR );            // frame
@@ -1296,6 +1416,8 @@ static double constant( const char *name, int arg )
     r( wxFONTFLAG_STRIKETHROUGH );      // font
     r( wxFONTFLAG_MASK );               // font
 #endif    
+    r( wxFONTENCODING_DEFAULT );        // font
+    r( wxFONTENCODING_SYSTEM );         // font
     r( wxFONTENCODING_ISO8859_1 );      // font
     r( wxFONTENCODING_ISO8859_2 );      // font
     r( wxFONTENCODING_ISO8859_3 );      // font
@@ -1331,6 +1453,69 @@ static double constant( const char *name, int arg )
     r( wxFONTENCODING_UTF7 );           // font
     r( wxFONTENCODING_UTF8 );           // font
     r( wxFONTENCODING_UNICODE );        // font
+    r( wxFONTENCODING_BIG5 );           // font
+    r( wxFONTENCODING_CP12_MAX );       // font
+    r( wxFONTENCODING_CP932 );          // font
+    r( wxFONTENCODING_CP936 );          // font
+    r( wxFONTENCODING_CP949 );          // font
+    r( wxFONTENCODING_CP950 );          // font
+    r( wxFONTENCODING_EUC_JP );         // font
+    r( wxFONTENCODING_GB2312 );         // font
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxFONTENCODING_ISO2022_JP );     // font
+#endif
+    r( wxFONTENCODING_ISO8859_MAX );    // font
+    r( wxFONTENCODING_KOI8_U );         // font
+    r( wxFONTENCODING_MACARABIC );      // font
+    r( wxFONTENCODING_MACARABICEXT );   // font
+    r( wxFONTENCODING_MACARMENIAN );    // font
+    r( wxFONTENCODING_MACBENGALI );     // font
+    r( wxFONTENCODING_MACBURMESE );     // font
+    r( wxFONTENCODING_MACCELTIC );      // font
+    r( wxFONTENCODING_MACCENTRALEUR );  // font
+    r( wxFONTENCODING_MACCHINESESIMP ); // font
+    r( wxFONTENCODING_MACCHINESETRAD ); // font
+    r( wxFONTENCODING_MACCROATIAN );    // font
+    r( wxFONTENCODING_MACCYRILLIC );    // font
+    r( wxFONTENCODING_MACDEVANAGARI );  // font
+    r( wxFONTENCODING_MACDINGBATS );    // font
+    r( wxFONTENCODING_MACETHIOPIC );    // font
+    r( wxFONTENCODING_MACGAELIC );      // font
+    r( wxFONTENCODING_MACGEORGIAN );    // font
+    r( wxFONTENCODING_MACGREEK );       // font
+    r( wxFONTENCODING_MACGUJARATI );    // font
+    r( wxFONTENCODING_MACGURMUKHI );    // font
+    r( wxFONTENCODING_MACHEBREW );      // font
+    r( wxFONTENCODING_MACICELANDIC );   // font
+    r( wxFONTENCODING_MACJAPANESE );    // font
+    r( wxFONTENCODING_MACKANNADA );     // font
+    r( wxFONTENCODING_MACKEYBOARD );    // font
+    r( wxFONTENCODING_MACKHMER );       // font
+    r( wxFONTENCODING_MACKOREAN );      // font
+    r( wxFONTENCODING_MACLAOTIAN );     // font
+    r( wxFONTENCODING_MACMALAJALAM );   // font
+    r( wxFONTENCODING_MACMAX );         // font
+    r( wxFONTENCODING_MACMIN );         // font
+    r( wxFONTENCODING_MACMONGOLIAN );   // font
+    r( wxFONTENCODING_MACORIYA );       // font
+    r( wxFONTENCODING_MACROMAN );       // font
+    r( wxFONTENCODING_MACROMANIAN );    // font
+    r( wxFONTENCODING_MACSINHALESE );   // font
+    r( wxFONTENCODING_MACSYMBOL );      // font
+    r( wxFONTENCODING_MACTAMIL );       // font
+    r( wxFONTENCODING_MACTELUGU );      // font
+    r( wxFONTENCODING_MACTHAI );        // font
+    r( wxFONTENCODING_MACTIBETAN );     // font
+    r( wxFONTENCODING_MACTURKISH );     // font
+    r( wxFONTENCODING_MACVIATNAMESE );  // font
+    r( wxFONTENCODING_MAX );            // font
+    r( wxFONTENCODING_SHIFT_JIS );      // font
+    r( wxFONTENCODING_UTF16 );          // font
+    r( wxFONTENCODING_UTF16BE );        // font
+    r( wxFONTENCODING_UTF16LE );        // font
+    r( wxFONTENCODING_UTF32 );          // font
+    r( wxFONTENCODING_UTF32BE );        // font
+    r( wxFONTENCODING_UTF32LE );        // font
 
     r( wxFULLSCREEN_NOMENUBAR );        // frame dialog
     r( wxFULLSCREEN_NOTOOLBAR );        // frame dialog
@@ -1350,10 +1535,13 @@ static double constant( const char *name, int arg )
     r( wxFLP_OVERWRITE_PROMPT );
     r( wxFLP_FILE_MUST_EXIST );
     r( wxFLP_CHANGE_DIR );
+    r( wxFLP_DEFAULT_STYLE );
+    r( wxFLP_USE_TEXTCTRL );
     r( wxFNTP_USE_TEXTCTRL );
     r( wxFNTP_DEFAULT_STYLE );
     r( wxFNTP_FONTDESC_AS_LABEL );
     r( wxFNTP_USEFONT_FOR_LABEL );
+    r( wxFNTP_MAXPOINT_SIZE );
 #endif
     r( wxFORWARD );                     // sizer
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
@@ -1362,6 +1550,16 @@ static double constant( const char *name, int arg )
     r( wxFC_MULTIPLE );                 // filectrl
     r( wxFC_NOSHOWHIDDEN );             // filectrl
 #endif
+
+    r( wxFILTER_ALPHA );
+    r( wxFILTER_ALPHANUMERIC );
+    r( wxFILTER_ASCII );
+    r( wxFILTER_EXCLUDE_CHAR_LIST );
+    r( wxFILTER_EXCLUDE_LIST );
+    r( wxFILTER_INCLUDE_CHAR_LIST );
+    r( wxFILTER_INCLUDE_LIST );
+    r( wxFILTER_NONE );
+    r( wxFILTER_NUMERIC );
     break;
   case 'G':
     r( wxGA_HORIZONTAL );               // gauge
@@ -1735,6 +1933,7 @@ static double constant( const char *name, int arg )
     r( wxLB_NEEDED_SB );                // listbox
     r( wxLB_OWNERDRAW );                // listbox
     r( wxLB_SORT );                     // listbox
+    r( wxLB_INT_HEIGHT  );              // listbox
 
 #if WXPERL_W_VERSION_GE( 2, 5, 1 )
     r( wxLB_DEFAULT );                  // listbook
@@ -1931,6 +2130,9 @@ static double constant( const char *name, int arg )
         rr( ROMANIAN );                 // locale
         rr( RUSSIAN );                  // locale
         rr( RUSSIAN_UKRAINE );          // locale
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+        rr( SAMI );                     // locale
+#endif
         rr( SAMOAN );                   // locale
         rr( SANGHO );                   // locale
         rr( SANSKRIT );                 // locale
@@ -1994,6 +2196,9 @@ static double constant( const char *name, int arg )
         rr( UZBEK );                    // locale
         rr( UZBEK_CYRILLIC );           // locale
         rr( UZBEK_LATIN );              // locale
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+        rr( VALENCIAN );                // locale
+#endif
         rr( VIETNAMESE );               // locale
         rr( VOLAPUK );                  // locale
         rr( WELSH );                    // locale
@@ -2041,12 +2246,27 @@ static double constant( const char *name, int arg )
     r( wxMOUSE_BTN_AUX1 );
     r( wxMOUSE_BTN_AUX2 );
 #endif
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    r( wxMOD_NONE );
+    r( wxMOD_ALT );
+    r( wxMOD_CONTROL );
+    r( wxMOD_SHIFT );
+    r( wxMOD_WIN );
+#endif
+#if WXPERL_W_VERSION_GE( 2, 8, 0 )
+    r( wxMOD_ALTGR );
+    r( wxMOD_META );
+    r( wxMOD_CMD );
+    r( wxMOD_ALL );
+#endif
     break;
   case 'N':
     r( wxNB_FIXEDWIDTH );               // notebook
     r( wxNB_LEFT );                     // notebook
     r( wxNB_RIGHT );                    // notebook
     r( wxNB_BOTTOM );                   // notebook
+    r( wxNB_TOP );                      // notebook
     r( wxNB_MULTILINE );                // notebook
 #if WXPERL_W_VERSION_GE( 2, 5, 0 )
     r( wxNB_HITTEST_NOWHERE );          // notebook
@@ -2054,6 +2274,15 @@ static double constant( const char *name, int arg )
     r( wxNB_HITTEST_ONLABEL );          // notebook
     r( wxNB_HITTEST_ONITEM );           // notebook
 #endif
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    r( wxNB_HITTEST_ONPAGE );           // notebook
+#endif
+    r( wxNB_DEFAULT );                  // notebook
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxNB_FLAT );                     // notebook
+    r( wxNB_NOPAGETHEME );              // notebook
+#endif
+
     r( wxNO );                          // dialog
     r( wxNO_BORDER );                   // frame toolbar
 #if WXPERL_W_VERSION_LT( 2, 7, 0 )
@@ -2138,13 +2367,46 @@ static double constant( const char *name, int arg )
     r( wxPROPSHEET_SHRINKTOFIT );       // propertysheet
 #endif
 
+    r( wxPENSTYLE_BDIAGONAL_HATCH );    // pen
+    r( wxPENSTYLE_CROSSDIAG_HATCH );    // pen
+    r( wxPENSTYLE_CROSS_HATCH );        // pen
+    r( wxPENSTYLE_DOT );                // pen
+    r( wxPENSTYLE_DOT_DASH );           // pen
+    r( wxPENSTYLE_FDIAGONAL_HATCH );    // pen
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxPENSTYLE_FIRST_HATCH );        // pen
+#endif
+    r( wxPENSTYLE_HORIZONTAL_HATCH );   // pen
+    r( wxPENSTYLE_INVALID );            // pen
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxPENSTYLE_LAST_HATCH );         // pen
+#endif
+    r( wxPENSTYLE_LONG_DASH );          // pen
+    r( wxPENSTYLE_SHORT_DASH );         // pen
+    r( wxPENSTYLE_SOLID );              // pen
+    r( wxPENSTYLE_STIPPLE );            // pen
+    r( wxPENSTYLE_STIPPLE_MASK );       // pen
+    r( wxPENSTYLE_STIPPLE_MASK_OPAQUE );// pen
+    r( wxPENSTYLE_TRANSPARENT );        // pen
+    r( wxPENSTYLE_USER_DASH );          // pen
+    r( wxPENSTYLE_VERTICAL_HATCH );     // pen
     break;
   case 'R':
     r( wxRAISED_BORDER );               // window
     r( wxRA_SPECIFY_ROWS );             // radiobox
     r( wxRA_SPECIFY_COLS );             // radiobox
+    r( wxRA_HORIZONTAL );               // radiobox
+    r( wxRA_LEFTTORIGHT );              // radiobox
+    r( wxRA_TOPTOBOTTOM );              // radiobox
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxRA_USE_CHECKBOX );             // radiobox
+#endif
+    r( wxRA_VERTICAL );                 // radiobox
     r( wxRB_GROUP );                    // radiobutton
     r( wxRB_SINGLE );                   // radiobutton
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxRB_USE_CHECKBOX );             // radiobutton
+#endif
     r( wxRESIZE_BORDER );               // dialog frame
     r( wxRETAINED );                    // scrolledwindow
     r( wxRIGHT );                       // sizer layout constraints
@@ -2154,6 +2416,23 @@ static double constant( const char *name, int arg )
     r( wxRightOf );                     // layout constraints
 
     r( wxRESET );                       // sizer
+
+    r( wxROP_BLACK );                   // dc
+    r( wxROP_COPYPEN );                 // dc
+    r( wxROP_MASKNOTPEN );              // dc
+    r( wxROP_MASKPEN );                 // dc
+    r( wxROP_MASKPENNOT );              // dc
+    r( wxROP_MERGENOTPEN );             // dc
+    r( wxROP_MERGEPEN );                // dc
+    r( wxROP_MERGEPENNOT );             // dc
+    r( wxROP_NOP );                     // dc
+    r( wxROP_NOT );                     // dc
+    r( wxROP_NOTCOPYPEN );              // dc
+    r( wxROP_NOTMASKPEN );              // dc
+    r( wxROP_NOTMERGEPEN );             // dc
+    r( wxROP_NOTXORPEN );               // dc
+    r( wxROP_WHITE );                   // dc
+    r( wxROP_XORPEN );                  // dc
     break;
   case 'S':
 
@@ -2205,6 +2484,9 @@ static double constant( const char *name, int arg )
     r( wxSL_RIGHT );                    // slider
     r( wxSL_TOP );                      // slider
     r( wxSL_SELRANGE );                 // slider
+    r( wxSL_BOTH );                     // slider
+    r( wxSL_BOTTOM );                   // slider
+    r( wxSL_TICKS );                    // slider
 #if WXPERL_W_VERSION_GE( 2, 5, 4 )
     r( wxSL_INVERSE );                  // slider
 #endif
@@ -2250,6 +2532,9 @@ static double constant( const char *name, int arg )
     r( wxSP_NOBORDER );                 // splitterwindow
     r( wxSP_PERMIT_UNSPLIT );           // splitterwindow
     r( wxSP_LIVE_UPDATE );              // splitterwindow
+    r( wxSP_NOSASH );                   // splitterwindow
+    r( wxSP_NO_XP_THEME );              // splitterwindow
+
     r( wxSPLIT_HORIZONTAL );            // splitterwindow
     r( wxSPLIT_VERTICAL );              // splitterwindow
 
@@ -2290,6 +2575,8 @@ static double constant( const char *name, int arg )
     r( wxSYS_SYSTEM_FONT );             // systemsettings
     r( wxSYS_DEVICE_DEFAULT_FONT );     // systemsettings
     r( wxSYS_DEFAULT_GUI_FONT );        // systemsettings
+    r( wxSYS_ICONTITLE_FONT );          // systemsettings
+    r( wxSYS_SYSTEM_FIXED_FONT );       // systemsettings
 
     // colours
     r( wxSYS_COLOUR_SCROLLBAR );        // systemsettings
@@ -2327,6 +2614,8 @@ static double constant( const char *name, int arg )
     r( wxSYS_COLOUR_3DHIGHLIGHT );      // systemsettings
     r( wxSYS_COLOUR_3DHILIGHT );        // systemsettings
     r( wxSYS_COLOUR_BTNHILIGHT );       // systemsettings
+
+    r( wxSYS_COLOUR_MAX );              // systemsettings
 
     // metrics
     r( wxSYS_MOUSE_BUTTONS );           // systemsettings
@@ -2373,6 +2662,14 @@ static double constant( const char *name, int arg )
     r( wxSYS_SCREEN_SMALL );            // systemsettings
     r( wxSYS_SCREEN_DESKTOP );          // systemsettings
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxSYS_DCLICK_MSEC );             // systemsettings
+#endif
+    r( wxSYS_DEFAULT_PALETTE );         // systemsettings
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    r( wxSYS_TABLET_PRESENT );          // systemsettings
+#endif
+
     // capabilities
     r( wxSYS_CAN_DRAW_FRAME_DECORATIONS );
     r( wxSYS_CAN_ICONIZE_FRAME );
@@ -2414,7 +2711,16 @@ static double constant( const char *name, int arg )
 #if WXPERL_W_VERSION_GE( 2, 7, 2 )
     r( wxTB_RIGHT );                    // toolbar
     r( wxTB_BOTTOM );                   // toolbar
+    r( wxTB_LEFT );                     // toolbar
+    r( wxTB_TOP );                      // toolbar
 #endif
+    r( wxTB_NOALIGN );                  // toolbar
+    r( wxTB_NODIVIDER );                // toolbar
+
+    r( wxTOOL_STYLE_BUTTON );           // toolbar
+    r( wxTOOL_STYLE_CONTROL );          // toolbar
+    r( wxTOOL_STYLE_SEPARATOR );        // toolbar
+
     r( wxTELETYPE );                    // font
     r( wxTE_PROCESS_ENTER );            // textctrl combobox comboctrl
     r( wxTE_PROCESS_TAB );              // textctrl
@@ -2443,6 +2749,10 @@ static double constant( const char *name, int arg )
     r( wxTE_HT_BELOW );                 // textctrl
     r( wxTE_HT_BEYOND );                // textctrl
 #endif
+    r( wxTE_AUTO_SCROLL );              // textctrl
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    r( wxTE_CAPITALIZE );               // textctrl
+#endif
 #if WXPERL_W_VERSION_LT( 2, 7, 0 )
     r( wxTHICK_FRAME );                 // frame dialog
 #endif
@@ -2467,18 +2777,26 @@ static double constant( const char *name, int arg )
     r( wxTEXT_ATTR_TABS );              // textctrl
 #endif
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
-    r( wxTEXT_ATTR_EFFECT_NONE );
-    r( wxTEXT_ATTR_EFFECT_CAPITALS );
-    r( wxTEXT_ATTR_EFFECT_SMALL_CAPITALS );
-    r( wxTEXT_ATTR_EFFECT_STRIKETHROUGH );
-    r( wxTEXT_ATTR_EFFECT_DOUBLE_STRIKETHROUGH );
-    r( wxTEXT_ATTR_EFFECT_SHADOW );
-    r( wxTEXT_ATTR_EFFECT_EMBOSS );
-    r( wxTEXT_ATTR_EFFECT_OUTLINE );
-    r( wxTEXT_ATTR_EFFECT_ENGRAVE );
-    r( wxTEXT_ATTR_EFFECT_SUPERSCRIPT );
-    r( wxTEXT_ATTR_EFFECT_SUBSCRIPT );
+    r( wxTEXT_ATTR_EFFECT_NONE );       // textctrl
+    r( wxTEXT_ATTR_EFFECT_CAPITALS );   // textctrl
+    r( wxTEXT_ATTR_EFFECT_SMALL_CAPITALS ); // textctrl
+    r( wxTEXT_ATTR_EFFECT_STRIKETHROUGH ); // textctrl
+    r( wxTEXT_ATTR_EFFECT_DOUBLE_STRIKETHROUGH ); // textctrl
+    r( wxTEXT_ATTR_EFFECT_SHADOW );     // textctrl
+    r( wxTEXT_ATTR_EFFECT_EMBOSS );     // textctrl
+    r( wxTEXT_ATTR_EFFECT_OUTLINE );    // textctrl
+    r( wxTEXT_ATTR_EFFECT_ENGRAVE );    // textctrl
+    r( wxTEXT_ATTR_EFFECT_SUPERSCRIPT );// textctrl
+    r( wxTEXT_ATTR_EFFECT_SUBSCRIPT );  // textctrl
+    r( wxTEXT_ATTR_EFFECTS );           // textctrl
+    r( wxTEXT_ATTR_FONT_ENCODING );     // textctrl
+    r( wxTEXT_ATTR_OUTLINE_LEVEL );     // textctrl
 #endif
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+    r( wxTEXT_TYPE_ANY );               // textctrl
+#endif
+
     r( wxTINY_CAPTION_HORIZ );          // miniframe
     r( wxTINY_CAPTION_VERT );           // miniframe
     r( wxTIMER_CONTINUOUS );            // timer
@@ -2557,7 +2875,16 @@ static double constant( const char *name, int arg )
     r( wxWANTS_CHARS );                 // window
     r( wxWINDING_RULE );                // dc
     r( wxWidth );                       // layout constraints
-    r( wxWIZARD_EX_HELPBUTTON );
+    r( wxWIZARD_EX_HELPBUTTON );        // wizard
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    r( wxWIZARD_HALIGN_CENTRE );        // wizard
+    r( wxWIZARD_HALIGN_LEFT );          // wizard
+    r( wxWIZARD_HALIGN_RIGHT );         // wizard
+    r( wxWIZARD_TILE );                 // wizard
+    r( wxWIZARD_VALIGN_BOTTOM );        // wizard
+    r( wxWIZARD_VALIGN_CENTRE );        // wizard
+    r( wxWIZARD_VALIGN_TOP );           // wizard
+#endif
 
     r( wxWS_EX_VALIDATE_RECURSIVELY );  // window
     r( wxWS_EX_BLOCK_EVENTS );          // window
@@ -2705,6 +3032,8 @@ void SetConstantsOnce()
     wxPli_make_const_string( wxMEDIABACKEND_QUICKTIME ); // media
     wxPli_make_const_string( wxMEDIABACKEND_MCI ); // media
     wxPli_make_const_string( wxMEDIABACKEND_GSTREAMER ); // media
+    wxPli_make_const_string( wxMEDIABACKEND_REALPLAYER ); //media
+    wxPli_make_const_string( wxMEDIABACKEND_WMP10 ); // media
 #endif
 
     wxPli_make_const( "wxTheClipboard" );       // clipboard
@@ -2775,6 +3104,14 @@ void SetConstantsOnce()
     wxPli_make_const_string( wxIMAGE_OPTION_RESOLUTIONX );     // image
     wxPli_make_const_string( wxIMAGE_OPTION_RESOLUTIONY );     // image
     wxPli_make_const_string( wxIMAGE_OPTION_RESOLUTIONUNIT );  // image
+#endif
+#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+    wxPli_make_const_string( wxIMAGE_OPTION_BITSPERSAMPLE );    // image
+    wxPli_make_const_string( wxIMAGE_OPTION_COMPRESSION );      // image
+    wxPli_make_const_string( wxIMAGE_OPTION_IMAGEDESCRIPTOR );  // image
+    wxPli_make_const_string( wxIMAGE_OPTION_PNG_BITDEPTH );     // image
+    wxPli_make_const_string( wxIMAGE_OPTION_PNG_FORMAT );       // image
+    wxPli_make_const_string( wxIMAGE_OPTION_SAMPLESPERPIXEL );  // image
 #endif
 
     wxPli_make_const_string( wxFileSelectorDefaultWildcardStr ); // filedialog

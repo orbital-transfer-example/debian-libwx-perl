@@ -1,9 +1,13 @@
-libwx-perl (0.84-3) UNRELEASED; urgency=low
+libwx-perl (0.86-1) UNRELEASED; urgency=low
 
+  [ gregor herrmann ]
   * Add debian/README.source to document quilt usage, as required by
     Debian Policy since 3.8.0.
 
- -- gregor herrmann <gregoa@debian.org>  Wed, 06 Aug 2008 21:34:20 -0300
+  [ Damyan Ivanov ]
+  * New upstream release
+
+ -- Damyan Ivanov <dmn@debian.org>  Mon, 15 Sep 2008 10:05:45 +0300
 
 libwx-perl (0.84-2) unstable; urgency=low
 
