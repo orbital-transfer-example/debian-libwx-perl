@@ -6,6 +6,7 @@ libwx-perl (0.86-1) UNRELEASED; urgency=low
 
   [ Damyan Ivanov ]
   * New upstream release
+  * debian/copyright: add a couple of copyright holders
 
  -- Damyan Ivanov <dmn@debian.org>  Mon, 15 Sep 2008 10:05:45 +0300
 

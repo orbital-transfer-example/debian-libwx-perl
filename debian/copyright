@@ -2,6 +2,9 @@ Upstream source location: http://search.cpan.org/dist/Wx/
 
 Files: *
 Copyright: (c) 2000-2008, Mattia Barbon <mbarbon@cpan.org>
+           (c) 2002-2008, Marcus Friedlaender
+           (c) 2002-2008, Graciliano M. P.
+           (c) 2005, 2008, Matthew Gabeler-Lee
 License: GPL-1+ | Artistic
  You may redistribute them [the files in this directory] under the same
  terms as Perl itself.
