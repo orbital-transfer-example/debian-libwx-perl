@@ -8,6 +8,8 @@ libwx-perl (0.86-1) UNRELEASED; urgency=low
   * New upstream release
   * debian/copyright: add a couple of copyright holders
   * debian/rules: fix target interdependencies allowing for parallel builds
+  * bump libalien-wxwidgets-perl (build-)dependency to >= 0.39 to pick up
+    building against wx2.8
 
  -- Damyan Ivanov <dmn@debian.org>  Mon, 15 Sep 2008 10:05:45 +0300
 
