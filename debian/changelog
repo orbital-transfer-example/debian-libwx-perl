@@ -1,3 +1,11 @@
+libwx-perl (0.86-2) UNRELEASED; urgency=low
+
+  * debian/rules: run tests with -j1; this disables parallel make during tests
+    even if the build targed was invoked with -jN (N>1).
+    Closes: #499740 -- FTBFS: Failed 2/4 test scripts. 6/9 subtests failed.
+
+ -- Damyan Ivanov <dmn@debian.org>  Fri, 03 Oct 2008 00:03:23 +0300
+
 libwx-perl (0.86-1) unstable; urgency=low
 
   [ gregor herrmann ]

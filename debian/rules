@@ -37,7 +37,7 @@ build-stamp: $(QUILT_STAMPFN)
 	# Add commands to compile the package here
 	$(PERL) Makefile.PL INSTALLDIRS=vendor
 	$(MAKE)
-	xvfb-run $(MAKE) test
+	xvfb-run $(MAKE) -j1 test
 
 	touch build-stamp
 
