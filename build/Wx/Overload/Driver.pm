@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     17/08/2001
-## RCS-ID:      $Id: Driver.pm 2256 2007-10-26 21:54:28Z mbarbon $
-## Copyright:   (c) 2001-2003, 2005-2007 Mattia Barbon
+## RCS-ID:      $Id: Driver.pm 2500 2008-11-05 22:17:53Z mbarbon $
+## Copyright:   (c) 2001-2003, 2005-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -189,12 +189,12 @@ EOT
 
     foreach my $i ( sort keys %constants ) {
       my $count = scalar @{$constants{$i}};
-      print $out "const unsigned char wxPliOvl_${i}_arr\[\] = { ";
+      print $out "const unsigned char wxPliOvl_${i}_datadef\[\] = { ";
       print $out join ", ", map { "wxPliOvl$_" } @{$constants{$i}};
       print $out " };\n";
       print $out <<EOT;
 const wxPliPrototype wxPliOvl_${i}
-    ( wxPliOvl\_tnames, wxPliOvl_${i}_arr, $count );
+    ( wxPliOvl\_tnames, wxPliOvl_${i}_datadef, $count );
 EOT
     }
 

@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     08/11/2000
-## RCS-ID:      $Id: ListBox.xs 2153 2007-08-15 17:37:39Z mbarbon $
-## Copyright:   (c) 2000-2003, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: ListBox.xs 2504 2008-11-06 00:25:57Z mbarbon $
+## Copyright:   (c) 2000-2003, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -108,18 +108,14 @@ int
 wxListBox::HitTest( point )
     wxPoint point
 
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+
 void
 wxListBox::InsertItems( items, pos )
-    SV* items
+    wxArrayString items
     int pos
-  PREINIT:
-    wxString* its;
-    int n;
-  CODE:
-    n = wxPli_av_2_stringarray( aTHX_ items, &its );
-    THIS->InsertItems( n, its, pos );
 
-    delete[] its;
+#endif
 
 bool
 wxListBox::IsSelected( n )
@@ -145,6 +141,10 @@ wxListBox::SetFirstItemString( str )
   CODE:
     THIS->SetFirstItem( str );
 
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+
 void
 wxListBox::Set( choices )
     wxArrayString choices
+
+#endif

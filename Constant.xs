@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2443 2008-08-13 21:08:46Z mbarbon $
+// RCS-ID:      $Id: Constant.xs 2503 2008-11-06 00:23:45Z mbarbon $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -529,7 +529,11 @@ static wxPlINH inherit[] =
 #endif
     I( OwnerDrawnComboBox, ComboCtrl )
     I( PlOwnerDrawnComboBox, OwnerDrawnComboBox )
+#if WXPERL_W_VERSION_GE( 2, 9, 0 ) && defined( __WXGTK__ )
+    I( BitmapComboBox,  ComboBox )
+#else
     I( BitmapComboBox,  OwnerDrawnComboBox )
+#endif
     I( GenericCollapsiblePane, Control )
     I( CollapsiblePane, GenericCollapsiblePane )
 
@@ -584,7 +588,7 @@ static wxPlINH inherit[] =
     I( TreeCtrl,        GenericTreeCtrl )
 #endif
 
-#if defined(__WXGTK__) || \
+#if ( defined( __WXGTK__ ) && WXPERL_W_VERSION_LT( 2, 9, 0 ) ) || \
     ( defined( __WXMAC__ ) && WXPERL_W_VERSION_GE( 2, 5, 1 ) )
     I( ComboBox,        Control )
 #else
@@ -2749,7 +2753,9 @@ static double constant( const char *name, int arg )
     r( wxTE_HT_BELOW );                 // textctrl
     r( wxTE_HT_BEYOND );                // textctrl
 #endif
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
     r( wxTE_AUTO_SCROLL );              // textctrl
+#endif
 #if WXPERL_W_VERSION_GE( 2, 6, 0 )
     r( wxTE_CAPITALIZE );               // textctrl
 #endif
