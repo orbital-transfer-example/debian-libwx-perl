@@ -75,6 +75,7 @@ install-stamp: build-stamp
 	# remove bogus man page
 	[ -f $(TMP)/usr/share/man/man3/Wx\:\:build\:\:MakeMaker\:\:Win32_MSVC.3pm.gz ] \
 		&& rm -f $(TMP)/usr/share/man/man3/Wx\:\:build\:\:MakeMaker\:\:Win32_MSVC.3pm.gz
+
 	touch install-stamp
 
 # Build architecture-independent files here.
