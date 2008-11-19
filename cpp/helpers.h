@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.h 2457 2008-08-31 15:49:17Z mbarbon $
+// RCS-ID:      $Id: helpers.h 2498 2008-11-05 19:45:38Z mbarbon $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -117,7 +117,7 @@ inline SV* wxPli_wxString_2_sv( pTHX_ const wxString& str, SV* out )
 
 #else
 
-#ifdef WXPL_EXT
+#if NEEDS_PLI_HELPERS_STRUCT()
 bool* wxPli_always_utf8;
 #else
 extern bool wxPli_always_utf8;
@@ -125,7 +125,7 @@ extern bool wxPli_always_utf8;
 
 inline SV* wxPli_wxChar_2_sv( pTHX_ const wxChar* str, SV* out )
 {
-#ifdef WXPL_EXT
+#if NEEDS_PLI_HELPERS_STRUCT()
     if( *wxPli_always_utf8 )
 #else
     if( wxPli_always_utf8 )
@@ -144,7 +144,7 @@ inline SV* wxPli_wxChar_2_sv( pTHX_ const wxChar* str, SV* out )
 
 inline SV* wxPli_wxString_2_sv( pTHX_ const wxString& str, SV* out )
 {
-#ifdef WXPL_EXT
+#if NEEDS_PLI_HELPERS_STRUCT()
     if( *wxPli_always_utf8 )
 #else
     if( wxPli_always_utf8 )
@@ -566,7 +566,7 @@ wxPliHelpers name = { &wxPli_sv_2_object, \
  &wxPli_objlist_push, &wxPliOutputStream_ctor, &wxPli_stringarray_push \
  }
 
-#if defined( WXPL_EXT ) && !defined( WXPL_STATIC ) && !defined(__WXMAC__)
+#if NEEDS_PLI_HELPERS_STRUCT()
 
 #define INIT_PLI_HELPERS( name ) \
   SV* wxpli_tmp = get_sv( "Wx::_exports", 1 ); \

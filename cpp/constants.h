@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     17/03/2001
-// RCS-ID:      $Id: constants.h 2057 2007-06-18 23:03:00Z mbarbon $
-// Copyright:   (c) 2001-2002, 2005 Mattia Barbon
+// RCS-ID:      $Id: constants.h 2498 2008-11-05 19:45:38Z mbarbon $
+// Copyright:   (c) 2001-2002, 2005, 2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ extern void FUNCPTR( wxPli_remove_constant_function )
 inline wxPlConstants::wxPlConstants( PL_CONST_FUNC function )
     :m_function( function )
 {
-#if defined( WXPL_EXT ) && !defined( WXPL_STATIC ) && !defined(__WXMAC__)
+#if NEEDS_PLI_HELPERS_STRUCT()
     dTHX;
     // GRR! init helpers...
     SV* wxpli_tmp = get_sv( "Wx::_exports", 1 );

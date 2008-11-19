@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: typemap 2340 2008-03-25 22:25:07Z mbarbon $
+## RCS-ID:      $Id: typemap 2502 2008-11-05 22:26:20Z mbarbon $
 ## Copyright:   (c) 2000-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -42,6 +42,7 @@ wxUint32                T_IV
 wxByte                  T_U_CHAR
 wxTextCtrlHitTestResult T_ENUM
 wxArrayString           T_ARRAYSTRING
+wxPliUserDataCD **      T_ARRAYUSERDATA
 wxArrayInt              T_ARRAYINT
 wxTextPos               T_IV
 wxTextAttrAlignment     T_ENUM
@@ -666,3 +667,8 @@ T_ARRAYSTRING
 INPUT
 T_ARRAYINT
     wxPli_av_2_arrayint( aTHX_ $arg, & $var );
+
+INPUT
+T_ARRAYUSERDATA
+    wxPli_av_2_userdatacdarray( aTHX_ $arg, & $var );
+    wxPliArrayGuard<wxPliUserDataCD*> guard_$var = $var;

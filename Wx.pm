@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 2448 2008-08-24 21:57:04Z mbarbon $
+## RCS-ID:      $Id: Wx.pm 2497 2008-11-05 19:35:30Z mbarbon $
 ## Copyright:   (c) 2000-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.86';
+$VERSION = '0.88';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -182,7 +182,7 @@ eval( "sub wxMAC() { $_platform == $_mac }" );
 eval( "sub wxX11() { $_platform == $_x11 }" );
 
 # Mac OS X warning
-if( wxMAC() && $^X !~ m{/wxPerl\.app/} ) {
+if( wxMAC() && $^X !~ m{/wxPerl\.app/} && !$ENV{HARNESS_ACTIVE} ) {
     warn "On Mac OS X please run scripts with the 'wxPerl' interpreter\n";
 }
 

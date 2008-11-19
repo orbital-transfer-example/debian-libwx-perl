@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Event.xs 2274 2007-11-10 22:37:30Z mbarbon $
-// Copyright:   (c) 2000-2007 Mattia Barbon
+// RCS-ID:      $Id: Event.xs 2499 2008-11-05 19:47:18Z mbarbon $
+// Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -338,6 +338,23 @@ MODULE=Wx_Evt PACKAGE=Wx::IconizeEvent
 
 bool
 wxIconizeEvent::Iconized()
+  CODE:
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+    RETVAL = THIS->Iconized();
+#else
+    RETVAL = THIS->IsIconized();
+#endif
+  OUTPUT: RETVAL
+
+bool
+wxIconizeEvent::IsIconized()
+  CODE:
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+    RETVAL = THIS->Iconized();
+#else
+    RETVAL = THIS->IsIconized();
+#endif
+  OUTPUT: RETVAL
 
 MODULE=Wx_Evt PACKAGE=Wx::KeyEvent
 
