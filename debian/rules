@@ -65,7 +65,7 @@ install-stamp: build-stamp
 	rename 's/build:://' $(TMP)/usr/share/man/man3/build*
 
 	find $(TMP) -type f -name .packlist | xargs rm -f
-	[ ! -d /$(TMP)/usr/share/perl5 ] \
+	[ ! -d $(TMP)/usr/share/perl5 ] \
 	    || rmdir --verbose --ignore-fail-on-non-empty --parents \
 	    	$(TMP)/usr/share/perl5
 
