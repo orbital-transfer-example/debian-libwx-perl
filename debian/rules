@@ -73,8 +73,8 @@ install-stamp: build-stamp
 	find $(TMP)/usr/lib/perl5/Wx -type f -perm /755 -print0 | xargs -r0 chmod 664
 	chmod 664 $(CURDIR)/samples/README.txt
 	# remove bogus man page
-	[ ! -f "$(TMP)/usr/share/man/man3/Wx::build::MakeMaker::Win32_MSVC.3pm.gz" ] \
-		|| rm -f "$(TMP)/usr/share/man/man3/Wx::build::MakeMaker::Win32_MSVC.3pm.gz"
+	find $(TMP)/usr/share/man/man3 -name 'Wx::build::MakeMaker::Win32_MSVC.3pm.gz' \
+		-exec rm {} \;
 
 	touch install-stamp
 
