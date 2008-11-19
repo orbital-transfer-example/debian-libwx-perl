@@ -74,7 +74,7 @@ install-stamp: build-stamp
 	chmod 664 $(CURDIR)/samples/README.txt
 	# remove bogus man page
 	find $(TMP)/usr/share/man/man3 -name 'Wx::build::MakeMaker::Win32_MSVC.3pm.gz' \
-		-exec rm '{}' \;
+		-print0 | xargs -r0 rm -f
 
 	touch install-stamp
 
