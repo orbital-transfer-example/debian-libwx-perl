@@ -1,7 +1,7 @@
 libwx-perl (0.88-1) unstable; urgency=low
 
   [ Roberto C. Sanchez]
-  * New upstream release
+  * New upstream release (Closes: #499740)
 
   [ gregor herrmann]
   * debian/control: Changed: Switched Vcs-Browser field to ViewSVN
