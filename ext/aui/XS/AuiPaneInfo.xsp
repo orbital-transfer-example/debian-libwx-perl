@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     11/11/2006
-## RCS-ID:      $Id: AuiPaneInfo.xsp 2274 2007-11-10 22:37:30Z mbarbon $
-## Copyright:   (c) 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: AuiPaneInfo.xsp 2515 2008-11-30 11:14:49Z mbarbon $
+## Copyright:   (c) 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -17,8 +17,17 @@
 %name{Wx::AuiPaneInfo} class wxAuiPaneInfo
 {
     wxAuiPaneInfo();
+
+%{
+static void
+wxAuiPaneInfo::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+
     ~wxAuiPaneInfo()
-        %code%{  if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
+        %code%{  wxPli_thread_sv_unregister( aTHX_ "Wx::AuiPaneInfo", THIS, ST(0) );
+                 if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
                      delete THIS;
                %};
 

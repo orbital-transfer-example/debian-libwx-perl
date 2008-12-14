@@ -3,7 +3,7 @@
 // Purpose:     constants for Wx::Socket
 // Author:      Graciliano M. P.
 // Created:     27/02/2003
-// RCS-ID:      $Id: sk_constants.cpp 2133 2007-08-11 21:31:54Z mbarbon $
+// RCS-ID:      $Id: sk_constants.cpp 2517 2008-11-30 20:14:22Z mbarbon $
 // Copyright:   (c) 2003, 2007 Graciliano M. P.
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -66,7 +66,6 @@ double socket_constant( const char* name, int arg )
         r( wxSOCKET_WOULDBLOCK );
         r( wxSOCKET_TIMEDOUT );
         r( wxSOCKET_MEMERR );
-        r( wxSOCKET_DUMMY );
     break;
     }
 #undef r
