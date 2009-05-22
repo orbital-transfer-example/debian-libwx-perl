@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: DC.xs 2301 2007-12-24 17:21:22Z mbarbon $
-## Copyright:   (c) 2000-2007 Mattia Barbon
+## RCS-ID:      $Id: DC.xs 2561 2009-05-17 08:49:49Z mbarbon $
+## Copyright:   (c) 2000-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -52,7 +52,7 @@ wxDC::Blit( xdest, ydest, width, height, source, xsrc, ysrc, logicalFunc = wxCOP
     wxDC* source
     wxCoord xsrc
     wxCoord ysrc
-    int logicalFunc
+    wxRasterOperationMode logicalFunc
     bool useMask
 
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
@@ -68,7 +68,7 @@ wxDC::StretchBlit( xdest, ydest, wdest, hdest, source, xsrc, ysrc, wsrc, hsrc, l
     wxCoord ysrc
     wxCoord wsrc
     wxCoord hsrc
-    int logicalFunc
+    wxRasterOperationMode logicalFunc
     bool useMask
     wxCoord xsrcmask
     wxCoord ysrcmask
@@ -202,10 +202,6 @@ wxDC::DrawLines( list, xoffset = 0, yoffset = 0 )
     THIS->DrawLines( &points, xoffset, yoffset );
 
 void
-wxDC::DrawObject( object )
-    wxDrawObject* object
-
-void
 wxDC::DrawPoint( x, y )
     wxCoord x
     wxCoord y
@@ -215,7 +211,7 @@ wxDC::DrawPolygon( list, xoffset, yoffset, fill_style = wxODDEVEN_RULE )
     SV* list
     wxCoord xoffset
     wxCoord yoffset
-    int fill_style
+    wxPolygonFillMode fill_style
   PREINIT:
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
     wxPointList points;
@@ -287,7 +283,7 @@ wxDC::FloodFill( x, y, colour, style =  wxFLOOD_SURFACE )
     wxCoord x
     wxCoord y
     wxColour* colour
-    int style
+    wxFloodFillStyle style
   CODE:
     THIS->FloodFill( x, y, *colour, style );
 
@@ -343,10 +339,10 @@ wxDC::GetFont()
   OUTPUT:
     RETVAL
 
-int
+wxRasterOperationMode
 wxDC::GetLogicalFunction()
 
-int
+wxMappingMode
 wxDC::GetMapMode()
 
 #if !defined( __WXMAC__ ) && WXPERL_W_VERSION_LE( 2, 5, 3 )
@@ -609,11 +605,11 @@ wxDC::SetFont( font )
 
 void
 wxDC::SetLogicalFunction( function )
-    int function
+    wxRasterOperationMode function
 
 void
 wxDC::SetMapMode( mode )
-    int mode
+    wxMappingMode mode
 
 #if !defined( __WXMAC__ ) && WXPERL_W_VERSION_LE( 2, 5, 3 )
 
@@ -865,7 +861,7 @@ new( ... )
     BEGIN_OVERLOAD()
         MATCH_REDISP( wxPliOvl_wdc_wrgn, newRegion )
         MATCH_REDISP( wxPliOvl_wdc_wrec, newRect )
-        MATCH_REDISP( wxPliOvl_wdc_n_n_n_, newXYWH )
+        MATCH_REDISP( wxPliOvl_wdc_n_n_n_n, newXYWH )
     END_OVERLOAD( Wx::DCClipper::new )
 %}
 
@@ -873,8 +869,17 @@ new( ... )
     %name{newRect} wxDCClipper( wxDC& dc, const wxRect& rect );
     %name{newXYWH} wxDCClipper( wxDC& dc, int x, int y, int w, int h );
 
-    ## // thread KO
-    ~wxDCClipper();
+%{
+static void
+wxDCClipper::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
+    ~wxDCClipper()
+        %code{% wxPli_thread_sv_unregister( aTHX_ "Wx::DCClipper", THIS, ST(0) );
+                delete THIS;
+                %};
 };
 
 #endif

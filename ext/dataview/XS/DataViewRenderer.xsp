@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     25/11/2007
-## RCS-ID:      $Id: DataViewRenderer.xsp 2314 2008-01-18 21:44:32Z mbarbon $
-## Copyright:   (c) 2007-2008 Mattia Barbon
+## RCS-ID:      $Id: DataViewRenderer.xsp 2573 2009-05-17 16:56:34Z mbarbon $
+## Copyright:   (c) 2007-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -21,10 +21,16 @@
 ##                        wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT );
 
 %{
-## // thread KO
+static void
+wxDataViewRenderer::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+
+## // thread OK
 void
 wxDataViewRenderer::DESTROY()
   CODE:
+    wxPli_thread_sv_unregister( aTHX_ wxPli_get_class( aTHX_ ST(0) ), THIS, ST(0) );
     if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
         delete THIS;
 %}

@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     27/06/2006
-## RCS-ID:      $Id: Sound.xsp 2079 2007-07-08 21:18:04Z mbarbon $
-## Copyright:   (c) 2006 Mattia Barbon
+## RCS-ID:      $Id: Sound.xsp 2560 2009-05-17 08:33:45Z mbarbon $
+## Copyright:   (c) 2006, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -25,7 +25,17 @@
     %name{newDefault} wxSound();
     %name{newFile} wxSound( const wxString& fileName );
 
-    ~wxSound();
+%{
+static void
+wxSound::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
+    ~wxSound()
+        %code{% wxPli_thread_sv_unregister( aTHX_ "Wx::Sound", THIS, ST(0) );
+                delete THIS;
+                %};
 
     %name{Create} bool Create( const wxString& fileName );
 

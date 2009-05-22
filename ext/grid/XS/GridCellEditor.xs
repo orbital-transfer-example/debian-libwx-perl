@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     13/12/2001
-## RCS-ID:      $Id: GridCellEditor.xs 2274 2007-11-10 22:37:30Z mbarbon $
-## Copyright:   (c) 2001-2007 Mattia Barbon
+## RCS-ID:      $Id: GridCellEditor.xs 2533 2009-03-08 19:03:35Z mbarbon $
+## Copyright:   (c) 2001-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -60,11 +60,32 @@ wxGridCellEditor::BeginEdit( row, col, grid )
     int col
     wxGrid* grid
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+bool
+wxGridCellEditor::EndEdit( row, col, grid, oldval, newval )
+    int row
+    int col
+    wxGrid* grid
+    wxString oldval
+    wxString newval
+  C_ARGS: row, col, grid, oldval, &newval
+
+void
+wxGridCellEditor::ApplyEdit( row, col, grid )
+    int row
+    int col
+    wxGrid* grid
+
+#else
+
 bool
 wxGridCellEditor::EndEdit( row, col, grid )
     int row
     int col
     wxGrid* grid
+
+#endif
 
 void
 wxGridCellEditor::Reset()

@@ -7,17 +7,15 @@ use threads;
 
 use Wx qw(:everything);
 use if !Wx::wxTHREADS, 'Test::More' => skip_all => 'No thread support';
+use if Wx::wxMOTIF, 'Test::More' => skip_all => 'Hangs under Motif';
 use Test::More tests => 4;
-use Wx::Html;
+use Wx::DateTime;
 
 my $app = Wx::App->new( sub { 1 } );
-my $easyprint = Wx::HtmlEasyPrinting->new;
-my $easyprint2 = Wx::HtmlEasyPrinting->new;
-my $htmldcrenderer = Wx::HtmlDCRenderer->new;
-my $htmldcrenderer2 = Wx::HtmlDCRenderer->new;
+my $dt = Wx::DateTime->new;
+my $dt2 = Wx::DateTime->new;
 
-undef $easyprint2;
-undef $htmldcrenderer2;
+undef $dt2;
 
 my $t = threads->create
   ( sub {

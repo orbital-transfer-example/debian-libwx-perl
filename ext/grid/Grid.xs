@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     04/12/2001
-// RCS-ID:      $Id: Grid.xs 2331 2008-01-20 10:20:17Z mbarbon $
-// Copyright:   (c) 2001-2004, 2006-2008 Mattia Barbon
+// RCS-ID:      $Id: Grid.xs 2527 2009-02-07 17:44:57Z mbarbon $
+// Copyright:   (c) 2001-2004, 2006-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,9 @@ static wxPliEventDescription evts[] =
     EVT( EVT_GRID_CMD_ROW_SIZE, 3, wxEVT_GRID_ROW_SIZE )
     EVT( EVT_GRID_CMD_COL_SIZE, 3, wxEVT_GRID_COL_SIZE )
     EVT( EVT_GRID_CMD_RANGE_SELECT, 3, wxEVT_GRID_RANGE_SELECT )
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
     EVT( EVT_GRID_CMD_CELL_CHANGE, 3, wxEVT_GRID_CELL_CHANGE )
+#endif
     EVT( EVT_GRID_CMD_SELECT_CELL, 3, wxEVT_GRID_SELECT_CELL )
     EVT( EVT_GRID_CMD_EDITOR_SHOWN, 3, wxEVT_GRID_EDITOR_SHOWN )
     EVT( EVT_GRID_CMD_EDITOR_HIDDEN, 3, wxEVT_GRID_EDITOR_HIDDEN )
@@ -61,7 +63,9 @@ static wxPliEventDescription evts[] =
     SEVT( EVT_GRID_ROW_SIZE, 2 )
     SEVT( EVT_GRID_COL_SIZE, 2 )
     SEVT( EVT_GRID_RANGE_SELECT, 2 )
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
     SEVT( EVT_GRID_CELL_CHANGE, 2 )
+#endif
     SEVT( EVT_GRID_SELECT_CELL, 2 )
     SEVT( EVT_GRID_EDITOR_SHOWN, 2 )
     SEVT( EVT_GRID_EDITOR_HIDDEN, 2 )

@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: compat.h 2498 2008-11-05 19:45:38Z mbarbon $
-// Copyright:   (c) 2000-2003, 2006, 2008 Mattia Barbon
+// RCS-ID:      $Id: compat.h 2532 2009-02-21 08:51:16Z mbarbon $
+// Copyright:   (c) 2000-2003, 2006, 2008-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -32,6 +32,7 @@
    ( 5 == (V) && PATCHLEVEL == (S) && SUBVERSION >= (P) ) )
 
 #endif
+#define WXPERL_P_VERSION_LT( V, S, P ) !WXPERL_P_VERSION_GE( V, S, P )
 
 #define WXPERL_W_VERSION_EQ( V, S, P ) \
  ( wxMAJOR_VERSION == (V) && wxMINOR_VERSION == (S) && wxRELEASE_NUMBER == (P) )

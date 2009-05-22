@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     25/12/2007
-## RCS-ID:      $Id: NotificationMessage.xsp 2309 2007-12-25 18:17:45Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: NotificationMessage.xsp 2563 2009-05-17 09:58:35Z mbarbon $
+## Copyright:   (c) 2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -48,8 +48,17 @@ new( ... )
                            int flags = wxICON_INFORMATION );
 #endif
 
-    ## // thread KO
-    ~wxNotificationMessage();
+%{
+static void
+wxNotificationMessage::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
+    ~wxNotificationMessage()
+        %code{% wxPli_thread_sv_unregister( aTHX_ "Wx::NotificationMessage", THIS, ST(0) );
+                delete THIS;
+                %};
 
     bool Show( int timeout = -1 );
     bool Close();

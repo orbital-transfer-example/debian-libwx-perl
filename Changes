@@ -1,5 +1,12 @@
 Revision history for Perl extension Wx.
 
+0.91  Sun May 17 18:55:45 CEST 2009
+	- Threading fixes for 25 classes.
+	- Fixed Windows build (patch by Ahmad Zawawi).
+
+0.90  Sun May 10 09:24:25 CEST 2009
+	- Miscellaneous build/compilation fixes.
+
 0.89  Sat Dec  6 11:39:54 CET 2008
 	- Fix crash when using AUI and threads.
 

@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/12/2001
-## RCS-ID:      $Id: Grid.xs 2315 2008-01-18 21:47:17Z mbarbon $
-## Copyright:   (c) 2001-2008 Mattia Barbon
+## RCS-ID:      $Id: Grid.xs 2570 2009-05-17 16:31:20Z mbarbon $
+## Copyright:   (c) 2001-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -21,9 +21,17 @@ wxGridUpdateLocker*
 wxGridUpdateLocker::new( grid = NULL )
     wxGrid* grid
 
-## // thread KO
+static void
+wxGridUpdateLocker::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+
+## // thread OK
 void
 wxGridUpdateLocker::DESTROY()
+  CODE:
+    wxPli_thread_sv_unregister( aTHX_ "Wx::GridUpdateLocker", THIS, ST(0) );
+    delete THIS;
 
 void
 wxGridUpdateLocker::Create( grid )

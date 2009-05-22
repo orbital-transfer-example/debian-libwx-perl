@@ -4,8 +4,8 @@
 ## Author:      Mark Dootson
 ## Modified by:
 ## Created:     20/00/2006
-## RCS-ID:      $Id: HtmlDCRenderer.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2006 Mark Dootson
+## RCS-ID:      $Id: HtmlDCRenderer.xs 2566 2009-05-17 14:10:06Z mbarbon $
+## Copyright:   (c) 2006, 2009 Mark Dootson
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -18,8 +18,17 @@ MODULE=Wx PACKAGE=Wx::HtmlDCRenderer
 wxHtmlDCRenderer*
 wxHtmlDCRenderer::new()
 
+static void
+wxHtmlDCRenderer::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+
+## // thread OK
 void
 wxHtmlDCRenderer::DESTROY()
+  CODE:
+    wxPli_thread_sv_unregister( aTHX_ "Wx::HtmlDCRenderer", THIS, ST(0) );
+    delete THIS;
 
 void
 wxHtmlDCRenderer::SetDC( dc, pixel_scale = 1.0 )

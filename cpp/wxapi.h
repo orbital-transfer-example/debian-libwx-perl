@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2441 2008-08-12 22:34:09Z mbarbon $
-// Copyright:   (c) 2002-2003, 2005-2008 Mattia Barbon
+// RCS-ID:      $Id: wxapi.h 2555 2009-05-11 09:11:08Z mbarbon $
+// Copyright:   (c) 2002-2003, 2005-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -47,6 +47,20 @@ WXPL_EXTERN_C_START
 #include <XSUB.h>
 WXPL_EXTERN_C_END
 
+#if WXPERL_P_VERSION_LT( 5, 10, 0 )
+
+// fix newXS type for perl 5.8
+inline CV* wxPli_newXS(pTHX_ const char* name, XSUBADDR_t addr,
+                       const char* file)
+{
+    return newXS( (char*)name, addr, (char*)file );
+}
+
+#undef newXS
+#define newXS( a, b, c ) wxPli_newXS( aTHX_ a, b, c )
+
+#endif
+
 #if defined(__VISUALC__) || defined(__DIGITALMARS__)
 #undef mode_t
 #endif
@@ -75,6 +89,9 @@ WXPL_EXTERN_C_END
 #undef form
 #undef vform
 #undef setbuf
+#undef malloc
+#undef realloc
+#undef free
 #endif
 #undef do_open
 #undef do_close

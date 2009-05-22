@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     11/11/2006
-## RCS-ID:      $Id: AuiManager.xsp 2516 2008-11-30 14:26:44Z mbarbon $
-## Copyright:   (c) 2006-2008 Mattia Barbon
+## RCS-ID:      $Id: AuiManager.xsp 2556 2009-05-11 10:18:47Z mbarbon $
+## Copyright:   (c) 2006-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -207,6 +207,7 @@ wxAuiManager::CLONE()
     wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
 %}
 
+    ## // thread OK
     ~wxAuiManager()
         %code%{  wxPli_thread_sv_unregister( aTHX_ "Wx::AuiManager", THIS, ST(0) );
                  delete THIS;

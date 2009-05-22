@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: GDI.xs 2340 2008-03-25 22:25:07Z mbarbon $
-// Copyright:   (c) 2000-2003, 2005-2008 Mattia Barbon
+// RCS-ID:      $Id: GDI.xs 2529 2009-02-07 17:50:29Z mbarbon $
+// Copyright:   (c) 2000-2003, 2005-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -25,6 +25,10 @@ typedef int wxBrushStyle;
 typedef int wxPenStyle;
 typedef int wxPenJoin;
 typedef int wxPenCap;
+typedef int wxRasterOperationMode;
+typedef int wxMappingMode;
+typedef int wxPolygonFillMode;
+typedef int wxFloodFillStyle;
 #endif
 
 MODULE=Wx_GDI
