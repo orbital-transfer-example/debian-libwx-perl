@@ -7,17 +7,15 @@ use threads;
 
 use Wx qw(:everything);
 use if !Wx::wxTHREADS, 'Test::More' => skip_all => 'No thread support';
+use if Wx::wxMOTIF, 'Test::More' => skip_all => 'Hangs under Motif';
 use Test::More tests => 4;
-use Wx::Html;
+use Wx::Socket;
 
 my $app = Wx::App->new( sub { 1 } );
-my $easyprint = Wx::HtmlEasyPrinting->new;
-my $easyprint2 = Wx::HtmlEasyPrinting->new;
-my $htmldcrenderer = Wx::HtmlDCRenderer->new;
-my $htmldcrenderer2 = Wx::HtmlDCRenderer->new;
+my $sk = Wx::IPV4address->new;
+my $sk2 = Wx::IPV4address->new;
 
-undef $easyprint2;
-undef $htmldcrenderer2;
+undef $sk2;
 
 my $t = threads->create
   ( sub {

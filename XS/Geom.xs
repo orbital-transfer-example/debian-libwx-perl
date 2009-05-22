@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Geom.xs 2315 2008-01-18 21:47:17Z mbarbon $
-## Copyright:   (c) 2000-2003, 2006-2008 Mattia Barbon
+## RCS-ID:      $Id: Geom.xs 2527 2009-02-07 17:44:57Z mbarbon $
+## Copyright:   (c) 2000-2003, 2006-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -472,7 +472,7 @@ wxRegion*
 newPolygon( CLASS, list, fillStyle = wxODDEVEN_RULE )
     SV* CLASS
     SV* list
-    int fillStyle
+    wxPolygonFillMode fillStyle
   PREINIT:
     wxPoint* points;
     size_t n;
@@ -483,6 +483,8 @@ newPolygon( CLASS, list, fillStyle = wxODDEVEN_RULE )
   OUTPUT: RETVAL
 
 #endif
+
+#if !defined( __WXOSX_COCOA__ )
 
 wxRegion*
 newBitmap( CLASS, bitmap, colour, tolerance = 0 )
@@ -501,6 +503,8 @@ newBitmapOnly( CLASS, bitmap )
   CODE:
     RETVAL = new wxRegion( *bitmap );
   OUTPUT: RETVAL
+
+#endif
 
 void
 wxRegion::new( ... )

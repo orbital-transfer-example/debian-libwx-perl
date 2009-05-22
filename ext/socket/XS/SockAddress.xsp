@@ -3,8 +3,8 @@
 ## Purpose:     XS++ for Wx::SockAddress and derived classes
 ## Author:      Mattia Barbon
 ## Created:     24/01/2004
-## RCS-ID:      $Id: SockAddress.xsp 2133 2007-08-11 21:31:54Z mbarbon $
-## Copyright:   (c) 2004, 2007 Mattia Barbon
+## RCS-ID:      $Id: SockAddress.xsp 2565 2009-05-17 13:34:37Z mbarbon $
+## Copyright:   (c) 2004, 2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -19,7 +19,17 @@
 
 %name{Wx::SockAddress} class wxSockAddress
 {
-    ~wxSockAddress();
+%{
+static void
+wxSockAddress::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
+    ~wxSockAddress()
+        %code{% wxPli_thread_sv_unregister( aTHX_ wxPli_get_class( aTHX_ ST(0) ), THIS, ST(0) );
+                delete THIS;
+                %};
 
     void Clear();
     int Type();
@@ -34,10 +44,6 @@
     bool IsLocalHost();
 
     %name{SetAnyAddress} bool AnyAddress();
-#if WXPERL_W_VERSION_GE( 2, 9, 0 )
-    %name{SetBroadcastAddress} bool BroadcastAddress();
-#endif
-
     %name{GetIPAddress} wxString IPAddress();
 
     %name{GetHostname} wxString Hostname();
@@ -51,6 +57,10 @@
     wxIPV4address();
 
     %name{GetOrigHostname} wxString OrigHostname();
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    %name{SetBroadcastAddress} bool BroadcastAddress();
+#endif
 };
 
 #if wxUSE_IPV6

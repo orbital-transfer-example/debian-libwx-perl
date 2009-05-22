@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.cpp 2434 2008-08-05 17:55:18Z mbarbon $
-// Copyright:   (c) 2000-2008 Mattia Barbon
+// RCS-ID:      $Id: helpers.cpp 2523 2009-02-04 23:50:57Z mbarbon $
+// Copyright:   (c) 2000-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -1287,7 +1287,7 @@ wxVariant wxPli_sv_2_wxvariant( pTHX_ SV* sv )
         // TODO
         return wxVariant();
     } else if( SvNOK( sv ) ) {
-        return wxVariant( SvNV( sv ) );
+        return wxVariant( (double)SvNV( sv ) );
     } else if( SvIOK( sv ) ) {
 #if INTSIZE > LONGSIZE
         return wxVariant( (int)SvIV( sv ) );
@@ -1556,7 +1556,7 @@ XS(Connect2)
     wxEvtHandler *THISo =
         (wxEvtHandler*)wxPli_sv_2_object( aTHX_ THISs, "Wx::EvtHandler" );
     SV* func = ST(1);
-    I32 evtID = CvXSUBANY(cv).any_i32;
+    wxEventType evtID = CvXSUBANY(cv).any_i32;
 
     if( SvOK( func ) )
     {
@@ -1584,7 +1584,7 @@ XS(Connect3)
         (wxEvtHandler*)wxPli_sv_2_object( aTHX_ THISs, "Wx::EvtHandler" );
     wxWindowID id = wxPli_get_wxwindowid( aTHX_ ST(1) );
     SV* func = ST(2);
-    I32 evtID = CvXSUBANY(cv).any_i32;
+    wxEventType evtID = CvXSUBANY(cv).any_i32;
 
     if( SvOK( func ) )
     {

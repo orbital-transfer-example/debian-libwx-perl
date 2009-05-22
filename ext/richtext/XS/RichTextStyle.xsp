@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/11/2006
-## RCS-ID:      $Id: RichTextStyle.xsp 2315 2008-01-18 21:47:17Z mbarbon $
-## Copyright:   (c) 2006, 2008 Mattia Barbon
+## RCS-ID:      $Id: RichTextStyle.xsp 2568 2009-05-17 15:52:56Z mbarbon $
+## Copyright:   (c) 2006, 2008-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -16,8 +16,16 @@
 
 %name{Wx::RichTextStyleDefinition} class wxRichTextStyleDefinition
 {
+%{
+static void
+wxRichTextStyleDefinition::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
     ~wxRichTextStyleDefinition()
-        %code%{  if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
+        %code%{  wxPli_thread_sv_unregister( aTHX_ wxPli_get_class( aTHX_ ST(0) ), THIS, ST(0) );
+                 if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
                      delete THIS;
                %};
 
@@ -85,8 +93,17 @@
 %name{Wx::RichTextStyleSheet} class wxRichTextStyleSheet
 {
     wxRichTextStyleSheet();
+
+%{
+static void
+wxRichTextStyleSheet::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
     ~wxRichTextStyleSheet()
-        %code%{  if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
+        %code%{  wxPli_thread_sv_unregister( aTHX_ "Wx::RichTextStyleSheet", THIS, ST(0) );
+                 if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
                      delete THIS;
                %};
 

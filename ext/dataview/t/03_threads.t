@@ -7,17 +7,18 @@ use threads;
 
 use Wx qw(:everything);
 use if !Wx::wxTHREADS, 'Test::More' => skip_all => 'No thread support';
+use if Wx::wxMOTIF, 'Test::More' => skip_all => 'Hangs under Motif';
 use Test::More tests => 4;
-use Wx::Html;
+use Wx::DataView;
 
 my $app = Wx::App->new( sub { 1 } );
-my $easyprint = Wx::HtmlEasyPrinting->new;
-my $easyprint2 = Wx::HtmlEasyPrinting->new;
-my $htmldcrenderer = Wx::HtmlDCRenderer->new;
-my $htmldcrenderer2 = Wx::HtmlDCRenderer->new;
+my $dvr = Wx::DataViewTextRenderer->new;
+my $dvr2 = Wx::DataViewTextRenderer->new;
+my $dvc = Wx::DataViewColumn->new( 'a', $dvr, 0 );
+my $dvc2 = Wx::DataViewColumn->new( 'a', $dvr2, 0 );
 
-undef $easyprint2;
-undef $htmldcrenderer2;
+undef $dvr2;
+undef $dvc2;
 
 my $t = threads->create
   ( sub {

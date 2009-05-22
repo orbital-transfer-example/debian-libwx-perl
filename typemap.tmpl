@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: typemap.tmpl 2502 2008-11-05 22:26:20Z mbarbon $
-## Copyright:   (c) 2000-2008 Mattia Barbon
+## RCS-ID:      $Id: typemap.tmpl 2564 2009-05-17 13:02:16Z mbarbon $
+## Copyright:   (c) 2000-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -24,10 +24,16 @@ wxCoord                 T_IV
 float                   T_NV
 wxFontEncoding          T_ENUM
 wxFontFamily            T_ENUM
+wxFontStyle             T_ENUM
+wxFontWeight            T_ENUM
 wxRegionContain         T_ENUM
 wxSashEdgePosition      T_ENUM
 wxSashDragStatus        T_ENUM
 wxListColumnFormat      T_ENUM
+wxRasterOperationMode   T_ENUM
+wxPolygonFillMode       T_ENUM
+wxFloodFillStyle        T_ENUM
+wxMappingMode           T_ENUM
 off_t                   T_IV
 ResourceCat             T_ENUM
 wxSeekMode              T_ENUM
@@ -116,10 +122,10 @@ wxMiniFrame *           O_WXOBJECT
 wxPopupWindow *         O_WXOBJECT
 wxPopupTransientWindow * O_WXOBJECT
 wxPlPopupTransientWindow * O_WXOBJECT
-wxDisplay *             O_NON_WXOBJECT
-wxVideoMode *           O_NON_WXOBJECT
-wxEventBlocker *        O_NON_WXOBJECT
-wxWindowUpdateLocker *  O_NON_WXOBJECT
+wxDisplay *             O_NON_WXOBJECT_THR
+wxVideoMode *           O_NON_WXOBJECT_THR
+wxEventBlocker *        O_NON_WXOBJECT_THR
+wxWindowUpdateLocker *  O_NON_WXOBJECT_THR
 
 wxMenuBar *             O_WXOBJECT
 wxMenu *                O_WXOBJECT
@@ -258,10 +264,10 @@ wxBufferedPaintDC *     O_WXOBJECT_THR
 wxAutoBufferedPaintDC * O_WXOBJECT_THR
 wxMirrorDC *            O_WXOBJECT_THR
 wxSVGFileDC *           O_WXOBJECT_THR
-wxDCClipper *           O_NON_WXOBJECT
+wxDCClipper *           O_NON_WXOBJECT_THR
 
 wxTaskBarIcon *         O_WXOBJECT
-wxNotificationMessage * O_WXOBJECT
+wxNotificationMessage * O_NON_WXOBJECT_THR
 
 wxTextAttr *            O_NON_WXOBJECT_THR
 
@@ -293,11 +299,11 @@ wxSize &                O_SIZE
 wxPosition &            O_POSITION
 wxColour &              O_NON_WXOBJECT_VAL
 
-wxVariant*              O_NON_WXOBJECT
+wxVariant*              O_NON_WXOBJECT_THR
 wxVariant               O_VARIANT
 
 wxProcess *             O_WXOBJECT
-wxSound *               O_NON_WXOBJECT
+wxSound *               O_NON_WXOBJECT_THR
 
 wxTipProvider *         O_NON_WXOBJECT
 
@@ -341,7 +347,7 @@ wxMask *                O_WXOBJECT
 wxBrush *               O_WXOBJECT_THR
 wxBitmapHandler *       O_WXOBJECT
 wxPalette *             O_WXOBJECT_THR
-wxMimeTypesManager *    O_NON_WXOBJECT
+wxMimeTypesManager *    O_NON_WXOBJECT_THR
 wxFileType *            O_NON_WXOBJECT
 wxFileTypeInfo *        O_NON_WXOBJECT
 

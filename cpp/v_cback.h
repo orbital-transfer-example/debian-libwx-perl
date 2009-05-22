@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: v_cback.h 2284 2007-11-11 21:29:49Z mbarbon $
-// Copyright:   (c) 2000-2007 Mattia Barbon
+// RCS-ID:      $Id: v_cback.h 2533 2009-03-08 19:03:35Z mbarbon $
+// Copyright:   (c) 2000-2007, 2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -56,6 +56,8 @@ public:
     SV* CallCallback( pTHX_ I32 flags, const char* argtypes,
                       va_list& arglist ) const;
     CV* GetMethod() const { return m_method; }
+
+    bool IsOk() const { return GetSelf() && m_package; }
 public:
     const char* m_package;
     HV* m_stash;

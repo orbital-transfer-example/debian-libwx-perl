@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     26/09/2007
-## RCS-ID:      $Id: Display.xsp 2308 2007-12-24 23:33:32Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: Display.xsp 2557 2009-05-11 10:41:11Z mbarbon $
+## Copyright:   (c) 2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -24,7 +24,18 @@
 %name{Wx::VideoMode} class wxVideoMode
 {
     wxVideoMode( int width = 0, int height = 0, int depth = 0, int freq = 0 );
-    ~wxVideoMode();
+
+%{
+static void
+wxVideoMode::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
+    ~wxVideoMode()
+        %code%{  wxPli_thread_sv_unregister( aTHX_ "Wx::VideoMode", THIS, ST(0) );
+                 delete THIS;
+               %};
 
     bool Matches( const wxVideoMode& other ) const;
     int GetWidth() const;
@@ -36,7 +47,18 @@
 %name{Wx::Display} class wxDisplay
 {
     wxDisplay( unsigned n = 0 );
-    ~wxDisplay();
+
+%{
+static void
+wxDisplay::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
+    ~wxDisplay()
+        %code%{  wxPli_thread_sv_unregister( aTHX_ "Wx::Display", THIS, ST(0) );
+                 delete THIS;
+               %};
 
 %{
 int

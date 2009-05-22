@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     28/03/2005
-## RCS-ID:      $Id: MimeTypes.xsp 2441 2008-08-12 22:34:09Z mbarbon $
-## Copyright:   (c) 2005-2008 Mattia Barbon
+## RCS-ID:      $Id: MimeTypes.xsp 2564 2009-05-17 13:02:16Z mbarbon $
+## Copyright:   (c) 2005-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -184,7 +184,18 @@ wxFileType::GetPrintCommand( file, mimeType = wxEmptyString )
 %name{Wx::MimeTypesManager} class wxMimeTypesManager
 {
     wxMimeTypesManager();
-    ~wxMimeTypesManager();
+
+%{
+static void
+wxMimeTypesManager::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+    ## // thread OK
+    ~wxMimeTypesManager()
+        %code{% wxPli_thread_sv_unregister( aTHX_ "Wx::MimeTypesManager", THIS, ST(0) );
+                delete THIS;
+                %};
 
     void AddFallbacks( const wxFileTypeInfo *fallbacks );
     wxFileType* GetFileTypeFromExtension( const wxString& extension );

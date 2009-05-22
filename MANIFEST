@@ -285,6 +285,7 @@ ext/calendar/Calendar.xs
 ext/calendar/Makefile.PL
 ext/calendar/t/01_load.t
 ext/calendar/t/02_inheritance.t
+ext/calendar/t/03_threads.t
 ext/calendar/typemap
 ext/calendar/XS/CalendarCtrl.xsp
 ext/calendar/XS/CalendarDateAttr.xsp
@@ -305,6 +306,7 @@ ext/dataview/XS/DataViewTreeCtrl.xsp
 ext/dataview/XS/DataViewTreeStore.xsp
 ext/dataview/t/01_load.t
 ext/dataview/t/02_inheritance.t
+ext/dataview/t/03_threads.t
 ext/dataview/typemap
 ext/dataview/typemap.xsp
 
@@ -312,6 +314,7 @@ ext/datetime/DateTime.pm
 ext/datetime/DateTime.xs
 ext/datetime/Makefile.PL
 ext/datetime/t/01_load.t
+ext/datetime/t/03_threads.t
 ext/datetime/typemap
 ext/datetime/XS/DateSpan.xsp
 ext/datetime/XS/DateTime.xsp
@@ -452,6 +455,7 @@ ext/socket/cpp/socket.h
 ext/socket/lib/Wx/Socket.pm
 ext/socket/t/01_load.t
 ext/socket/t/02_inheritance.t
+ext/socket/t/03_threads.t
 ext/socket/typemap
 
 ext/stc/Makefile.PL
@@ -493,6 +497,7 @@ ext/richtext/XS/SymbolPickerDialog.xsp
 ext/richtext/lib/Wx/RichText.pm
 ext/richtext/t/01_load.t
 ext/richtext/t/02_inheritance.t
+ext/richtext/t/03_threads.t
 ext/richtext/typemap
 ext/richtext/typemap.xsp
 

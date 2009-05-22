@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     28/05/2003
-// RCS-ID:      $Id: editor.h 2057 2007-06-18 23:03:00Z mbarbon $
-// Copyright:   (c) 2003-2005 Mattia Barbon
+// RCS-ID:      $Id: editor.h 2533 2009-03-08 19:03:35Z mbarbon $
+// Copyright:   (c) 2003-2005, 2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -13,6 +13,23 @@
 #include "cpp/v_cback.h"
 #include <wx/clntdata.h>
 #include "cpp/helpers.h"
+
+#define DEC_V_CBACK_BOOL__INT_INT_cWXGRID_WXSTRING_WXSTRINGp( METHOD ) \
+    bool METHOD( int, int, const wxGrid*, const wxString&, wxString* )
+
+#define DEF_V_CBACK_BOOL__INT_INT_cWXGRID_WXSTRING_WXSTRINGp_pure( CLASS, BASE, METHOD )\
+  bool CLASS::METHOD( int p1, int p2, const wxGrid* p3, const wxString& p4, wxString* p5 ) \
+  {                                                                           \
+    dTHX;                                                                     \
+    if( wxPliVirtualCallback_FindCallback( aTHX_ &m_callback, #METHOD ) )     \
+    {                                                                         \
+        wxAutoSV ret( aTHX_ wxPliCCback( aTHX_ &m_callback, G_SCALAR,         \
+                                         "iiOP", p1, p2, p3, &p4 ) );         \
+        WXSTRING_INPUT( *p5, const char *, ret );                             \
+        return SvOK( ret );                                                   \
+    } else                                                                    \
+        return false;                                                         \
+  }
 
 #define DEC_V_CBACK_VOID__INT_INT_WXGRID_pure( METHOD ) \
   void METHOD( int, int, wxGrid* )
@@ -198,7 +215,12 @@ public:
     virtual wxString GetValue() const { return wxEmptyString; }
 
     DEC_V_CBACK_VOID__INT_INT_WXGRID_pure( BeginEdit );
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+    DEC_V_CBACK_VOID__INT_INT_WXGRID_pure( ApplyEdit );
+    DEC_V_CBACK_BOOL__INT_INT_cWXGRID_WXSTRING_WXSTRINGp( EndEdit );
+#else
     DEC_V_CBACK_BOOL__INT_INT_WXGRID_pure( EndEdit );
+#endif
     DEC_V_CBACK_VOID__VOID( Reset );
     DEC_V_CBACK_VOID__VOID( Destroy );
     DEC_V_CBACK_VOID__VOID( StartingClick );
@@ -208,7 +230,12 @@ public:
 };
 
 DEF_V_CBACK_VOID__INT_INT_WXGRID_pure( wxPlGridCellEditor, wxGridCellEditor, BeginEdit );
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+DEF_V_CBACK_VOID__INT_INT_WXGRID_pure( wxPlGridCellEditor, wxGridCellEditor, ApplyEdit );
+DEF_V_CBACK_BOOL__INT_INT_cWXGRID_WXSTRING_WXSTRINGp_pure( wxPlGridCellEditor, wxGridCellEditor, EndEdit );
+#else
 DEF_V_CBACK_BOOL__INT_INT_WXGRID_pure( wxPlGridCellEditor, wxGridCellEditor, EndEdit );
+#endif
 DEF_V_CBACK_VOID__VOID_pure( wxPlGridCellEditor, wxGridCellEditor, Reset );
 DEF_V_CBACK_VOID__VOID( wxPlGridCellEditor, wxGridCellEditor, Destroy );
 DEF_V_CBACK_VOID__VOID( wxPlGridCellEditor, wxGridCellEditor, StartingClick );

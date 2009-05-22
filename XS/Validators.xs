@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Validators.xs 2283 2007-11-11 13:58:13Z mbarbon $
-## Copyright:   (c) 2000-2002, 2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: Validators.xs 2559 2009-05-17 08:18:03Z mbarbon $
+## Copyright:   (c) 2000-2002, 2004, 2006-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -50,7 +50,7 @@ wxPlValidator::new()
   OUTPUT:
     RETVAL
 
-## // thread KO
+## // thread OK
 void
 wxPlValidator::DESTROY()
   PREINIT:
