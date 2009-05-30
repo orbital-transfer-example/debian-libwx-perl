@@ -15,6 +15,7 @@ libwx-perl (0.91-1) UNRELEASED; urgency=low
       Wx::build::MakeMaker::Win32_MSVC.3pm removal
     + mode of examples/README.txt fixed with an override
   * describe hashbang.patch
+  * drop kill_bogus_test.patch, it is skipped anyway
 
  -- Jonathan Yu <frequency@cpan.org>  Fri, 22 May 2009 12:58:35 -0400
 
