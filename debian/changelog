@@ -1,6 +1,19 @@
 libwx-perl (0.91-1) UNRELEASED; urgency=low
 
-  * (NOT RELEASED YET) New upstream release
+  [ Jonathan Yu ]
+  * New upstream release
+
+  [ Damyan Ivanov ]
+  * convert to debhelper7 and clean-up
+    + bump debhelper and quilt build-dependencies due to usage of overrides
+      and "--with quilt"
+    + move removal of build cruft to debian/clean
+    + install examples using debian/examples
+    + drop dropping of build:: from the beginning of some manual pages (there
+      are no more man pages starting with build::
+    + make chown of module files in /usr/lib/perl5 verbose. ditto for
+      Wx::build::MakeMaker::Win32_MSVC.3pm removal
+    + mode of examples/README.txt fixed with an override
 
  -- Jonathan Yu <frequency@cpan.org>  Fri, 22 May 2009 12:58:35 -0400
 
