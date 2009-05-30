@@ -16,6 +16,7 @@ libwx-perl (0.91-1) UNRELEASED; urgency=low
     + mode of examples/README.txt fixed with an override
   * describe hashbang.patch
   * drop kill_bogus_test.patch, it is skipped anyway
+  * add a sentence to long description
 
  -- Jonathan Yu <frequency@cpan.org>  Fri, 22 May 2009 12:58:35 -0400
 

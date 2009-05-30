@@ -18,4 +18,5 @@ Architecture: any
 Depends: ${perl:Depends}, ${shlibs:Depends}, ${misc:Depends}, libalien-wxwidgets-perl (>= 0.39)
 Description: interface to wxWidgets cross-platform GUI toolkit
  wxPerl is an extension module allowing the creation of GUI (Graphical
- User Interface) Perl programs using the wxWidgets toolkit.
+ User Interface) Perl programs using the wxWidgets toolkit. It serves as a Perl
+ wrapper around wxWidgets.
