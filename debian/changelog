@@ -1,4 +1,4 @@
-libwx-perl (0.91-1) UNRELEASED; urgency=low
+libwx-perl (0.91-1) unstable; urgency=low
 
   [ Jonathan Yu ]
   * New upstream release
@@ -9,6 +9,7 @@ libwx-perl (0.91-1) UNRELEASED; urgency=low
       and "--with quilt"
     + move removal of build cruft to debian/clean
     + install examples using debian/examples
+    + install README.txt using debian/docs
     + drop dropping of build:: from the beginning of some manual pages (there
       are no more man pages starting with build::
     + make chown of module files in /usr/lib/perl5 verbose. ditto for
@@ -21,7 +22,7 @@ libwx-perl (0.91-1) UNRELEASED; urgency=low
   * bump years in debian/copyright and add two additional upstream copyright
     holders
 
- -- Jonathan Yu <frequency@cpan.org>  Fri, 22 May 2009 12:58:35 -0400
+ -- Damyan Ivanov <dmn@debian.org>  Sat, 30 May 2009 17:23:32 +0300
 
 libwx-perl (0.89-1) unstable; urgency=low
 
