@@ -1,6 +1,6 @@
 # http://module-build.sourceforge.net/META-spec.html
 name:         Wx
-version:      0.91
+version:      0.92
 version_from: Wx.pm
 installdirs:  site
 author:       Mattia Barbon <mbarbon@cpan.org>
@@ -11,6 +11,7 @@ build_requires:
   Alien::wxWidgets:      0.25
   Data::Dumper:             0
   ExtUtils::MakeMaker:   6.17
+  ExtUtils::XSpp:        0.04
   File::Spec::Functions: 0.82
   if:                    0.03
   Test::Harness:         2.26
@@ -29,7 +30,7 @@ configure_requires:
 dynamic_config: 1
 
 distribution_type: module
-generated_by: ExtUtils::MY_Metafile version 0.09, EUMM-6.50.
+generated_by: ExtUtils::MY_Metafile version 0.09, EUMM-6.54.
 meta-spec:
   version: 1.3
   url: http://module-build.sourceforge.net/META-spec-v1.3.html

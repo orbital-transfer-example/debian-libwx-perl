@@ -5,7 +5,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Makefile.PL 2511 2008-11-09 17:20:18Z mbarbon $
+## RCS-ID:      $Id: Makefile.PL 2577 2009-06-18 20:36:39Z tsee $
 ## Copyright:   (c) 2000-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -40,6 +40,7 @@ my $build_requires =
     'ExtUtils::MakeMaker'    => 6.17,
     'Alien::wxWidgets'       => 0.25,
     'if'                     => 0.03,
+    'ExtUtils::XSpp'         => 0.04,
     };
 
 eval {
@@ -65,8 +66,7 @@ wxWriteMakefile( NAME          => 'Wx',
                  VERSION_FROM  => 'Wx.pm',
                  PREREQ_PM     => { %$build_requires },
                  PMLIBDIRS     => [ 'lib', 'build' ],
-                 EXE_FILES     => [ qw(script/wxperl_xspp
-                                       script/wxperl_overload) ],
+                 EXE_FILES     => [ qw(script/wxperl_overload) ],
                  WX_CORE_LIB_MAYBE => $^O eq 'darwin' ? 'media html' : '',
                  WX_CORE_LIB   => 'adv core base',
                  WX_OVERLOAD   => { header  => 'cpp/ovl_const.h',
