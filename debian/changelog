@@ -1,8 +1,12 @@
-libwx-perl (0.91-2) UNRELEASED; urgency=low
+libwx-perl (0.92-1) UNRELEASED; urgency=low
 
+  [ Nathan Handler ]
   * debian/watch: Update to ignore development releases.
 
- -- Nathan Handler <nhandler@ubuntu.com>  Sat, 06 Jun 2009 01:38:07 +0000
+  [ Damyan Ivanov ]
+  * New upstream release
+
+ -- Damyan Ivanov <dmn@debian.org>  Thu, 20 Aug 2009 15:45:51 +0300
 
 libwx-perl (0.91-1) unstable; urgency=low
 

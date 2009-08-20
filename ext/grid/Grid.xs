@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     04/12/2001
-// RCS-ID:      $Id: Grid.xs 2527 2009-02-07 17:44:57Z mbarbon $
+// RCS-ID:      $Id: Grid.xs 2577 2009-06-18 20:36:39Z tsee $
 // Copyright:   (c) 2001-2004, 2006-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -85,9 +85,9 @@ INCLUDE: XS/GridEvent.xs
 INCLUDE: XS/GridCellRenderer.xs
 INCLUDE: XS/GridCellEditor.xs
 
-INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp XS/GridTable.xsp |
+INCLUDE: xspp -t ../../typemap.xsp XS/GridTable.xsp |
 
-INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp XS/GridTableMessage.xsp |
+INCLUDE: xspp -t ../../typemap.xsp XS/GridTableMessage.xsp |
 
 MODULE=Wx__Grid PACKAGE=Wx::Grid
 

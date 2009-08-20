@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     22/09/2002
-// RCS-ID:      $Id: Calendar.xs 2331 2008-01-20 10:20:17Z mbarbon $
+// RCS-ID:      $Id: Calendar.xs 2577 2009-06-18 20:36:39Z tsee $
 // Copyright:   (c) 2002, 2005-2006, 2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -27,11 +27,11 @@ MODULE=Wx__Calendar
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp XS/DatePickerCtrl.xsp |
+INCLUDE: xspp -t ../../typemap.xsp XS/DatePickerCtrl.xsp |
 
-INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp XS/CalendarCtrl.xsp |
+INCLUDE: xspp -t ../../typemap.xsp XS/CalendarCtrl.xsp |
 
-INCLUDE: perl ../../script/wxperl_xspp -t ../../typemap.xsp XS/CalendarDateAttr.xsp |
+INCLUDE: xspp -t ../../typemap.xsp XS/CalendarDateAttr.xsp |
 
 #  //FIXME//tricky
 #if defined(__WXMSW__)

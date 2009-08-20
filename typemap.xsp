@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/03/2003
-## RCS-ID:      $Id: typemap.xsp 2502 2008-11-05 22:26:20Z mbarbon $
+## RCS-ID:      $Id: typemap.xsp 2581 2009-06-19 08:56:01Z tsee $
 ## Copyright:   (c) 2003-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -15,8 +15,11 @@
 %typemap{char}{simple};
 %typemap{short}{simple};
 %typemap{int}{simple};
-%typemap{unsigned}{simple};
 %typemap{long}{simple};
+%typemap{unsigned short}{simple};
+%typemap{unsigned}{simple};
+%typemap{unsigned int}{simple};
+%typemap{unsigned long}{simple};
 %typemap{float}{simple};
 %typemap{double}{simple};
 %typemap{wxChar}{simple};

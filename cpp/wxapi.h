@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2555 2009-05-11 09:11:08Z mbarbon $
+// RCS-ID:      $Id: wxapi.h 2595 2009-08-02 07:43:26Z mbarbon $
 // Copyright:   (c) 2002-2003, 2005-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -17,6 +17,10 @@
 #define __CPP_WXAPI_H
 
 #undef bool
+
+#if defined( __WXMSW__ )
+#define STRICT
+#endif
 
 #include <wx/defs.h>
 

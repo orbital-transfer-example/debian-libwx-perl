@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     10/03/2001
-// RCS-ID:      $Id: Html.xs 2331 2008-01-20 10:20:17Z mbarbon $
+// RCS-ID:      $Id: Html.xs 2577 2009-06-18 20:36:39Z tsee $
 // Copyright:   (c) 2001-2004, 2006, 2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -42,7 +42,7 @@ MODULE=Wx__Html
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: perl ../../script/wxperl_xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlWindow.xs |
+INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlWindow.xs |
 
 INCLUDE: XS/HtmlHelpController.xs
 
@@ -53,15 +53,15 @@ INCLUDE: XS/HtmlDCRenderer.xs
 
 #endif
 
-INCLUDE: perl ../../script/wxperl_xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlParser.xsp |
+INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlParser.xsp |
 
-INCLUDE: perl ../../script/wxperl_xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlTagHandler.xsp |
+INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlTagHandler.xsp |
 
-INCLUDE: perl ../../script/wxperl_xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlTag.xsp |
+INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlTag.xsp |
 
-INCLUDE: perl ../../script/wxperl_xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlCell.xsp |
+INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlCell.xsp |
 
-INCLUDE: perl ../../script/wxperl_xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlListBox.xsp |
+INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/HtmlListBox.xsp |
 
 #include "cpp/ht_constants.cpp"
 #include "cpp/ovl_const.cpp"
