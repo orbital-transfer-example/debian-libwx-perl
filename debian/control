@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 7.0.50), quilt (>= 0.46-7),
  libalien-wxwidgets-perl (>= 0.39), libextutils-xspp-perl,
  xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl,
  libio-string-perl, libmodule-info-perl
-Standards-Version: 3.8.1
+Standards-Version: 3.8.3
 Homepage: http://wxperl.sourceforge.net/
 Vcs-Svn: svn://svn.debian.org/pkg-perl/trunk/libwx-perl/
 Vcs-Browser: http://svn.debian.org/viewsvn/pkg-perl/trunk/libwx-perl/
