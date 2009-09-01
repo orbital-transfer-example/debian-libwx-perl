@@ -1,4 +1,4 @@
-libwx-perl (0.92-1) UNRELEASED; urgency=low
+libwx-perl (0.92-1) unstable; urgency=low
 
   [ Nathan Handler ]
   * debian/watch: Update to ignore development releases.
@@ -9,7 +9,7 @@ libwx-perl (0.92-1) UNRELEASED; urgency=low
   * bump Standards-Version to 3.8.3 (no changes needed)
   * add explicit build-dependency on perl
 
- -- Damyan Ivanov <dmn@debian.org>  Thu, 20 Aug 2009 15:45:51 +0300
+ -- Damyan Ivanov <dmn@debian.org>  Tue, 01 Sep 2009 13:49:55 +0300
 
 libwx-perl (0.91-1) unstable; urgency=low
 
