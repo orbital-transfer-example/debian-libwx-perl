@@ -1,12 +1,11 @@
 libwx-perl (0.92-1) UNRELEASED; urgency=low
 
-  WAITS-FOR: libextutils-xspp-perl
-
   [ Nathan Handler ]
   * debian/watch: Update to ignore development releases.
 
   [ Damyan Ivanov ]
   * New upstream release
+  * add libextutils-xspp-perl to B-D
 
  -- Damyan Ivanov <dmn@debian.org>  Thu, 20 Aug 2009 15:45:51 +0300
 
