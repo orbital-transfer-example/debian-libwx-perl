@@ -7,6 +7,7 @@ libwx-perl (0.92-1) UNRELEASED; urgency=low
   * New upstream release
   * add libextutils-xspp-perl to B-D
   * bump Standards-Version to 3.8.3 (no changes needed)
+  * add explicit build-dependency on perl
 
  -- Damyan Ivanov <dmn@debian.org>  Thu, 20 Aug 2009 15:45:51 +0300
 
