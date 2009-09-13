@@ -5,13 +5,9 @@ Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
  gregor herrmann <gregoa@debian.org>, Damyan Ivanov <dmn@debian.org>,
  Ryan Niebur <ryanryan52@gmail.com>
-Build-Depends: debhelper (>= 7.0.50), quilt (>= 0.46-7), perl,,
- Ryan Niebur <ryanryan52@gmail.com>
- libalien-wxwidgets-perl (>= 0.39), libextutils-xspp-perl,,
- Ryan Niebur <ryanryan52@gmail.com>
- xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl,,
- Ryan Niebur <ryanryan52@gmail.com>
- libio-string-perl, libmodule-info-perl
+Build-Depends: debhelper (>= 7.0.50), quilt (>= 0.46-7), perl,
+ libalien-wxwidgets-perl (>= 0.39), libextutils-xspp-perl,
+ xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl,
 Standards-Version: 3.8.3
 Homepage: http://wxperl.sourceforge.net/
 Vcs-Svn: svn://svn.debian.org/pkg-perl/trunk/libwx-perl/
