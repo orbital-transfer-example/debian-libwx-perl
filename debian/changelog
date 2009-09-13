@@ -1,4 +1,4 @@
-libwx-perl (0.92-2) UNRELEASED; urgency=low
+libwx-perl (0.92-2) unstable; urgency=low
 
   [ gregor herrmann ]
   * Change my email address.
@@ -7,7 +7,7 @@ libwx-perl (0.92-2) UNRELEASED; urgency=low
   * wrap wxKeyEvent::GetRawKeyCode, backported from upstream SVN
   * Add myself to Uploaders
 
- -- Ryan Niebur <ryanryan52@gmail.com>  Sat, 12 Sep 2009 22:49:58 -0700
+ -- Ryan Niebur <ryanryan52@gmail.com>  Sat, 12 Sep 2009 23:18:49 -0700
 
 libwx-perl (0.92-1) unstable; urgency=low
 
