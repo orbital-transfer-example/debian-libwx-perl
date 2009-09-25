@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
  gregor herrmann <gregoa@debian.org>, Damyan Ivanov <dmn@debian.org>,
- Ryan Niebur <ryanryan52@gmail.com>
+ Ryan Niebur <ryan@debian.org>
 Build-Depends: debhelper (>= 7.0.50), quilt (>= 0.46-7), perl,
  libalien-wxwidgets-perl (>= 0.39), libextutils-xspp-perl,
  xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl,
