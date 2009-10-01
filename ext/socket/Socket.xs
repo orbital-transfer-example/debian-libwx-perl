@@ -4,7 +4,7 @@
 // Author:      Graciliano M. P.
 // Modified by:
 // Created:     27/02/2003
-// RCS-ID:      $Id: Socket.xs 2577 2009-06-18 20:36:39Z tsee $
+// RCS-ID:      $Id: Socket.xs 2610 2009-09-20 13:28:54Z mbarbon $
 // Copyright:   (c) 2003-2004, 2006, 2008 Graciliano M. P.
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -30,9 +30,9 @@ INCLUDE: XS/SocketClient.xs
 INCLUDE: XS/SocketServer.xs
 INCLUDE: XS/SocketEvent.xs
 
-INCLUDE: xspp -t ../../typemap.xsp XS/SockAddress.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/SockAddress.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp XS/DatagramSocket.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/DatagramSocket.xsp |
 
 #  //FIXME//tricky
 #if defined(__WXMSW__)

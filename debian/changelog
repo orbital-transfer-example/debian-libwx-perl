@@ -1,8 +1,12 @@
-libwx-perl (0.92-3) UNRELEASED; urgency=low
+libwx-perl (0.93-1) UNRELEASED; urgency=low
 
+  [ Ryan Niebur ]
   * Update ryan52's email address
 
- -- Ryan Niebur <ryan@debian.org>  Fri, 25 Sep 2009 00:27:01 -0700
+  [ gregor herrmann ]
+  * New upstream release.
+
+ -- gregor herrmann <gregoa@debian.org>  Thu, 01 Oct 2009 23:05:38 +0200
 
 libwx-perl (0.92-2) unstable; urgency=low
 

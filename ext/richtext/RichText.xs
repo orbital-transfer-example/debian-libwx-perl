@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2006
-// RCS-ID:      $Id: RichText.xs 2577 2009-06-18 20:36:39Z tsee $
+// RCS-ID:      $Id: RichText.xs 2610 2009-09-20 13:28:54Z mbarbon $
 // Copyright:   (c) 2006-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -62,23 +62,23 @@ MODULE=Wx__RichText
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextCtrl.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextCtrl.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextAttr.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextAttr.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextStyle.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextStyle.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextStyleCtrl.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextStyleCtrl.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextFormattingDialog.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextFormattingDialog.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextFileHandler.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextFileHandler.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextBuffer.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextBuffer.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/SymbolPickerDialog.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/SymbolPickerDialog.xsp |
 
-INCLUDE: xspp -t typemap.xsp -t ../../typemap.xsp XS/RichTextStyleOrganiserDialog.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextStyleOrganiserDialog.xsp |
 
 MODULE=Wx__RichText PACKAGE=Wx::RichText
 

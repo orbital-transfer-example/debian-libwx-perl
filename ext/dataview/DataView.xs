@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2007
-// RCS-ID:      $Id: DataView.xs 2577 2009-06-18 20:36:39Z tsee $
+// RCS-ID:      $Id: DataView.xs 2610 2009-09-20 13:28:54Z mbarbon $
 // Copyright:   (c) 2007-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -46,25 +46,25 @@ MODULE=Wx__DataView
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewCtrl.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewCtrl.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewModel.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewModel.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewIndexListModel.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewIndexListModel.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewColumn.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewColumn.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewEvent.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewEvent.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewItem.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewItem.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewModelNotifier.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewModelNotifier.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewRenderer.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewRenderer.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeStore.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeStore.xsp |
 
-INCLUDE: xspp -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeCtrl.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeCtrl.xsp |
 
 MODULE=Wx__DataView PACKAGE=Wx::DataView
 
