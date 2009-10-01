@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Frames.xs 2577 2009-06-18 20:36:39Z tsee $
+// RCS-ID:      $Id: Frames.xs 2610 2009-09-20 13:28:54Z mbarbon $
 // Copyright:   (c) 2000-2003, 2005-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -24,25 +24,25 @@ MODULE=Wx_Wnd
 
 INCLUDE: XS/Panel.xs
 
-INCLUDE: xspp -t typemap.xsp XS/Dialog.xs |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Dialog.xs |
 
 INCLUDE: XS/Frame.xs
 INCLUDE: XS/StatusBar.xs
 INCLUDE: XS/ToolBar.xs
 INCLUDE: XS/Wizard.xs
 
-INCLUDE: xspp -t typemap.xsp XS/IconBundle.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/IconBundle.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/TopLevelWindow.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/TopLevelWindow.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/PopupWindow.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/PopupWindow.xsp |
 
 INCLUDE: XS/ColourDialog.xs
 INCLUDE: XS/DirDialog.xs
 INCLUDE: XS/FileDialog.xs
 INCLUDE: XS/TextEntryDialog.xs
 
-INCLUDE: xspp -t typemap.xsp XS/MessageDialog.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/MessageDialog.xsp |
 
 INCLUDE: XS/ProgressDialog.xs
 INCLUDE: XS/SingleChoiceDialog.xs
@@ -50,8 +50,8 @@ INCLUDE: XS/MultiChoiceDialog.xs
 INCLUDE: XS/FontDialog.xs
 INCLUDE: XS/FindReplaceDialog.xs
 
-INCLUDE: xspp -t typemap.xsp XS/AboutDialog.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/AboutDialog.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/PropertySheetDialog.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/PropertySheetDialog.xsp |
 
 MODULE=Wx_Wnd

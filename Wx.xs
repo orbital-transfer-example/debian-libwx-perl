@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 2577 2009-06-18 20:36:39Z tsee $
+// RCS-ID:      $Id: Wx.xs 2610 2009-09-20 13:28:54Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -420,23 +420,23 @@ INCLUDE: XS/Process.xs
 INCLUDE: XS/FontMapper.xs
 INCLUDE: XS/FontEnumerator.xs
 INCLUDE: XS/Wave.xs
-INCLUDE: xspp -t typemap.xsp XS/ArtProvider.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/ArtProvider.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/MimeTypes.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/MimeTypes.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/Sound.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Sound.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/Power.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Power.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/ClassInfo.xs |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/ClassInfo.xs |
 
-INCLUDE: xspp -t typemap.xsp XS/Display.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Display.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/StandardPaths.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/StandardPaths.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/Variant.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Variant.xsp |
 
-INCLUDE: xspp -t typemap.xsp XS/NotificationMessage.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/NotificationMessage.xsp |
 
 ##  //FIXME// tricky
 ##if defined(__WXMSW__)

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     04/05/2001
-// RCS-ID:      $Id: Print.xs 2577 2009-06-18 20:36:39Z tsee $
+// RCS-ID:      $Id: Print.xs 2610 2009-09-20 13:28:54Z mbarbon $
 // Copyright:   (c) 2001-2002, 2004-2006, 2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -32,9 +32,9 @@ INCLUDE: XS/PrintPreview.xs
 INCLUDE: XS/Printout.xs
 INCLUDE: XS/PrintDialog.xs
 
-INCLUDE: xspp -t ../../typemap.xsp XS/Preview.xs |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/Preview.xs |
 
-INCLUDE: xspp -t ../../typemap.xsp XS/PrintFactory.xsp |
+INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/PrintFactory.xsp |
 
 #include "cpp/pr_constants.cpp"
 
