@@ -1,4 +1,4 @@
-libwx-perl (0.93-1) UNRELEASED; urgency=low
+libwx-perl (0.93-1) unstable; urgency=low
 
   [ Ryan Niebur ]
   * Update ryan52's email address
@@ -7,7 +7,7 @@ libwx-perl (0.93-1) UNRELEASED; urgency=low
   * New upstream release.
   * Make build dependency on libextutils-xspp-perl versioned.
 
- -- gregor herrmann <gregoa@debian.org>  Thu, 01 Oct 2009 23:05:38 +0200
+ -- gregor herrmann <gregoa@debian.org>  Thu, 01 Oct 2009 23:34:48 +0200
 
 libwx-perl (0.92-2) unstable; urgency=low
 
