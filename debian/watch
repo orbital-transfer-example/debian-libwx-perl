@@ -1,4 +1,3 @@
 version=3
 
-# <Webpage URL> <string match>
-http://search.cpan.org/dist/Wx/ .*/Wx-v?(\d[\d.]+)\.(?:tar(?:\.gz|\.bz2)?|tgz|zip)
+http://search.cpan.org/dist/Wx/ .*/Wx-v?(\d[\d.]+)\.(?:tar(?:\.gz|\.bz2)?|tgz|zip)$

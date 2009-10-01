@@ -3,8 +3,6 @@
 %:
 	dh --with quilt $@
 
-include /usr/share/quilt/quilt.make
-
 PACKAGE=$(shell dh_listpackages)
 TMP     =$(CURDIR)/debian/$(PACKAGE)
 
@@ -13,10 +11,10 @@ override_dh_auto_test:
 
 override_dh_auto_install:
 	dh_auto_install
-	
+
 	# fix permissions
 	find $(TMP)/usr/lib/perl5/Wx -type f -perm /755 -print0 | xargs -r0 chmod -v 664
-	
+
 	# remove bogus man page
 	rm -vf "$(TMP)/usr/share/man/man3/Wx::build::MakeMaker::Win32_MSVC.3pm"
 
