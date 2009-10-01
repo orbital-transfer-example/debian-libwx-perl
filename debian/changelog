@@ -1,5 +1,7 @@
 libwx-perl (0.93-1) UNRELEASED; urgency=low
 
+  WAITS-FOR: libextutils-xspp-perl 0.05
+
   [ Ryan Niebur ]
   * Update ryan52's email address
 
