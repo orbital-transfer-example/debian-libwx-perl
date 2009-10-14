@@ -1,3 +1,10 @@
+libwx-perl (0.93-2) UNRELEASED; urgency=low
+
+  * run the splashfast tests with perl instead of under Test::Harness
+    (or whatever it usually runs under)
+
+ -- Ryan Niebur <ryan@debian.org>  Wed, 14 Oct 2009 16:32:16 -0700
+
 libwx-perl (0.93-1) unstable; urgency=low
 
   [ Ryan Niebur ]
