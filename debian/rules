@@ -7,8 +7,11 @@ PACKAGE=$(shell dh_listpackages)
 TMP     =$(CURDIR)/debian/$(PACKAGE)
 
 override_dh_auto_test:
-	xvfb-run sh -c "cd ext/pperl/splashfast/; T=0; for i in t/*; do echo ====\$$i====; perl -I ../../../blib/lib -I ../../../blib/arch \$$i || T=\$$(( 1 + \$$T )); done; exit \$$T"
-	xvfb-run $(MAKE) -j1 test
+	$(MAKE) -f debian/rules do_tests
+
+do_tests:
+	cd ext/pperl/splashfast/; T=0; for i in t/*; do echo ====$$i====; perl -I ../../../blib/lib -I ../../../blib/arch $$i || T=$$(( 1 + $$T )); done; exit $$T
+	$(MAKE) -j1 test
 
 override_dh_auto_install:
 	dh_auto_install
