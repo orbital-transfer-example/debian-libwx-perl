@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Event.xs 2499 2008-11-05 19:47:18Z mbarbon $
+// RCS-ID:      $Id: Event.xs 2607 2009-09-06 07:44:32Z tsee $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -377,6 +377,13 @@ wxKeyEvent::ControlDown()
 
 int
 wxKeyEvent::GetKeyCode()
+
+#ifdef wxHAS_RAW_KEY_CODES
+
+int
+wxKeyEvent::GetRawKeyCode()
+
+#endif
 
 #if wxUSE_UNICODE && WXPERL_W_VERSION_GE( 2, 5, 3 )
 

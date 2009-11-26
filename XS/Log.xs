@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Log.xs 2064 2007-06-24 20:40:28Z mbarbon $
-## Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
+## RCS-ID:      $Id: Log.xs 2626 2009-10-18 22:48:17Z mbarbon $
+## Copyright:   (c) 2000-2003, 2005-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -288,7 +288,7 @@ wxLogTraceMask( mask, string )
     const wxChar* mask
     const wxChar* string
   CODE:
-    ::wxLogTrace( mask, string );
+    wxLogTrace( mask, string );
 
 void
 wxLogSysError( string )
