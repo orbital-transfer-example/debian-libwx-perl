@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2595 2009-08-02 07:43:26Z mbarbon $
+// RCS-ID:      $Id: wxapi.h 2633 2009-10-20 19:09:12Z mbarbon $
 // Copyright:   (c) 2002-2003, 2005-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -96,6 +96,9 @@ inline CV* wxPli_newXS(pTHX_ const char* name, XSUBADDR_t addr,
 #undef malloc
 #undef realloc
 #undef free
+#undef open
+#undef seekdir
+#undef close
 #endif
 #undef do_open
 #undef do_close

@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Cursor.xs 2517 2008-11-30 20:14:22Z mbarbon $
-## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
+## RCS-ID:      $Id: Cursor.xs 2635 2009-10-20 19:17:01Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -29,7 +29,7 @@ wxCursor*
 newFile( CLASS, name, type, hsx = -1, hsy = -1 )
     SV* CLASS
     wxString name
-    long type
+    wxBitmapType type
     int hsx
     int hsy
   CODE:
@@ -61,7 +61,8 @@ newImage( CLASS, img )
 
 #endif
 
-#if !defined( __WXGTK__ ) && !defined(__WXMAC__)
+#if !defined( __WXGTK__ ) && !defined(__WXMAC__) \
+    && WXPERL_W_VERSION_LT( 2, 9, 0 )
 
 wxCursor*
 newData( CLASS, bits, width, height, hotSpotX = -1, hotSpotY = -1, maskBits = 0 )
