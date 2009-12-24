@@ -1,8 +1,12 @@
 libwx-perl (0.94-1) UNRELEASED; urgency=low
 
+  [ Roberto C. Sanchez ]
   * (NOT RELEASED YET) New upstream release
 
- -- Roberto C. Sanchez <roberto@connexer.com>  Thu, 26 Nov 2009 12:22:46 -0500
+  [ Ryan Niebur ]
+  * remove wrap_get_raw_keycode.patch, applied upstream
+
+ -- Ryan Niebur <ryan@debian.org>  Thu, 24 Dec 2009 10:33:22 -0800
 
 libwx-perl (0.93-2) unstable; urgency=low
 
