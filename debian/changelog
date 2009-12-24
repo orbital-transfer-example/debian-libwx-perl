@@ -1,4 +1,4 @@
-libwx-perl (0.94-1) UNRELEASED; urgency=low
+libwx-perl (0.94-1) unstable; urgency=low
 
   [ Roberto C. Sanchez ]
   * New upstream release
@@ -7,7 +7,7 @@ libwx-perl (0.94-1) UNRELEASED; urgency=low
   * remove wrap_get_raw_keycode.patch, applied upstream
   * skip the failing tests (Closes: #499740)
 
- -- Ryan Niebur <ryan@debian.org>  Thu, 24 Dec 2009 12:14:44 -0800
+ -- Ryan Niebur <ryan@debian.org>  Thu, 24 Dec 2009 12:23:28 -0800
 
 libwx-perl (0.93-2) unstable; urgency=low
 
