@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 2615 2009-09-24 19:48:01Z mbarbon $
+## RCS-ID:      $Id: Wx.pm 2731 2009-12-29 21:19:56Z mbarbon $
 ## Copyright:   (c) 2000-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.94';
+$VERSION = '0.96';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -38,14 +38,14 @@ sub wxSIZE   { Wx::Size->new( $_[0], $_[1] )  }
 sub wxTheApp { $Wx::wxTheApp }
 
 sub AUTOLOAD {
-  my( $constname );
+  my( $constname, $error );
 
   ($constname = $AUTOLOAD) =~ s<^.*::>{};
   return 0 if $constname eq 'wxVERSION';
 
-  my( $val ) = constant($constname, 0 );
+  my( $val ) = constant( $constname, 0, $error );
 
-  if ($! != 0) {
+  if( $error != 0 ) {
 # re-add this if need support for autosplitted subroutines
 #    $AutoLoader::AUTOLOAD = $AUTOLOAD;
 #    goto &AutoLoader::AUTOLOAD;
@@ -114,12 +114,12 @@ sub set_load_function { $load_fun = shift }
 sub set_end_function { $unload_fun = shift }
 
 sub load_dll {
-  return if $^O eq 'darwin' || Wx::wxVERSION() < 2.005;
+  return if $^O ne 'MSWin32';
   goto &$load_fun;
 }
 
 sub unload_dll {
-  return if $^O eq 'darwin' || Wx::wxVERSION() < 2.005;
+  return if $^O ne 'MSWin32';
   goto &$unload_fun;
 }
 
@@ -243,6 +243,7 @@ sub GetMultipleChoices {
     return @s;
   }
 
+  $dialog->Destroy;
   return;
 }
 

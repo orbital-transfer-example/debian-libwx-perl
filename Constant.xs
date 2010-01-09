@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2636 2009-10-20 19:39:08Z mbarbon $
+// RCS-ID:      $Id: Constant.xs 2715 2009-12-25 17:23:03Z mbarbon $
 // Copyright:   (c) 2000-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -745,7 +745,7 @@ void SetInheritance()
 // !package: Wx
 // !tag:
 
-static double constant( const char *name, int arg ) 
+static double constant( const char* name, int arg ) 
 {
   WX_PL_CONSTANT_INIT();
 
@@ -3322,9 +3322,16 @@ WXPLI_BOOT_ONCE(Wx_Const);
 MODULE=Wx_Const PACKAGE=Wx
 
 double
-constant(name,arg)
+constant( name, arg, error )
     const char* name
     int arg
+    int error = NO_INIT
+  CODE:
+    RETVAL = constant( name, arg );
+    error = errno;
+  OUTPUT:
+    RETVAL
+    error
 
 void
 UnsetConstants()

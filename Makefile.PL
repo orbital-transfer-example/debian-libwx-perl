@@ -5,8 +5,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Makefile.PL 2611 2009-09-20 13:30:33Z mbarbon $
-## Copyright:   (c) 2000-2008 Mattia Barbon
+## RCS-ID:      $Id: Makefile.PL 2746 2010-01-08 21:36:41Z mbarbon $
+## Copyright:   (c) 2000-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -57,6 +57,12 @@ eval {
                               },
           configure_requires => { 'Alien::wxWidgets' => 0.25,
                                   },
+          resources       => { 'license'       => 'http://dev.perl.org/licenses/',
+                               'homepage'      => 'http://wxperl.eu/',
+                               'bugtracker'    => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx',
+                               'repository'    => 'https://wxperl.svn.sourceforge.net/svnroot/wxperl/wxPerl',
+                               'MailingList'   => 'http://lists.perl.org/list/wxperl-users.html',
+                               },
           } );
 };
 

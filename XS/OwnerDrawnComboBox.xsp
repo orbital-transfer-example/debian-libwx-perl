@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     13/08/2007
-## RCS-ID:      $Id: OwnerDrawnComboBox.xsp 2251 2007-10-17 22:52:17Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: OwnerDrawnComboBox.xsp 2743 2010-01-08 19:39:53Z mbarbon $
+## Copyright:   (c) 2007, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -50,7 +50,7 @@ INCLUDE: perl -pe "s/ItemContainer/OwnerDrawnComboBox/g" XS/ItemContainer.xs |
                                              p3, p4 ) );                     \
             return;                                                          \
         } else                                                               \
-            return BASE::METHOD( p1, p2, p3, p4 );                           \
+            BASE::METHOD( p1, p2, p3, p4 );                                  \
     }
 
 class wxPlOwnerDrawnComboBox : public wxOwnerDrawnComboBox {

@@ -4,8 +4,8 @@
 // Author:      Simon Flack
 // Modified by:
 // Created:     11/09/2002
-// RCS-ID:      $Id: DocView.xs 2610 2009-09-20 13:28:54Z mbarbon $
-// Copyright:   (c) 2002, 2004, 2007-2008 Simon Flack
+// RCS-ID:      $Id: DocView.xs 2700 2009-12-13 11:25:50Z mbarbon $
+// Copyright:   (c) 2002, 2004, 2007-2009 Simon Flack
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
