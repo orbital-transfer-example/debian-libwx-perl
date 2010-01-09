@@ -1,3 +1,9 @@
+libwx-perl (0.94-2) UNRELEASED; urgency=low
+
+  * require alien-wxwidgets version 0.48
+
+ -- Ryan Niebur <ryan@debian.org>  Sat, 09 Jan 2010 10:08:45 -0800
+
 libwx-perl (0.94-1) unstable; urgency=low
 
   [ Roberto C. Sanchez ]
