@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.cpp 2523 2009-02-04 23:50:57Z mbarbon $
+// RCS-ID:      $Id: helpers.cpp 2682 2009-11-21 10:39:46Z mbarbon $
 // Copyright:   (c) 2000-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -1476,8 +1476,8 @@ I32 my_looks_like_number( pTHX_ SV* sv )
     HV* wxhash = get_hv( wxrbuffer, (create) ) \
 
 #define dwxKey( ptr )              \
-    char wxkey[50];                \
-    sprintf( wxkey, "%x", (ptr) ); \
+    char wxkey[40];                \
+    sprintf( wxkey, "%p", (ptr) ); \
 
 void wxPli_thread_sv_register( pTHX_ const char* package,
                                const void* ptr, SV* sv )

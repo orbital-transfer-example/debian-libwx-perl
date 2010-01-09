@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/11/2006
-## RCS-ID:      $Id: AuiNotebook.xsp 2606 2009-08-17 21:10:29Z mbarbon $
-## Copyright:   (c) 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: AuiNotebook.xsp 2700 2009-12-13 11:25:50Z mbarbon $
+## Copyright:   (c) 2006-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################

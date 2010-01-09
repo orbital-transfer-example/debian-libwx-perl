@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2006
-// RCS-ID:      $Id: RichText.xs 2610 2009-09-20 13:28:54Z mbarbon $
-// Copyright:   (c) 2006-2008 Mattia Barbon
+// RCS-ID:      $Id: RichText.xs 2700 2009-12-13 11:25:50Z mbarbon $
+// Copyright:   (c) 2006-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////

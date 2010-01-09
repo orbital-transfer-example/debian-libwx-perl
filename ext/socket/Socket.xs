@@ -4,8 +4,8 @@
 // Author:      Graciliano M. P.
 // Modified by:
 // Created:     27/02/2003
-// RCS-ID:      $Id: Socket.xs 2610 2009-09-20 13:28:54Z mbarbon $
-// Copyright:   (c) 2003-2004, 2006, 2008 Graciliano M. P.
+// RCS-ID:      $Id: Socket.xs 2700 2009-12-13 11:25:50Z mbarbon $
+// Copyright:   (c) 2003-2004, 2006, 2008-2009 Graciliano M. P.
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////

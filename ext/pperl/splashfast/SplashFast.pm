@@ -4,8 +4,8 @@
 ## Author:      Graciliano M. P.
 ## Modified by:
 ## Created:     30/06/2002
-## RCS-ID:      $Id: SplashFast.pm 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2002-2006 Graciliano M. P.
+## RCS-ID:      $Id: SplashFast.pm 2723 2009-12-25 17:35:15Z mbarbon $
+## Copyright:   (c) 2002-2006, 2009 Graciliano M. P.
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -27,9 +27,10 @@ sub new {
   Wx::Perl::SplashFast::App->new() ;
   Wx::InitAllImageHandlers() ;
 
-  my $any = Wx::constant( 'wxBITMAP_TYPE_ANY', 0 );
-  my $spl_c = Wx::constant( 'wxSPLASH_CENTRE_ON_SCREEN', 0 );
-  my $spl_ti = Wx::constant( 'wxSPLASH_TIMEOUT', 0 );
+  my $dummy;
+  my $any = Wx::constant( 'wxBITMAP_TYPE_ANY', 0, $dummy );
+  my $spl_c = Wx::constant( 'wxSPLASH_CENTRE_ON_SCREEN', 0, $dummy );
+  my $spl_ti = Wx::constant( 'wxSPLASH_TIMEOUT', 0, $dummy );
   my $bitmap = Wx::Bitmap->new( $_[0], $any );
 
   my $splash = Wx::SplashScreen->new( $bitmap , $spl_c|$spl_ti ,
