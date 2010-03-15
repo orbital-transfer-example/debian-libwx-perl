@@ -8,7 +8,7 @@ Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
 Build-Depends: debhelper (>= 7.0.50), quilt (>= 0.46-7), perl,
  libalien-wxwidgets-perl (>= 0.48), libextutils-xspp-perl (>= 0.05),
  xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl,
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://wxperl.sourceforge.net/
 Vcs-Svn: svn://svn.debian.org/pkg-perl/trunk/libwx-perl/
 Vcs-Browser: http://svn.debian.org/viewsvn/pkg-perl/trunk/libwx-perl/
