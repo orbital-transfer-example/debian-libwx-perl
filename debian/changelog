@@ -1,3 +1,11 @@
+libwx-perl (0.96-2) UNRELEASED; urgency=low
+
+  * add -a option to xvfb-run invocation
+    Closes: #573679. Thanks to Lucas for reporting and to Jozef for providing
+    the solution.
+
+ -- Damyan Ivanov <dmn@debian.org>  Mon, 15 Mar 2010 08:39:36 +0200
+
 libwx-perl (0.96-1) unstable; urgency=low
 
   * require alien-wxwidgets version 0.48

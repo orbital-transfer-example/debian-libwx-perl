@@ -7,7 +7,7 @@ PACKAGE=$(shell dh_listpackages)
 TMP     =$(CURDIR)/debian/$(PACKAGE)
 
 override_dh_auto_test:
-	xvfb-run $(MAKE) -j1 test
+	xvfb-run -a $(MAKE) -j1 test
 
 override_dh_auto_install:
 	dh_auto_install
