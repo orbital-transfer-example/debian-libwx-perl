@@ -5,6 +5,7 @@ libwx-perl (0.9701-1) UNRELEASED; urgency=low
     - build-dep on ExtUtils:XSpp upped to version 0.9
   * Switched to source format 3.0 (quilt). Removed quilt invocation in rules
     and build-dep.
+  * Updated upstream author copyright years in debian/copyright
 
  -- Chris Butler <chrisb@debian.org>  Sun, 28 Mar 2010 20:17:26 +0100
 
