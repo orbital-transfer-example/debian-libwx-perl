@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: ComboBox.xs 2435 2008-08-05 18:05:54Z mbarbon $
-## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
+## RCS-ID:      $Id: ComboBox.xs 2757 2010-01-17 10:26:27Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -87,8 +87,9 @@ wxComboBox::Create( parent, id = wxID_ANY, value = wxEmptyString, pos = wxDefaul
 
 #define WXPERL_IN_COMBOBOX
 
-INCLUDE: perl -pe "s/ItemContainerImmutable/ComboBox/g" XS/ItemContainerImmutable.xs |
-INCLUDE: perl -pe "s/ItemContainer/ComboBox/g" XS/ItemContainer.xs |
+INCLUDE_COMMAND: $^X -pe "s/ItemContainerImmutable/ComboBox/g" XS/ItemContainerImmutable.xs
+
+INCLUDE_COMMAND: $^X -pe "s/ItemContainer/ComboBox/g" XS/ItemContainer.xs
 
 #undef WXPERL_IN_COMBOBOX
 

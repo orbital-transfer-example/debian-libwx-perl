@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2714 2009-12-23 23:46:16Z mbarbon $
-// Copyright:   (c) 2002-2003, 2005-2009 Mattia Barbon
+// RCS-ID:      $Id: wxapi.h 2790 2010-02-09 20:53:54Z mbarbon $
+// Copyright:   (c) 2002-2003, 2005-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -142,6 +142,9 @@ inline CV* wxPli_newXS(pTHX_ const char* name, XSUBADDR_t addr,
 
 // some helper functions/classes/macros
 #include "cpp/helpers.h"
+
+// temporary, for recent XS++ versions
+#include <exception>
 
 // 0.01 -> 0010; 1.01 -> 1010, etc
 #define WXPL_API_VERSION 0150

@@ -1,3 +1,9 @@
+libwx-perl (0.9701-1) UNRELEASED; urgency=low
+
+  * New upstream release
+
+ -- Chris Butler <chrisb@debian.org>  Sun, 28 Mar 2010 20:17:26 +0100
+
 libwx-perl (0.96-2) unstable; urgency=low
 
   * add -a option to xvfb-run invocation

@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: DC.xs 2561 2009-05-17 08:49:49Z mbarbon $
+## RCS-ID:      $Id: DC.xs 2788 2010-02-09 03:06:59Z mdootson $
 ## Copyright:   (c) 2000-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -17,6 +17,9 @@
 #include <wx/dcscreen.h>
 #include <wx/window.h>
 #include <wx/dcbuffer.h>
+#if wxUSE_GRAPHICS_CONTEXT && WXPERL_W_VERSION_GE( 2, 8, 8 )
+#include <wx/dcgraph.h>
+#endif
 
 #define wxNullBitmapPtr (wxBitmap*) &wxNullBitmap
 
@@ -677,6 +680,45 @@ void
 wxDC::SetLayoutDirection( wxLayoutDirection dir )
 
 #endif
+
+#if wxUSE_GRAPHICS_CONTEXT && WXPERL_W_VERSION_GE( 2, 8, 8 )
+    
+# DECLARE_OVERLOAD( wmdc, Wx::MemoryDC )
+# DECLARE_OVERLOAD( wwdc, Wx::WindowDC )
+
+MODULE=Wx PACKAGE=Wx::GCDC
+
+void
+wxGCDC::new( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+#if defined( __WXMSW__ )    
+        MATCH_REDISP( wxPliOvl_wmdc, newMemoryDC )
+#endif        
+        MATCH_REDISP( wxPliOvl_wwdc, newWindowDC )
+    END_OVERLOAD( "Wx::GCDC::new" )
+
+#if defined( __WXMSW__ )   
+
+wxGCDC*
+newMemoryDC( CLASS, dc )
+    SV* CLASS
+    wxMemoryDC* dc
+  CODE:
+    RETVAL = new wxGCDC( *dc );
+  OUTPUT: RETVAL
+
+#endif
+
+wxGCDC*
+newWindowDC( CLASS, dc )
+    SV* CLASS
+    wxWindowDC* dc
+  CODE:
+    RETVAL = new wxGCDC( *dc );
+  OUTPUT: RETVAL
+
+#endif    
 
 MODULE=Wx PACKAGE=Wx::ScreenDC
 
