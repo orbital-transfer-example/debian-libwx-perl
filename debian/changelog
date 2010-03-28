@@ -2,6 +2,7 @@ libwx-perl (0.9701-1) UNRELEASED; urgency=low
 
   * New upstream release
     - now requires at least ExtUtils::ParseXS version 2.2202, build-dep added
+    - build-dep on ExtUtils:XSpp upped to version 0.9
   * Switched to source format 3.0 (quilt). Removed quilt invocation in rules
     and build-dep.
 
