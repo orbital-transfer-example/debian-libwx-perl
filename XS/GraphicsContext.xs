@@ -4,7 +4,7 @@
 ## Author:      Klaas Hartmann
 ## Modified by:
 ## Created:     29/06/2007
-## RCS-ID:      $Id: GraphicsContext.xs 2523 2009-02-04 23:50:57Z mbarbon $
+## RCS-ID:      $Id: GraphicsContext.xs 2788 2010-02-09 03:06:59Z mdootson $
 ## Copyright:   (c) 2007, 2009 Klaas Hartmann
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -19,12 +19,23 @@
 
 MODULE=Wx PACKAGE=Wx::GraphicsContext
 
+# DECLARE_OVERLOAD( wmdc, Wx::MemoryDC )
+# DECLARE_OVERLOAD( wwdc, Wx::WindowDC )
+# DECLARE_OVERLOAD( wpdc, Wx::PrinterDC )
+
 void
 Create ( ... )
   PPCODE:
     BEGIN_OVERLOAD()
+        MATCH_VOIDM_REDISP_FUNCTION( Wx::GraphicsContext::createMeasuringContext )
         MATCH_REDISP_FUNCTION(wxPliOvl_wwin, Wx::GraphicsContext::createFromWindow)
-        MATCH_REDISP_FUNCTION(wxPliOvl_wdc, Wx::GraphicsContext::createFromDC)
+#if defined(__WXMSW__) || WXPERL_W_VERSION_GE( 2, 9, 0 )       
+        MATCH_REDISP_FUNCTION(wxPliOvl_wmdc, Wx::GraphicsContext::createFromMemoryDC)
+#endif     
+#if wxPERL_USE_PRINTING_ARCHITECTURE && WXPERL_W_VERSION_GE( 2, 9, 0 )     
+        MATCH_REDISP_FUNCTION(wxPliOvl_wpdc, Wx::GraphicsContext::createFromPrinterDC)
+#endif  
+        MATCH_REDISP_FUNCTION(wxPliOvl_wwdc, Wx::GraphicsContext::createFromWindowDC)
     END_OVERLOAD( "Wx::GraphicsContext::Create" )
 
 wxGraphicsContext* 
@@ -35,10 +46,38 @@ createFromWindow ( window )
   OUTPUT: RETVAL
 
 wxGraphicsContext* 
-createFromDC (dc )
+createFromWindowDC (dc )
     wxWindowDC* dc
   CODE:
     RETVAL = wxGraphicsContext::Create(*dc);
+  OUTPUT: RETVAL
+
+#if wxPERL_USE_PRINTING_ARCHITECTURE && WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+wxGraphicsContext* 
+createFromPrinterDC (dc )
+     wxPrinterDC* dc
+  CODE:
+    RETVAL = wxGraphicsContext::Create(*dc);
+  OUTPUT: RETVAL
+
+#endif
+
+#if defined(__WXMSW__) || WXPERL_W_VERSION_GE( 2, 9, 0 )     
+
+wxGraphicsContext* 
+createFromMemoryDC (dc )
+     wxMemoryDC* dc
+  CODE:
+    RETVAL = wxGraphicsContext::Create(*dc);
+  OUTPUT: RETVAL
+
+#endif
+
+wxGraphicsContext* 
+createMeasuringContext ()
+  CODE:
+    RETVAL = wxGraphicsContext::Create();
   OUTPUT: RETVAL
 
 wxGraphicsPen*  

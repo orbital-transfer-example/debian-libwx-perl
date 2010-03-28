@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     04/03/2006
-// RCS-ID:      $Id: Media.xs 2700 2009-12-13 11:25:50Z mbarbon $
-// Copyright:   (c) 2006, 2008-2009 Mattia Barbon
+// RCS-ID:      $Id: Media.xs 2757 2010-01-17 10:26:27Z mbarbon $
+// Copyright:   (c) 2006, 2008-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -22,9 +22,9 @@ MODULE=Wx__Media
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/MediaCtrl.xsp |
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/MediaCtrl.xsp
 
-INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/MediaEvent.xsp |
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/MediaEvent.xsp
 
 #include "cpp/overload.h"
 #include "cpp/ovl_const.cpp"

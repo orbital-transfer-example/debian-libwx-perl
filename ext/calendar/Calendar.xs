@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     22/09/2002
-// RCS-ID:      $Id: Calendar.xs 2700 2009-12-13 11:25:50Z mbarbon $
-// Copyright:   (c) 2002, 2005-2006, 2008-2009 Mattia Barbon
+// RCS-ID:      $Id: Calendar.xs 2757 2010-01-17 10:26:27Z mbarbon $
+// Copyright:   (c) 2002, 2005-2006, 2008-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -27,11 +27,11 @@ MODULE=Wx__Calendar
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/DatePickerCtrl.xsp |
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/DatePickerCtrl.xsp
 
-INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/CalendarCtrl.xsp |
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/CalendarCtrl.xsp
 
-INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/CalendarDateAttr.xsp |
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/CalendarDateAttr.xsp
 
 #  //FIXME//tricky
 #if defined(__WXMSW__)

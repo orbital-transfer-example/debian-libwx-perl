@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     30/09/2007
-## RCS-ID:      $Id: GraphicsRenderer.xsp 2300 2007-12-24 17:02:32Z mbarbon $
+## RCS-ID:      $Id: GraphicsRenderer.xsp 2788 2010-02-09 03:06:59Z mdootson $
 ## Copyright:   (c) 2007 Klaas Hartmann
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -15,6 +15,10 @@
 #if wxUSE_GRAPHICS_CONTEXT
 
 #include <wx/graphics.h>
+
+## DECLARE_OVERLOAD( wmdc, Wx::MemoryDC )
+## DECLARE_OVERLOAD( wwdc, Wx::WindowDC )
+## DECLARE_OVERLOAD( wpdc, Wx::PrinterDC )
 
 %name{Wx::GraphicsRenderer} class wxGraphicsRenderer
 {
@@ -29,13 +33,25 @@ void
 CreateContext( ... )
   PPCODE:
     BEGIN_OVERLOAD()
-        MATCH_REDISP_FUNCTION( wxPliOvl_wwin, CreateFromWindow )
-        MATCH_REDISP_FUNCTION( wxPliOvl_wdc, CreateFromDC )
+        MATCH_REDISP_FUNCTION( wxPliOvl_wwin, CreateFromWindow )   
+        MATCH_REDISP_FUNCTION( wxPliOvl_wwdc, CreateFromWindowDC )
+#if defined(__WXMSW__) || WXPERL_W_VERSION_GE( 2, 9, 0 )       
+        MATCH_REDISP_FUNCTION( wxPliOvl_wmdc, CreateFromMemoryDC)
+#endif     
+#if wxPERL_USE_PRINTING_ARCHITECTURE && WXPERL_W_VERSION_GE( 2, 9, 0 )     
+        MATCH_REDISP_FUNCTION( wxPliOvl_wpdc, CreateFromPrinterDC)
+#endif                  
     END_OVERLOAD( "Wx::GraphicsRenderer::CreateContext" )
 %}
 
-    %name{CreateFromDC} wxGraphicsContext* CreateContext( const wxWindowDC& dc );
+    %name{CreateFromWindowDC} wxGraphicsContext* CreateContext( const wxWindowDC& dc );
     %name{CreateFromWindow} wxGraphicsContext* CreateContext( wxWindow* window );
+#if defined(__WXMSW__) || WXPERL_W_VERSION_GE( 2, 9, 0 )           
+    %name{CreateFromMemoryDC} wxGraphicsContext* CreateContext( const wxMemoryDC& dc );
+#endif
+#if wxPERL_USE_PRINTING_ARCHITECTURE && WXPERL_W_VERSION_GE( 2, 9, 0 )     
+    %name{CreateFromPrinterDC} wxGraphicsContext* CreateContext( const wxPrinterDC& dc );
+#endif
     wxGraphicsContext* CreateMeasuringContext();
     const wxGraphicsPath& CreatePath();
     const wxGraphicsMatrix& CreateMatrix( wxDouble a=1.0, wxDouble b=0.0,

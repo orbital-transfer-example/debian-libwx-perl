@@ -4,8 +4,8 @@
 // Author:      Simon Flack
 // Modified by:
 // Created:     11/09/2002
-// RCS-ID:      $Id: DocView.xs 2700 2009-12-13 11:25:50Z mbarbon $
-// Copyright:   (c) 2002, 2004, 2007-2009 Simon Flack
+// RCS-ID:      $Id: DocView.xs 2757 2010-01-17 10:26:27Z mbarbon $
+// Copyright:   (c) 2002, 2004, 2007-2010 Simon Flack
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ INCLUDE: XS/FileHistory.xs
 INCLUDE: XS/DocParentFrame.xs
 INCLUDE: XS/DocChildFrame.xs
 
-INCLUDE: perl -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/CommandProcessor.xsp |
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/CommandProcessor.xsp
 
 #if wxUSE_MDI_ARCHITECTURE && wxUSE_DOC_VIEW_ARCHITECTURE
 

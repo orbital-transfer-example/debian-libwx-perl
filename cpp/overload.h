@@ -5,7 +5,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     11/08/2002
-// RCS-ID:      $Id: overload.h 2737 2010-01-03 19:50:07Z mbarbon $
+// RCS-ID:      $Id: overload.h 2788 2010-02-09 03:06:59Z mdootson $
 // Copyright:   (c) 2002, 2004, 2006-2007, 2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -71,4 +71,8 @@
 #define MATCH_REDISP_COUNT_ALLOWMORE_FUNCTION( PROTO, METHOD, REQUIRED ) \
     else if( wxPli_match_arguments( aTHX_ PROTO,       \
                                     REQUIRED, true ) ) \
+        { REDISPATCH_FUNCTION( METHOD ); }
+
+#define MATCH_VOIDM_REDISP_FUNCTION( METHOD ) \
+    else if( items == 0 ) \
         { REDISPATCH_FUNCTION( METHOD ); }

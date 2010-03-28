@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 2731 2009-12-29 21:19:56Z mbarbon $
-## Copyright:   (c) 2000-2009 Mattia Barbon
+## RCS-ID:      $Id: Wx.pm 2779 2010-02-06 08:49:13Z mbarbon $
+## Copyright:   (c) 2000-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.96';
+$VERSION = '0.9701';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -102,38 +102,22 @@ use Wx::Mini;
 _start();
 
 our( $wx_path );
+our( $wx_binary_loader );
 
+# back compat only
 sub _load_file {
-  Wx::wxVERSION() < 2.005 ? DynaLoader::dl_load_file( $_[0], 0 ) :
-                            Wx::_load_plugin( $_[0] );
+  Wx::_load_plugin( $_[0] );
 }
 
-my( $load_fun, $unload_fun ) = ( \&_load_dll, \&_unload_dll );
-
-sub set_load_function { $load_fun = shift }
-sub set_end_function { $unload_fun = shift }
-
 sub load_dll {
-  return if $^O ne 'MSWin32';
-  goto &$load_fun;
+  $wx_binary_loader->load_dll(@_);
 }
 
 sub unload_dll {
-  return if $^O ne 'MSWin32';
-  goto &$unload_fun;
+  $wx_binary_loader->unload_dll(@_);
 }
 
 END { unload_dll() }
-
-sub _unload_dll { }
-
-sub _load_dll {
-  local $ENV{PATH} = $wx_path . ';' . $ENV{PATH} if $wx_path;
-  return unless exists $Wx::dlls->{$_[0]} && $Wx::dlls->{$_[0]};
-  my $dll = $Wx::dlls->{$_[0]};
-  $dll = $wx_path . '/' . $dll if $wx_path;
-  Wx::_load_file( $dll );
-}
 
 {
   _boot_Constant( 'Wx', $XS_VERSION );
