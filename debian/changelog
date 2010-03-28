@@ -1,4 +1,4 @@
-libwx-perl (0.9701-1) UNRELEASED; urgency=low
+libwx-perl (0.9701-1) unstable; urgency=low
 
   * New upstream release
     - now requires at least ExtUtils::ParseXS version 2.2202, build-dep added
@@ -7,7 +7,7 @@ libwx-perl (0.9701-1) UNRELEASED; urgency=low
     and build-dep.
   * Updated upstream author copyright years in debian/copyright
 
- -- Chris Butler <chrisb@debian.org>  Sun, 28 Mar 2010 20:17:26 +0100
+ -- Chris Butler <chrisb@debian.org>  Sun, 28 Mar 2010 21:02:12 +0100
 
 libwx-perl (0.96-2) unstable; urgency=low
 
