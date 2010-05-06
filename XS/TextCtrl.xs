@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: TextCtrl.xs 2735 2010-01-02 10:39:01Z mbarbon $
+## RCS-ID:      $Id: TextCtrl.xs 2911 2010-04-26 19:51:34Z mbarbon $
 ## Copyright:   (c) 2000-2003, 2005-2007, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -19,7 +19,9 @@
 %typemap{const wxTextAttr&}{reference};
 %typemap{wxTextAttrAlignment}{simple};
 %typemap{const wxKeyEvent&}{reference};
-%typemap{wxTextPos}{parsed}{%wxTextPos%};
+%typemap{wxTextPos}{parsed}{
+    %cpp_type{%wxTextPos%};
+};
 
 %name{Wx::TextUrlEvent} class wxTextUrlEvent
 {

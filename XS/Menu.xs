@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Menu.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## RCS-ID:      $Id: Menu.xs 2858 2010-03-25 09:28:22Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -571,6 +571,33 @@ wxMenuBar::SetMenuLabel( pos, label )
 bool
 wxMenuBar::IsEnabledTop( id )
     int id
+
+#if defined( __WXMAC__ )
+
+void 
+wxMenuBar::MacInstallMenuBar()
+
+wxMenuBar* 
+MacGetInstalledMenuBar()
+  CODE:
+    RETVAL = wxMenuBar::MacGetInstalledMenuBar();
+  OUTPUT: RETVAL
+
+void
+MacSetCommonMenuBar( menubar )
+    wxMenuBar* menubar
+  CODE:
+    wxMenuBar::MacSetCommonMenuBar( menubar );
+
+wxMenuBar* 
+MacGetCommonMenuBar()
+  CODE:
+    RETVAL = wxMenuBar::MacGetCommonMenuBar();
+  OUTPUT: RETVAL
+	  
+
+#endif
+
 
 MODULE=Wx PACKAGE=Wx::MenuItem
 

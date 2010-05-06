@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2006
-// RCS-ID:      $Id: RichText.xs 2757 2010-01-17 10:26:27Z mbarbon $
+// RCS-ID:      $Id: RichText.xs 2888 2010-04-13 22:23:09Z mdootson $
 // Copyright:   (c) 2006-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -79,6 +79,8 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../ty
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/SymbolPickerDialog.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextStyleOrganiserDialog.xsp
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/RichTextPrinting.xsp
 
 MODULE=Wx__RichText PACKAGE=Wx::RichText
 

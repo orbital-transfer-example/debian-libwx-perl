@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: App.xs 2303 2007-12-24 17:25:05Z mbarbon $
+## RCS-ID:      $Id: App.xs 2826 2010-02-26 10:44:33Z mdootson $
 ## Copyright:   (c) 2000-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -216,9 +216,10 @@ wxApp::SetUseBestVisual( flag )
     bool flag
 
 void
-wxApp::Yield()
+wxApp::Yield( onlyifneeded = false )
+    bool onlyifneeded
   CODE:
-    THIS->wxApp::Yield();
+    THIS->wxApp::Yield( onlyifneeded );
 
 #if defined( __WXMSW__ ) && WXPERL_W_VERSION_GE( 2, 5, 0 )
 

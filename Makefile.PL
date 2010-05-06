@@ -5,7 +5,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Makefile.PL 2757 2010-01-17 10:26:27Z mbarbon $
+## RCS-ID:      $Id: Makefile.PL 2922 2010-05-06 00:00:20Z mbarbon $
 ## Copyright:   (c) 2000-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -40,8 +40,8 @@ my $build_requires =
     'ExtUtils::MakeMaker'    => 6.17,
     'Alien::wxWidgets'       => 0.25,
     'if'                     => 0.03,
-    'ExtUtils::XSpp'         => 0.09,
-    'ExtUtils::ParseXS'      => 2.2202,
+    'ExtUtils::XSpp'         => 0.11,
+    'ExtUtils::ParseXS'      => 2.2203,
     };
 
 eval {

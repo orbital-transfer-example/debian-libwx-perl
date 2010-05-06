@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: typemap 2568 2009-05-17 15:52:56Z mbarbon $
-## Copyright:   (c) 2006-2007, 2009 Mattia Barbon
+## RCS-ID:      $Id: typemap 2888 2010-04-13 22:23:09Z mdootson $
+## Copyright:   (c) 2006-2007, 2009-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -37,3 +37,12 @@ wxRichTextXMLHandler *  O_WXOBJECT
 wxRichTextHTMLHandler * O_WXOBJECT
 wxSymbolPickerDialog *  O_WXOBJECT
 wxRichTextStyleOrganiserDialog * O_WXOBJECT
+
+wxPrintData *           O_WXOBJECT
+wxPageSetupDialogData * O_WXOBJECT
+## no RTTI info for wxRichTextPrinting
+wxRichTextPrinting *    O_NON_WXOBJECT_THR
+wxRichTextHeaderFooterData * O_WXOBJECT_THR
+wxRichTextOddEvenPage   T_ENUM
+wxRichTextPageLocation  T_ENUM
+

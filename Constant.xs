@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2788 2010-02-09 03:06:59Z mdootson $
+// RCS-ID:      $Id: Constant.xs 2856 2010-03-25 07:13:41Z mdootson $
 // Copyright:   (c) 2000-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -480,7 +480,7 @@ static wxPlINH inherit[] =
     I( ANIHandler,      CURHandler )
     I( TGAHandler,      ImageHandler )
 
-    I( GraphicsContext, Object )
+    I( GraphicsContext, GraphicsObject )
     I( GraphicsRenderer, Object )
     I( GraphicsObject,  Object )
     I( GraphicsPath,    GraphicsObject )
@@ -490,10 +490,15 @@ static wxPlINH inherit[] =
     I( GraphicsFont,    GraphicsObject )
 #ifdef __WXMSW__
     I( GDIPlusContext,  GraphicsContext )
+    I( GDIPlusRenderer, GraphicsRenderer )
 #endif
 #ifdef __WXMAC__
     I( MacCoreGraphicsContext,  GraphicsContext )
     I( MacCoreGraphicsRenderer, GraphicsRenderer )
+#endif
+#ifdef __WXGTK__
+    I( CairoContext,  GraphicsContext )
+    I( CairoRenderer, GraphicsRenderer )
 #endif
     I( LogTextCtrl,     Log )
     I( LogWindow,       Log )
@@ -3325,17 +3330,18 @@ WXPLI_BOOT_ONCE(Wx_Const);
 
 MODULE=Wx_Const PACKAGE=Wx
 
+## this used to be written using a CODE: section, but it seems to tickle
+## an optimizer bug with g++ 4.2, -O2, no threads, on Mac OS X
 double
 constant( name, arg, error )
     const char* name
     int arg
     int error = NO_INIT
-  CODE:
+  PPCODE:
     RETVAL = constant( name, arg );
-    error = errno;
-  OUTPUT:
-    RETVAL
-    error
+    XPUSHs( sv_2mortal( newSViv( RETVAL ) ) );
+    sv_setiv_mg( ST(2), errno );
+    XSRETURN( 1 );
 
 void
 UnsetConstants()
