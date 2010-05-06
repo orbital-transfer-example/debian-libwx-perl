@@ -1,6 +1,8 @@
 libwx-perl (0.9702-1) UNRELEASED; urgency=low
 
   * New upstream release
+    - now requires at least ExtUtils::ParseXS version 2.2202 and
+      ExtUtils:XSpp 0.11
 
  -- Chris Butler <chrisb@debian.org>  Thu, 06 May 2010 21:18:58 +0100
 
