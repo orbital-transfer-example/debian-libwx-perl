@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.cpp 2682 2009-11-21 10:39:46Z mbarbon $
-// Copyright:   (c) 2000-2009 Mattia Barbon
+// RCS-ID:      $Id: helpers.cpp 2800 2010-02-11 22:20:09Z mbarbon $
+// Copyright:   (c) 2000-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -1482,6 +1482,8 @@ I32 my_looks_like_number( pTHX_ SV* sv )
 void wxPli_thread_sv_register( pTHX_ const char* package,
                                const void* ptr, SV* sv )
 {
+    if( !SvOK( sv ) )
+        return;
     if( !SvROK( sv ) )
         croak( "PANIC: no sense in registering a non-reference" );
 

@@ -4,7 +4,7 @@
 ## Author:      Klaas Hartmann
 ## Modified by:
 ## Created:     29/06/2007
-## RCS-ID:      $Id: GraphicsContext.xs 2788 2010-02-09 03:06:59Z mdootson $
+## RCS-ID:      $Id: GraphicsContext.xs 2860 2010-03-26 17:46:44Z mdootson $
 ## Copyright:   (c) 2007, 2009 Klaas Hartmann
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -18,6 +18,25 @@
 #include "cpp/overload.h"
 
 MODULE=Wx PACKAGE=Wx::GraphicsContext
+
+## // not deleteable if created from wxGCDC::GetGraphicsContext
+## // override wxGraphicsObject CLONE and DESTROY methods
+## // default return for wxPli_object_is_deleteable should be true
+
+static void
+wxGraphicsContext::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+
+
+## // thread OK
+
+void
+wxGraphicsContext::DESTROY()
+  CODE:
+    wxPli_thread_sv_unregister( aTHX_ wxPli_get_class( aTHX_ ST(0) ), THIS, ST(0) );
+    if( wxPli_object_is_deleteable( aTHX_ ST(0) ) )
+       delete THIS;
 
 # DECLARE_OVERLOAD( wmdc, Wx::MemoryDC )
 # DECLARE_OVERLOAD( wwdc, Wx::WindowDC )
@@ -436,5 +455,12 @@ wxGraphicsContext::StrokeLinesTwo ( beginPoints, endPoints )
     int n1 = wxPli_av_2_point2ddoublearray(aTHX_ beginPoints, beginPoints2d.lvalue());
     int n2 = wxPli_av_2_point2ddoublearray(aTHX_ endPoints, endPoints2d.lvalue());
     THIS->StrokeLines(wxMin(n1, n2), beginPoints2d, endPoints2d);
+
+void
+wxGraphicsContext::PopState()
+
+void
+wxGraphicsContext::PushState()
+
 
 #endif

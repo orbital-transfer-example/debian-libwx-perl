@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichText.pm 2310 2007-12-31 00:31:49Z mbarbon $
-## Copyright:   (c) 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: RichText.pm 2888 2010-04-13 22:23:09Z mdootson $
+## Copyright:   (c) 2006-2007, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -13,6 +13,7 @@
 package Wx::RichText;
 
 use strict;
+use Wx::Print;
 
 our $VERSION = '0.01';
 
@@ -49,6 +50,8 @@ package Wx::RichTextCompositeObject; @ISA = qw(Wx::RichTextObject);
 package Wx::RichTextBox;     @ISA = qw(Wx::RichTextCompositeObject);
 package Wx::RichTextParagraphLayoutBox; @ISA = qw(Wx::RichTextBox);
 package Wx::RichTextBuffer;  @ISA = qw(Wx::RichTextParagraphLayoutBox);
+package Wx::RichTextPrinting;  @ISA = qw(Wx::Object);
+package Wx::RichTextHeaderFooterData;  @ISA = qw(Wx::Object);
 package Wx::SymbolPickerDialog; @ISA = qw(Wx::Dialog);
 package Wx::RichTextStyleOrganiserDialog; @ISA = qw(Wx::Dialog);
 

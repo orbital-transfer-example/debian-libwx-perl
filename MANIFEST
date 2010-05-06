@@ -53,6 +53,7 @@ t/16_stream.t
 t/17_thread_evt.t
 t/18_unicode.t
 t/19_overlay.t
+t/20_ctx_threads.t
 t/Tests_Helper.pm
 t/zz_distrib.t
 
@@ -64,6 +65,7 @@ lib/Wx/Loader.pod
 lib/Wx/Locale.pm
 lib/Wx/Menu.pm
 lib/Wx/Mini.pm
+lib/Wx/NewClass.pod
 lib/Wx/RadioBox.pm
 lib/Wx/Thread.pod
 lib/Wx/Timer.pm
@@ -487,6 +489,7 @@ ext/richtext/XS/RichTextBuffer.xsp
 ext/richtext/XS/RichTextCtrl.xsp
 ext/richtext/XS/RichTextFileHandler.xsp
 ext/richtext/XS/RichTextFormattingDialog.xsp
+ext/richtext/XS/RichTextPrinting.xsp
 ext/richtext/XS/RichTextStyle.xsp
 ext/richtext/XS/RichTextStyleCtrl.xsp
 ext/richtext/XS/RichTextStyleOrganiserDialog.xsp

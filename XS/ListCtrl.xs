@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/02/2001
-## RCS-ID:      $Id: ListCtrl.xs 2145 2007-08-15 10:22:29Z mbarbon $
-## Copyright:   (c) 2001-2007 Mattia Barbon
+## RCS-ID:      $Id: ListCtrl.xs 2843 2010-03-14 11:53:02Z mbarbon $
+## Copyright:   (c) 2001-2007, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -815,7 +815,7 @@ wxListCtrl::SortItems( function )
     SV* function
   CODE:
     RETVAL = THIS->SortItems( (wxListCtrlCompare)&ListCtrlCompareFn,
-        (long)function );
+                              PTR2IV( function ) );
   OUTPUT:
     RETVAL
 
