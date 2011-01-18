@@ -1,11 +1,11 @@
 #############################################################################
-## Name:        ext/html/XS/HtmlWindow.xs
+## Name:        ext/html/XS/HtmlWindow.xsp
 ## Purpose:     XS for Wx::HtmlWindow
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     17/03/2001
-## RCS-ID:      $Id: HtmlWindow.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2001-2006 Mattia Barbon
+## RCS-ID:      $Id: HtmlWindow.xsp 2938 2010-07-04 12:56:48Z mbarbon $
+## Copyright:   (c) 2001-2006, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################

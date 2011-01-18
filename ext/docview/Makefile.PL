@@ -4,8 +4,8 @@
 ## Author:      Simon Flack
 ## Modified by:
 ## Created:     11/09/2002
-## RCS-ID:      $Id: Makefile.PL 2188 2007-08-20 19:21:29Z mbarbon $
-## Copyright:   (c) 2002-2004, 2007 Simon Flack
+## RCS-ID:      $Id: Makefile.PL 2927 2010-06-06 08:06:10Z mbarbon $
+## Copyright:   (c) 2002-2004, 2007, 2010 Simon Flack
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -16,7 +16,6 @@ use Wx::build::MakeMaker;
 
 wxWriteMakefile( NAME            => 'Wx::DocView',
                  VERSION_FROM    => 'lib/Wx/DocView.pm',
-                 clean        => { FILES => 'cpp/cmdproc.h' },
                  WX_CORE_LIB     => 'core base',
                  );
 

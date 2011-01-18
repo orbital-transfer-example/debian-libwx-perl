@@ -5,13 +5,24 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     11/08/2002
-// RCS-ID:      $Id: overload.h 2788 2010-02-09 03:06:59Z mdootson $
+// RCS-ID:      $Id: overload.h 2953 2010-08-15 14:29:24Z mbarbon $
 // Copyright:   (c) 2002, 2004, 2006-2007, 2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
 
 #include "cpp/ovl_const.h"
+
+#define wxPliOvlarr   ((const char*)1)
+#define wxPliOvlbool  ((const char*)2)
+#define wxPliOvlnum   ((const char*)3)
+#define wxPliOvlstr   ((const char*)4)
+#define wxPliOvlwist  ((const char*)5)
+#define wxPliOvlwost  ((const char*)6)
+#define wxPliOvlwpoi  ((const char*)7)
+#define wxPliOvlwpos  ((const char*)8)
+#define wxPliOvlwsiz  ((const char*)9)
+#define wxPliOvlzzz   ((const char*)10)
 
 #define BEGIN_OVERLOAD() \
     PUSHMARK(MARK); \
@@ -22,11 +33,14 @@
     else \
     { \
         static const char msg[] = "unable to resolve overloaded method for "; \
-        require_pv( "Carp" ); \
+        require_pv( "Carp.pm" ); \
         const char* argv[3]; argv[0] = msg; argv[1] = #FUNCTION; argv[2] = 0; \
         call_argv( "Carp::croak", G_VOID|G_DISCARD, (char**) argv ); \
-    } \
-    /* POPMARK; */
+    }
+
+#define END_OVERLOAD_MESSAGE( FUNCTION, PROTOTYPES )       \
+    else \
+        wxPli_overload_error( aTHX_ #FUNCTION, PROTOTYPES );
 
 #define REDISPATCH( NEW_METHOD_NAME ) \
     count = call_method( #NEW_METHOD_NAME, GIMME_V ); SPAGAIN

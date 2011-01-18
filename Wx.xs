@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 2778 2010-02-06 08:45:45Z mbarbon $
+// RCS-ID:      $Id: Wx.xs 2955 2010-08-15 15:46:21Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -25,6 +25,7 @@
 
 #include <wx/window.h>
 #include <wx/module.h>
+#include <wx/log.h>
 // FIXME hack
 #if WXPERL_W_VERSION_GE( 2, 5, 2 ) \
     && defined(__DARWIN__)
@@ -37,6 +38,10 @@
 
 #if defined(__WXMSW__)
 #include <wx/msw/private.h>
+#endif
+
+#if defined(__WXMAC__)
+#include <ApplicationServices/ApplicationServices.h>
 #endif
 
 #if WXPERL_W_VERSION_GE( 2, 5, 1 )
@@ -177,6 +182,7 @@ int wxEntryInitGui()
 
 void wxEntryCleanup()
 {
+#if wxUSE_LOG
     // flush the logged messages if any
     wxLog *pLog = wxLog::GetActiveTarget();
     if ( pLog != NULL && pLog->HasPendingMessages() )
@@ -184,6 +190,7 @@ void wxEntryCleanup()
 
     delete wxLog::SetActiveTarget(new wxLogStderr); // So dialog boxes aren't used
     // for further messages
+#endif
 
     wxApp::CleanUp();
 
@@ -243,10 +250,16 @@ BOOT:
 #endif
 
 bool 
-Load()
+Load( bool croak_on_error = false )
   CODE:
+#if defined(__WXMAC__)
+    ProcessSerialNumber kCurrentPSN = { 0, kCurrentProcess };
+    TransformProcessType( &kCurrentPSN, kProcessTransformToForegroundApplication );
+    SetFrontProcess( &kCurrentPSN );
+#endif
     wxPerlAppCreated = wxTheApp != NULL;
-    if( wxPerlInitialized ) { XSRETURN( true ); }
+    if( wxPerlInitialized )
+        XSRETURN( true );
     wxPerlInitialized = true;
 
     NV ver = wxMAJOR_VERSION + wxMINOR_VERSION / 1000.0 + 
@@ -277,7 +290,7 @@ Load()
     sv_setiv( tmp, platform );
 
     if( wxPerlAppCreated || wxTopLevelWindows.GetCount() > 0 )
-        return;
+        XSRETURN( true );
 #if defined(DEBUGGING) && !defined(PERL_USE_SAFE_PUTENV)
     // avoid crash on exit in Fedora (and other DEBUGGING Perls)
     PL_use_safe_putenv = 1;
@@ -302,6 +315,16 @@ Load()
 #endif
 #endif
     RETVAL = wxPerlInitialized;
+
+    if( !RETVAL && croak_on_error )
+    {
+#if wxUSE_LOG
+        wxLog::FlushActive();
+#endif
+        require_pv( "Carp.pm" );
+        const char* argv[2] = { "Failed to initialize wxWidgets", NULL };
+        call_argv( "Carp::croak", G_VOID|G_DISCARD, (char**) argv );
+    }
   OUTPUT: RETVAL
 
 void
@@ -432,7 +455,7 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Sound.xs
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Power.xsp
 
-INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/ClassInfo.xs
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/ClassInfo.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Display.xsp
 

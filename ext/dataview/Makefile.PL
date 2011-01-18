@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2007
-## RCS-ID:      $Id: Makefile.PL 2264 2007-11-05 23:23:35Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: Makefile.PL 2927 2010-06-06 08:06:10Z mbarbon $
+## Copyright:   (c) 2007, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -18,7 +18,6 @@ use Wx::build::MakeMaker;
 
 wxWriteMakefile( NAME         => 'Wx::DataView',
                  VERSION_FROM => 'DataView.pm',
-                 clean        => { FILES => 'cpp' },
                  REQUIRE_WX   => 2.009000,
                  WX_CORE_LIB  => 'adv core base',
-               );
+                 );

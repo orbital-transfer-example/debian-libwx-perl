@@ -1,5 +1,18 @@
 Revision history for Perl extension Wx.
 
+0.98  Wed Aug 18 20:31:30 CEST 2010
+	- wxWidgets 2.9.1 compatibility.
+	- die() when wxWidgets initialization fails.
+
+0.9702_01  Tue Jul  6 21:38:17 CEST 2010
+	- Can now run using the standard perl interpreter on Mac OS X
+	  (suggested by Kyle McKay).
+	- Added wxSpinCtrlDouble (2.9).
+	- Added wxDataViewListCtrl (2.9).
+	- Added wxDataViewVirtualListModel (2.9).
+	- Added wxInfoBar (2.9).
+	- Added wxHeaderCtrlSimple (2.9).
+
 0.9702  Thu May  6 01:53:50 CEST 2010
 	- Released 0.9701_02 as 0.9702.
 

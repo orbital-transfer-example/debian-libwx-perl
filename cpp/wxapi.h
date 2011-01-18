@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2799 2010-02-11 22:18:39Z mbarbon $
+// RCS-ID:      $Id: wxapi.h 2946 2010-08-01 14:05:48Z mbarbon $
 // Copyright:   (c) 2002-2003, 2005-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -23,6 +23,12 @@
 #endif
 
 #include <wx/defs.h>
+#include <stdio.h>
+
+// used to restore PerlIO-inflicted damage
+inline FILE* _wxPli_stdin() { return stdin; }
+inline FILE* _wxPli_stdout() { return stdout; }
+inline FILE* _wxPli_stderr() { return stderr; }
 
 #include "cpp/compat.h"
 
@@ -127,6 +133,12 @@ inline CV* wxPli_newXS(pTHX_ const char* name, XSUBADDR_t addr,
 #undef vform
 #undef vfprintf
 #undef write
+#undef stdin
+#undef stdout
+#undef stderr
+#define stdin (_wxPli_stdin())
+#define stdout (_wxPli_stdout())
+#define stderr (_wxPli_stderr())
 #endif
 
 #if __VISUALC__

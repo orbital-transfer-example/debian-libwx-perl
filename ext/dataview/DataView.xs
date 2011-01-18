@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2007
-// RCS-ID:      $Id: DataView.xs 2757 2010-01-17 10:26:27Z mbarbon $
+// RCS-ID:      $Id: DataView.xs 2929 2010-06-18 22:22:11Z mbarbon $
 // Copyright:   (c) 2007-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -18,6 +18,7 @@
 // re-include for client data
 #include <wx/clntdata.h>
 #include "cpp/helpers.h"
+#include "cpp/array_helpers.h"
 
 #define wxDefaultValidatorPtr (wxValidator*)&wxDefaultValidator
 
@@ -39,6 +40,22 @@
 static wxPliEventDescription evts[] =
 {
     { 0, 0, 0 }
+};
+
+// TODO XS++ needs a way to move these inside the typemap
+#include <wx/vector.h>
+#include <wx/variant.h>
+
+typedef wxVector<wxVariant> wxVectorVariant;
+
+class wxPli_convert_variant
+{
+public:
+    bool operator()( pTHX_ wxVariant& dest, SV* src ) const
+    {
+        dest = wxPli_sv_2_wxvariant( aTHX_ src );
+        return true;
+    }
 };
 
 MODULE=Wx__DataView
@@ -65,6 +82,12 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t ty
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeStore.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp XS/DataViewTreeCtrl.xsp
+
+INCLUDE_COMMAND: $^X -I../.. -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp ../../interface/wx/dataview/dataviewlistctrl.h
+
+INCLUDE_COMMAND: $^X -I../.. -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp ../../interface/wx/dataview/dataviewliststore.h
+
+INCLUDE_COMMAND: $^X -I../.. -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp -t typemap.xsp ../../interface/wx/dataview/dataviewvirtuallistmodel.h
 
 MODULE=Wx__DataView PACKAGE=Wx::DataView
 

@@ -4,8 +4,8 @@
 ## Author:      Klaas Hartmann
 ## Modified by:
 ## Created:     29/06/2007
-## RCS-ID:      $Id: GraphicsContext.xs 2860 2010-03-26 17:46:44Z mdootson $
-## Copyright:   (c) 2007, 2009 Klaas Hartmann
+## RCS-ID:      $Id: GraphicsContext.xs 2938 2010-07-04 12:56:48Z mbarbon $
+## Copyright:   (c) 2007, 2009-2010 Klaas Hartmann
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
