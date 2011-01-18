@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     10/03/2001
-// RCS-ID:      $Id: Html.xs 2757 2010-01-17 10:26:27Z mbarbon $
+// RCS-ID:      $Id: Html.xs 2935 2010-07-04 11:46:58Z mbarbon $
 // Copyright:   (c) 2001-2004, 2006, 2008-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -42,7 +42,7 @@ MODULE=Wx__Html
 BOOT:
   INIT_PLI_HELPERS( wx_pli_helpers );
 
-INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/HtmlWindow.xs
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/HtmlWindow.xsp
 
 INCLUDE: XS/HtmlHelpController.xs
 

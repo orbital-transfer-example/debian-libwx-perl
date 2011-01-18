@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 2856 2010-03-25 07:13:41Z mdootson $
+// RCS-ID:      $Id: Constant.xs 2933 2010-06-20 14:48:07Z mbarbon $
 // Copyright:   (c) 2000-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -454,7 +454,6 @@ static wxPlINH inherit[] =
     I( Font,            GDIObject )
     I( Region,          GDIObject )
     I( Bitmap,          GDIObject )
-    I( Brush,           GDIObject )
     I( Pen,             GDIObject )
     I( Palette,         GDIObject )
 

@@ -1,11 +1,11 @@
 #############################################################################
-## Name:        XS/SplitterWindow.xs
+## Name:        XS/SplitterWindow.xsp
 ## Purpose:     XS for Wx::SplitterWindow
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     02/12/2000
-## RCS-ID:      $Id: SplitterWindow.xs 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2000-2003, 2005-2006 Mattia Barbon
+## RCS-ID:      $Id: SplitterWindow.xsp 2938 2010-07-04 12:56:48Z mbarbon $
+## Copyright:   (c) 2000-2003, 2005-2006, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################

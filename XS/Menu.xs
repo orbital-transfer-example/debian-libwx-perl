@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Menu.xs 2858 2010-03-25 09:28:22Z mdootson $
-## Copyright:   (c) 2000-2004, 2006-2008 Mattia Barbon
+## RCS-ID:      $Id: Menu.xs 2938 2010-07-04 12:56:48Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################

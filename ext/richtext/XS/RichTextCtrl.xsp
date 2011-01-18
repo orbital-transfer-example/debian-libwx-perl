@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichTextCtrl.xsp 2738 2010-01-03 20:03:42Z mbarbon $
+## RCS-ID:      $Id: RichTextCtrl.xsp 2927 2010-06-06 08:06:10Z mbarbon $
 ## Copyright:   (c) 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -21,7 +21,7 @@
 #include <wx/richtext/richtextformatdlg.h>
 #include <wx/richtext/richtextstyledlg.h>
 #include <wx/richtext/richtextprint.h>
-#include "cpp/richtextctrl.h"
+#include "xspp/richtextctrl.h"
 
 %module{Wx};
 
@@ -30,7 +30,7 @@
 ## DECLARE_OVERLOAD( wtae, Wx::TextAttrEx )
 ## DECLARE_OVERLOAD( wtat, Wx::TextAttr )
 
-%file{cpp/richtextctrl.h};
+%file{xspp/richtextctrl.h};
 %{
 
 #define wxTEXT_ATTR_DEFAULT_NUMBERED_BULLET wxTEXT_ATTR_BULLET_STYLE_ARABIC|wxTEXT_ATTR_BULLET_STYLE_PERIOD

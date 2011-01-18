@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 2921 2010-05-05 23:58:14Z mbarbon $
+## RCS-ID:      $Id: Wx.pm 2954 2010-08-15 14:33:55Z mbarbon $
 ## Copyright:   (c) 2000-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.9702';
+$VERSION = '0.98';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -142,7 +142,7 @@ use strict 'refs';
 
 *Wx::Window::GetClientSizeWH = \&Wx::Window::GetClientSizeXY;
 
-if( Load() ) {
+if( Load( 1 ) ) {
     SetConstants();
     SetConstantsOnce();
     SetOvlConstants();
@@ -164,11 +164,6 @@ eval( "sub wxMSW() { $_platform == $_msw }" );
 eval( "sub wxGTK() { $_platform == $_gtk }" );
 eval( "sub wxMAC() { $_platform == $_mac }" );
 eval( "sub wxX11() { $_platform == $_x11 }" );
-
-# Mac OS X warning
-if( wxMAC() && $^X !~ m{/wxPerl\.app/} && !$ENV{HARNESS_ACTIVE} ) {
-    warn "On Mac OS X please run scripts with the 'wxPerl' interpreter\n";
-}
 
 require Wx::App;
 require Wx::Event;

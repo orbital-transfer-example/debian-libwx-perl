@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     13/08/2007
-## RCS-ID:      $Id: OwnerDrawnComboBox.xsp 2757 2010-01-17 10:26:27Z mbarbon $
+## RCS-ID:      $Id: OwnerDrawnComboBox.xsp 2927 2010-06-06 08:06:10Z mbarbon $
 ## Copyright:   (c) 2007, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -29,7 +29,7 @@ INCLUDE_COMMAND: $^X -pe "s/ItemContainerImmutable/OwnerDrawnComboBox/g" XS/Item
 
 INCLUDE_COMMAND: $^X -pe "s/ItemContainer/OwnerDrawnComboBox/g" XS/ItemContainer.xs
 
-%file{cpp/odcombo.h};
+%file{xspp/odcombo.h};
 %{
 
 #include "cpp/v_cback.h"
@@ -87,7 +87,7 @@ WXPLI_IMPLEMENT_DYNAMIC_CLASS( wxPlOwnerDrawnComboBox, wxOwnerDrawnComboBox );
 %}
 %file{-};
 
-#include "cpp/odcombo.h"
+#include "xspp/odcombo.h"
 
 %name{Wx::PlOwnerDrawnComboBox} class wxPlOwnerDrawnComboBox
 {

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Frames.xs 2757 2010-01-17 10:26:27Z mbarbon $
+// RCS-ID:      $Id: Frames.xs 2935 2010-07-04 11:46:58Z mbarbon $
 // Copyright:   (c) 2000-2003, 2005-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -24,7 +24,7 @@ MODULE=Wx_Wnd
 
 INCLUDE: XS/Panel.xs
 
-INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Dialog.xs
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Dialog.xsp
 
 INCLUDE: XS/Frame.xs
 INCLUDE: XS/StatusBar.xs

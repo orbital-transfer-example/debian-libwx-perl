@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/03/2003
-## RCS-ID:      $Id: typemap.xsp 2911 2010-04-26 19:51:34Z mbarbon $
+## RCS-ID:      $Id: typemap.xsp 2927 2010-06-06 08:06:10Z mbarbon $
 ## Copyright:   (c) 2003-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -33,13 +33,30 @@
 %typemap{wxByte}{simple};
 
 %typemap{wxArrayString}{simple};
-%typemap{wxArrayInt}{simple};
+%typemap{wxArrayInt}{parsed}{
+  %output_list{%
+    PUTBACK;
+    wxPli_intarray_push( aTHX_ RETVAL );
+    SPAGAIN;
+  %};
+};
 %typemap{const wxArrayString&}{parsed}{
-    %cpp_type{%wxArrayString%};
+  %cpp_type{%wxArrayString%};
+  %output_list{%
+    PUTBACK;
+    wxPli_stringarray_push( aTHX_ RETVAL );
+    SPAGAIN;
+  %};
 };
 %typemap{const wxArrayInt&}{parsed}{
-    %cpp_type{%wxArrayInt%};
+  %cpp_type{%wxArrayInt%};
+  %output_list{%
+    PUTBACK;
+    wxPli_intarray_push( aTHX_ RETVAL );
+    SPAGAIN;
+  %};
 };
+%typemap{wxArrayInt&}{parsed}{%wxArrayInt%};
 
 %typemap{wxWindowID}{simple};
 %typemap{wxCoord}{simple};

@@ -5,8 +5,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: make_exp_list.pl 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2000-2003, 2005 Mattia Barbon
+## RCS-ID:      $Id: make_exp_list.pl 2927 2010-06-06 08:06:10Z mbarbon $
+## Copyright:   (c) 2000-2003, 2005, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -38,7 +38,7 @@ sub add_to_exports {
   }
 }
 
-foreach my $i ( @ARGV ) {
+foreach my $i ( map glob( $_ ), @ARGV ) {
   open IN, '< ' . $i or die "unable to open '$i'";
   $tag = '';
   $package = '';

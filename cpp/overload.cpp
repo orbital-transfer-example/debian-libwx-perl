@@ -5,8 +5,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     07/08/2002
-// RCS-ID:      $Id: overload.cpp 2192 2007-08-21 21:27:40Z mbarbon $
-// Copyright:   (c) 2002-2004, 2006-2007 Mattia Barbon
+// RCS-ID:      $Id: overload.cpp 2953 2010-08-15 14:29:24Z mbarbon $
+// Copyright:   (c) 2002-2004, 2006-2007, 2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ bool wxPli_match_arguments_offset( pTHX_ const wxPliPrototype& prototype,
     size_t max = wxMin( prototype.count, size_t(argc) ) + offset;
     for( size_t i = offset; i < max; ++i )
     {
-        unsigned char p = prototype.args[i - offset];
+        const char* p = prototype.args[i - offset];
         // everything is a string or a boolean
         if( p == wxPliOvlstr ||
             p == wxPliOvlbool )
@@ -92,7 +92,7 @@ bool wxPli_match_arguments_offset( pTHX_ const wxPliPrototype& prototype,
         }
         // want an object/package name, accept undef, too
         const char* cstr =
-          p > wxPliOvlzzz   ? prototype.tnames[p - wxPliOvlzzz] :
+          p > wxPliOvlzzz   ? p :
           p == wxPliOvlwpos ? "Wx::Position" :
           p == wxPliOvlwpoi ? "Wx::Point" :
           p == wxPliOvlwsiz ? "Wx::Size"  :
@@ -133,4 +133,81 @@ void wxPli_set_ovl_constant( const char* name, const wxPliPrototype* value )
 
     SV* sv = get_sv( buffer, 1 );
     sv_setiv( sv, PTR2IV( value ) );
+}
+
+static const char *overload_descriptions[] =
+{
+    NULL, "array", "boolean", "number", "string/scalar", "input stream",
+    "output stream", "Wx::Point/array", "Wx::Position/array", "Wx::Size/array"
+};
+
+void wxPli_overload_error( pTHX_ const char* function,
+                           wxPliPrototype* prototypes[] )
+{
+    dXSARGS; // restore the mark we implicitly popped in dMARK!
+    SV* message = newSVpv( "Availble methods:\n", 0 );
+    sv_2mortal( message );
+
+    for( int j = 0; prototypes[j]; ++j )
+    {
+        wxPliPrototype* p = prototypes[j];
+
+        sv_catpv( message, function );
+        sv_catpv( message, "(" );
+
+        for( int i = 0; i < p->count; ++i )
+        {
+            if( p->args[i] < wxPliOvlzzz )
+                sv_catpv( message, overload_descriptions[wxUIntPtr(p->args[i])] );
+            else
+                sv_catpv( message, p->args[i] );
+
+            if( i != p->count - 1 )
+                sv_catpv( message, ", " );                
+        }
+
+        sv_catpv( message, ")\n" );
+    }
+
+    sv_catpvf( message, "unable to resolve overload for %s(", function );
+
+    for( size_t i = 1; i < items; ++i )
+    {
+        SV* t = ST(i);
+        const char* type;
+
+        if( !SvOK( t ) )
+            type = "undef";
+        else if( sv_isobject( t ) )
+            type = HvNAME( SvSTASH( SvRV( t ) ) );
+        else if( SvROK( t ) )
+        {
+            SV* r = SvRV( t );
+
+            if( SvTYPE( r ) == SVt_PVAV )
+                type = "array";
+            else if( SvTYPE( r ) == SVt_PVHV )
+                type = "hash";
+            else
+                type = "reference";
+        }
+        else if( IsGV( t ) )
+            type = "glob/handle";
+        else if( my_looks_like_number( aTHX_ t ) )
+            type = "number";
+        else
+            type = "scalar";
+
+        sv_catpv( message, type );
+        if( i != items - 1 )
+            sv_catpv( message, ", " );                
+    }
+
+    sv_catpv( message, ")" );
+
+    PUSHMARK(MARK); // probably not necessary
+
+    require_pv( "Carp.pm" );
+    const char* argv[2]; argv[0] = SvPV_nolen( message ); argv[1] = NULL;
+    call_argv( "Carp::croak", G_VOID|G_DISCARD, (char**) argv ); \
 }

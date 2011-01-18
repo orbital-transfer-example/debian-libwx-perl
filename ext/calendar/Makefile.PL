@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/10/2002
-## RCS-ID:      $Id: Makefile.PL 2057 2007-06-18 23:03:00Z mbarbon $
-## Copyright:   (c) 2002-2003 Mattia Barbon
+## RCS-ID:      $Id: Makefile.PL 2927 2010-06-06 08:06:10Z mbarbon $
+## Copyright:   (c) 2002-2003, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -18,9 +18,8 @@ use Wx::build::MakeMaker;
 
 wxWriteMakefile( NAME         => 'Wx::Calendar',
                  VERSION_FROM => 'Calendar.pm',
-                 clean        => { FILES => 'cpp' },
                  WX_CORE_LIB  => 'adv core base',
-               );
+                 );
 
 # local variables:
 # mode: cperl

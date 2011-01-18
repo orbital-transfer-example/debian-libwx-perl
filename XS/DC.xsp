@@ -1,10 +1,10 @@
 #############################################################################
-## Name:        XS/DC.xs
+## Name:        XS/DC.xsp
 ## Purpose:     XS for Wx::DC and derived classes
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: DC.xs 2866 2010-03-30 20:46:12Z mbarbon $
+## RCS-ID:      $Id: DC.xsp 2938 2010-07-04 12:56:48Z mbarbon $
 ## Copyright:   (c) 2000-2007, 2009-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
