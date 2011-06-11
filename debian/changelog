@@ -1,4 +1,6 @@
 libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
+ 
+  TODO: Investigate test failures
 
   * Team upload.
   * New upstream release
