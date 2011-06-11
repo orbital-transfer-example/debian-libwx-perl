@@ -2,6 +2,7 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
  
   TODO: Investigate test failures
 
+  [ Salvatore Bonaccorso ]
   * Team upload.
   * New upstream release
   * Remove debian/README.source as we use '3.0 (quilt) source package
@@ -11,6 +12,10 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
     - Bump versioned Build-Depends on debhelper to (>= 8).
     - Bump versioned Build-Depends on libextutils-xspp-perl to (>= 0.1602). 
   * debian/copyright: Update copyright years for upstream files.
+
+  [ gregor herrmann ]
+  * debian/watch: add uversionmangle to cope with future 2-digit minor
+    versions.
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 
