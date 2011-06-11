@@ -6,9 +6,10 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
     format now.
   * Bump Debhelper compat level to 8.
   * debian/control:
-    - Bump versioned Build-Depends on debhelper to (>= 8). 
+    - Bump versioned Build-Depends on debhelper to (>= 8).
+    - Bump versioned Build-Depends on libextutils-xspp-perl to (>= 0.1602). 
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:52:08 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:54:08 +0200
 
 libwx-perl (1:0.98-1) unstable; urgency=low
 

@@ -6,7 +6,7 @@ Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
  gregor herrmann <gregoa@debian.org>, Damyan Ivanov <dmn@debian.org>,
  Ryan Niebur <ryan@debian.org>, Chris Butler <chrisb@debian.org>
 Build-Depends: debhelper (>= 8), perl,
- libalien-wxwidgets-perl (>= 0.48), libextutils-xspp-perl (>= 0.11),
+ libalien-wxwidgets-perl (>= 0.48), libextutils-xspp-perl (>= 0.1602),
  xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl,
  libextutils-parsexs-perl (>= 2.2203)
 Standards-Version: 3.9.1
