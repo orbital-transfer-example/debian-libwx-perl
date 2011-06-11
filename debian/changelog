@@ -8,8 +8,9 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   * debian/control:
     - Bump versioned Build-Depends on debhelper to (>= 8).
     - Bump versioned Build-Depends on libextutils-xspp-perl to (>= 0.1602). 
+  * debian/copyright: Update copyright years for upstream files.
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:54:08 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 
 libwx-perl (1:0.98-1) unstable; urgency=low
 
