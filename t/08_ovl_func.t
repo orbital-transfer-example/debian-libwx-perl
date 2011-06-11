@@ -6,23 +6,12 @@
 use strict;
 use Wx;
 use lib './t';
-use Test::More 'tests' => 180;
-use Tests_Helper qw(test_app);
+use Test::More 'tests' => 230;
+use Tests_Helper qw(test_app :overload);
 use Fatal qw(open);
 
 my $nolog = Wx::LogNull->new;
 Wx::InitAllImageHandlers;
-
-sub hijack {
-  while( @_ ) {
-    my( $name, $code ) = ( shift, shift );
-    no strict 'refs';
-    die $name unless defined &{$name};
-    my $old = \&{$name};
-    undef *{$name};
-    *{$name} = sub { &$code; goto &$old };
-  }
-}
 
 test_app( sub {
 my $frame = Wx::Frame->new( undef, -1, 'a' );
@@ -165,7 +154,8 @@ ok( $setsizewh,   "Wx::Caret::SetSizeWH" );
 my( $cwiappendstr, $cwiappenddata, $cwiappenditems,
     $cbappendstr, $cbappenddata, $cbsetselectionN, $cbsetselectionNN,
     $cwiappenditemsdata, $cwiinsertitemsdata, $cwiinsertitems,
-    $cwiinsertdata, $cwiinsertstr, $cwisetitemsdata, $cwisetitems );
+    $cwiinsertdata, $cwiinsertstr, $cwisetitemsdata, $cwisetitems,
+    $cwifindstringc, $cwifindstringnoc );
 my $good_combo = 'Wx::ComboBox'->isa( 'Wx::Choice' );
 hijack( 'Wx::ControlWithItems::AppendString' => sub { $cwiappendstr = 1 },
         'Wx::ControlWithItems::AppendData'   => sub { $cwiappenddata = 1 },
@@ -186,10 +176,19 @@ hijack( 'Wx::ControlWithItems::AppendString' => sub { $cwiappendstr = 1 },
         ( !Wx::wxMAC() ?
           ( 'Wx::ComboBox::SetSelectionN'    => sub { $cbsetselectionN = 1 } )
           : () ),
+        ( Wx::wxVERSION() >= 2.007002
+          ? ( 'Wx::ControlWithItems::FindStringCase' => sub { $cwifindstringc = 1 } ) : () ),
+        'Wx::ControlWithItems::FindStringNoCase' => sub { $cwifindstringnoc = 1 },
        );
 
 my $cwi = Wx::ListBox->new( $frame, -1 );
 my $cb = Wx::ComboBox->new( $frame, -1, 'bar' );
+
+$cwi->FindString( 'a' );
+ok( $cwifindstringnoc,"Wx::ControlWithItems::FindStringNoCase" );
+
+$cwi->FindString( 'a', 0 );
+ok( $cwifindstringc,  "Wx::ControlWithItems::FindStringCase" );
 
 $cwi->Append( 'a' );
 ok( $cwiappendstr,    "Wx::ControlWithItems::AppendString" );
@@ -518,6 +517,11 @@ ok( $scspoi, "Wx::Window::SetClientSizePoint" );
 
 $frame->SetClientSize( 200, 200 );
 ok( $scswh, "Wx::Window::SetClientSizeWH" );
+
+test_override { $frame->SetVirtualSize( 500, 500 ) }
+              'Wx::Window::SetVirtualSizeXY';
+test_override { $frame->SetVirtualSize( [ 500, 500 ] ) }
+              'Wx::Window::SetVirtualSizeSize';
 }
 
 ##############################################################################
@@ -971,6 +975,109 @@ $img->LoadFile( 'wxpl.xpm', 'image/xpm' );
 ok( $lfm, "Wx::Image::LoadFileMIME" );
 }
 
+##############################################################################
+# Wx::BitmapComboBox
+##############################################################################
+if( Wx::wxVERSION() >= 2.007002 ) {
+my $bcb = Wx::BitmapComboBox->new( $frame, -1, 'a', [-1, -1], [-1, -1], [] );
+
+test_override { $bcb->Append( 'a', $bmpok ) }
+              'Wx::BitmapComboBox::AppendString';
+test_override { $bcb->Append( 'b', $bmpok, \1 ) }
+              'Wx::BitmapComboBox::AppendData';
+
+test_override { $bcb->Insert( 'a', $bmpok, 1 ) }
+              'Wx::BitmapComboBox::InsertString';
+test_override { $bcb->Insert( 'b', $bmpok, 1, \1 ) }
+              'Wx::BitmapComboBox::InsertData';
+} else {
+    ok( 1, 'skipped' ) for 1 .. 4;
+}
+
+##############################################################################
+# Wx::ColourPickerCtrl
+##############################################################################
+if( Wx::wxVERSION() >= 2.007000 ) {
+my $cpc = Wx::ColourPickerCtrl->new( $frame );
+
+test_override { $cpc->SetColour( Wx::Colour->new( 'red' ) ) }
+              'Wx::ColourPickerCtrl::SetColourColour';
+test_override { $cpc->SetColour( 'red' ) }
+              'Wx::ColourPickerCtrl::SetColourString';
+} else {
+    ok( 1, 'skipped' ) for 1 .. 2;
+}
+
+##############################################################################
+# Wx::IconBundle
+##############################################################################
+{
+my $ib = Wx::IconBundle->new;
+
+test_override { Wx::IconBundle->new }
+              'Wx::IconBundle::newEmpty';
+test_override { Wx::IconBundle->new( 'wxpl.ico' ) }
+              'Wx::IconBundle::newFile';
+test_override { Wx::IconBundle->new( $icook ) }
+              'Wx::IconBundle::newIcon';
+
+test_override { $ib->AddIcon( 'wxpl.ico' ) }
+              'Wx::IconBundle::AddIconFile';
+test_override { $ib->AddIcon( $icook ) }
+              'Wx::IconBundle::AddIconIcon';
+
+test_override { $ib->GetIcon( 16 ) }
+              'Wx::IconBundle::GetIconCoord';
+test_override { $ib->GetIcon( [ 16, 16 ] ) }
+              'Wx::IconBundle::GetIconSize';
+
+if( Wx::wxVERSION() >= 2.009 ) {
+    test_override { $ib->GetIconOfExactSize( 16 ) }
+                  'Wx::IconBundle::GetIconOfExactSizeCoord';
+    test_override { $ib->GetIconOfExactSize( [ 16, 16 ] ) }
+                  'Wx::IconBundle::GetIconOfExactSizeSize';
+} else {
+    ok( 1, 'skipped' );
+    ok( 1, 'skipped' );
+}
+}
+
+##############################################################################
+# Wx::HVScrollHelper
+##############################################################################
+if( Wx::wxVERSION() >= 2.009 ) {
+my $sw = Wx::PlHVScrolledWindow->new( $frame, -1 );
+$sw->SetRowColumnCount( 10, 10 );
+
+test_override { $sw->ScrollToRowColumn( 1, 1 ) }
+              'Wx::HVScrolledWindow::ScrollToRowColumnRC';
+test_override { $sw->ScrollToRowColumn( Wx::Position->new( 2, 2 ) ) }
+              'Wx::HVScrolledWindow::ScrollToRowColumnPosition';
+
+test_override { $sw->RefreshRowColumn( 1, 1 ) }
+              'Wx::HVScrolledWindow::RefreshRowColumnRC';
+test_override { $sw->RefreshRowColumn( Wx::Position->new( 2, 2 ) ) }
+              'Wx::HVScrolledWindow::RefreshRowColumnPosition';
+
+test_override { $sw->RefreshRowsColumns( 1, 1, 3, 3 ) }
+              'Wx::HVScrolledWindow::RefreshRowsColumnsRC';
+test_override { $sw->RefreshRowsColumns( Wx::Position->new( 2, 2 ),
+                                         Wx::Position->new( 4, 4 ) ) }
+              'Wx::HVScrolledWindow::RefreshRowsColumnsPosition';
+
+test_override { $sw->VirtualHitTest( 10, 10 ) }
+              'Wx::HVScrolledWindow::VirtualHitTestXY';
+test_override { $sw->VirtualHitTest( [ 10, 10 ] ) }
+              'Wx::HVScrolledWindow::VirtualHitTestPoint';
+
+test_override { $sw->IsVisible( 1, 1 ) }
+              'Wx::HVScrolledWindow::IsVisibleRC';
+test_override { $sw->IsVisible( Wx::Position->new( 2, 2 ) ) }
+              'Wx::HVScrolledWindow::IsVisiblePosition';
+} else {
+    ok( 1, 'skipped' ) for 1 .. 10;
+}
+
 $frame->Destroy;
 } );
 
@@ -1015,6 +1122,72 @@ SKIP: {
 
 undef $dc;
 undef $cdc;
+}
+
+##############################################################################
+# Wx::GridBagSizer
+##############################################################################
+{
+my $gbs = Wx::GridBagSizer->new;
+my $win = Wx::Frame->new( undef, -1, 'Foo' );
+my $sz = Wx::BoxSizer->new( Wx::wxVERTICAL() );
+
+test_override { $gbs->Add( $win, Wx::GBPosition->new( 0, 0 ),
+                           Wx::GBSpan->new( 1, 1 ) ) }
+              'Wx::GridBagSizer::AddWindow';
+test_override { $gbs->Add( $sz, Wx::GBPosition->new( 0, 1 ),
+                           Wx::GBSpan->new( 1, 1 ) ) }
+              'Wx::GridBagSizer::AddSizer';
+test_override { $gbs->Add( 20, 20, Wx::GBPosition->new( 0, 2 ),
+                           Wx::GBSpan->new( 1, 1 ) ) }
+              'Wx::GridBagSizer::AddSpace';
+
+test_override { $gbs->GetItemPosition( $win ) }
+              'Wx::GridBagSizer::GetItemPositionWindow';
+test_override { $gbs->GetItemPosition( $sz ) }
+              'Wx::GridBagSizer::GetItemPositionSizer';
+test_override { $gbs->GetItemPosition( 0 ) }
+              'Wx::GridBagSizer::GetItemPositionIndex';
+
+test_override { $gbs->SetItemPosition( $win, Wx::GBPosition->new( 1, 0 ) ) }
+              'Wx::GridBagSizer::SetItemPositionWindow';
+test_override { $gbs->SetItemPosition( $sz, Wx::GBPosition->new( 1, 1 ) ) }
+              'Wx::GridBagSizer::SetItemPositionSizer';
+test_override { $gbs->SetItemPosition( 2, Wx::GBPosition->new( 1, 2 ) ) }
+              'Wx::GridBagSizer::SetItemPositionIndex';
+
+test_override { $gbs->GetItemSpan( $win ) }
+              'Wx::GridBagSizer::GetItemSpanWindow';
+test_override { $gbs->GetItemSpan( $sz ) }
+              'Wx::GridBagSizer::GetItemSpanSizer';
+test_override { $gbs->GetItemSpan( 0 ) }
+              'Wx::GridBagSizer::GetItemSpanIndex';
+
+test_override { $gbs->FindItem( $win ) }
+              'Wx::GridBagSizer::FindItemWindow';
+test_override { $gbs->FindItem( $sz ) }
+              'Wx::GridBagSizer::FindItemSizer';
+
+test_override { $gbs->SetItemSpan( $win, Wx::GBSpan->new( 2, 1 ) ) }
+              'Wx::GridBagSizer::SetItemSpanWindow';
+test_override { $gbs->SetItemSpan( $sz, Wx::GBSpan->new( 2, 1 ) ) }
+              'Wx::GridBagSizer::SetItemSpanSizer';
+test_override { $gbs->SetItemSpan( 2, Wx::GBSpan->new( 2, 1 ) ) }
+              'Wx::GridBagSizer::SetItemSpanIndex';
+
+my $gbi = $gbs->GetItem( 0 );
+
+test_override { $gbi->Intersects( $gbi ) }
+              'Wx::GBSizerItem::IntersectsItem';
+test_override { $gbi->Intersects( Wx::GBPosition->new( 0, 0 ),
+                                  Wx::GBSpan->new( 1, 1 ) ) }
+              'Wx::GBSizerItem::IntersectsPosition';
+
+test_override { $gbs->CheckForIntersection( $gbi ) }
+              'Wx::GridBagSizer::CheckForIntersectionItem';
+test_override { $gbs->CheckForIntersection( Wx::GBPosition->new( 0, 0 ),
+                                            Wx::GBSpan->new( 1, 1 ) ) }
+              'Wx::GridBagSizer::CheckForIntersectionPos';
 }
 
 ##############################################################################

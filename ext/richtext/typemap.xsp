@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: typemap.xsp 2911 2010-04-26 19:51:34Z mbarbon $
+## RCS-ID:      $Id: typemap.xsp 2962 2010-08-23 19:33:35Z mbarbon $
 ## Copyright:   (c) 2006-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -83,3 +83,4 @@
 %typemap{wxRichTextHeaderFooterData*}{simple};
 %typemap{const wxRichTextHeaderFooterData&}{reference};
 
+%typemap{wxRect&}{reference};

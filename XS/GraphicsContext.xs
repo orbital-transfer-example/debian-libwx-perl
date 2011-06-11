@@ -4,7 +4,7 @@
 ## Author:      Klaas Hartmann
 ## Modified by:
 ## Created:     29/06/2007
-## RCS-ID:      $Id: GraphicsContext.xs 2938 2010-07-04 12:56:48Z mbarbon $
+## RCS-ID:      $Id: GraphicsContext.xs 3045 2011-03-24 16:20:59Z mdootson $
 ## Copyright:   (c) 2007, 2009-2010 Klaas Hartmann
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -164,14 +164,12 @@ wxGraphicsContext::CreatePath ()
       RETVAL = new wxGraphicsPath( THIS->CreatePath() );
   OUTPUT: RETVAL
 
-# DECLARE_OVERLOAD( wrgn, Wx::Region )
-
 void
 Clip ( ... )
   PPCODE:
     BEGIN_OVERLOAD()
         MATCH_REDISP(wxPliOvl_n_n_n_n, ClipXYWH)
-        MATCH_REDISP(wxPliOvl_wrgn, ClipRegion)
+        MATCH_REDISP(wxPliOvl_wreg, ClipRegion)
     END_OVERLOAD( "Wx::GraphicsContext::Clip" )
 
 void

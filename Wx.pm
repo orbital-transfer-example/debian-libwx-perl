@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 2954 2010-08-15 14:33:55Z mbarbon $
-## Copyright:   (c) 2000-2010 Mattia Barbon
+## RCS-ID:      $Id: Wx.pm 3067 2011-06-06 11:13:09Z mdootson $
+## Copyright:   (c) 2000-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.98';
+$VERSION = '0.9901';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -347,6 +347,36 @@ must be placed in the same directory as the executable file.
       </dependentAssembly>
       </dependency>
   </assembly>
+
+=head1 Running on Mac OSX
+
+From version 0.98 wxPerl no longer needs to use the special startup
+executable 'wxperl' to run scripts on the Mac. The ordinary perl
+interpreter now works without problems. This is because wxPerl now
+contains code that brings the running application to the front and
+gives it the focus.
+
+In a syntax checking editor you may prevent Wx code from being
+given focus as the front process by setting an environment variable
+
+export WXPERL_OPTIONS=NO_MAC_SETFRONTPROCESS
+
+or 
+
+$ENV{WXPERL_OPTIONS} = 'NO_MAC_SETFRONTPROCESS';
+
+The code that makes the SetFrontProcess call is in Wx::Mini as
+
+Wx::MacSetFrontProcess();
+
+so it is also straightforward to override this method if you wish.
+
+Finally, any code can force the running application to become the
+front process regardless of environment settings by calling the xs
+method directly. (Note the underscore in the method name).
+
+Wx::_MacSetFrontProcess();
+
 
 =head1 AUTHOR
 

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     30/03/2002
-// RCS-ID:      $Id: event.h 2526 2009-02-07 14:35:21Z mbarbon $
+// RCS-ID:      $Id: event.h 2981 2010-10-01 17:50:28Z mdootson $
 // Copyright:   (c) 2002-2004, 2006-2007, 2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -52,7 +52,7 @@ wxEvent* wxPlEvent::Clone() const
             ( aTHX_ &self->m_callback, G_SCALAR, NULL );
         wxPlEvent* clone =
             (wxPlEvent*)wxPli_sv_2_object( aTHX_ ret, "Wx::PlEvent" );
-        
+
         return clone;
     }
 
@@ -69,8 +69,8 @@ class wxPlCommandEvent : public wxCommandEvent
     // only to appease wxWidgets' RTTI
     wxPlCommandEvent() : m_callback( NULL ) {}
 public:
-    wxPlCommandEvent( const char* package, int id, wxEventType eventType )
-        : wxCommandEvent( id, eventType ),
+    wxPlCommandEvent( const char* package, wxEventType eventType, int id )
+        : wxCommandEvent( eventType, id ),
           m_callback( "Wx::PlCommandEvent" )
     {
         m_callback.SetSelf( wxPli_make_object( this, package ), true );
@@ -138,7 +138,7 @@ public:
         SV** dst = hv_fetch( GetStash(), buffer, length, 1 );
         sv_setsv( *dst, data );
         mg_set( *dst );
-        m_data = data_id;    
+        m_data = data_id;
     }
 
     wxPlThreadEvent( const wxPlThreadEvent& e )
@@ -147,7 +147,7 @@ public:
     { }
 
     ~wxPlThreadEvent()
-    { 
+    {
         if( !m_data )
             return;
 

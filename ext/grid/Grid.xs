@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     04/12/2001
-// RCS-ID:      $Id: Grid.xs 2757 2010-01-17 10:26:27Z mbarbon $
-// Copyright:   (c) 2001-2004, 2006-2010 Mattia Barbon
+// RCS-ID:      $Id: Grid.xs 3020 2011-03-12 10:16:00Z mbarbon $
+// Copyright:   (c) 2001-2004, 2006-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -19,6 +19,17 @@
 #include <wx/control.h>
 #include <wx/grid.h>
 #include <wx/generic/gridctrl.h>
+
+#define wxGridCellAttr__wxAttrKind wxGridCellAttr::wxAttrKind
+
+inline wxGridCellAttr* convert_GridCellAttrOut(pTHX_ SV* value)
+{
+     wxGridCellAttr* attr = (wxGridCellAttr*)wxPli_sv_2_object( aTHX_ value, "Wx::GridCellAttr" );
+
+     attr->IncRef();
+
+     return attr;
+}
 
 typedef wxGrid::wxGridSelectionModes wxGridSelectionModes;
 typedef wxGridCellAttr::wxAttrKind wxAttrKind;
@@ -46,6 +57,11 @@ static wxPliEventDescription evts[] =
     EVT( EVT_GRID_CMD_RANGE_SELECT, 3, wxEVT_GRID_RANGE_SELECT )
 #if WXPERL_W_VERSION_LT( 2, 9, 0 )
     EVT( EVT_GRID_CMD_CELL_CHANGE, 3, wxEVT_GRID_CELL_CHANGE )
+    EVT( EVT_GRID_CMD_CELL_CHANGED, 3, wxEVT_GRID_CELL_CHANGE )
+#else
+    EVT( EVT_GRID_CMD_CELL_CHANGE, 3, wxEVT_GRID_CELL_CHANGED )
+    EVT( EVT_GRID_CMD_CELL_CHANGED, 3, wxEVT_GRID_CELL_CHANGED )
+    EVT( EVT_GRID_CMD_CELL_CHANGING, 3, wxEVT_GRID_CELL_CHANGING )
 #endif
     EVT( EVT_GRID_CMD_SELECT_CELL, 3, wxEVT_GRID_SELECT_CELL )
     EVT( EVT_GRID_CMD_EDITOR_SHOWN, 3, wxEVT_GRID_EDITOR_SHOWN )
@@ -65,6 +81,11 @@ static wxPliEventDescription evts[] =
     SEVT( EVT_GRID_RANGE_SELECT, 2 )
 #if WXPERL_W_VERSION_LT( 2, 9, 0 )
     SEVT( EVT_GRID_CELL_CHANGE, 2 )
+    EVT( EVT_GRID_CELL_CHANGED, 2, wxEVT_GRID_CELL_CHANGE )
+#else
+    EVT( EVT_GRID_CELL_CHANGE, 2, wxEVT_GRID_CELL_CHANGED )
+    SEVT( EVT_GRID_CELL_CHANGING, 2 )
+    SEVT( EVT_GRID_CELL_CHANGED, 2 )
 #endif
     SEVT( EVT_GRID_SELECT_CELL, 2 )
     SEVT( EVT_GRID_EDITOR_SHOWN, 2 )
@@ -85,7 +106,7 @@ INCLUDE: XS/GridEvent.xs
 INCLUDE: XS/GridCellRenderer.xs
 INCLUDE: XS/GridCellEditor.xs
 
-INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/GridTable.xsp
+INCLUDE_COMMAND: $^X -I../.. -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp ../../interface/wx/grid/gridtablebase.h
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/GridTableMessage.xsp
 

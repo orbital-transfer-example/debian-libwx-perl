@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     22/09/2002
-// RCS-ID:      $Id: log.h 2057 2007-06-18 23:03:00Z mbarbon $
+// RCS-ID:      $Id: log.h 3049 2011-04-18 18:57:52Z mdootson $
 // Copyright:   (c) 2002-2004 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -21,10 +21,12 @@ public:
 
     DEC_V_CBACK_VOID__CWXCHARP_TIMET( DoLogString );
     DEC_V_CBACK_VOID__WXLOGLEVEL_CWXCHARP_TIMET( DoLog );
+    DEC_V_CBACK_VOID__VOID( Flush );
 };
 
 DEF_V_CBACK_VOID__CWXCHARP_TIMET( wxPlLog, wxLog, DoLogString );
 DEF_V_CBACK_VOID__WXLOGLEVEL_CWXCHARP_TIMET( wxPlLog, wxLog, DoLog );
+DEF_V_CBACK_VOID__VOID( wxPlLog, wxLog, Flush );
 
 class wxPlLogPassThrough : public wxLogPassThrough
 {

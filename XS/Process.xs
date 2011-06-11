@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     11/02/2002
-## RCS-ID:      $Id: Process.xs 2186 2007-08-19 21:13:06Z mbarbon $
+## RCS-ID:      $Id: Process.xs 2998 2011-01-17 02:41:09Z mdootson $
 ## Copyright:   (c) 2002-2004, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -183,28 +183,30 @@ wxExecuteArgs( args, sync = wxEXEC_ASYNC, callback = 0 )
 #endif
 
 void
-wxExecuteStdout( command )
+wxExecuteStdout( command, flags = 0 )
     wxString command
+    int flags
   PREINIT:
     wxArrayString out;
     AV* ret;
     long code;
   PPCODE:
-    code = wxExecute( command, out );
+    code = wxExecute( command, out, flags );
     ret = wxPli_stringarray_2_av( aTHX_ out );
     EXTEND( SP, 2 );
     PUSHs( sv_2mortal( newSViv( code ) ) );
     PUSHs( sv_2mortal( newRV_noinc( (SV*)ret ) ) );
 
 void
-wxExecuteStdoutStderr( command )
+wxExecuteStdoutStderr( command, flags = 0)
     wxString command
+    int flags
   PREINIT:
     wxArrayString out, err;
     AV *rout, *rerr;
     long code;
   PPCODE:
-    code = wxExecute( command, out, err );
+    code = wxExecute( command, out, err, flags );
     rout = wxPli_stringarray_2_av( aTHX_ out );
     rerr = wxPli_stringarray_2_av( aTHX_ err );
     EXTEND( SP, 3 );

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Controls.xs 2935 2010-07-04 11:46:58Z mbarbon $
+// RCS-ID:      $Id: Controls.xs 3032 2011-03-13 21:48:58Z mbarbon $
 // Copyright:   (c) 2000-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -60,7 +60,7 @@ wxControl::GetLabelText()
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/ControlWithItems.xsp
 
-INCLUDE: XS/BitmapButton.xs
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/bmpbuttn.h
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/AnimationCtrl.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/EditableListBox.xsp
@@ -103,7 +103,7 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/w
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/headercol.h
 
-INCLUDE: XS/Button.xs
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/button.h
 INCLUDE: XS/CheckBox.xs
 INCLUDE: XS/CheckListBox.xs
 INCLUDE: XS/Choice.xs

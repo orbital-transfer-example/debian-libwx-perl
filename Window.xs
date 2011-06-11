@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Window.xs 2935 2010-07-04 11:46:58Z mbarbon $
+// RCS-ID:      $Id: Window.xs 2979 2010-09-07 20:39:08Z mbarbon $
 // Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -757,11 +757,11 @@ bool
 wxWindow::NavigateIn( flags = wxNavigationKeyEvent::IsForward )
     int flags
 
+#endif
+
 bool
 wxWindow::Navigate( flags = wxNavigationKeyEvent::IsForward )
     int flags
-
-#endif
 
 wxEvtHandler*
 wxWindow::PopEventHandler( deleteHandler )

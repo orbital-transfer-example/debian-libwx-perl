@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     02/06/2001
-## RCS-ID:      $Id: Tests_Helper.pm 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: Tests_Helper.pm 3034 2011-03-13 21:54:19Z mbarbon $
 ## Copyright:   (c) 2001-2003, 2005 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -28,10 +28,11 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 %EXPORT_TAGS =
   ( inheritance => [ qw(test_inheritance test_inheritance_all
                         test_inheritance_start test_inheritance_end) ],
+    overload    => [ qw(hijack test_override) ],
   );
 
 @EXPORT_OK = ( qw(test_app app_timeout test_frame in_frame),
-               @{$EXPORT_TAGS{inheritance}} );
+               @{$EXPORT_TAGS{inheritance}}, @{$EXPORT_TAGS{overload}} );
 
 sub in_frame($) {
   my $callback = shift;
@@ -69,11 +70,18 @@ sub test_app {
 }
 
 sub test_frame {
-  my $class = shift;
+  my( $class, $delete_after ) = @_;
   my @params = @_;
 
   my $function = sub {
     my $frame = $class->new( @params );
+
+    if( $delete_after ) {
+        Wx::Event::EVT_IDLE( $frame,
+                             sub { $frame->Destroy } );
+        # force idle event delivery
+        Wx::Timer->new->Start( 100 );
+    }
   };
 
   my $app = Tests_Helper_App->new( $function );
@@ -190,6 +198,27 @@ sub cpp_2_perl {
   $v =~ s/^wx/Wx::/;
 
   $v;
+}
+
+sub hijack {
+  while( @_ ) {
+    my( $name, $code ) = ( shift, shift );
+    no strict 'refs';
+    die "Unknown method name '$name'" unless defined &{$name};
+    my $old = \&{$name};
+    undef *{$name};
+    *{$name} = sub { &$code; goto &$old };
+  }
+}
+
+sub test_override(&$) {
+  my( $code, $method ) = @_;
+  my $called = 0;
+
+  local $Test::Builder::Level = $Test::Builder::Level + 1;
+  hijack( $method => sub { $called = 1 } );
+  $code->();
+  ok( $called, $method );
 }
 
 package Tests_Helper_App;

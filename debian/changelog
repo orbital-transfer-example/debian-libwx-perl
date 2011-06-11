@@ -1,3 +1,10 @@
+libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
+
+  * Team upload.
+  * New upstream release
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:46:29 +0200
+
 libwx-perl (1:0.98-1) unstable; urgency=low
 
   * New upstream release

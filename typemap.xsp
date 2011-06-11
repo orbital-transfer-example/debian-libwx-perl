@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/03/2003
-## RCS-ID:      $Id: typemap.xsp 2927 2010-06-06 08:06:10Z mbarbon $
-## Copyright:   (c) 2003-2010 Mattia Barbon
+## RCS-ID:      $Id: typemap.xsp 3024 2011-03-12 13:20:45Z mbarbon $
+## Copyright:   (c) 2003-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -61,6 +61,7 @@
 %typemap{wxWindowID}{simple};
 %typemap{wxCoord}{simple};
 %typemap{wxEventType}{simple};
+%typemap{wxDirection}{simple};
 
 %typemap{const wxChar*}{simple};
 %typemap{PlClassName}{simple};
