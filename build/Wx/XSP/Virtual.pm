@@ -15,6 +15,7 @@ sub register_plugin {
     my $instance = $class->new;
 
     $parser->add_class_tag_plugin( plugin => $instance, tag => 'NoVirtualBase' );
+    $parser->add_class_tag_plugin( plugin => $instance, tag => 'VirtualImplementation' );
     $parser->add_method_tag_plugin( plugin => $instance, tag => 'Virtual' );
     $parser->add_post_process_plugin( plugin => $instance );
 }
@@ -22,7 +23,17 @@ sub register_plugin {
 sub handle_class_tag {
     my( $self, $class, $tag, %args ) = @_;
 
-    $self->{skip_virtual_base}{$class->cpp_name} = 1;
+    if( $tag eq 'NoVirtualBase' ) {
+        $self->{skip_virtual_base}{$class->cpp_name} = 1;
+    } elsif( $tag eq 'VirtualImplementation' ) {
+        my %map = @{$args{any_named_arguments}};
+
+        $self->{virtual_implementation}{$class->cpp_name} =
+            { name           => $map{Name}[0][0] || '',
+              declaration    => join( "\n", @{$map{Declaration}[0] || []} ),
+              implementation => join( "\n", @{$map{Implementation}[0] || []} ),
+              };
+    }
 
     1;
 }
@@ -49,12 +60,31 @@ my %type_map =
                             default_value  => '0',
                             type_char      => 'i',
                             },
+    'long'             => { convert_return => 'SvIV( ret )',
+                            default_value  => '0',
+                            type_char      => 'l',
+                            },
+    'double'           => { convert_return => 'SvNV( ret )',
+                            default_value  => '0.0',
+                            type_char      => 'd',
+                            },
     # TODO merge
     'wxAlignment'      => { convert_return => '(wxAlignment)SvIV( ret )',
                             default_value  => '(wxAlignment)0',
                             type_char      => 'i',
                             },
+    # TODOD merge
+    'wxGridCellAttr::wxAttrKind' =>
+                       => { convert_return => '(wxGridCellAttr::wxAttrKind)SvIV( ret )',
+                            default_value  => '(wxGridCellAttr::wxAttrKind)0',
+                            type_char      => 'i',
+                            },
     'unsigned int'     => { convert_return => 'SvUV( ret )',
+                            default_value  => '0',
+                            type_char      => 'I',
+                            },
+    # TODO merge
+    'size_t'           => { convert_return => 'SvUV( ret )',
                             default_value  => '0',
                             type_char      => 'I',
                             },
@@ -96,6 +126,14 @@ my %type_map =
                            type_char      => 'O',
                            arguments      => '&%s',
                            },
+    'wxGrid*' =>         { convert_return => '(wxGrid*)wxPli_sv_2_object( aTHX_ ret, "Wx::Grid" )',
+                           type_char      => 'O',
+                           arguments      => '&%s',
+                           },
+    'wxGridCellAttr*' => { convert_return => 'convert_GridCellAttrOut( aTHX_ ret )',
+                           type_char      => 'O',
+                           arguments      => '&%s',
+                           },
     );
 
 sub _virtual_typemap {
@@ -105,6 +143,18 @@ sub _virtual_typemap {
     die "No virtual typemap for ", $type->print unless $tm;
 
     return $tm;
+}
+
+sub _emit_method_conditions {
+    my( $class ) = @_;
+    my @res;
+
+    foreach my $method ( @{$class->methods} ) {
+        next unless $method->isa( 'ExtUtils::XSpp::Node::Preprocessor' );
+        push @res, $method;
+    }
+
+    return @res;
 }
 
 sub post_process {
@@ -145,7 +195,12 @@ sub post_process {
         next unless @virtual;
 
         # TODO wxPerl-specific
-        ( my $cpp_class = $node->cpp_name ) =~ s/^wx/wxPl/;
+        my $cpp_class;
+        if( $self->{virtual_implementation}{$node->cpp_name}{name} ) {
+            $cpp_class = $self->{virtual_implementation}{$node->cpp_name}{name};
+        } else {
+            ( $cpp_class = $node->cpp_name ) =~ s/^wx/wxPl/;
+        }
         my $perl_class;
         if( $abstract_class ) {
             ( $perl_class = $cpp_class ) =~ s/^wx/Wx::/;
@@ -159,6 +214,16 @@ sub post_process {
         for( my $i = 0; $i <= $#$nodes; ++$i ) {
             next unless $nodes->[$i] == $node;
             splice @$nodes, $i, 0, $include;
+            # TODO a very crude hack that should somehow be
+            # encapsulated by XS++: the class definition in the
+            # generated .h need to use the preprocessor conditions
+            # applied to the various methods, but the conditions are
+            # only emitted together with the method definition, which
+            # require the header
+            #
+            # this forces the preprocessor #defines to be emitted just before
+            # including the header
+            splice @$nodes, $i, 0, _emit_method_conditions( $node );
             last;
         }
 
@@ -173,6 +238,7 @@ sub post_process {
 
 class %s : public %s
 {
+    %s
     // TODO wxPerl-specific
     WXPLI_DECLARE_V_CBACK();
 public:
@@ -182,7 +248,8 @@ public:
     }
 
 EOC
-          $cpp_class, $node->cpp_name;
+          $cpp_class, $node->cpp_name,
+          $self->{virtual_implementation}{$node->cpp_name}{declaration} || '';
 
         # add the (implicit) default constructor
         unless( @constructors ) {
@@ -194,7 +261,7 @@ EOC
                        );
         }
 
-        my @new_constructors;
+        my( @new_constructors, @call_base );
         foreach my $constructor ( @constructors ) {
             my $cpp_parms = join ', ', map $_->name, @{$constructor->arguments};
             my $cpp_args = join ', ', map $_->print, @{$constructor->arguments};
@@ -212,9 +279,10 @@ EOC
 
             my $code = [ "RETVAL = new $cpp_class( CLASS $comma $cpp_parms );" ];
 
+            my $ctor_name = $constructor->perl_name eq $node->cpp_name ? $cpp_class : $constructor->perl_name;
             my $new_ctor = ExtUtils::XSpp::Node::Constructor->new
                                ( cpp_name   => $cpp_class,
-                                 perl_name  => $constructor->perl_name,
+                                 perl_name  => $ctor_name,
                                  code       => $code,
                                  arguments  => $constructor->arguments,
                                  postcall   => $constructor->postcall,
@@ -236,6 +304,7 @@ EOC
                 push @arg_types, $typemap->{type_char};
             }
 
+            my @base_parms = map $_->name, @{$method->arguments};
             my( $cpp_parms, $arg_types );
             if( @cpp_parms ) {
                 $cpp_parms = join ', ', @cpp_parms;
@@ -245,9 +314,10 @@ EOC
                 $arg_types = 'NULL';
             }
 
+            push @cpp_code, '#if ' . ( $method->condition_expression || 1 );
             push @cpp_code, '    ' . $method->print_declaration;
             my $call_base = $node->cpp_name . '::' . $method->cpp_name .
-              '(' . $cpp_parms . ')';
+              '(' . join( ', ', @base_parms ) . ')';
             if( $method->ret_type->is_void ) {
                 my $default = $pure ? 'return' : $call_base;
                 push @cpp_code, sprintf <<EOT,
@@ -291,6 +361,7 @@ EOT
 EOT
                   $method->cpp_name, $arg_types, $cpp_parms, $convert, $default;
             }
+            push @cpp_code, '#endif';
 
             my $callbase_decl = $method->ret_type->print . ' ' .
                                 'base_' . $method->cpp_name . '( ' .
@@ -298,6 +369,7 @@ EOT
                                 ( $method->const ? ' const' : '' );
 
             if( !$pure ) {
+                push @cpp_code, '#if ' . ( $method->condition_expression || 1 );
                 push @cpp_code, '    ' . $callbase_decl, '    {';
 
                 if( $method->ret_type->is_void ) {
@@ -307,15 +379,29 @@ EOT
                 }
 
                 push @cpp_code, '    }';
+                push @cpp_code, '#endif';
 
-#                 $method->set_access( 'public' );
-#                 $method->set_cpp_name( 'base_' . $method->cpp_name );
+                my $call_base = ExtUtils::XSpp::Node::Method->new
+                               ( cpp_name       => 'base_' . $method->cpp_name,
+                                 perl_name      => $method->perl_name,
+                                 arguments      => $method->arguments,
+                                 condition      => $method->condition,
+                                 emit_condition => $method->condition_expression,
+                                 );
+
+                push @call_base, $call_base;
             }
         }
 
-        push @cpp_code, '};', '';
+        push @cpp_code, sprintf <<'EOT',
+};
+%s
 
-        open my $h_file, '>', $file;
+EOT
+          $self->{virtual_implementation}{$node->cpp_name}{implementation} || '';
+
+        mkdir 'xspp' unless -d 'xspp';
+        open my $h_file, '>', $file or die "open '$file': $!";
         print $h_file join "\n", @cpp_code;
         close $h_file;
 
@@ -327,12 +413,33 @@ EOT
                                   base_classes    => [ $node ],
                                   condition       => $node->condition,
                                   emit_condition  => $node->condition_expression,
-                                  methods         => \@new_constructors,
+                                  methods         => [ @new_constructors,
+                                                       @call_base ],
                                   );
 
             push @$nodes, $new_class;
         } else {
             $node->add_methods( @new_constructors );
+
+            if( @call_base ) {
+                # make calls to base_* methods available; needs to be a
+                # new class object because the generated methods are only
+                # available in the generated C++ class
+                #
+                # does not specify base classes because the base class
+                # list is emitted for the class in $node; at some
+                # point XS++ should be fixed to detect and remove the
+                # duplicate base class list
+                my $new_class = ExtUtils::XSpp::Node::Class->new
+                                    ( cpp_name        => $cpp_class,
+                                      perl_name       => $perl_class,
+                                      condition       => $node->condition,
+                                      emit_condition  => $node->condition_expression,
+                                      methods         => [ @call_base ],
+                                      );
+
+                push @$nodes, $new_class;
+            }
         }
     }
 }

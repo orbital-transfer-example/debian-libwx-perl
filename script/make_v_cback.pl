@@ -5,8 +5,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     19/08/2007
-## RCS-ID:      $Id: make_v_cback.pl 2264 2007-11-05 23:23:35Z mbarbon $
-## Copyright:   (c) 2007 Mattia Barbon
+## RCS-ID:      $Id: make_v_cback.pl 3003 2011-02-13 13:05:48Z mbarbon $
+## Copyright:   (c) 2007, 2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -105,6 +105,9 @@ my @macros =
      DEC_V_CBACK_WXSTRING__UINT_const
      DEF_V_CBACK_WXSTRING__UINT
      DEF_V_CBACK_WXSTRING__UINT_const_pure
+
+     DEC_V_CBACK_WXGRIDATTR__INT_INT_WXATTRKIND
+     DEF_V_CBACK_WXGRIDATTR__INT_INT_WXATTRKIND
      );
 my %type_map =
   ( BOOL    => [ 'bool',    'SvTRUE( ret )', 'return false',
@@ -128,6 +131,10 @@ my %type_map =
                  'const wxVariant& p%d', 'q', '&p%d, "Wx::Variant"', 'p%d' ],
     mWXVARIANT=> [ 'wxVariant','wxPli_sv_2_wxvariant( aTHX_ ret )', 'return wxVariant()',
                  'wxVariant& p%d', 'q', '&p%d, "Wx::Variant"', 'p%d' ],
+    WXGRIDATTR=> [ 'wxGridCellAttr*', '(wxGridCellAttr*)wxPli_sv_2_object( aTHX_ ret, "Wx::GridCellAttr" )', 'return NULL',
+                   'wxGridCellAttr* p%d', 'q', 'p%d, "Wx::GridCellAttr"', 'p%d' ],
+    WXATTRKIND=> [ 'wxGridCellAttr::wxAttrKind', 'SvIV( ret )', 'return 0',
+                   'wxGridCellAttr::wxAttrKind p%d', 'i', 'p%d', 'p%d' ],
     );
 my %const_map =
   ( 0       => 'wxPli_NOCONST',

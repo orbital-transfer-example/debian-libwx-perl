@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 2955 2010-08-15 15:46:21Z mbarbon $
+// RCS-ID:      $Id: Wx.xs 2986 2010-10-18 12:27:33Z mdootson $
 // Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -252,11 +252,6 @@ BOOT:
 bool 
 Load( bool croak_on_error = false )
   CODE:
-#if defined(__WXMAC__)
-    ProcessSerialNumber kCurrentPSN = { 0, kCurrentProcess };
-    TransformProcessType( &kCurrentPSN, kProcessTransformToForegroundApplication );
-    SetFrontProcess( &kCurrentPSN );
-#endif
     wxPerlAppCreated = wxTheApp != NULL;
     if( wxPerlInitialized )
         XSRETURN( true );
@@ -326,6 +321,17 @@ Load( bool croak_on_error = false )
         call_argv( "Carp::croak", G_VOID|G_DISCARD, (char**) argv );
     }
   OUTPUT: RETVAL
+
+#if defined(__WXMAC__)
+
+void
+_MacSetFrontProcess()
+  CODE:
+    ProcessSerialNumber kCurrentPSN = { 0, kCurrentProcess };
+    TransformProcessType( &kCurrentPSN, kProcessTransformToForegroundApplication );
+    SetFrontProcess( &kCurrentPSN );
+
+#endif
 
 void
 SetConstants()

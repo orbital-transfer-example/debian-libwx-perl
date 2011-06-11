@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Log.xs 2626 2009-10-18 22:48:17Z mbarbon $
+## RCS-ID:      $Id: Log.xs 3050 2011-04-19 00:37:57Z mdootson $
 ## Copyright:   (c) 2000-2003, 2005-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -19,6 +19,43 @@ void
 wxLog::Destroy()
   CODE:
     delete THIS;
+    
+bool 
+IsEnabled()  
+  CODE:
+    RETVAL = wxLog::IsEnabled();
+  OUTPUT:
+    RETVAL
+
+bool 
+EnableLogging( enable = true )
+    bool enable
+  CODE:
+    RETVAL = wxLog::EnableLogging( enable );
+  OUTPUT:
+    RETVAL
+    
+#if WXPERL_W_VERSION_GE( 2, 8, 5 )
+    
+void 
+SetRepetitionCounting( RepetCounting = true )
+    bool RepetCounting
+  CODE:
+    wxLog::SetRepetitionCounting( RepetCounting );
+    
+bool 
+GetRepetitionCounting()
+  CODE:
+    RETVAL = wxLog::GetRepetitionCounting();
+  OUTPUT:
+    RETVAL  
+
+void
+DoCreateOnDemand()
+  CODE:
+    wxLog::DoCreateOnDemand();
+
+#endif
 
 void
 AddTraceMask( mask )
@@ -64,22 +101,95 @@ void
 DontCreateOnDemand()
   CODE:
     wxLog::DontCreateOnDemand();
+    
+void
+Suspend()
+  CODE:
+    wxLog::Suspend();
+    
+void
+Resume()
+  CODE:
+    wxLog::Resume();
+    
+wxLogLevel
+GetLogLevel()
+  CODE:
+    RETVAL = wxLog::GetLogLevel();
+  OUTPUT:
+    RETVAL
+
+void   
+SetLogLevel( loglevel )
+    wxLogLevel loglevel
+  CODE:
+    wxLog::SetLogLevel( loglevel );
 
 void
 wxLog::Flush()
 
+## // Allow static function call and previously
+## // wrapped method call for FlushActive
+
 void
-wxLog::FlushActive()
+FlushActive( myLog = NULL )
+    wxLog* myLog
+  CODE:
+    wxLog::FlushActive();
+
 
 bool
 wxLog::HasPendingMessages()
 
+## // Allow correct static function call and previously
+## // wrapped method call for Get / SetVerbose
+## // It all maps to a static call anyway.
+## // Old code should still work
+
+# DECLARE_OVERLOAD( wlog, Wx::Log )
+
 void
-wxLog::SetVerbose( verbose = true )
-    bool verbose
+SetVerbose( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+        MATCH_VOIDM_REDISP_FUNCTION( Wx::Log::SetVerboseFunctionDefault )
+        MATCH_REDISP_COUNT_FUNCTION(wxPliOvl_wlog, Wx::Log::SetVerboseMethodDefault, 1 )
+        MATCH_REDISP_COUNT_FUNCTION(wxPliOvl_n, Wx::Log::SetVerboseFunctionParam, 1)
+        MATCH_REDISP_COUNT_FUNCTION(wxPliOvl_wlog_n, Wx::Log::SetVerboseMethodParam, 2)
+    END_OVERLOAD( "Wx::Log::SetVerbose" )
+
+void
+SetVerboseFunctionDefault()
+  CODE:
+    wxLog::SetVerbose( true );
+
+void
+SetVerboseMethodDefault( myLog )
+    wxLog* myLog
+  CODE:
+    wxLog::SetVerbose( true );
+    
+void
+SetVerboseFunctionParam( enable )
+    bool enable
+  CODE:
+    wxLog::SetVerbose( enable );
+
+void
+SetVerboseMethodParam( myLog, enable )
+    wxLog* myLog
+    bool enable
+  CODE:
+    wxLog::SetVerbose( enable );
 
 bool
-wxLog::GetVerbose()
+GetVerbose( myLog = NULL )
+    wxLog* myLog
+  CODE:
+    RETVAL = wxLog::GetVerbose();
+  OUTPUT:
+    RETVAL
+
 
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
 
@@ -342,3 +452,4 @@ MODULE=Wx PACKAGE=Wx::LogStderr
 wxLogStderr*
 wxLogStderr::new( fp = NULL )
     FILE* fp;
+

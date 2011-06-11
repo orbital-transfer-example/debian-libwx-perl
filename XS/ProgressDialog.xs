@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/12/2000
-## RCS-ID:      $Id: ProgressDialog.xs 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: ProgressDialog.xs 2991 2010-11-11 04:53:56Z mdootson $
 ## Copyright:   (c) 2000-2002, 2004 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -26,10 +26,27 @@ wxProgressDialog::new( title, message, maximum = 100, parent = 0, style = wxPD_A
   OUTPUT:
     RETVAL
 
+
+#if WXPERL_W_VERSION_GE( 2, 8, 0 )
+
+bool 
+wxProgressDialog::Pulse( newmsg = wxEmptyString )
+	wxString newmsg
+
+
+bool
+wxProgressDialog::Show( show = true )
+	bool show
+
+#endif
+
 bool
 wxProgressDialog::Update( value = -1, newmsg = wxEmptyString )
     int value
     wxString newmsg
 
+
 void
 wxProgressDialog::Resume()
+
+

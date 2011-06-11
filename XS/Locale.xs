@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     30/11/2000
-## RCS-ID:      $Id: Locale.xs 2848 2010-03-17 20:10:43Z mbarbon $
-## Copyright:   (c) 2000-2007, 2010 Mattia Barbon
+## RCS-ID:      $Id: Locale.xs 3063 2011-06-03 21:28:26Z mbarbon $
+## Copyright:   (c) 2000-2007, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -84,8 +84,16 @@ wxLanguageInfo::GetDescription()
 
 MODULE=Wx PACKAGE=Wx::Locale
 
+#if WXPERL_W_VERSION_GE( 2, 9, 1 )
+#define wxPL_LOCALE_CTOR_FLAGS wxLOCALE_LOAD_DEFAULT
+#define wxPL_LOCALE_CONVERT_ENCODING true
+#else
+#define wxPL_LOCALE_CTOR_FLAGS wxLOCALE_LOAD_DEFAULT|wxLOCALE_CONV_ENCODING
+#define wxPL_LOCALE_CONVERT_ENCODING false
+#endif
+
 wxLocale*
-newLong( name, shorts = NULL, locale = NULL, loaddefault = true, convertencoding = false )
+newLong( name, shorts = NULL, locale = NULL, loaddefault = true, convertencoding = wxPL_LOCALE_CONVERT_ENCODING )
     const wxChar* name
     const wxChar* shorts = NO_INIT
     const wxChar* locale = NO_INIT
@@ -115,7 +123,7 @@ newLong( name, shorts = NULL, locale = NULL, loaddefault = true, convertencoding
     RETVAL
 
 wxLocale*
-newShort( language, flags = wxLOCALE_LOAD_DEFAULT|wxLOCALE_CONV_ENCODING )
+newShort( language, flags = wxPL_LOCALE_CTOR_FLAGS )
     int language
     int flags
   CODE:
@@ -233,7 +241,8 @@ FindLanguageInfo( name )
   OUTPUT:
     RETVAL
   CLEANUP:
-    wxPli_object_set_deleteable( aTHX_ ST(0), false );
+    if( ST(0) != NULL )
+    	wxPli_object_set_deleteable( aTHX_ ST(0), false );
 
 bool
 wxLocale::Init( language, flags = wxLOCALE_LOAD_DEFAULT|wxLOCALE_CONV_ENCODING )
@@ -248,7 +257,8 @@ GetLanguageInfo( language )
   OUTPUT:
     RETVAL
   CLEANUP:
-    wxPli_object_set_deleteable( aTHX_ ST(0), false );
+    if( ST(0) != NULL )
+    	wxPli_object_set_deleteable( aTHX_ ST(0), false );
 
 MODULE=Wx PACKAGE=Wx PREFIX=wx
 

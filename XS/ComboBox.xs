@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: ComboBox.xs 2757 2010-01-17 10:26:27Z mbarbon $
-## Copyright:   (c) 2000-2004, 2006-2008, 2010 Mattia Barbon
+## RCS-ID:      $Id: ComboBox.xs 3037 2011-03-19 10:56:08Z mbarbon $
+## Copyright:   (c) 2000-2004, 2006-2008, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -89,7 +89,9 @@ wxComboBox::Create( parent, id = wxID_ANY, value = wxEmptyString, pos = wxDefaul
 
 INCLUDE_COMMAND: $^X -pe "s/ItemContainerImmutable/ComboBox/g" XS/ItemContainerImmutable.xs
 
-INCLUDE_COMMAND: $^X -pe "s/ItemContainer/ComboBox/g" XS/ItemContainer.xs
+# the second regex is an horrible hack to solve ambiguity;
+# see also OwnerDrawnComboBox.xsp
+INCLUDE_COMMAND: $^X -pe "s/ItemContainer/ComboBox/g;s/->(?=[SG]etClientObject)/->wxItemContainer::/" XS/ItemContainer.xs
 
 #undef WXPERL_IN_COMBOBOX
 

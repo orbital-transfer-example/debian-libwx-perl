@@ -4,7 +4,7 @@
 ## Author:      Mark Dootson
 ## Modified by:
 ## Created:     10/04/2010
-## RCS-ID:      $Id: RichTextPrinting.xsp 2938 2010-07-04 12:56:48Z mbarbon $
+## RCS-ID:      $Id: RichTextPrinting.xsp 2962 2010-08-23 19:33:35Z mbarbon $
 ## Copyright:   (c) 2010 Mark Dootson
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -15,6 +15,43 @@
 #include <wx/richtext/richtextprint.h>
 
 %module{Wx};
+
+%name{Wx::RichTextPrintout} class wxRichTextPrintout : public %name{Wx::Printout} wxPrintout
+{
+       wxRichTextPrintout(const wxString& title = wxT("Printout"));
+ 
+    ~wxRichTextPrintout()
+        %code%{  wxPli_thread_sv_unregister( aTHX_ "Wx::RichTextPrintout", THIS, ST(0) );
+                 delete THIS; %};
+
+%{
+static void
+wxRichTextPrintout::CLONE()
+  CODE:
+    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
+%}
+
+    /// The buffer to print
+    void SetRichTextBuffer(wxRichTextBuffer* buffer);
+    wxRichTextBuffer* GetRichTextBuffer() const ;
+
+    /// Set/get header/footer data
+    void SetHeaderFooterData(const wxRichTextHeaderFooterData& data) ;
+    const wxRichTextHeaderFooterData& GetHeaderFooterData() const ;
+
+    /// Sets margins in 10ths of millimetre. Defaults to 1 inch for margins.
+    void SetMargins(int top = 254, int bottom = 254, int left = 254, int right = 254);
+
+    /// Calculate scaling and rectangles, setting the device context scaling
+    void CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& headerRect, wxRect& footerRect);
+
+    // wxPrintout virtual functions
+    virtual bool OnPrintPage(int page);
+    virtual bool HasPage(int page);
+    //virtual void GetPageInfo(int *minPage, int *maxPage, int *selPageFrom, int *selPageTo);
+    virtual bool OnBeginDocument(int startPage, int endPage);
+    virtual void OnPreparePrinting();
+};
 
 %name{Wx::RichTextPrinting} class wxRichTextPrinting : public wxObject
 {

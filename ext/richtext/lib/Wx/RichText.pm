@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichText.pm 2888 2010-04-13 22:23:09Z mdootson $
-## Copyright:   (c) 2006-2007, 2010 Mattia Barbon
+## RCS-ID:      $Id: RichText.pm 3035 2011-03-13 21:57:38Z mbarbon $
+## Copyright:   (c) 2006-2007, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -31,6 +31,7 @@ SetEvents();
 
 no strict;
 
+package Wx::Printout;
 package Wx::RichTextCtrl;    @ISA = qw(Wx::TextCtrl);
 package Wx::TextAttrEx;      @ISA = qw(Wx::TextAttr);
 package Wx::RichTextEvent;   @ISA = qw(Wx::NotifyEvent);
@@ -47,8 +48,8 @@ package Wx::RichTextXMLHandler; @ISA = qw(Wx::RichTextFileHandler);
 package Wx::RichTextHTMLHandler; @ISA = qw(Wx::RichTextFileHandler);
 package Wx::RichTextObject;
 package Wx::RichTextCompositeObject; @ISA = qw(Wx::RichTextObject);
-package Wx::RichTextBox;     @ISA = qw(Wx::RichTextCompositeObject);
-package Wx::RichTextParagraphLayoutBox; @ISA = qw(Wx::RichTextBox);
+package Wx::RichTextBox;     @ISA = ( Wx::wxVERSION() <= 2.009001 ? qw(Wx::RichTextCompositeObject) : qw(Wx::RichTextParagraphLayoutBox) );
+package Wx::RichTextParagraphLayoutBox; @ISA = ( Wx::wxVERSION() <= 2.009001 ? qw(Wx::RichTextBox) : qw(Wx::RichTextCompositeObject) );
 package Wx::RichTextBuffer;  @ISA = qw(Wx::RichTextParagraphLayoutBox);
 package Wx::RichTextPrinting;  @ISA = qw(Wx::Object);
 package Wx::RichTextHeaderFooterData;  @ISA = qw(Wx::Object);

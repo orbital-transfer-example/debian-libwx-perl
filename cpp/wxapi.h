@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 2946 2010-08-01 14:05:48Z mbarbon $
-// Copyright:   (c) 2002-2003, 2005-2010 Mattia Barbon
+// RCS-ID:      $Id: wxapi.h 3009 2011-02-20 16:25:26Z mbarbon $
+// Copyright:   (c) 2002-2003, 2005-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,7 @@
 
 #if defined( __WXMSW__ )
 #define STRICT
+#undef NO_STRICT
 #endif
 
 #include <wx/defs.h>
@@ -133,6 +134,7 @@ inline CV* wxPli_newXS(pTHX_ const char* name, XSUBADDR_t addr,
 #undef vform
 #undef vfprintf
 #undef write
+#undef fgets
 #undef stdin
 #undef stdout
 #undef stderr

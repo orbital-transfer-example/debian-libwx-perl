@@ -58,6 +58,8 @@ t/17_thread_evt.t
 t/18_unicode.t
 t/19_overlay.t
 t/20_ctx_threads.t
+t/21_locale.t
+t/22_interface.t
 t/Tests_Helper.pm
 t/zz_distrib.t
 
@@ -105,11 +107,9 @@ XS/AnimationCtrl.xsp
 XS/App.xs
 XS/ArtProvider.xsp
 XS/Bitmap.xs
-XS/BitmapButton.xs
 XS/BitmapComboBox.xsp
 XS/BookCtrl.xsp
 XS/Brush.xsp
-XS/Button.xs
 XS/Caret.xs
 XS/CheckBox.xs
 XS/CheckListBox.xs
@@ -280,6 +280,7 @@ ext/aui/lib/Wx/AUI.pm
 ext/aui/t/01_load.t
 ext/aui/t/02_inheritance.t
 ext/aui/t/03_threads.t
+ext/aui/t/08_ovl_func.t
 ext/aui/typemap
 ext/aui/typemap.xsp
 
@@ -310,6 +311,7 @@ ext/dataview/XS/DataViewTreeStore.xsp
 ext/dataview/t/01_load.t
 ext/dataview/t/02_inheritance.t
 ext/dataview/t/03_threads.t
+ext/dataview/t/08_ovl_func.t
 ext/dataview/typemap
 ext/dataview/typemap.xsp
 
@@ -317,6 +319,7 @@ ext/datetime/DateTime.pm
 ext/datetime/DateTime.xs
 ext/datetime/Makefile.PL
 ext/datetime/t/01_load.t
+ext/datetime/t/02_api.t
 ext/datetime/t/03_threads.t
 ext/datetime/typemap
 ext/datetime/XS/DateSpan.xsp
@@ -361,7 +364,6 @@ ext/grid/XS/GridCellAttr.xs
 ext/grid/XS/GridCellEditor.xs
 ext/grid/XS/GridCellRenderer.xs
 ext/grid/XS/GridEvent.xs
-ext/grid/XS/GridTable.xsp
 ext/grid/XS/GridTableMessage.xsp
 ext/grid/cpp/editor.h
 ext/grid/cpp/gr_constants.cpp
@@ -405,6 +407,7 @@ ext/html/t/01_load.t
 ext/html/t/02_inheritance.t
 ext/html/t/03_threads.t
 ext/html/t/04_taghandlers.t
+ext/html/t/08_ovl_func.t
 
 ext/mdi/MDI.xs
 ext/mdi/Makefile.PL
@@ -503,6 +506,7 @@ ext/richtext/lib/Wx/RichText.pm
 ext/richtext/t/01_load.t
 ext/richtext/t/02_inheritance.t
 ext/richtext/t/03_threads.t
+ext/richtext/t/08_ovl_func.t
 ext/richtext/typemap
 ext/richtext/typemap.xsp
 
@@ -540,10 +544,13 @@ ext/docview/t/02_inheritance.t
 ext/docview/t/03_threads.t
 ext/docview/t/04_cmdproc.t
 
+interface/wx/bmpbuttn.h
+interface/wx/button.h
 interface/wx/dataview/dataviewlistctrl.h
 interface/wx/dataview/dataviewliststore.h
 interface/wx/dataview/dataviewvirtuallistmodel.h
 interface/wx/generic/spinctrg.h
+interface/wx/grid/gridtablebase.h
 interface/wx/headercol.h
 interface/wx/headerctrl.h
 interface/wx/infobar.h

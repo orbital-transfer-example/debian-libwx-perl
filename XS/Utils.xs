@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     09/02/2001
-## RCS-ID:      $Id: Utils.xs 2315 2008-01-18 21:47:17Z mbarbon $
-## Copyright:   (c) 2001-2003, 2005-2008 Mattia Barbon
+## RCS-ID:      $Id: Utils.xs 2980 2010-09-07 20:54:15Z mbarbon $
+## Copyright:   (c) 2001-2003, 2005-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -523,6 +523,10 @@ wxGetKeyState( key )
     wxKeyCode key
 
 #endif
+
+void
+wxSetCursor( wxCursor* cursor)
+  C_ARGS: *cursor
 
 MODULE=Wx PACKAGE=Wx
 

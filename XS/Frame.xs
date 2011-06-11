@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Frame.xs 2291 2007-11-25 00:09:04Z mbarbon $
+## RCS-ID:      $Id: Frame.xs 3066 2011-06-06 11:11:57Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -121,6 +121,9 @@ wxFrame::OnCreateStatusBar( number, style, id, name )
   CODE:
     RETVAL = THIS->wxFrame::OnCreateStatusBar( number, style, id, name );
   OUTPUT: RETVAL
+
+void
+wxFrame::SendSizeEvent()
 
 void
 wxFrame::SetIcon( icon )

@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     02/12/2000
-## RCS-ID:      $Id: SplitterWindow.xsp 2938 2010-07-04 12:56:48Z mbarbon $
+## RCS-ID:      $Id: SplitterWindow.xsp 2982 2010-10-06 23:43:16Z mdootson $
 ## Copyright:   (c) 2000-2003, 2005-2006, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -82,6 +82,7 @@
 #if WXPERL_W_VERSION_GE( 2, 6, 0 )
     void SetSashGravity( double gravity );
     double GetSashGravity();
+    void UpdateSize();
 #endif
 #if WXPERL_W_VERSION_GE( 2, 5, 3 )
     int GetSashSize();
