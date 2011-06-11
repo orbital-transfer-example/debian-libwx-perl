@@ -16,6 +16,7 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   [ gregor herrmann ]
   * debian/watch: add uversionmangle to cope with future 2-digit minor
     versions.
+  * debian/rules: use --max-parallel=1 instead of $(MAKE) -j1.
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 
