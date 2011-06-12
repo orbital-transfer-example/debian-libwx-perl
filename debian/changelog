@@ -3,7 +3,6 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   TODO: Investigate test failures
 
   [ Salvatore Bonaccorso ]
-  * Team upload.
   * New upstream release
   * Remove debian/README.source as we use '3.0 (quilt) source package
     format now.
