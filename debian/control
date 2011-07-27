@@ -11,8 +11,8 @@ Build-Depends: debhelper (>= 8), perl,
  libextutils-parsexs-perl (>= 2.2203)
 Standards-Version: 3.9.1
 Homepage: http://wxperl.sourceforge.net/
-Vcs-Svn: svn://svn.debian.org/pkg-perl/trunk/libwx-perl/
-Vcs-Browser: http://svn.debian.org/viewsvn/pkg-perl/trunk/libwx-perl/
+Vcs-Git: git://git.debian.org/pkg-perl/packages/libwx-perl.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-perl/packages/libwx-perl.git
 
 Package: libwx-perl
 Architecture: any
