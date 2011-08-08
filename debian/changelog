@@ -20,6 +20,11 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   [ Ansgar Burchardt ]
   * debian/control: Convert Vcs-* fields to Git.
 
+  [ gregor herrmann ]
+  * Set Standards-Version to 3.9.2 (no changes).
+  * Add perl 5.14 as an alternative build dependency to libextutils-parsexs-perl.
+    (Closes: #636762)
+
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 
 libwx-perl (1:0.98-1) unstable; urgency=low
