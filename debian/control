@@ -6,9 +6,15 @@ Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
  gregor herrmann <gregoa@debian.org>, Damyan Ivanov <dmn@debian.org>,
  Ryan Niebur <ryan@debian.org>, Chris Butler <chrisb@debian.org>
 Build-Depends: debhelper (>= 8), perl,
- libalien-wxwidgets-perl (>= 0.48), libextutils-xspp-perl (>= 0.1602),
- xauth, xvfb, x11-xkb-utils, xfonts-base, libtest-pod-perl, libyaml-perl,
- libextutils-parsexs-perl (>= 2.2203)
+ libalien-wxwidgets-perl (>= 0.48),
+ libextutils-parsexs-perl (>= 2.2203) | | perl (>= 5.14),
+ libextutils-xspp-perl (>= 0.1602),
+ libtest-pod-perl,
+ libyaml-perl,
+ x11-xkb-utils,
+ xauth,
+ xfonts-base,
+ xvfb
 Standards-Version: 3.9.2
 Homepage: http://wxperl.sourceforge.net/
 Vcs-Git: git://git.debian.org/pkg-perl/packages/libwx-perl.git
@@ -16,7 +22,8 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-perl/packages/libwx-perl.gi
 
 Package: libwx-perl
 Architecture: any
-Depends: ${perl:Depends}, ${shlibs:Depends}, ${misc:Depends}, libalien-wxwidgets-perl (>= 0.48)
+Depends: ${perl:Depends}, ${shlibs:Depends}, ${misc:Depends},
+ libalien-wxwidgets-perl (>= 0.48)
 Description: interface to wxWidgets cross-platform GUI toolkit
  wxPerl is an extension module allowing the creation of GUI (Graphical
  User Interface) Perl programs using the wxWidgets toolkit. It serves as a Perl
