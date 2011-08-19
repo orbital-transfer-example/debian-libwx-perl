@@ -31,6 +31,7 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   * describe interface/wx in debian/copyright
   * rules: consistently make all examples executable
   * add fix-fake-pod.patch fixing unintentionally created manual page
+  * add spelling.patch fixing a small spelling mistake in cpp/overload.cpp
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 
