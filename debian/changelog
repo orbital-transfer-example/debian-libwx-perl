@@ -28,6 +28,7 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
     testsuite as root (in the 'binary' target).
     Thanks to Jonathen Nieder
   * allow parallel building
+  * describe interface/wx in debian/copyright
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 
