@@ -1,4 +1,6 @@
-libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
+libwx-perl (1:0.9901-1) unstable; urgency=low
+
+  * Team upload
 
   [ Salvatore Bonaccorso ]
   * New upstream release
@@ -33,7 +35,7 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   * add fix-fake-pod.patch fixing unintentionally created manual page
   * add spelling.patch fixing a small spelling mistake in cpp/overload.cpp
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
+ -- Damyan Ivanov <dmn@debian.org>  Fri, 19 Aug 2011 11:06:22 +0300
 
 libwx-perl (1:0.98-1) unstable; urgency=low
 
