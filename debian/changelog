@@ -1,5 +1,5 @@
 libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
- 
+
   [ Salvatore Bonaccorso ]
   * New upstream release
   * Remove debian/README.source as we use '3.0 (quilt) source package
@@ -7,7 +7,7 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   * Bump Debhelper compat level to 8.
   * debian/control:
     - Bump versioned Build-Depends on debhelper to (>= 8).
-    - Bump versioned Build-Depends on libextutils-xspp-perl to (>= 0.1602). 
+    - Bump versioned Build-Depends on libextutils-xspp-perl to (>= 0.1602).
   * debian/copyright: Update copyright years for upstream files.
 
   [ gregor herrmann ]
@@ -20,8 +20,8 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
 
   [ gregor herrmann ]
   * Set Standards-Version to 3.9.2 (no changes).
-  * Add perl 5.14 as an alternative build dependency to libextutils-parsexs-perl.
-    (Closes: #636762)
+  * Add perl 5.14 as an alternative build dependency to
+    libextutils-parsexs-perl. (Closes: #636762)
 
   [ Damyan Ivanov ]
   * rules: delcare top-level targets as phony. Closes: #638396 -- runs
