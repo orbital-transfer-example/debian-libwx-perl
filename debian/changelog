@@ -29,6 +29,7 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
     Thanks to Jonathen Nieder
   * allow parallel building
   * describe interface/wx in debian/copyright
+  * rules: consistently make all examples executable
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 

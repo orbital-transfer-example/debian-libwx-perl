@@ -25,3 +25,4 @@ override_dh_auto_install:
 override_dh_installexamples:
 	dh_installexamples
 	chmod 0644 $(TMP)/usr/share/doc/$(PACKAGE)/examples/README.txt
+	find $(TMP)/usr/share/doc/$(PACKAGE)/examples -name '*.pl' -exec chmod 0755 {} \;
