@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-DEBIAN_TARGETS := clean binary binary-arch binary-indep build
+DEBIAN_TARGETS := clean binary binary-arch binary-indep build build-arch build-indep
 
 .PHONY: $(DEBIAN_TARGETS)
 
