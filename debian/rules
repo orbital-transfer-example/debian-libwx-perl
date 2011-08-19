@@ -5,7 +5,7 @@ DEBIAN_TARGETS := clean binary binary-arch binary-indep build
 .PHONY: $(DEBIAN_TARGETS)
 
 $(DEBIAN_TARGETS):
-	dh $@
+	dh $@ --parallel
 
 PACKAGE=$(shell dh_listpackages)
 TMP     =$(CURDIR)/debian/$(PACKAGE)
