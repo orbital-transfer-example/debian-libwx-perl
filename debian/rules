@@ -1,6 +1,10 @@
 #!/usr/bin/make -f
 
-%:
+DEBIAN_TARGETS := clean binary binary-arch binary-indep build
+
+.PHONY: $(DEBIAN_TARGETS)
+
+$(DEBIAN_TARGETS):
 	dh $@
 
 PACKAGE=$(shell dh_listpackages)

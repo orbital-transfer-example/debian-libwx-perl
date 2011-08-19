@@ -1,7 +1,5 @@
 libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
  
-  TODO: Investigate test failures
-
   [ Salvatore Bonaccorso ]
   * New upstream release
   * Remove debian/README.source as we use '3.0 (quilt) source package
@@ -24,6 +22,11 @@ libwx-perl (1:0.9901-1) UNRELEASED; urgency=low
   * Set Standards-Version to 3.9.2 (no changes).
   * Add perl 5.14 as an alternative build dependency to libextutils-parsexs-perl.
     (Closes: #636762)
+
+  [ Damyan Ivanov ]
+  * rules: delcare top-level targets as phony. Closes: #638396 -- runs
+    testsuite as root (in the 'binary' target).
+    Thanks to Jonathen Nieder
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 11 Jun 2011 10:55:39 +0200
 
