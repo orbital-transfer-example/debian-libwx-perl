@@ -1,3 +1,10 @@
+libwx-perl (1:0.9901-2) UNRELEASED; urgency=low
+
+  * rules: use cleartext targets instead of a variable containing them all
+    works around lintian #638411 which causes an automated reject
+
+ -- Damyan Ivanov <dmn@debian.org>  Sat, 20 Aug 2011 21:48:38 +0300
+
 libwx-perl (1:0.9901-1) unstable; urgency=low
 
   * Team upload

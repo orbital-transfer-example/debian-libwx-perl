@@ -4,7 +4,10 @@ DEBIAN_TARGETS := clean binary binary-arch binary-indep build build-arch build-i
 
 .PHONY: $(DEBIAN_TARGETS)
 
-$(DEBIAN_TARGETS):
+# the list is put verbatim here as a workaround for lintian bug #638411
+# lintian fails to interpolate the variable and reports missing required
+# targets, leading to an automated reject
+clean binary binary-arch binary-indep build build-arch build-indep:
 	dh $@ --parallel
 
 PACKAGE=$(shell dh_listpackages)
