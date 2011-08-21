@@ -1,3 +1,9 @@
+libwx-perl (1:0.9901-3) unstable; urgency=low
+
+  * point to GPL-1 for "version 1 or later". Thanks to Salvatore.
+
+ -- Damyan Ivanov <dmn@debian.org>  Sun, 21 Aug 2011 09:22:38 +0300
+
 libwx-perl (1:0.9901-2) unstable; urgency=low
 
   * rules: use cleartext targets instead of a variable containing them all
