@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     12/08/2001
-// RCS-ID:      $Id: DND.xs 2057 2007-06-18 23:03:00Z mbarbon $
-// Copyright:   (c) 2001-2004 Mattia Barbon
+// RCS-ID:      $Id: DND.xs 3083 2011-07-04 16:44:05Z mdootson $
+// Copyright:   (c) 2001-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -47,6 +47,12 @@ wxDF_TEXT()
   CODE:
     RETVAL = new wxDataFormat( wxDF_TEXT );
   OUTPUT: RETVAL
+  
+wxDataFormat*
+wxDF_UNICODETEXT()
+  CODE:
+    RETVAL = new wxDataFormat( wxDF_UNICODETEXT );
+  OUTPUT: RETVAL  
 
 wxDataFormat*
 wxDF_BITMAP()

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 3012 2011-03-02 21:33:41Z mbarbon $
+// RCS-ID:      $Id: Constant.xs 3094 2011-10-13 04:41:01Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -405,8 +405,13 @@ static wxPlINH inherit[] =
     I( ListCtrl,        Control )
     I( ListView,        ListCtrl )
     I( SashWindow,      Window )
+#if WXPERL_W_VERSION_GE( 2, 9, 2 )
+    I( ToggleButton,    Control )
+    I( BitmapToggleButton, ToggleButton )
+#else
     I( ToggleButton,    Control )
     I( BitmapToggleButton, Control )
+#endif
     I( Wizard,          Dialog )
     I( WizardPage,      Panel )
     I( WizardPageSimple, WizardPage )
@@ -702,7 +707,7 @@ static wxPlINH inherit[] =
     I( ScrollEvent,     CommandEvent )
     I( SizeEvent,       Event )
     I( ScrollWinEvent,  Event )
-#if defined(__WXMAC__)
+#if defined(__WXMAC__) && WXPERL_W_VERSION_LE( 2, 9, 1 )
     I( SpinEvent,       ScrollEvent )
 #else
     I( SpinEvent,       NotifyEvent )

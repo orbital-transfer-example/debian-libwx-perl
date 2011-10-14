@@ -1,6 +1,6 @@
 # http://module-build.sourceforge.net/META-spec.html
 name:         Wx
-version:      0.9901
+version:      0.9902
 version_from: Wx.pm
 installdirs:  site
 author:       Mattia Barbon <mbarbon@cpan.org>

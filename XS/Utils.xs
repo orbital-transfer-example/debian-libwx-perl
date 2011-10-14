@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     09/02/2001
-## RCS-ID:      $Id: Utils.xs 2980 2010-09-07 20:54:15Z mbarbon $
+## RCS-ID:      $Id: Utils.xs 3096 2011-10-13 05:52:30Z mdootson $
 ## Copyright:   (c) 2001-2003, 2005-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -88,9 +88,40 @@ wxSplashScreen::GetTimeout()
 
 MODULE=Wx PACKAGE=Wx::WindowDisabler
 
+#if WXPERL_W_VERSION_GE( 2, 9, 2 )
+
+void
+new( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+        MATCH_VOIDM_REDISP( newBool )
+        MATCH_REDISP( wxPliOvl_wwin, newWindow )
+        MATCH_REDISP( wxPliOvl_n, newBool )
+    END_OVERLOAD( "Wx::WindowDisabler::new" )
+
+wxWindowDisabler*
+newWindow( CLASS, skip )
+    SV* CLASS
+    wxWindow* skip
+  CODE:
+    RETVAL = new wxWindowDisabler( skip );
+  OUTPUT: RETVAL
+
+wxWindowDisabler*
+newBool( CLASS, disable = true )
+    SV* CLASS
+    bool disable
+  CODE:
+    RETVAL = new wxWindowDisabler( disable );
+  OUTPUT: RETVAL
+
+#else
+
 wxWindowDisabler*
 wxWindowDisabler::new( skip = 0 )
     wxWindow* skip
+
+#endif
 
 static void
 wxWindowDisabler::CLONE()

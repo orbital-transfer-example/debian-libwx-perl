@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/08/2001
-## RCS-ID:      $Id: DND.pm 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: DND.pm 3083 2011-07-04 16:44:05Z mdootson $
 ## Copyright:   (c) 2001-2004, 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -52,7 +52,7 @@ use strict;
 
 package Wx;
 
-use vars qw($_df_invalid $_df_bitmap $_df_text $_df_metafile $_df_filename);
+use vars qw($_df_invalid $_df_bitmap $_df_text $_df_unicodetext $_df_metafile $_df_filename);
 
 # !parser: sub { $_[0] =~ m/^\s*\#\s*sub\s+(wx\w+)/ }
 # !package: Wx
@@ -60,6 +60,7 @@ use vars qw($_df_invalid $_df_bitmap $_df_text $_df_metafile $_df_filename);
 
 # sub wxDF_INVALID
 # sub wxDF_TEXT
+# sub wxDF_UNICODETEXT
 # sub wxDF_BITMAP
 # sub wxDF_METAFILE
 # sub wxDF_FILENAME

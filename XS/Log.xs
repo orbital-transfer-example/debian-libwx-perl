@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Log.xs 3050 2011-04-19 00:37:57Z mdootson $
+## RCS-ID:      $Id: Log.xs 3078 2011-07-04 02:23:36Z mdootson $
 ## Copyright:   (c) 2000-2003, 2005-2007, 2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -81,6 +81,14 @@ IsAllowedTraceMask( mask )
     RETVAL = wxLog::IsAllowedTraceMask( mask );
   OUTPUT:
     RETVAL
+    
+void
+GetTraceMasks()
+  PPCODE:
+    const wxArrayString& masksallowed = wxLog::GetTraceMasks();
+    PUTBACK;
+    wxPli_stringarray_push( aTHX_  masksallowed );
+    SPAGAIN;
 
 wxLog*
 GetActiveTarget()
@@ -421,6 +429,9 @@ wxLogChain::new( logger )
 
 wxLog*
 wxLogChain::GetOldLog()
+
+void
+wxLogChain::DetachOldLog()
 
 bool
 wxLogChain::IsPassingMessages()

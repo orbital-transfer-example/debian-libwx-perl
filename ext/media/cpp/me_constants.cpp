@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     04/03/2006
-// RCS-ID:      $Id: me_constants.cpp 2057 2007-06-18 23:03:00Z mbarbon $
+// RCS-ID:      $Id: me_constants.cpp 3072 2011-06-29 19:29:53Z mdootson $
 // Copyright:   (c) 2006 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -33,6 +33,11 @@ double media_constant( const char* name, int arg )
         r( wxEVT_MEDIA_FINISHED );
         r( wxEVT_MEDIA_STOP );
         r( wxEVT_MEDIA_LOADED );
+#if WXPERL_W_VERSION_GE( 2, 6, 3 )
+        r( wxEVT_MEDIA_STATECHANGED );
+        r( wxEVT_MEDIA_PLAY );
+        r( wxEVT_MEDIA_PAUSE );
+#endif        
     case 'M':
         r( wxMEDIASTATE_STOPPED );
         r( wxMEDIASTATE_PAUSED );
