@@ -6,7 +6,7 @@ Forwarded: yes
 
 --- a/build/Wx/XSP/Overload.pm
 +++ b/build/Wx/XSP/Overload.pm
-@@ -52,7 +52,7 @@ sub post_process {
+@@ -52,7 +52,7 @@
      }
  }
  

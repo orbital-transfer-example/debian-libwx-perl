@@ -5,7 +5,7 @@ Forwarded: yes
 
 --- a/cpp/overload.cpp
 +++ b/cpp/overload.cpp
-@@ -145,7 +145,7 @@ void wxPli_overload_error( pTHX_ const c
+@@ -145,7 +145,7 @@
                             wxPliPrototype* prototypes[] )
  {
      dXSARGS; // restore the mark we implicitly popped in dMARK!
