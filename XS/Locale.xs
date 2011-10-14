@@ -4,14 +4,13 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     30/11/2000
-## RCS-ID:      $Id: Locale.xs 3063 2011-06-03 21:28:26Z mbarbon $
+## RCS-ID:      $Id: Locale.xs 3085 2011-10-08 06:09:39Z mdootson $
 ## Copyright:   (c) 2000-2007, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
 
 #include <wx/intl.h>
-#include "cpp/overload.h"
 
 MODULE=Wx PACKAGE=Wx::LanguageInfo
 

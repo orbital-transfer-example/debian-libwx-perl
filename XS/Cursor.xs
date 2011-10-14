@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Cursor.xs 2635 2009-10-20 19:17:01Z mbarbon $
+## RCS-ID:      $Id: Cursor.xs 3070 2011-06-13 02:57:21Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -25,6 +25,22 @@ wxCursor::new( ... )
         
 #if defined( __WXMSW__ ) || defined( __WXPERL_FORCE__ )
 
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+
+wxCursor*
+newFile( CLASS, name, type, hsx = -1, hsy = -1 )
+    SV* CLASS
+    wxString name
+    long type
+    int hsx
+    int hsy
+  CODE:
+    RETVAL = new wxCursor( name, type, hsx, hsy );
+  OUTPUT:
+    RETVAL
+    
+#else
+
 wxCursor*
 newFile( CLASS, name, type, hsx = -1, hsy = -1 )
     SV* CLASS
@@ -36,6 +52,8 @@ newFile( CLASS, name, type, hsx = -1, hsy = -1 )
     RETVAL = new wxCursor( name, type, hsx, hsy );
   OUTPUT:
     RETVAL
+    
+#endif
 
 #endif
 
