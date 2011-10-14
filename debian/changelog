@@ -1,8 +1,11 @@
-libwx-perl (1:0.9902-1) UNRELEASED; urgency=low
+libwx-perl (1:0.9902-1) unstable; urgency=low
 
+  * Team upload
   * New upstream release
+  * Refresh patches
+  * Update debian/copyright
 
- -- Alessandro Ghedini <al3xbio@gmail.com>  Fri, 14 Oct 2011 13:27:08 +0200
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Fri, 14 Oct 2011 13:53:09 +0200
 
 libwx-perl (1:0.9901-3) unstable; urgency=low
 
