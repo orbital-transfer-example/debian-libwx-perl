@@ -1,11 +1,14 @@
 libwx-perl (1:0.9903-1) UNRELEASED; urgency=low
 
-  IGNORE-VERSION: 1:0.9903-1
-  mingw build related fixes
-
+  [ Alessandro Ghedini ]
   * New upstream release
 
- -- Alessandro Ghedini <al3xbio@gmail.com>  Sat, 12 Nov 2011 17:56:26 +0100
+  [ Dominic Hargreaves ]
+  * Swap libextutils-parsexs-perl/perl alternate build-dependency around
+    following migration of perl 5.14 to unstable so that it can be
+    autobuilt
+
+ -- Dominic Hargreaves <dom@earth.li>  Thu, 17 Nov 2011 21:24:21 +0000
 
 libwx-perl (1:0.9902-1) unstable; urgency=low
 
