@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Menu.xs 2938 2010-07-04 12:56:48Z mbarbon $
+## RCS-ID:      $Id: Menu.xs 3137 2012-02-28 00:29:39Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -420,6 +420,17 @@ void
 wxMenu::UpdateUI( source = 0 )
     wxEvtHandler* source
 
+#if defined(__WXGTK__) && WXPERL_W_VERSION_GE( 2, 7, 1 )
+
+wxLayoutDirection
+wxMenu::GetLayoutDirection()
+
+void
+wxMenu::SetLayoutDirection( direction )
+    wxLayoutDirection direction
+
+#endif
+
 MODULE=Wx PACKAGE=Wx::MenuBar
 
 wxMenuBar*
@@ -571,6 +582,18 @@ wxMenuBar::SetMenuLabel( pos, label )
 bool
 wxMenuBar::IsEnabledTop( id )
     int id
+    
+#if defined(__WXGTK__) && WXPERL_W_VERSION_GE( 2, 7, 1 )
+
+wxLayoutDirection
+wxMenuBar::GetLayoutDirection()
+
+void
+wxMenuBar::SetLayoutDirection( direction )
+    wxLayoutDirection direction
+
+#endif
+
 
 #if defined( __WXMAC__ )
 

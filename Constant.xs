@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 3094 2011-10-13 04:41:01Z mdootson $
+// RCS-ID:      $Id: Constant.xs 3119 2011-11-18 17:38:16Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -386,7 +386,11 @@ static wxPlINH inherit[] =
     I( FileCtrl,        Control )
 #endif
     I( SpinButton,      Control )
+#if WXPERL_W_VERSION_GE( 2, 9, 2 ) && !defined(__WXMAC__)
+    I( SearchCtrl,      Control )
+#else
     I( SearchCtrl,      TextCtrl )
+#endif
     I( RadioBox,        Control )
     I( RadioButton,     Control )
     I( StaticLine,      Control )
@@ -469,6 +473,9 @@ static wxPlINH inherit[] =
     I( SVGFileDC,       DC )
     I( MirrorDC,        DC )
     I( GCDC,            DC )
+#ifdef __WXMSW__   
+    I( EnhMetaFileDC,   DC )
+#endif
     
     I( BMPHandler,      ImageHandler )
     I( PNGHandler,      ImageHandler )

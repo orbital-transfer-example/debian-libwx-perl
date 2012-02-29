@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     11/11/2006
-## RCS-ID:      $Id: AUI.pm 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: AUI.pm 3124 2011-11-21 02:44:58Z mdootson $
 ## Copyright:   (c) 2006 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -31,6 +31,6 @@ no strict;
 package Wx::AuiManager;    @ISA = qw(Wx::EvtHandler);
 package Wx::AuiNotebook;   @ISA = qw(Wx::Control);
 package Wx::AuiManagerEvent; @ISA = qw(Wx::Event);
-package Wx::AuiNotebookEvent; @ISA = qw(Wx::NotifyEvent);
+package Wx::AuiNotebookEvent; @ISA = ( Wx::wxVERSION() <= 2.009002 ? qw(Wx::NotifyEvent) : qw(Wx::BookCtrlEvent) );
 
 1;

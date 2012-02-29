@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: ComboBox.xs 3037 2011-03-19 10:56:08Z mbarbon $
+## RCS-ID:      $Id: ComboBox.xs 3142 2012-02-28 03:06:04Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2008, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -94,6 +94,16 @@ INCLUDE_COMMAND: $^X -pe "s/ItemContainerImmutable/ComboBox/g" XS/ItemContainerI
 INCLUDE_COMMAND: $^X -pe "s/ItemContainer/ComboBox/g;s/->(?=[SG]etClientObject)/->wxItemContainer::/" XS/ItemContainer.xs
 
 #undef WXPERL_IN_COMBOBOX
+
+#if WXPERL_W_VERSION_GE( 2, 9, 3 )
+
+bool 
+wxComboBox::IsListEmpty();
+
+bool 
+wxComboBox::IsTextEmpty();
+
+#endif
 
 #if WXPERL_W_VERSION_GE( 2, 7, 2 )
 

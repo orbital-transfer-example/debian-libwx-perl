@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     05/11/2006
-// RCS-ID:      $Id: RichText.xs 2888 2010-04-13 22:23:09Z mdootson $
+// RCS-ID:      $Id: RichText.xs 3134 2012-02-27 23:15:23Z mdootson $
 // Copyright:   (c) 2006-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -47,6 +47,13 @@ static wxPliEventDescription evts[] =
     EVT( EVT_RICHTEXT_STYLESHEET_CHANGED, 3, wxEVT_COMMAND_RICHTEXT_STYLESHEET_CHANGED )
     EVT( EVT_RICHTEXT_STYLESHEET_REPLACING, 3, wxEVT_COMMAND_RICHTEXT_STYLESHEET_REPLACING )
     EVT( EVT_RICHTEXT_STYLESHEET_REPLACED, 3, wxEVT_COMMAND_RICHTEXT_STYLESHEET_REPLACED )
+#endif
+#if WXPERL_W_VERSION_GE( 2, 8, 11 )
+    EVT( EVT_RICHTEXT_CHARACTER, 3, wxEVT_COMMAND_RICHTEXT_CHARACTER )
+    EVT( EVT_RICHTEXT_DELETE, 3, wxEVT_COMMAND_RICHTEXT_DELETE )
+    EVT( EVT_RICHTEXT_STYLE_CHANGED, 3, wxEVT_COMMAND_RICHTEXT_STYLE_CHANGED )
+    EVT( EVT_RICHTEXT_CONTENT_INSERTED, 3, wxEVT_COMMAND_RICHTEXT_CONTENT_INSERTED )
+    EVT( EVT_RICHTEXT_CONTENT_DELETED, 3, wxEVT_COMMAND_RICHTEXT_CONTENT_DELETED )
 #endif
     { 0, 0, 0 }
 };

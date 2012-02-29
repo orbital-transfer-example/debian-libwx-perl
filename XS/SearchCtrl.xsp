@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/08/2007
-## RCS-ID:      $Id: SearchCtrl.xsp 2140 2007-08-12 13:35:52Z mbarbon $
+## RCS-ID:      $Id: SearchCtrl.xsp 3131 2011-11-22 05:28:54Z mdootson $
 ## Copyright:   (c) 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -18,6 +18,7 @@
 #include <wx/menu.h>
 
 %typemap{wxSearchCtrl*}{simple};
+%typemap{const wxTextAttr&}{reference};
 
 %name{Wx::SearchCtrl} class wxSearchCtrl
 {
@@ -68,5 +69,17 @@ new( ... )
     void SetDescriptiveText( const wxString& text );
     wxString GetDescriptiveText() const;
 };
+
+#if WXPERL_W_VERSION_GE( 2, 9, 2 ) && !defined(__WXMAC__)
+
+#define WXPERL_IN_SEARCHCTRL
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/TextCtrlIface.xsp
+INCLUDE_COMMAND: $^X -pe "s/TextCtrlIface/SearchCtrl/g" xspp/TextCtrlIface.h
+
+#undef WXPERL_IN_SEARCHCTRL
+
+#endif
+
 
 #endif

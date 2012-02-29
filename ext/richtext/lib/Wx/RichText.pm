@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichText.pm 3035 2011-03-13 21:57:38Z mbarbon $
+## RCS-ID:      $Id: RichText.pm 3115 2011-11-18 06:38:35Z mdootson $
 ## Copyright:   (c) 2006-2007, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -32,7 +32,7 @@ SetEvents();
 no strict;
 
 package Wx::Printout;
-package Wx::RichTextCtrl;    @ISA = qw(Wx::TextCtrl);
+package Wx::RichTextCtrl;    @ISA = ( Wx::wxVERSION() <= 2.009001 ? qw(Wx::TextCtrl) : qw(Wx::Control) );
 package Wx::TextAttrEx;      @ISA = qw(Wx::TextAttr);
 package Wx::RichTextEvent;   @ISA = qw(Wx::NotifyEvent);
 package Wx::RichTextStyleDefinition;

@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichTextCtrl.xsp 2990 2010-11-01 08:42:11Z mbarbon $
+## RCS-ID:      $Id: RichTextCtrl.xsp 3131 2011-11-22 05:28:54Z mdootson $
 ## Copyright:   (c) 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -366,7 +366,9 @@ wxPlConstants richtextctrl_module( &richtextctrl_constant );
     const wxRichTextRange& GetInternalSelectionRange() const;
     void SetInternalSelectionRange( const wxRichTextRange& range );
 #endif
+#if WXPERL_W_VERSION_LE( 2, 9, 1 )
     bool HasSelection() const;
+#endif
     wxRichTextRange AddParagraph( const wxString& text );
     wxRichTextRange AddImage( const wxImage& image );
 
@@ -478,6 +480,7 @@ wxRichTextCtrl::SetBasicStyle( ... )
 
     wxRichTextBuffer* GetBuffer()
         %code{% RETVAL = &THIS->GetBuffer(); %};
+
 };
 
 %{
@@ -728,5 +731,16 @@ WriteImage( ... )
         MATCH_REDISP( wxPliOvl_s_n, WriteImageFile )
     END_OVERLOAD( "Wx::RichTextCtrl::WriteImage" )
 
-
 %}
+
+#if WXPERL_W_VERSION_GE( 2, 9, 2 )
+
+#define WXPERL_IN_RICHTEXTCTRL
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp ../../XS/TextCtrlIface.xsp
+INCLUDE_COMMAND: $^X -pe "s/TextCtrlIface/RichTextCtrl/g" xspp/TextCtrlIface.h
+
+#undef WXPERL_IN_RICHTEXTCTRL
+
+#endif
+
