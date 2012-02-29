@@ -1,6 +1,6 @@
-Format: http://dep.debian.net/deps/dep5/
-Upstream-Contact: Mattia Barbon <mbarbon@cpan.org>
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Wx
+Upstream-Contact: Mattia Barbon <mbarbon@cpan.org>
 Source: http://search.cpan.org/dist/Wx/
 
 Files: *
@@ -18,7 +18,7 @@ Copyright: wxWidgets team
 License: wxWindows
 
 Files: interface/wx/headercol.h
-       interface/wx/headerctrl.h
+ interface/wx/headerctrl.h
 Copyright: 2008 Vadim Zeitlin <vadim@wxwidgets.org>
 License: wxWindows
 
