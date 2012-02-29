@@ -5,7 +5,8 @@ Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
  gregor herrmann <gregoa@debian.org>, Damyan Ivanov <dmn@debian.org>,
  Ryan Niebur <ryan@debian.org>, Chris Butler <chrisb@debian.org>,
- Dominic Hargreaves <dom@earth.li>
+ Dominic Hargreaves <dom@earth.li>,
+ Alessandro Ghedini <al3xbio@gmail.com>
 Build-Depends: debhelper (>= 8), perl,
  libalien-wxwidgets-perl (>= 0.48),
  perl (>= 5.14) | libextutils-parsexs-perl (>= 2.2203),
