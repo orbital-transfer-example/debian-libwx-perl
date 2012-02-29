@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     14/08/2007
-## RCS-ID:      $Id: ItemContainerImmutable.xsp 2163 2007-08-15 22:46:51Z mbarbon $
+## RCS-ID:      $Id: ItemContainerImmutable.xsp 3142 2012-02-28 03:06:04Z mdootson $
 ## Copyright:   (c) 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -16,7 +16,9 @@
 
 %name{Wx::ItemContainerImmutable} class wxItemContainerImmutable {
     unsigned int GetCount() const;
+#if !defined(WXPERL_IN_COMBOBOX) || WXPERL_W_VERSION_LE( 2, 9, 2 )
     bool IsEmpty() const;
+#endif
     wxString GetString( unsigned int n );
 
 %{

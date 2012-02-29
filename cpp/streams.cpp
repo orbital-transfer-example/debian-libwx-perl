@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     30/03/2001
-// RCS-ID:      $Id: streams.cpp 2698 2009-12-13 11:08:53Z mbarbon $
+// RCS-ID:      $Id: streams.cpp 3128 2011-11-21 20:54:27Z mdootson $
 // Copyright:   (c) 2001-2002, 2004, 2006-2007, 2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -21,7 +21,38 @@ const char sub_read[] = "sub { read $_[0], $_[1], $_[2] }";
 const char sub_seek[] = "sub { seek $_[0], $_[1], $_[2]; tell $_[0] }";
 const char sub_tell[] = "sub { tell $_[0] }";
 const char sub_write[] = "sub { print { $_[0] } $_[1] }";
-const char sub_length[] = "sub { eval { fileno( $_[0] ) && fileno( $_[0] ) >= 0 } ? ( stat $_[0] )[7] : -1 }";
+
+// for an open filehandle to a real file, fileno returns a filenumber
+// and we use stat to get the file length.
+// If fileno returns undef, $fh may be a scalar tied via IO::Scalar
+// or IO::String. We test for that and return length of tied scalar.
+// If fileno returns -1, then $fh maybe a handle provided by PerlIO
+// scalar layer so we see if we can get the length with seek & tell
+
+const char sub_length[] = "sub {  \
+    local $@; \
+    my $rval = -1; \
+    my $fn = eval { fileno( $_[0] ) }; \
+    if( !defined($fn) ) { \
+        eval { \
+            if( $_[0]->can('sref') ) { \
+                use bytes; \
+                $rval = length( ${ $_[0]->sref } ); \
+            } \
+        }; \
+    } elsif( $fn != -1 ) { \
+        $rval = (stat $_[0])[7]; \
+    } else { \
+        eval { \
+            my $curpos = tell($_[0]); \
+            if( ( $curpos != -1) && seek($_[0],0,2) ) { \
+                $rval = tell($_[0]); \
+                seek($_[0],$curpos,0); \
+            } \
+        }; \
+    } \
+    return $rval; \
+    }";
 
 SV* sg_read;
 SV* sg_seek;
@@ -171,7 +202,12 @@ wxFileOffset wxPliInputStream::GetLength() const
 
 size_t wxPliInputStream::GetSize() const
 {
-    return stream_length( this, m_fh );
+    wxFileOffset length = stream_length( this, m_fh );
+    if ( length == (wxFileOffset)wxInvalidOffset )
+        return 0;
+    
+    const size_t len = wx_truncate_cast(size_t, length);
+    return len;
 }
 
 // output stream
@@ -271,7 +307,12 @@ wxFileOffset wxPliOutputStream::GetLength() const
 
 size_t wxPliOutputStream::GetSize() const
 {
-    return stream_length( this, m_fh );
+    wxFileOffset length = stream_length( this, m_fh );
+    if ( length == (wxFileOffset)wxInvalidOffset )
+        return 0;
+    
+    const size_t len = wx_truncate_cast(size_t, length);
+    return len;
 }
 
 // helpers

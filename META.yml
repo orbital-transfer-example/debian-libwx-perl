@@ -1,9 +1,9 @@
 # http://module-build.sourceforge.net/META-spec.html
 name:         Wx
-version:      0.9903
+version:      0.9904
 version_from: Wx.pm
 installdirs:  site
-author:       ARRAY(0x99742f0)
+author: Mattia Barbon <mbarbon@cpan.org>
 abstract:     interface to the wxWidgets cross-platform GUI toolkit
 license:      perl
 #requires:
@@ -37,7 +37,7 @@ resources:
   repository: https://wxperl.svn.sourceforge.net/svnroot/wxperl/wxPerl
 
 distribution_type: module
-generated_by: ExtUtils::MY_Metafile version 0.09, EUMM-6.57_05.
+generated_by: ExtUtils::MY_Metafile version 0.09, EUMM-6.56.
 meta-spec:
   version: 1.3
   url: http://module-build.sourceforge.net/META-spec-v1.3.html

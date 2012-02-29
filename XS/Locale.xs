@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     30/11/2000
-## RCS-ID:      $Id: Locale.xs 3085 2011-10-08 06:09:39Z mdootson $
+## RCS-ID:      $Id: Locale.xs 3125 2011-11-21 02:47:30Z mdootson $
 ## Copyright:   (c) 2000-2007, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -74,6 +74,7 @@ wxLanguageInfo::GetWinSublang()
 #else
     RETVAL = 0;
 #endif
+  OUTPUT: RETVAL
 
 wxString
 wxLanguageInfo::GetDescription()

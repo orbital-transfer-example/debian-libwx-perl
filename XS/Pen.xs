@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     21/11/2000
-## RCS-ID:      $Id: Pen.xs 2340 2008-03-25 22:25:07Z mbarbon $
+## RCS-ID:      $Id: Pen.xs 3125 2011-11-21 02:47:30Z mdootson $
 ## Copyright:   (c) 2000-2003, 2004, 2006-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -55,6 +55,7 @@ newBitmap( CLASS, stipple, width )
     int width
   CODE:
     RETVAL = new wxPen( *stipple, width );
+  OUTPUT: RETVAL
 
 #endif
 

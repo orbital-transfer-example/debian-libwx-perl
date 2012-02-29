@@ -3,7 +3,7 @@
 ## Purpose:     XS for Wx::StyledTextCtrl
 ## Author:      Marcus Friedlaender and Mattia Barbon
 ## Created:     23/05/2002
-## RCS-ID:      $Id: StyledTextCtrl.xsp 2938 2010-07-04 12:56:48Z mbarbon $
+## RCS-ID:      $Id: StyledTextCtrl.xsp 3136 2012-02-27 23:38:01Z mdootson $
 ## Copyright:   (c) 2002-2004, 2006-2008, 2010 Graciliano M. P., 
 ##                  Marcus Friedlaender, Mattia Barbon, Simon Flack
 ## Licence:     This program is free software; you can redistribute it and/or
@@ -1483,7 +1483,10 @@ wxStyledTextCtrl::AppendTextRaw( text )
 
     void LineUpExtend();
     void LineUpRectExtend();
-
+    
+    void LineUp();
+    void LineDown();
+    
     void LinesJoin();
     void LinesSplit( int pixelWidth );
 
