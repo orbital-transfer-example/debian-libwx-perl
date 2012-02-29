@@ -1,3 +1,9 @@
+libwx-perl (1:0.9904-1) UNRELEASED; urgency=low
+
+  * New upstream release
+
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Wed, 29 Feb 2012 13:36:16 +0100
+
 libwx-perl (1:0.9903-1) unstable; urgency=low
 
   [ Alessandro Ghedini ]
