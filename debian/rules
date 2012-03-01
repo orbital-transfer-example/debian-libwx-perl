@@ -1,17 +1,12 @@
 #!/usr/bin/make -f
 
-DEBIAN_TARGETS := clean binary binary-arch binary-indep build build-arch build-indep
-
-.PHONY: $(DEBIAN_TARGETS)
-
-# the list is put verbatim here as a workaround for lintian bug #638411
-# lintian fails to interpolate the variable and reports missing required
-# targets, leading to an automated reject
-clean binary binary-arch binary-indep build build-arch build-indep:
-	dh $@ --parallel
-
 PACKAGE=$(shell dh_listpackages)
 TMP     =$(CURDIR)/debian/$(PACKAGE)
+
+DEBIAN_TARGETS := clean binary binary-arch binary-indep build build-arch build-indep
+
+$(DEBIAN_TARGETS):
+	dh $@ --parallel
 
 override_dh_auto_test:
 	xvfb-run -a dh_auto_test --max-parallel=1
@@ -29,3 +24,5 @@ override_dh_installexamples:
 	dh_installexamples
 	chmod 0644 $(TMP)/usr/share/doc/$(PACKAGE)/examples/README.txt
 	find $(TMP)/usr/share/doc/$(PACKAGE)/examples -name '*.pl' -exec chmod 0755 {} \;
+
+.PHONY: $(DEBIAN_TARGETS)
