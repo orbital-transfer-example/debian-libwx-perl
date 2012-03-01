@@ -1,11 +1,15 @@
 libwx-perl (1:0.9904-1) unstable; urgency=low
 
+  [ Alessandro Ghedini ]
   * New upstream release
   * Add myself to Uploaders
   * Bump debhelper compat level to 9
   * Update debian/copyright format as in Debian Policy 3.9.3
   * Bump Standards-Version to 3.9.3
   * Remove README.Debian (duplicates the Homepage d/control field)
+
+  [ gregor herrmann ]
+  * Simplify debian/rules a bit since lintian bug #638411 is fixed.
 
  -- Alessandro Ghedini <al3xbio@gmail.com>  Wed, 29 Feb 2012 14:29:46 +0100
 
