@@ -7,7 +7,7 @@ Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
  Ryan Niebur <ryan@debian.org>, Chris Butler <chrisb@debian.org>,
  Dominic Hargreaves <dom@earth.li>,
  Alessandro Ghedini <al3xbio@gmail.com>
-Build-Depends: debhelper (>= 9), perl,
+Build-Depends: debhelper (>= 9.20120312), perl,
  libalien-wxwidgets-perl (>= 0.48),
  perl (>= 5.14) | libextutils-parsexs-perl (>= 2.2203),
  libextutils-xspp-perl (>= 0.1602),
