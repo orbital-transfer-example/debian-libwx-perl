@@ -1,8 +1,11 @@
-libwx-perl (1:0.9905-1) UNRELEASED; urgency=low
+libwx-perl (1:0.9905-1) unstable; urgency=low
 
   * New upstream release
+  * Update debhelper versioned build depend to get more hardening flags
+  * Update upstream copyright years
+  * Add interface/wx/treelist.h to copyright
 
- -- Alessandro Ghedini <al3xbio@gmail.com>  Mon, 19 Mar 2012 13:25:36 +0100
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Mon, 19 Mar 2012 15:40:27 +0100
 
 libwx-perl (1:0.9904-1) unstable; urgency=low
 
