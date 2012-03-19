@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: typemap 3115 2011-11-18 06:38:35Z mdootson $
-## Copyright:   (c) 2000-2011 Mattia Barbon
+## RCS-ID:      $Id: typemap 3166 2012-03-06 03:02:31Z mdootson $
+## Copyright:   (c) 2000-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -45,9 +45,12 @@ wxItemKind              T_ENUM
 wxLayoutDirection       T_ENUM
 PlClassName             T_CLASSNAME
 wxUint32                T_IV
+wxLongLong_t            T_IV
+wxULongLong_t           T_UV
 wxByte                  T_U_CHAR
 wxTextCtrlHitTestResult T_ENUM
 wxArrayString           T_ARRAYSTRING
+wxArrayString *         T_ARRAYSTRING
 wxPliUserDataCD **      T_ARRAYUSERDATA
 wxArrayInt              T_ARRAYINT
 wxTextPos               T_IV
@@ -408,6 +411,10 @@ wxGraphicsPath *        O_WXOBJECT_THR
 wxGraphicsPen *         O_WXOBJECT_THR
 wxGraphicsGradientStop * O_NON_WXOBJECT_THR
 wxGraphicsGradientStops * O_NON_WXOBJECT_THR
+wxTreeListCtrl *        O_WXEVTHANDLER
+wxTreeListItem *        O_NON_WXOBJECT_THR
+wxTreeListItemComparator * O_NON_WXOBJECT_THR
+wxPlTreeListItemComparator * O_NON_WXOBJECT_SELF
 
 # events
 wxEvent *               O_WXOBJECT_THR
@@ -466,6 +473,7 @@ wxWindowCreateEvent *   O_WXOBJECT_THR
 wxWindowDestroyEvent *  O_WXOBJECT_THR
 wxCollapsiblePaneEvent * O_WXOBJECT_THR
 wxHeaderCtrlEvent *     O_WXOBJECT_THR
+wxTreeListEvent *       O_WXOBJECT_THR
 
 wxPlEvent *             O_WXOBJECT_THR
 wxPlCommandEvent *      O_WXOBJECT_THR
@@ -477,6 +485,8 @@ wxFileConfig *          O_NON_WXOBJECT
 
 wxArtProvider *         O_WXOBJECT
 wxPlArtProvider *       O_WXOBJECT
+
+
 
 OUTPUT
 O_WXOBJECT

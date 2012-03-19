@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 3119 2011-11-18 17:38:16Z mdootson $
+// RCS-ID:      $Id: Constant.xs 3185 2012-03-10 06:40:00Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -118,7 +118,11 @@
 #include <wx/filectrl.h>
 #include <wx/wrapsizer.h>
 #endif
-
+#if WXPERL_W_VERSION_GE( 2, 9, 3 )
+#include <wx/propgrid/propgrid.h>
+#include <wx/propgrid/property.h>
+#include <wx/propgrid/propgriddefs.h>
+#endif
 #if WXPERL_W_VERSION_GE( 2, 7, 0 ) && !WXWIN_COMPATIBILITY_2_6
 #define wxCHB_DEFAULT         wxBK_DEFAULT
 #define wxCHB_TOP             wxBK_TOP
@@ -708,6 +712,7 @@ static wxPlINH inherit[] =
     I( NotifyEvent,     CommandEvent )
     I( FileCtrlEvent,   CommandEvent )
     I( PaintEvent,      Event )
+    I( NcPaintEvent,    Event )
     I( ProcessEvent,    Event )
     I( QueryLayoutInfoEvent, Event )
     I( SashEvent,       CommandEvent )
@@ -739,7 +744,6 @@ static wxPlINH inherit[] =
     I( FontPickerEvent, CommandEvent )
     I( SetCursorEvent,  Event )
     I( CollapsiblePaneEvent, CommandEvent )
-
     { 0, 0 }
 };
 
@@ -3076,6 +3080,39 @@ void SetConstantsOnce()
     wxPli_make_const_string( wxMEDIABACKEND_WMP10 ); // media
 #endif
 
+// PropertyGrid string constants
+#if WXPERL_W_VERSION_GE( 2, 9, 3 ) && wxUSE_PROPGRID
+/* cached values - not constants
+    wxPli_make_const_string( wxPG_ATTR_UNITS );
+    wxPli_make_const_string( wxPG_ATTR_HINT );
+    wxPli_make_const_string( wxPG_ATTR_INLINE_HELP );
+    wxPli_make_const_string( wxPG_ATTR_DEFAULT_VALUE );
+    wxPli_make_const_string( wxPG_ATTR_MIN );
+    wxPli_make_const_string( wxPG_ATTR_MAX );
+*/
+    wxPli_make_const_string( wxPG_ATTR_AUTOCOMPLETE );
+    wxPli_make_const_string( wxPG_BOOL_USE_CHECKBOX );
+    wxPli_make_const_string( wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING );
+    wxPli_make_const_string( wxPG_FLOAT_PRECISION );
+    wxPli_make_const_string( wxPG_STRING_PASSWORD );
+    wxPli_make_const_string( wxPG_UINT_BASE );
+    wxPli_make_const_string( wxPG_UINT_PREFIX );
+    wxPli_make_const_string( wxPG_FILE_WILDCARD );
+    wxPli_make_const_string( wxPG_FILE_SHOW_FULL_PATH );
+    wxPli_make_const_string( wxPG_FILE_SHOW_RELATIVE_PATH );
+    wxPli_make_const_string( wxPG_FILE_INITIAL_PATH );
+    wxPli_make_const_string( wxPG_FILE_DIALOG_TITLE );
+    wxPli_make_const_string( wxPG_DIR_DIALOG_MESSAGE );
+    wxPli_make_const_string( wxPG_ARRAY_DELIMITER );
+    wxPli_make_const_string( wxPG_DATE_FORMAT );
+    wxPli_make_const_string( wxPG_DATE_PICKER_STYLE );
+    wxPli_make_const_string( wxPG_ATTR_SPINCTRL_STEP );
+    wxPli_make_const_string( wxPG_ATTR_SPINCTRL_WRAP );
+    wxPli_make_const_string( wxPG_ATTR_MULTICHOICE_USERSTRINGMODE );
+    wxPli_make_const_string( wxPG_COLOUR_ALLOW_CUSTOM );
+    wxPli_make_const_string( wxPG_COLOUR_HAS_ALPHA );
+#endif
+
     wxPli_make_const( "wxTheClipboard" );       // clipboard
     wxPli_make_const( "wxDefaultValidator" );   // misc
     wxPli_make_const( "wxFormatInvalid" );      // dnd
@@ -3419,6 +3456,12 @@ _get_packages()
 #endif
 #if wxPERL_USE_MEDIA && wxUSE_MEDIACTRL && WXPERL_W_VERSION_GE( 2, 6, 0 )
     "use Wx::Media;"
+#endif
+#if wxPERL_USE_PROPGRID && wxUSE_PROPGRID && WXPERL_W_VERSION_GE( 2, 9, 3 )
+    "use Wx::PropertyGrid;"
+#endif
+#if wxPERL_USE_RIBBON && wxUSE_RIBBON && WXPERL_W_VERSION_GE( 2, 9, 3 )
+    "use Wx::Ribbon;"
 #endif
 #if wxPERL_USE_RICHTEXT && WXPERL_W_VERSION_GE( 2, 7, 0 )
     "use Wx::RichText;"

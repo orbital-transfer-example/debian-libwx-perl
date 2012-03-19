@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: Sizer.xsp 2961 2010-08-22 17:29:51Z mbarbon $
+## RCS-ID:      $Id: Sizer.xsp 3173 2012-03-08 02:50:45Z mdootson $
 ## Copyright:   (c) 2000-2003, 2005-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -356,6 +356,19 @@ wxBoxSizer::new( orientation )
 
 int
 wxBoxSizer::GetOrientation()
+
+#if WXPERL_W_VERSION_GE( 2, 8, 0 )
+void
+wxBoxSizer::SetOrientation( orientation )
+    int orientation
+
+#endif
+
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+bool
+wxBoxSizer::IsVertical()
+
+#endif
 
 MODULE=Wx PACKAGE=Wx::StaticBoxSizer
 
