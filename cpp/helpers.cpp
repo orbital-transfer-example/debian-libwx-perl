@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.cpp 3038 2011-03-19 14:38:34Z mdootson $
+// RCS-ID:      $Id: helpers.cpp 3190 2012-03-16 05:04:03Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -1227,8 +1227,18 @@ wxVariant wxPli_sv_2_wxvariant( pTHX_ SV* sv )
     if( !SvOK( sv ) ) {
         return wxVariant();
     } else if( SvROK( sv ) ) {
-        // TODO
-        return wxVariant();
+        if( SvTYPE( SvRV( sv ) ) == SVt_PVAV ) {
+            // array type.
+            // assume a string array as it is the only one we
+            // can usefully handle.
+            // TODO - something better
+            wxArrayString	items;
+            wxPli_av_2_arraystring( aTHX_ sv, &items );
+            return wxVariant( items );
+        } else {
+            // TODO
+            return wxVariant();
+        }
     } else if( SvNOK( sv ) ) {
         return wxVariant( (double)SvNV( sv ) );
     } else if( SvIOK( sv ) ) {

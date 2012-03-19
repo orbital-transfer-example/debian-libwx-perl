@@ -3,6 +3,8 @@ package build::Wx::XSP::Virtual;
 use strict;
 use warnings;
 
+my %type_map;
+
 sub new {
     return bless { virtual_methods => {},
                    virtual_classes => {},
@@ -13,11 +15,34 @@ sub new {
 sub register_plugin {
     my( $class, $parser ) = @_;
     my $instance = $class->new;
-
+    
+    $parser->add_toplevel_tag_plugin ( plugin => $instance, tag => 'VirtualTypeMap' );
     $parser->add_class_tag_plugin( plugin => $instance, tag => 'NoVirtualBase' );
     $parser->add_class_tag_plugin( plugin => $instance, tag => 'VirtualImplementation' );
     $parser->add_method_tag_plugin( plugin => $instance, tag => 'Virtual' );
     $parser->add_post_process_plugin( plugin => $instance );
+}
+
+sub handle_toplevel_tag {
+    my( $self, $empty, $tag, %args ) = @_;
+    
+    if( $tag eq 'VirtualTypeMap' ) {
+        my %map = @{$args{any_named_arguments}};
+        my $typename = $map{Name}[0][0] || undef;
+        die 'No Name in VirtualTypeMap' if !$typename;
+        my $vtmap = {
+            'convert_return'  => $map{ConvertReturn}[0][0] || undef,
+            'default_value'   => $map{DefaultValue}[0][0] || undef,
+            'type_char'       => $map{TypeChar}[0][0] || undef,
+            'arguments'       => $map{Arguments}[0][0] || undef,
+        };
+        foreach my $key (sort keys( %$vtmap ) ) {
+            delete($vtmap->{$key}) unless defined($vtmap->{$key});
+        }
+        $type_map{$typename} = $vtmap;
+    }
+    
+    1;
 }
 
 sub handle_class_tag {
@@ -32,7 +57,7 @@ sub handle_class_tag {
             { name           => $map{Name}[0][0] || '',
               declaration    => join( "\n", @{$map{Declaration}[0] || []} ),
               implementation => join( "\n", @{$map{Implementation}[0] || []} ),
-              };
+            };
     }
 
     1;
@@ -51,7 +76,7 @@ sub handle_method_tag {
     1;
 }
 
-my %type_map =
+%type_map =
   ( 'bool'             => { convert_return => 'SvTRUE( ret )',
                             default_value  => 'false',
                             type_char      => 'b',
@@ -68,12 +93,10 @@ my %type_map =
                             default_value  => '0.0',
                             type_char      => 'd',
                             },
-    # TODO merge
     'wxAlignment'      => { convert_return => '(wxAlignment)SvIV( ret )',
                             default_value  => '(wxAlignment)0',
                             type_char      => 'i',
                             },
-    # TODOD merge
     'wxGridCellAttr::wxAttrKind' =>
                        => { convert_return => '(wxGridCellAttr::wxAttrKind)SvIV( ret )',
                             default_value  => '(wxGridCellAttr::wxAttrKind)0',
@@ -83,6 +106,10 @@ my %type_map =
                             default_value  => '0',
                             type_char      => 'I',
                             },
+    'wxUint32'         => { convert_return => 'SvIV( ret )',
+                            default_value  => '0',
+                            type_char      => 'i',
+                            },    
     # TODO merge
     'size_t'           => { convert_return => 'SvUV( ret )',
                             default_value  => '0',
@@ -93,19 +120,34 @@ my %type_map =
                             type_char      => 'P',
                             arguments      => '&%s',
                             },
+    'wxString&'         => { convert_return => 'wxPli_sv_2_wxString( aTHX_ ret )',
+                            default_value  => 'wxEmptyString',
+                            type_char      => 'P',
+                            arguments      => '&%s',
+                            },    
+    'wxString*'         => { convert_return => '(wxString*)wxPli_sv_2_wxString( aTHX_ ret )',
+                            default_value  => 'wxEmptyString',
+                            type_char      => 'P',
+                            arguments      => '&%s',
+                            },
     # TODO merge
     'const wxString&'  => { convert_return => 'wxPli_sv_2_wxString( aTHX_ ret )',
                             default_value  => 'wxEmptyString',
                             type_char      => 'P',
                             arguments      => '&%s',
                             },
-    'wxVariant&'       => { convert_return => 'wxPli_sv_2_variant( aTHX_ ret )',
+    'wxVariant&'       => { convert_return => 'wxPli_sv_2_wxvariant( aTHX_ ret )',
                             default_value  => 'wxVariant()',
                             type_char      => 'q',
                             arguments      => '&%s, "Wx::Variant"',
                             },
+    'wxVariant'        => { convert_return => 'wxPli_sv_2_wxvariant( aTHX_ ret )',
+                            default_value  => 'wxVariant()',
+                            type_char      => 'q',
+                            arguments      => '&%s, "Wx::Variant"',
+                            },    
     # TODO merge
-    'const wxVariant&' => { convert_return => 'wxPli_sv_2_variant( aTHX_ ret )',
+    'const wxVariant&' => { convert_return => 'wxPli_sv_2_wxvariant( aTHX_ ret )',
                             default_value  => 'wxVariant()',
                             type_char      => 'q',
                             arguments      => '&%s, "Wx::Variant"',
@@ -121,6 +163,27 @@ my %type_map =
                            type_char      => 'O',
                            arguments      => '&%s',
                            },
+    'const wxPoint&'  => { convert_return => 'wxPli_sv_2_wxpoint( aTHX_ ret )',
+                           default_value  => 'wxPoint()',
+                           type_char      => 'o',
+                           arguments      => '&%s, "Wx::Point"',
+                           },
+    'wxSize'          => { convert_return => 'wxPli_sv_2_wxsize( aTHX_ ret )',
+                           default_value  => 'wxSize()',
+                           type_char      => 'o',
+                           arguments      => '&%s, "Wx::Size"',
+                           },        
+    'const wxSize&'   => { convert_return => 'wxPli_sv_2_wxsize( aTHX_ ret )',
+                           default_value  => 'wxSize()',
+                           type_char      => 'o',
+                           arguments      => '&%s, "Wx::Size"',
+                           },    
+    'const wxRect&'   => { convert_return => '*(wxRect*)wxPli_sv_2_object( aTHX_ ret, "Wx::Bitmap" )',
+                           default_value  => 'wxRect()',
+                           type_char      => 'O',
+                           arguments      => '&%s',
+                           },
+    
     'const wxHeaderColumn&' =>
                          { convert_return => '*(wxHeaderColumn*)wxPli_sv_2_object( aTHX_ ret, "Wx::HeaderColumn" )',
                            type_char      => 'O',
@@ -166,7 +229,7 @@ sub post_process {
         next unless $node->isa( 'ExtUtils::XSpp::Node::Class' );
         next if $self->{virtual_classes}{$node};
         my( @virtual, $abstract_class, @classes, %redefined );
-
+        
         @classes = $node;
         # find virtual method in this class and in all base classes
         while( @classes ) {

@@ -92,6 +92,7 @@ sub is_number {
                   'unsigned long', 'float', 'double',
                   'wxAlignment', 'wxBrushStyle',
                   'size_t', 'ssize_t', 'wxCoord',
+                  'wxUint32'
                   );
 }
 
@@ -107,6 +108,7 @@ sub is_any {
 
     # TODO wxPerl-specific type
     return 1 if $type->base_type eq 'Wx_UserDataO';
+    return 1 if $type->base_type eq 'wxVariantArg';
 }
 
 sub _compare_function {
@@ -218,7 +220,12 @@ EOT
         # TODO name mapping is wxPerl-specific
         die 'Unable to dispatch ', $arg->type->base_type
           unless $arg->type->base_type =~ /^[Ww]x/;
-        push @indices, '"Wx::' . ( substr $arg->type->base_type, 2 ) . '"';
+        {
+            # convert typemap parsed types
+            my $subtype = substr $arg->type->base_type, 2;
+            $subtype =~ s/__parsed.*$//;
+            push @indices, '"Wx::' . $subtype . '"';
+        }
     }
 
     my $proto_name = sprintf '%s_proto', $method->perl_name;

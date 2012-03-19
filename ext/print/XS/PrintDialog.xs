@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     02/06/2001
-## RCS-ID:      $Id: PrintDialog.xs 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: PrintDialog.xs 3163 2012-03-01 00:54:35Z mdootson $
 ## Copyright:   (c) 2001, 2004 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -29,3 +29,6 @@ wxPrintDialog::GetPrintDialogData()
 
 wxDC*
 wxPrintDialog::GetPrintDC()
+
+int
+wxPrintDialog::ShowModal()

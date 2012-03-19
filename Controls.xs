@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Controls.xs 3032 2011-03-13 21:48:58Z mbarbon $
+// RCS-ID:      $Id: Controls.xs 3159 2012-02-29 23:43:26Z mdootson $
 // Copyright:   (c) 2000-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -104,6 +104,8 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/w
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/headercol.h
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/button.h
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/treelist.h
 INCLUDE: XS/CheckBox.xs
 INCLUDE: XS/CheckListBox.xs
 INCLUDE: XS/Choice.xs

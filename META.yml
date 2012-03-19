@@ -1,22 +1,22 @@
 # http://module-build.sourceforge.net/META-spec.html
 name:         Wx
-version:      0.9904
+version:      0.9905
 version_from: Wx.pm
 installdirs:  site
-author: Mattia Barbon <mbarbon@cpan.org>
+author:
+  - Mattia Barbon <mbarbon@cpan.org>
 abstract:     interface to the wxWidgets cross-platform GUI toolkit
 license:      perl
-#requires:
-build_requires:
+requires:
   Alien::wxWidgets:        0.25
-  Data::Dumper:               0
-  ExtUtils::MakeMaker:     6.17
-  ExtUtils::ParseXS:     2.2203
+  ExtUtils::ParseXS:       3.15
   ExtUtils::XSpp:        0.1602
   File::Spec::Functions:   0.82
   if:                      0.03
   Test::Harness:           2.26
   Test::More:              0.45
+build_requires:
+  ExtUtils::MakeMaker: 6.17
 no_index:
   directory:
     - samples
@@ -37,7 +37,7 @@ resources:
   repository: https://wxperl.svn.sourceforge.net/svnroot/wxperl/wxPerl
 
 distribution_type: module
-generated_by: ExtUtils::MY_Metafile version 0.09, EUMM-6.56.
+generated_by: ExtUtils::MY_Metafile version 0.09, EUMM-6.57_05.
 meta-spec:
   version: 1.3
   url: http://module-build.sourceforge.net/META-spec-v1.3.html
