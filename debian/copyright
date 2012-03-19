@@ -26,6 +26,10 @@ Files: interface/wx/infobar.h
 Copyright: 2009 Vadim Zeitlin <vadim@wxwidgets.org>
 License: wxWindows
 
+Files: interface/wx/treelist.h
+Copyright: 2011 Vadim Zeitlin <vadim@wxwidgets.org>
+License: wxWindows
+
 Files: debian/*
 Copyright: 2008, Roberto C. Sanchez <roberto@connexer.com>
 License: GPL-1+ or Artistic
