@@ -1,8 +1,9 @@
-libwx-perl (1:0.9905-2) UNRELEASED; urgency=low
+libwx-perl (1:0.9906-1) UNRELEASED; urgency=low
 
+  * New upstream release
   * Email change: Alessandro Ghedini -> ghedo@debian.org
 
- -- Alessandro Ghedini <ghedo@debian.org>  Thu, 29 Mar 2012 15:51:44 +0200
+ -- Alessandro Ghedini <ghedo@debian.org>  Sun, 01 Apr 2012 15:03:07 +0200
 
 libwx-perl (1:0.9905-1) unstable; urgency=low
 
