@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 3168 2012-03-08 01:49:46Z mdootson $
+// RCS-ID:      $Id: Wx.xs 3220 2012-03-18 03:02:46Z mdootson $
 // Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -449,6 +449,16 @@ bool
 _wx_optmod_media()
   CODE:
 #if wxPERL_USE_MEDIA && wxUSE_MEDIACTRL
+    RETVAL = TRUE;
+#else
+    RETVAL = FALSE;
+#endif
+  OUTPUT: RETVAL
+
+bool
+_wx_optmod_webview()
+  CODE:
+#if wxPERL_USE_WEBVIEW && wxUSE_WEBVIEW && WXPERL_W_VERSION_GE( 2, 9, 3 )
     RETVAL = TRUE;
 #else
     RETVAL = FALSE;

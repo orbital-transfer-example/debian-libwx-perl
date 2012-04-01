@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Controls.xs 3159 2012-02-29 23:43:26Z mdootson $
+// RCS-ID:      $Id: Controls.xs 3228 2012-03-19 03:59:13Z mdootson $
 // Copyright:   (c) 2000-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -31,6 +31,7 @@
 #define wxNORMAL_FONTPtr (wxFont*)wxNORMAL_FONT
 #define wxNullBitmapPtr (wxBitmap*) &wxNullBitmap
 #define wxNullAnimationPtr (wxAnimation*) &wxNullAnimation
+#define wxNullColourPtr (wxColour*)&wxNullColour
 
 #undef THIS
 
@@ -106,6 +107,11 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/w
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/button.h
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/treelist.h
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/richtooltip.h
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/bannerwindow.h
+
 INCLUDE: XS/CheckBox.xs
 INCLUDE: XS/CheckListBox.xs
 INCLUDE: XS/Choice.xs

@@ -4,7 +4,7 @@
 ## Author:      Mark Dootson
 ## Modified by:
 ## Created:     10/04/2010
-## RCS-ID:      $Id: RichTextPrinting.xsp 2962 2010-08-23 19:33:35Z mbarbon $
+## RCS-ID:      $Id: RichTextPrinting.xsp 3245 2012-03-26 10:26:32Z mdootson $
 ## Copyright:   (c) 2010 Mark Dootson
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -70,8 +70,14 @@ wxRichTextPrinting::CLONE()
 
     bool PreviewFile(const wxString& richTextFile);
     bool PreviewBuffer(const wxRichTextBuffer& buffer);
+
+#if WXPERL_W_VERSION_GE( 2, 9, 4 )
+    bool PrintFile(const wxString& richTextFile, bool showPrintDialog = true ); 
+    bool PrintBuffer(const wxRichTextBuffer& buffer, bool showPrintDialog = true ); 
+#else
     bool PrintFile(const wxString& richTextFile);
     bool PrintBuffer(const wxRichTextBuffer& buffer);
+#endif
 
     void PageSetup();
 
@@ -94,11 +100,11 @@ wxRichTextPrinting::CLONE()
     wxPageSetupDialogData *GetPageSetupData() const;
     void SetPageSetupData(const wxPageSetupDialogData& pageSetupData);
 
-    // void SetRichTextBufferPreview(wxRichTextBuffer* buf);
-    // wxRichTextBuffer* GetRichTextBufferPreview() const;
+    void SetRichTextBufferPreview(wxRichTextBuffer* buf);
+    wxRichTextBuffer* GetRichTextBufferPreview() const;
 
-    // void SetRichTextBufferPrinting(wxRichTextBuffer* buf);
-    // wxRichTextBuffer* GetRichTextBufferPrinting() const;
+    void SetRichTextBufferPrinting(wxRichTextBuffer* buf);
+    wxRichTextBuffer* GetRichTextBufferPrinting() const;
 
     void SetParentWindow(wxWindow* parent);
     wxWindow* GetParentWindow() const;

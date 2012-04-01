@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/05/2001
-## RCS-ID:      $Id: PrintData.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## RCS-ID:      $Id: PrintData.xs 3243 2012-03-25 11:24:18Z mdootson $
 ## Copyright:   (c) 2001, 2004-2005, 2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -103,4 +103,55 @@ wxPrintData::SetPrinterName( name )
 void
 wxPrintData::SetQuality( quality )
     wxPrintQuality quality
+    
 
+#if WXPERL_W_VERSION_GE( 2, 8, 0 )
+bool
+wxPrintData::IsOrientationReversed()
+    
+wxPrintMode
+wxPrintData::GetPrintMode()
+
+int
+wxPrintData::GetMedia();
+
+void
+wxPrintData::SetOrientationReversed( reversed )
+    bool reversed
+
+void
+wxPrintData::SetMedia( media )
+    int media
+    
+void
+wxPrintData::SetPrintMode( printMode )
+    wxPrintMode printMode
+
+wxString
+wxPrintData::GetFilename()
+
+void
+wxPrintData::SetFilename( filename )
+    wxString filename
+
+char*
+wxPrintData::GetPrivData()
+    
+int
+wxPrintData::GetPrivDataLen()
+    
+void
+wxPrintData::SetPrivData( privData, len )
+    char* privData
+    int len
+
+void
+wxPrintData::ConvertToNative()
+    
+void
+wxPrintData::ConvertFromNative()
+    
+## wxPrintNativeDataBase*
+## wxPrintData::GetNativeData()
+
+#endif

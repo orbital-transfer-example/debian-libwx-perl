@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: typemap.tmpl 3159 2012-02-29 23:43:26Z mdootson $
+## RCS-ID:      $Id: typemap.tmpl 3228 2012-03-19 03:59:13Z mdootson $
 ## Copyright:   (c) 2000-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -45,9 +45,12 @@ wxItemKind              T_ENUM
 wxLayoutDirection       T_ENUM
 PlClassName             T_CLASSNAME
 wxUint32                T_IV
+wxLongLong_t            T_IV
+wxULongLong_t           T_UV
 wxByte                  T_U_CHAR
 wxTextCtrlHitTestResult T_ENUM
 wxArrayString           T_ARRAYSTRING
+wxArrayString *         T_ARRAYSTRING
 wxPliUserDataCD **      T_ARRAYUSERDATA
 wxArrayInt              T_ARRAYINT
 wxTextPos               T_IV
@@ -77,6 +80,7 @@ wxPenCap                T_ENUM
 wxPenJoin               T_ENUM
 wxBrushStyle            T_ENUM
 wxShowEffect            T_ENUM
+wxTipKind               T_ENUM
 
 wxDialogLayoutAdaptationMode T_ENUM
 
@@ -129,6 +133,7 @@ wxDisplay *             O_NON_WXOBJECT_THR
 wxVideoMode *           O_NON_WXOBJECT_THR
 wxEventBlocker *        O_NON_WXOBJECT_THR
 wxWindowUpdateLocker *  O_NON_WXOBJECT_THR
+wxRichToolTip *         O_NON_WXOBJECT_THR
 
 wxMenuBar *             O_WXOBJECT
 wxMenu *                O_WXOBJECT
@@ -222,6 +227,7 @@ wxSettableHeaderColumn * O_NON_WXOBJECT_THR
 wxHeaderColumnSimple *  O_NON_WXOBJECT_THR
 wxPlHeaderColumn *      O_NON_WXOBJECT_SELF
 wxPlSettableHeaderColumn * O_NON_WXOBJECT_SELF
+wxBannerWindow *        O_WXEVTHANDLER
 
 wxWizard *              O_WXOBJECT
 wxWizardPage *          O_WXOBJECT

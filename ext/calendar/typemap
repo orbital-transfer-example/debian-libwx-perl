@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/10/2002
-## RCS-ID:      $Id: typemap 2567 2009-05-17 14:29:33Z mbarbon $
+## RCS-ID:      $Id: typemap 3224 2012-03-18 05:19:08Z mdootson $
 ## Copyright:   (c) 2002-2003, 2005, 2008-2009 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -18,5 +18,6 @@ wxDateEvent *           O_WXOBJECT
 wxCalendarEvent *	O_WXOBJECT
 wxCalendarCtrl *        O_WXOBJECT
 wxDatePickerCtrl *      O_WXOBJECT
+wxTimePickerCtrl *      O_WXOBJECT
 wxDateTime *            O_NON_WXOBJECT_THR
 wxCalendarDateAttr *    O_NON_WXOBJECT_THR

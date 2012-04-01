@@ -3,7 +3,7 @@
 ## Purpose:     Wx::PropertyGrid and related classes
 ## Author:      Mark Dootson
 ## Created:     01/03/2012
-## SVN-ID:      $Id: PropertyGrid.pm 3194 2012-03-16 09:35:01Z mdootson $
+## SVN-ID:      $Id: PropertyGrid.pm 3242 2012-03-23 22:29:59Z mdootson $
 ## Copyright:   (c) 2012 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -38,6 +38,8 @@ sub wxPG_ATTR_MIN { return ( $Wx::PropertyGrid::__wx_pgrid_present ) ? Wx::Prope
 sub wxPG_ATTR_MAX { return ( $Wx::PropertyGrid::__wx_pgrid_present ) ? Wx::PropertyGrid::_get_wxPG_ATTR_MAX() : undef ; }
 package Wx::PropertyGrid;
 
+# these are all string 'constants', those above
+# and those added in Constant.xs
 our @_wxpg_extra_exported_constants = qw(
     wxPG_ATTR_UNITS 
     wxPG_ATTR_HINT 
