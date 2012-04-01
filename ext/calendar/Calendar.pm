@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/10/2002
-## RCS-ID:      $Id: Calendar.pm 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: Calendar.pm 3224 2012-03-18 05:19:08Z mdootson $
 ## Copyright:   (c) 2002, 2005-2006 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -30,6 +30,7 @@ no strict;
 
 package Wx::CalendarCtrl;    @ISA = qw(Wx::Control);
 package Wx::DatePickerCtrl;  @ISA = qw(Wx::Control);
+package Wx::TimePickerCtrl;  @ISA = qw(Wx::Control);
 package Wx::DateEvent;       @ISA = qw(Wx::CommandEvent);
 package Wx::CalendarEvent;   @ISA = qw(Wx::DateEvent);
 
@@ -47,6 +48,7 @@ sub EVT_CALENDAR_MONTH($$$) { $_[0]->Connect( $_[1], -1, &Wx::wxEVT_CALENDAR_MON
 sub EVT_CALENDAR_YEAR($$$) { $_[0]->Connect( $_[1], -1, &Wx::wxEVT_CALENDAR_YEAR_CHANGED, $_[2] ) }
 sub EVT_CALENDAR_WEEKDAY_CLICKED($$$) { $_[0]->Connect( $_[1], -1, &Wx::wxEVT_CALENDAR_WEEKDAY_CLICKED, $_[2] ) }
 sub EVT_DATE_CHANGED($$$) { $_[0]->Connect( $_[1], -1, &Wx::wxEVT_DATE_CHANGED, $_[2] ) }
+sub EVT_TIME_CHANGED($$$) { $_[0]->Connect( $_[1], -1, &Wx::wxEVT_TIME_CHANGED, $_[2] ) }
 
 1;
 

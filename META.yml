@@ -1,43 +1,39 @@
-# http://module-build.sourceforge.net/META-spec.html
-name:         Wx
-version:      0.9905
-version_from: Wx.pm
-installdirs:  site
+--- #YAML:1.0
+name:               Wx
+version:            0.9906
+abstract:           interface to the wxWidgets cross-platform GUI toolkit
 author:
-  - Mattia Barbon <mbarbon@cpan.org>
-abstract:     interface to the wxWidgets cross-platform GUI toolkit
-license:      perl
-requires:
-  Alien::wxWidgets:        0.25
-  ExtUtils::ParseXS:       3.15
-  ExtUtils::XSpp:        0.1602
-  File::Spec::Functions:   0.82
-  if:                      0.03
-  Test::Harness:           2.26
-  Test::More:              0.45
-build_requires:
-  ExtUtils::MakeMaker: 6.17
-no_index:
-  directory:
-    - samples
-    - script
-  package:
-    - MY
-    - Parse::Yapp::Driver
-
-# extras.
+    - Mattia Barbon <mbarbon@cpan.org>
+license:            perl
+distribution_type:  module
 configure_requires:
-  Alien::wxWidgets: 0.25
-dynamic_config: 1
+    Alien::wxWidgets:  0.25
+build_requires:
+    Alien::wxWidgets:     0.25
+    ExtUtils::MakeMaker:  6.48
+    ExtUtils::ParseXS:    3.15
+    ExtUtils::XSpp:       0.1602
+    File::Spec::Functions:  0.82
+    if:                   0.03
+    Test::Harness:        2.26
+    Test::More:           0.45
+requires:
+    Alien::wxWidgets:  0.25
 resources:
-  MailingList: http://lists.perl.org/list/wxperl-users.html
-  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx
-  homepage: http://wxperl.eu/
-  license: http://dev.perl.org/licenses/
-  repository: https://wxperl.svn.sourceforge.net/svnroot/wxperl/wxPerl
-
-distribution_type: module
-generated_by: ExtUtils::MY_Metafile version 0.09, EUMM-6.57_05.
+    bugtracker:   http://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx
+    homepage:     http://wxperl.eu/
+    license:      http://dev.perl.org/licenses/
+    MailingList:  http://lists.perl.org/list/wxperl-users.html
+    repository:   https://wxperl.svn.sourceforge.net/svnroot/wxperl/wxPerl
+no_index:
+    directory:
+        - samples
+        - script
+    package:
+        - MY
+        - Parse::Yapp::Driver
+generated_by:       ExtUtils::MakeMaker version 6.57_05
 meta-spec:
-  version: 1.3
-  url: http://module-build.sourceforge.net/META-spec-v1.3.html
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
+dynamic_config:     1

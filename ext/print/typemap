@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/05/2001
-## RCS-ID:      $Id: typemap 2317 2008-01-18 22:00:14Z mbarbon $
+## RCS-ID:      $Id: typemap 3243 2012-03-25 11:24:18Z mdootson $
 ## Copyright:   (c) 2001, 2003-2005, 2007-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -37,3 +37,4 @@ wxPaperSize             T_ENUM
 wxPrintQuality          T_ENUM
 wxPrinterError          T_ENUM
 wxPrintBin              T_ENUM
+wxPrintMode             T_ENUM

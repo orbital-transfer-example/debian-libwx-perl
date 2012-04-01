@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Event.xs 2700 2009-12-13 11:25:50Z mbarbon $
+// RCS-ID:      $Id: Event.xs 3232 2012-03-19 05:38:20Z mdootson $
 // Copyright:   (c) 2000-2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -413,6 +413,16 @@ wxKeyEvent::HasModifiers()
 
 bool
 wxKeyEvent::ShiftDown()
+
+#if WXPERL_W_VERSION_GE( 2, 9, 3 )
+
+void
+wxKeyEvent::DoAllowNextEvent()
+
+bool
+wxKeyEvent::IsNextEventAllowed()
+
+#endif
 
 MODULE=Wx_Evt PACKAGE=Wx::HelpEvent
 

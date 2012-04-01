@@ -295,6 +295,7 @@ ext/calendar/typemap
 ext/calendar/XS/CalendarCtrl.xsp
 ext/calendar/XS/CalendarDateAttr.xsp
 ext/calendar/XS/DatePickerCtrl.xsp
+ext/calendar/XS/TimePickerCtrl.xsp
 
 ext/dataview/DataView.pm
 ext/dataview/DataView.xs
@@ -586,6 +587,17 @@ ext/ribbon/t/02_inheritance.t
 ext/ribbon/t/03_threads.t
 ext/ribbon/t/04_userdata.t
 
+ext/webview/Makefile.PL
+ext/webview/WebView.xs
+ext/webview/typemap
+ext/webview/typemap.xsp
+ext/webview/lib/Wx/WebView.pm
+ext/webview/t/01_load.t
+ext/webview/t/02_inheritance.t
+ext/webview/t/03_threads.t
+ext/webview/cpp/webview_constants.cpp
+ext/webview/XS/WebView.xsp
+
 interface/wx/bmpbuttn.h
 interface/wx/button.h
 interface/wx/dataview/dataviewlistctrl.h
@@ -597,5 +609,7 @@ interface/wx/headercol.h
 interface/wx/headerctrl.h
 interface/wx/infobar.h
 interface/wx/treelist.h
+interface/wx/bannerwindow.h
+interface/wx/richtooltip.h
 
 META.yml                                 Module meta-data (added by MakeMaker)
