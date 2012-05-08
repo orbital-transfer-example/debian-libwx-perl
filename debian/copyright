@@ -14,6 +14,7 @@ Copyright: 2000-2012, Mattia Barbon <mbarbon@cpan.org>
 License: Artistic or GPL-1+
 
 Files: interface/wx/*
+ ext/webview/XS/WebView.xsp
 Copyright: wxWidgets team
 License: wxWindows
 
@@ -27,6 +28,8 @@ Copyright: 2009 Vadim Zeitlin <vadim@wxwidgets.org>
 License: wxWindows
 
 Files: interface/wx/treelist.h
+ interface/wx/bannerwindow.h
+ interface/wx/richtooltip.h
 Copyright: 2011 Vadim Zeitlin <vadim@wxwidgets.org>
 License: wxWindows
 
