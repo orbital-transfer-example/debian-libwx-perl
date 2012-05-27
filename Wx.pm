@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 3214 2012-03-16 22:46:23Z mdootson $
+## RCS-ID:      $Id: Wx.pm 3291 2012-05-10 15:38:43Z mdootson $
 ## Copyright:   (c) 2000-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.9906';
+$VERSION = '0.9908';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 

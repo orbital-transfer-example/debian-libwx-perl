@@ -4,7 +4,7 @@
 ## Author:      Mark Dootson
 ## Modified by:
 ## Created:     10/04/2010
-## RCS-ID:      $Id: RichTextPrinting.xsp 3245 2012-03-26 10:26:32Z mdootson $
+## RCS-ID:      $Id: RichTextPrinting.xsp 3293 2012-05-16 20:02:24Z mdootson $
 ## Copyright:   (c) 2010 Mark Dootson
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -18,21 +18,17 @@
 
 %name{Wx::RichTextPrintout} class wxRichTextPrintout : public %name{Wx::Printout} wxPrintout
 {
-       wxRichTextPrintout(const wxString& title = wxT("Printout"));
- 
-    ~wxRichTextPrintout()
-        %code%{  wxPli_thread_sv_unregister( aTHX_ "Wx::RichTextPrintout", THIS, ST(0) );
-                 delete THIS; %};
 
-%{
-static void
-wxRichTextPrintout::CLONE()
-  CODE:
-    wxPli_thread_sv_clone( aTHX_ CLASS, (wxPliCloneSV)wxPli_detach_object );
-%}
+public:
+
+    wxRichTextPrintout(const wxString& title = wxT("Printout"));
+ 
+    %name{Destroy} ~wxRichTextPrintout()
+        %code%{ delete THIS; %};
 
     /// The buffer to print
     void SetRichTextBuffer(wxRichTextBuffer* buffer);
+
     wxRichTextBuffer* GetRichTextBuffer() const ;
 
     /// Set/get header/footer data
@@ -52,6 +48,22 @@ wxRichTextPrintout::CLONE()
     virtual bool OnBeginDocument(int startPage, int endPage);
     virtual void OnPreparePrinting();
 };
+
+%{
+
+void
+wxRichTextPrintout::GetPageInfo()
+  PREINIT:
+    int minPage, maxPage, pageFrom, pageTo;
+  PPCODE:
+    THIS->wxRichTextPrintout::GetPageInfo( &minPage, &maxPage, &pageFrom, &pageTo );
+    EXTEND( SP, 4 );
+    PUSHs( sv_2mortal( newSViv( minPage ) ) );
+    PUSHs( sv_2mortal( newSViv( maxPage ) ) );
+    PUSHs( sv_2mortal( newSViv( pageFrom ) ) );
+    PUSHs( sv_2mortal( newSViv( pageTo ) ) );
+
+%}
 
 %name{Wx::RichTextPrinting} class wxRichTextPrinting : public wxObject
 {
@@ -100,11 +112,21 @@ wxRichTextPrinting::CLONE()
     wxPageSetupDialogData *GetPageSetupData() const;
     void SetPageSetupData(const wxPageSetupDialogData& pageSetupData);
 
-    void SetRichTextBufferPreview(wxRichTextBuffer* buf);
-    wxRichTextBuffer* GetRichTextBufferPreview() const;
+    void SetRichTextBufferPreview(wxRichTextBuffer* buffer)
+        %code%{ THIS->SetRichTextBufferPreview(buffer); %}
+        %cleanup%{ wxPli_object_set_deleteable( aTHX_ ST(0), false ); %};
+         
+    wxRichTextBuffer* GetRichTextBufferPreview() const
+        %code%{ RETVAL = THIS->GetRichTextBufferPreview(); %}
+        %cleanup%{ wxPli_object_set_deleteable( aTHX_ ST(0), false ); %};
 
-    void SetRichTextBufferPrinting(wxRichTextBuffer* buf);
-    wxRichTextBuffer* GetRichTextBufferPrinting() const;
+    void SetRichTextBufferPrinting(wxRichTextBuffer* buffer)
+        %code%{ THIS->SetRichTextBufferPrinting(buffer); %}
+        %cleanup%{ wxPli_object_set_deleteable( aTHX_ ST(0), false ); %};    
+    
+    wxRichTextBuffer* GetRichTextBufferPrinting() const
+        %code%{ RETVAL = THIS->GetRichTextBufferPrinting(); %}
+        %cleanup%{ wxPli_object_set_deleteable( aTHX_ ST(0), false ); %};
 
     void SetParentWindow(wxWindow* parent);
     wxWindow* GetParentWindow() const;

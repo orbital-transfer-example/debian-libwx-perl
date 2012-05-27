@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/05/2001
-## RCS-ID:      $Id: typemap 3243 2012-03-25 11:24:18Z mdootson $
+## RCS-ID:      $Id: typemap 3295 2012-05-22 14:46:54Z mdootson $
 ## Copyright:   (c) 2001, 2003-2005, 2007-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -31,6 +31,7 @@ wxPreviewCanvas *       O_WXOBJECT
 wxPreviewFrame *        O_WXOBJECT
 wxPlPreviewFrame *      O_WXOBJECT
 wxPrintFactory *        O_NON_WXOBJECT
+wxPrintPaperType *      O_WXOBJECT
 
 wxDuplexMode            T_ENUM
 wxPaperSize             T_ENUM

@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Wx
-version:            0.9906
+version:            0.9908
 abstract:           interface to the wxWidgets cross-platform GUI toolkit
 author:
     - Mattia Barbon <mbarbon@cpan.org>
@@ -32,7 +32,7 @@ no_index:
     package:
         - MY
         - Parse::Yapp::Driver
-generated_by:       ExtUtils::MakeMaker version 6.57_05
+generated_by:       ExtUtils::MakeMaker version 6.56
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4

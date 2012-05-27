@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     10/03/2001
-// RCS-ID:      $Id: Html.xs 2935 2010-07-04 11:46:58Z mbarbon $
+// RCS-ID:      $Id: Html.xs 3281 2012-05-06 07:25:12Z mdootson $
 // Copyright:   (c) 2001-2004, 2006, 2008-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -62,6 +62,8 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../ty
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/HtmlCell.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/HtmlListBox.xsp
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp -t ../../typemap.xsp XS/HtmlPrintout.xsp
 
 #include "cpp/ht_constants.cpp"
 #include "cpp/ovl_const.cpp"
