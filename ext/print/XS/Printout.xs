@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     02/06/2001
-## RCS-ID:      $Id: Printout.xs 2315 2008-01-18 21:47:17Z mbarbon $
+## RCS-ID:      $Id: Printout.xs 3281 2012-05-06 07:25:12Z mdootson $
 ## Copyright:   (c) 2001-2002, 2004, 2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -55,6 +55,13 @@ wxPrintout::GetDC()
     RETVAL
   CLEANUP:
     wxPli_object_set_deleteable( aTHX_ ST(0), false );
+
+void
+wxPrintout::SetDC( dc )
+    wxDC* dc
+  CODE:
+    wxPli_object_set_deleteable( aTHX_ ST(1), false );
+    THIS->SetDC( dc );
 
 void
 wxPrintout::GetPageInfo()
@@ -131,6 +138,21 @@ wxPrintout::HasPage( pageNum )
 
 bool
 wxPrintout::IsPreview()
+
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+void
+wxPrintout::SetIsPreview( p )
+    bool p
+    
+#else
+void
+wxPrintout::SetPreview( preview )
+    wxPrintPreview* preview
+
+wxPrintPreview*
+wxPrintout::GetPreview()
+
+#endif
 
 bool
 wxPrintout::OnBeginDocument( startPage, endPage )
@@ -227,5 +249,31 @@ void
 wxPrintout::OffsetLogicalOrigin( xoff, yoff )
     wxCoord xoff
     wxCoord yoff
+
+void 
+wxPrintout::SetPageSizePixels( w, h )
+    int w
+    int h
+
+void 
+wxPrintout::SetPageSizeMM( w, h )
+    int w
+    int h
+
+void 
+wxPrintout::SetPPIScreen( x, y )
+    int x
+    int y
+
+void 
+wxPrintout::SetPPIPrinter( x, y )
+    int x
+    int y
+
+void
+wxPrintout::SetPaperRectPixels( paperRectPixels )
+    wxRect* paperRectPixels
+  CODE:
+    THIS->SetPaperRectPixels( *paperRectPixels );
 
 #endif

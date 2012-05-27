@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/05/2001
-## RCS-ID:      $Id: Print.pm 2057 2007-06-18 23:03:00Z mbarbon $
+## RCS-ID:      $Id: Print.pm 3295 2012-05-22 14:46:54Z mdootson $
 ## Copyright:   (c) 2001-2002, 2004-2006 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -46,6 +46,7 @@ package Wx::WindowsPrintPreview; @ISA = qw(Wx::PrintPreview);
 package Wx::WindowsPrinter; @ISA = qw(Wx::Printer);
 package Wx::PlPreviewFrame; @ISA = qw(Wx::PreviewFrame);
 package Wx::PlPreviewControlBar; @ISA = qw(Wx::PreviewControlBar);
+package Wx::PrintPaperType; @ISA = qw(Wx::Object);
 
 use strict;
 

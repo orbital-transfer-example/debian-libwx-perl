@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichTextCtrl.xsp 3131 2011-11-22 05:28:54Z mdootson $
+## RCS-ID:      $Id: RichTextCtrl.xsp 3293 2012-05-16 20:02:24Z mdootson $
 ## Copyright:   (c) 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -467,6 +467,10 @@ wxPlConstants richtextctrl_module( &richtextctrl_constant );
 
     %name{SetBasicStyleRich} void SetBasicStyle( const wxRichTextAttr& style );
     %name{SetBasicStyleEx} void SetBasicStyle( const wxTextAttrEx& style );
+    
+    %name{SetDefaultStyleEx} bool SetDefaultStyle(const wxTextAttrEx& style);
+    %name{SetDefaultStyleDefault} bool SetDefaultStyle(const wxTextAttr& style);
+    
 %{
 void
 wxRichTextCtrl::SetBasicStyle( ... )
@@ -476,10 +480,20 @@ wxRichTextCtrl::SetBasicStyle( ... )
         MATCH_REDISP( wxPliOvl_wtae, SetBasicStyleEx )
     END_OVERLOAD( "Wx::RichTextCtrl::SetBasicStyle" )
 
+
+void
+wxRichTextCtrl::SetDefaultStyle( ... )
+  PPCODE:
+    BEGIN_OVERLOAD()
+        MATCH_REDISP( wxPliOvl_wtae, SetDefaultStyleEx )
+        MATCH_REDISP( wxPliOvl_wtat, SetDefaultStyleDefault )
+    END_OVERLOAD( "Wx::RichTextCtrl::SetDefaultStyle" )
+
 %}
 
     wxRichTextBuffer* GetBuffer()
-        %code{% RETVAL = &THIS->GetBuffer(); %};
+        %code{% RETVAL = &THIS->GetBuffer(); %}
+        %cleanup%{ wxPli_object_set_deleteable( aTHX_ ST(0), false ); %};
 
 };
 
