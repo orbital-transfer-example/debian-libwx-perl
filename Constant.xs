@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 3220 2012-03-18 03:02:46Z mdootson $
+// RCS-ID:      $Id: Constant.xs 3300 2012-05-31 00:58:11Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -68,6 +68,7 @@
 #include <wx/stattext.h>
 #include <wx/dirctrl.h>
 #include <wx/spinctrl.h>
+#include <wx/paper.h>
 
 #include "cpp/wxapi.h"
 #include "cpp/setup.h"
@@ -3118,6 +3119,7 @@ void SetConstantsOnce()
     wxPli_make_const( "wxFormatInvalid" );      // dnd
     wxPli_make_const( "wxDefaultPosition" );    // misc
     wxPli_make_const( "wxDefaultSize" );        // misc
+    wxPli_make_const( "wxThePrintPaperDatabase" );  // print
 
 #if WXPERL_W_VERSION_GE( 2, 7, 2 )
     wxPli_make_const( "wxNullAnimation" );      // animation
@@ -3373,6 +3375,14 @@ void SetConstants()
 
     tmp = get_sv( "Wx::wxTheClipboard", 1 );
     sv_setref_pv( tmp, "Wx::Clipboard", wxTheClipboard );
+    
+    //
+    // Printing
+    //
+    
+    tmp = get_sv( "Wx::wxThePrintPaperDatabase", 1 );
+    sv_setref_pv( tmp, "Wx::PrintPaperDatabase", wxThePrintPaperDatabase );
+    
 }
 
 WXPLI_BOOT_ONCE(Wx_Const);
@@ -3405,6 +3415,11 @@ UnsetConstants()
     tmp = get_sv( "Wx::wxDefaultValidator", 1 );
     if( tmp && SvROK( tmp ) )
         sv_setiv( SvRV( tmp ), 0 );
+    
+    tmp = get_sv( "Wx::wxThePrintPaperDatabase", 1 );
+    if( tmp && SvROK( tmp ) )
+        sv_setiv( SvRV( tmp ), 0 );
+
 
 void
 SetEvents()
