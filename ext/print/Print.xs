@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     04/05/2001
-// RCS-ID:      $Id: Print.xs 3295 2012-05-22 14:46:54Z mdootson $
+// RCS-ID:      $Id: Print.xs 3300 2012-05-31 00:58:11Z mdootson $
 // Copyright:   (c) 2001-2002, 2004-2006, 2008-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -13,6 +13,8 @@
 #define PERL_NO_GET_CONTEXT
 
 #include "cpp/wxapi.h"
+#include "cpp/constants.h"
+#include "cpp/overload.h"
 
 #undef THIS
 
@@ -39,6 +41,7 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/Pr
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t ../../typemap.xsp XS/PaperDatabase.xsp
 
 #include "cpp/pr_constants.cpp"
+#include "cpp/ovl_const.cpp"
 
 #endif
 
