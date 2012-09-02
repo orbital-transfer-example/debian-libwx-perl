@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichText.pm 3115 2011-11-18 06:38:35Z mdootson $
+## RCS-ID:      $Id: RichText.pm 3325 2012-08-16 03:41:14Z mdootson $
 ## Copyright:   (c) 2006-2007, 2010-2011 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -56,4 +56,21 @@ package Wx::RichTextHeaderFooterData;  @ISA = qw(Wx::Object);
 package Wx::SymbolPickerDialog; @ISA = qw(Wx::Dialog);
 package Wx::RichTextStyleOrganiserDialog; @ISA = qw(Wx::Dialog);
 
+#
+# constants
+#
+
+package Wx;
+
+# !parser: sub { $_[0] =~ m/^\s*sub\s+(wx\w+)/ }
+# !package: Wx
+# !tag: richtextctrl
+
+sub wxRichTextLineBreakChar() { chr(29) }
+
 1;
+
+# Local variables: #
+# mode: cperl #
+# End: #
+

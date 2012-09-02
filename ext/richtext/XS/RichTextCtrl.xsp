@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2006
-## RCS-ID:      $Id: RichTextCtrl.xsp 3293 2012-05-16 20:02:24Z mdootson $
+## RCS-ID:      $Id: RichTextCtrl.xsp 3325 2012-08-16 03:41:14Z mdootson $
 ## Copyright:   (c) 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -296,6 +296,10 @@ wxPlConstants richtextctrl_module( &richtextctrl_constant );
     const wxTextAttrEx& GetDefaultStyleEx() const;
 
     bool Newline();
+    
+#if WXPERL_W_VERSION_GE( 2, 8, 0 )
+    bool LineBreak();
+#endif
 
     bool BeginStyle( const wxTextAttrEx& style );
     bool EndStyle();

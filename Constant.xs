@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 3300 2012-05-31 00:58:11Z mdootson $
+// RCS-ID:      $Id: Constant.xs 3313 2012-07-13 02:14:15Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -2438,13 +2438,13 @@ static double constant( const char* name, int arg )
     r( wxRA_HORIZONTAL );               // radiobox
     r( wxRA_LEFTTORIGHT );              // radiobox
     r( wxRA_TOPTOBOTTOM );              // radiobox
-#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+#if WXPERL_W_VERSION_LE( 2, 9, 3 )
     r( wxRA_USE_CHECKBOX );             // radiobox
 #endif
     r( wxRA_VERTICAL );                 // radiobox
     r( wxRB_GROUP );                    // radiobutton
     r( wxRB_SINGLE );                   // radiobutton
-#if WXPERL_W_VERSION_GE( 2, 6, 0 )
+#if WXPERL_W_VERSION_LE( 2, 9, 3 )
     r( wxRB_USE_CHECKBOX );             // radiobutton
 #endif
     r( wxRESIZE_BORDER );               // dialog frame

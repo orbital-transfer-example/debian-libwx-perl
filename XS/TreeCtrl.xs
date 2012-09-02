@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/02/2001
-## RCS-ID:      $Id: TreeCtrl.xs 2298 2007-11-25 15:57:03Z mdootson $
+## RCS-ID:      $Id: TreeCtrl.xs 3323 2012-08-09 01:17:49Z mdootson $
 ## Copyright:   (c) 2001-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -121,6 +121,13 @@ wxTreeCtrl::GetQuickBestSize()
 
 int
 wxTreeEvent::GetKeyCode()
+
+wxKeyEvent*
+wxTreeEvent::GetKeyEvent()
+  CODE:
+    RETVAL = new wxKeyEvent ( THIS->GetKeyEvent() );
+  OUTPUT:
+    RETVAL
 
 wxTreeItemId*
 wxTreeEvent::GetOldItem()
