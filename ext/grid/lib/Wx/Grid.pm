@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/12/2001
-## RCS-ID:      $Id: Grid.pm 2170 2007-08-17 22:53:11Z mbarbon $
+## RCS-ID:      $Id: Grid.pm 3316 2012-07-14 02:05:19Z mdootson $
 ## Copyright:   (c) 2001-2002, 2004-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -60,6 +60,16 @@ package Wx::PlGridCellEditor; @ISA = qw(Wx::GridCellEditor);
 
 package Wx::GridTableBase;
 package Wx::PlGridTable; @ISA = qw(Wx::GridTableBase);
+
+package Wx::Event;
+# allow 2.8 / 2.9 event name changes compatibility
+if(defined(&Wx::Event::EVT_GRID_CELL_CHANGED)) {
+  *Wx::Event::EVT_GRID_CELL_CHANGE = \&Wx::Event::EVT_GRID_CELL_CHANGED;
+  *Wx::Event::EVT_GRID_CMD_CELL_CHANGE = \&Wx::Event::EVT_GRID_CMD_CELL_CHANGED;
+} else {
+  *Wx::Event::EVT_GRID_CELL_CHANGED = \&Wx::Event::EVT_GRID_CELL_CHANGE;
+  *Wx::Event::EVT_GRID_CMD_CELL_CHANGED = \&Wx::Event::EVT_GRID_CMD_CELL_CHANGE;
+}
 
 package Wx::Grid;
 
