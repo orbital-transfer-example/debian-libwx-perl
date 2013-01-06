@@ -19,7 +19,7 @@ Build-Depends: debhelper (>= 9.20120312), perl,
  xvfb
 Standards-Version: 3.9.3
 Homepage: http://wxperl.sourceforge.net/
-Vcs-Git: git://git.debian.org/pkg-perl/packages/libwx-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libwx-perl.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-perl/packages/libwx-perl.git
 
 Package: libwx-perl
