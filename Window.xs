@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Window.xs 2979 2010-09-07 20:39:08Z mbarbon $
+// RCS-ID:      $Id: Window.xs 3481 2013-04-16 14:21:03Z mdootson $
 // Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -67,14 +67,13 @@ wxGetActiveWindow()
 
 MODULE=Wx_Win PACKAGE=Wx::Window
 
+#if WXPERL_W_VERSION_LT( 2, 9, 0 )
+
 int
-NewControlId( winid )
-    int winid
+NewControlId()
   CODE:
     RETVAL = wxWindowBase::NewControlId();
   OUTPUT: RETVAL
-
-#if WXPERL_W_VERSION_LT( 2, 9, 0 )
 
 int
 NextControlId( winid )
@@ -89,6 +88,22 @@ PrevControlId( winid )
   CODE:
     RETVAL = wxWindowBase::PrevControlId( winid );
   OUTPUT: RETVAL
+
+#else
+
+wxWindowID
+NewControlId( idcount = 1 )
+    int idcount
+  CODE:
+    RETVAL = wxWindowBase::NewControlId( idcount );
+  OUTPUT: RETVAL
+
+void
+UnreserveControlId( id,  idcount = 1)
+    wxWindowID id
+    int idcount
+  CODE:
+    wxWindowBase::UnreserveControlId( id, idcount );
 
 #endif
 

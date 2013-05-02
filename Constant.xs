@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Constant.xs 3313 2012-07-13 02:14:15Z mdootson $
+// RCS-ID:      $Id: Constant.xs 3470 2013-04-13 08:38:19Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -467,6 +467,7 @@ static wxPlINH inherit[] =
 #endif
     I( Font,            GDIObject )
     I( Region,          GDIObject )
+    I( RegionIterator,  Object    )
     I( Bitmap,          GDIObject )
     I( Pen,             GDIObject )
     I( Palette,         GDIObject )
@@ -481,6 +482,7 @@ static wxPlINH inherit[] =
 #ifdef __WXMSW__   
     I( EnhMetaFileDC,   DC )
 #endif
+    I( PlFontEnumerator, FontEnumerator )
     
     I( BMPHandler,      ImageHandler )
     I( PNGHandler,      ImageHandler )
@@ -3466,7 +3468,7 @@ _get_packages()
 #if wxPERL_USE_DATETIME
     "use Wx::DateTime;"
 #endif
-#if wxPERL_USE_DATAVIEW && wxUSE_DATAVIEW && WXPERL_W_VERSION_GE( 2, 9, 0 )
+#if wxPERL_USE_DATAVIEW && wxUSE_DATAVIEWCTRL && WXPERL_W_VERSION_GE( 2, 9, 0 )
     "use Wx::DataView;"
 #endif
 #if wxPERL_USE_MEDIA && wxUSE_MEDIACTRL && WXPERL_W_VERSION_GE( 2, 6, 0 )

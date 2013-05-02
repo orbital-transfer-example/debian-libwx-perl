@@ -12,7 +12,7 @@ our $alien_key = 'XXXALIENXXX';
     $Wx::dlls = XXXDLLSXXX;
 }
 
-$VERSION = '0.9911'; # bootstrap will catch wrong versions
+$VERSION = '0.9922'; # bootstrap will catch wrong versions
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -92,7 +92,14 @@ sub _start {
     _boot_Constant( 'Wx', $XS_VERSION );
     _boot_GDI( 'Wx', $XS_VERSION );
 
+    if( ( exists($ENV{WXPERL_OPTIONS}) && $ENV{WXPERL_OPTIONS} =~ /ENABLE_DEFAULT_ASSERT_HANDLER/) ) {
+        Wx::EnableDefaultAssertHandler();
+    } else {
+        Wx::DisableAssertHandler();
+    }
+    
     Load( 1 );
+    
     Wx::MacSetFrontProcess();
 }
 

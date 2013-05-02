@@ -1,5 +1,76 @@
 Revision history for Perl extension Wx.
 
+0.9922 Wed May 01 2013 
+    - added wxCommandLinkButton
+    - updates to ID creation methods
+    - rt#84633
+    - added wxUIActionSimulator
+    - wxFindReplaceDialog new return a hash type object
+    - wxProgressDialog updates
+    - IPC classes object deletion updates
+    - wxString conversion UTF-8 only in Unicode builds
+    - typemap template missing some specs since 0.9917
+
+0.9921 Sun Apr 14 2013
+    - Fix 2.9.4 handling of wxConnection::Execute
+
+0.9919 Sat Apr 13 2013
+    - Makefile checks for supported Wx version
+    - Fixed wxUSE_DATAVIEWCTRL constant ( rt#84566 )
+    - wrapped wxRegionIterator
+    - wrapped IPC - wxConnection / wxServer / wxClient
+
+0.9918 Wed Apr 03 2013
+    - Added missing GetItemFont / SetItemFont for Wx::ListCtrl
+    - Fixed wxFontEnumerator GetEncodings / GetFacenames
+                               ( thanks to Marton Papp )
+    - Wrapped wxFontEnumerator callbacks
+
+0.9917 Mon Feb 11 2013
+    - Stopped wxWidgets >= 2.9.0 from setting locale to current user locale
+      ( thanks to Tarek Unger )
+
+0.9916 Sat Jan 19 2013
+    - put correct version check around wxLogChain::DetachOldLog
+    - fixed paper type tests in ext/print/09_paper.t
+
+0.9915 Sun Dec 30 2012
+    - fix bug for wxMac and wxwidgets 2.9.4+ in cpp/app.h
+    - add some missing aui events
+
+0.9914 Tue Oct 02 2012
+    - Wx::StyledTextCtrl additions for 2.9.4
+    - wxLog functions for 2.9.x added
+    - wrapped wxRearrangeCtrl
+    - added start of Wx::PerlTest - to aid documentation and examples
+    - Additions for Wx::XSP::* classes
+    - wrapped wxEventFilter for 2.9.3 +
+    - updated missing Wx::App methods for 2.9.4 +
+    - added wxEvtHandler::ProcessEventLocally for 2.9.1+
+    - added some absent wxWindow methods
+    - updated wxTopLevelWindow
+    - added wxFrame::ProcessCommand
+
+0.9913 Fri Sep 28 2012
+    - ld build fix for some 64 bit *nix 
+
+0.9912 Fri Sep 21 2012
+    - wrapped wxListCtrl::SetItemPtrData.
+    - updated to use sv_magicext / mg_findext so
+      external modules do not stomp on our magic.
+    - updated wxListView so that LC_VIRTUAL style works.
+    - set wxListCtrl full constructor to create evthandler.
+    - updated Wx::Ribbon controls for 2.9.4 interface +
+      tool/button 'Add' and 'Insert' methods now return objects
+      as described in the docs instead of int id's.
+    - added SetClientData to PGProperty and PropertyGridInterface
+    - Wx::ToolBar->SetClientData now deletes any prior set Wx::Object
+    - wxDataViewListCtrl and wxDataViewListStore - fix ClientData for >= 2.9.4
+    - /usr/local/lib needs removing from LD:DL:FLAGS on all *nix types
+    - nostdinc now removed from any flags on MacOSX
+    - Fixed handling of asserts and debug level > 0 on wxWidgets >= 2.9.3
+    - Added wxApp::OnAssertFailure
+
 0.9911 Fri Aug 24 2012
     - wxDataView - updated for 2.9.4
     - wxTreeEvent::GetKeyEvent() added

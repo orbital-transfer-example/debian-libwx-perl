@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.h 3038 2011-03-19 14:38:34Z mdootson $
+// RCS-ID:      $Id: helpers.h 3397 2012-09-30 02:26:07Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -69,18 +69,14 @@ inline SV* wxPli_wxString_2_sv( pTHX_ const wxString& str, SV* out )
 }
 
 #define WXCHAR_INPUT( var, type, arg ) \
-  const wxWCharBuffer var##_tmp = ( SvUTF8( arg ) ) ? \
-            ( wxString( SvPVutf8_nolen( arg ), wxConvUTF8 ) ).wc_str() \
-          : ( wxString( SvPV_nolen( arg ), wxConvLibc ) ).wc_str(); \
+  const wxWCharBuffer var##_tmp = ( wxString( SvPVutf8_nolen( arg ), wxConvUTF8 ) ).wc_str(); \
   var = const_cast<type>( var##_tmp.data() );
 
 #define WXCHAR_OUTPUT( var, arg ) \
   wxPli_wxChar_2_sv( aTHX_ var, arg )
 
 #define WXSTRING_INPUT( var, type, arg ) \
-  var =  ( SvUTF8( arg ) ) ? \
-           wxString( SvPVutf8_nolen( arg ), wxConvUTF8 ) \
-         : wxString( SvPV_nolen( arg ), wxConvLibc );
+  var = wxString( SvPVutf8_nolen( arg ), wxConvUTF8 );
 
 #define WXSTRING_OUTPUT( var, arg ) \
   wxPli_wxString_2_sv( aTHX_ var, arg )
@@ -104,18 +100,14 @@ inline SV* wxPli_wxString_2_sv( pTHX_ const wxString& str, SV* out )
 }
 
 #define WXCHAR_INPUT( var, type, arg ) \
-  const wxString var##_tmp = ( SvUTF8( arg ) ) ? \
-            ( wxString( SvPVutf8_nolen( arg ), wxConvUTF8 ) ) \
-          : ( wxString( SvPV_nolen( arg ), wxConvLibc ) ); \
+  const wxString var##_tmp = ( wxString( SvPVutf8_nolen( arg ), wxConvUTF8 ) ); \
   var = const_cast<type>( static_cast<const type>( var##_tmp.wc_str() ) );
 
 #define WXCHAR_OUTPUT( var, arg ) \
   wxPli_wxChar_2_sv( aTHX_ var, arg )
 
 #define WXSTRING_INPUT( var, type, arg ) \
-  var =  ( SvUTF8( arg ) ) ? \
-           wxString( SvPVutf8_nolen( arg ), wxConvUTF8 ) \
-         : wxString( SvPV_nolen( arg ), wxConvLibc );
+  var =  wxString( SvPVutf8_nolen( arg ), wxConvUTF8 );
 
 #define WXSTRING_OUTPUT( var, arg ) \
   wxPli_wxString_2_sv( aTHX_ var, arg )
@@ -439,6 +431,8 @@ void FUNCPTR( wxPli_overload_error )( pTHX_ const char* function,
 SV* FUNCPTR( wxPli_create_virtual_evthandler )( pTHX_ wxEvtHandler* object,
                                         const char* classn, bool forcevirtual );
 wxPliSelfRef* FUNCPTR( wxPli_get_selfref )( pTHX_ wxObject* object, bool forcevirtual );
+SV* FUNCPTR( wxPli_object_2_scalarsv )( pTHX_ SV* var, const wxObject* object );
+SV* FUNCPTR( wxPli_namedobject_2_sv )( pTHX_ SV* var, const wxObject* object, const char* package );
 
 #define WXPLI_BOOT_ONCE_( name, xs ) \
 bool name##_booted = false; \
@@ -535,6 +529,8 @@ struct wxPliHelpers
     SV* ( * m_wxPli_create_virtual_evthandler )( pTHX_ wxEvtHandler* object,
                                         const char* cln, bool forcevirtual );
     wxPliSelfRef* ( * m_wxPli_get_selfref )( pTHX_ wxObject*, bool);
+    SV* ( * m_wxPli_object_2_scalarsv )( pTHX_ SV* var, const wxObject* object );
+    SV* ( * m_wxPli_namedobject_2_sv )( pTHX_ SV* var, const wxObject* object, const char* package );
 };
 
 #if wxPERL_USE_THREADS
@@ -579,7 +575,8 @@ wxPliHelpers name = { &wxPli_sv_2_object, \
  &wxPli_av_2_arrayint, &wxPli_set_events, &wxPli_av_2_arraystring, \
  &wxPli_objlist_push, &wxPliOutputStream_ctor, &wxPli_stringarray_push, \
  &wxPli_overload_error, &wxPli_sv_2_wxvariant, \
- &wxPli_create_virtual_evthandler, &wxPli_get_selfref \
+ &wxPli_create_virtual_evthandler, &wxPli_get_selfref, &wxPli_object_2_scalarsv, \
+ &wxPli_namedobject_2_sv \
  }
 
 #if NEEDS_PLI_HELPERS_STRUCT()
@@ -628,6 +625,8 @@ wxPliHelpers name = { &wxPli_sv_2_object, \
   wxPli_sv_2_wxvariant = name->m_wxPli_sv_2_wxvariant; \
   wxPli_create_virtual_evthandler = name->m_wxPli_create_virtual_evthandler; \
   wxPli_get_selfref = name->m_wxPli_get_selfref; \
+  wxPli_object_2_scalarsv = name->m_wxPli_object_2_scalarsv; \
+  wxPli_namedobject_2_sv = name->m_wxPli_namedobject_2_sv; \
   WXPLI_INIT_CLASSINFO();
 
 #else

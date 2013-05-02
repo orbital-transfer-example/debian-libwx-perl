@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: e_cback.cpp 2454 2008-08-31 11:12:47Z mbarbon $
+// RCS-ID:      $Id: e_cback.cpp 3374 2012-09-26 11:37:03Z mdootson $
 // Copyright:   (c) 2000-2002, 2004-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -26,31 +26,6 @@ wxPliEventCallback::~wxPliEventCallback()
     SvREFCNT_dec( m_method );
     SvREFCNT_dec( m_self );
 }
-
-class wxPliGuard
-{
-public:
-    wxPliGuard()
-    {
-        m_sv = NULL;
-    }
-
-    ~wxPliGuard()
-    {
-        if( m_sv )
-        {
-            dTHX;
-
-            wxPli_thread_sv_unregister( aTHX_ wxPli_get_class( aTHX_ m_sv ),
-                                        (void*)SvIV( m_sv ), m_sv );
-            sv_setiv( m_sv, 0 );
-        }
-    }
-
-    void SetSV( SV* sv ) { m_sv = sv; }
-private:
-    SV* m_sv;
-};
 
 void wxPliEventCallback::Handler( wxEvent& event ) 
 {

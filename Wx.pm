@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Wx.pm 3304 2012-05-31 02:18:07Z mdootson $
-## Copyright:   (c) 2000-2011 Mattia Barbon
+## RCS-ID:      $Id: Wx.pm 3476 2013-04-15 00:00:55Z mdootson $
+## Copyright:   (c) 2000-2013 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -21,7 +21,7 @@ use vars qw(@ISA $VERSION $XS_VERSION $AUTOLOAD @EXPORT_OK %EXPORT_TAGS
 $_msw = 1; $_gtk = 2; $_motif = 3; $_mac = 4; $_x11 = 5;
 
 @ISA = qw(Exporter);
-$VERSION = '0.9911';
+$VERSION = '0.9922';
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -318,35 +318,56 @@ can download it from http://wxperl.sourceforge.net/
 
 Please see F<docs/INSTALL.pod> in source package.
 
-=head1 Windows XP look
+=head1 Runtime Assertions
 
-For standalone (packed using PAR, Perl2Exe, Perl2App, ...)
-applications to get Windows XP look, a file named C<App.exe.manifest>
-(assuming the program is named C<App.exe>) and containing the text below
-must be placed in the same directory as the executable file.
+For wxWidgets 2.9.3 and greater, Wx can switch runtime assertions on
+and off. In wxWidgets 2.9.x and above, there are three levels of
+debuging
 
-  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-  <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-      <assemblyIdentity
-          processorArchitecture="x86"
-          version="5.1.0.0"
-          type="win32"
-          name="Controls"
-      />
-      <description>Super wxPerl Application</description>
-      <dependency>
-          <dependentAssembly>
-              <assemblyIdentity
-                  type="win32"
-                  name="Microsoft.Windows.Common-Controls"
-                  version="6.0.0.0"
-                  publicKeyToken="6595b64144ccf1df"
-                  language="*"
-                  processorArchitecture="x86"
-          />
-      </dependentAssembly>
-      </dependency>
-  </assembly>
+0 - No debug assertions
+1 - Low cost debug assertions
+2 - All debug assertions
+
+If you used Alien::wxWidgets 0.61 or greater to build your wxWidgets,
+then the libraries will be built using debug level 1. If you
+specified --wxWidgets-debug for a debug build, then debug level 2
+will have been used.
+
+By default in Wx, debug assertions are switched off. However you may
+switch assertions on by using
+
+ Wx::EnableDefaultAssertHandler();
+
+you can switch assertions off again by using
+
+ Wx::DisableAssertHandler();
+
+You may also set en enviroment variable to cause all invocations
+of Wx to call Wx::EnableDefaultAssertHandler().
+
+ export WXPERL_OPTIONS=ENABLE_DEFAULT_ASSERT_HANDLER
+
+This may be useful during tests.
+
+The enviroment setting WXPERL_OPTIONS can contain multiple
+options. Options are checked for using a simple regex match.
+So
+
+ export WXPERL_OPTIONS="ENABLE_DEFAULT_ASSERT_HANDLER SOME_OTHER_SETTING"
+
+would evaluate as ENABLE_DEFAULT_ASSERT_HANDLER being set.
+
+If you want to handle assert failures yourself you can override
+wxApp::OnAssertFailure in your Wx::App derived class.
+
+  sub OnAssertFailure {
+    my ( $self, $file, $line, $function, $condition, $msg ) = @_;
+    ......
+  }
+
+For wxWidgets 2.8.x, the assert methods have no effect. You may
+however still usefully override wxApp::OnAssertFailure in a debug
+build.
 
 =head1 Running on Mac OSX
 
@@ -359,15 +380,23 @@ gives it the focus.
 In a syntax checking editor you may prevent Wx code from being
 given focus as the front process by setting an environment variable
 
-export WXPERL_OPTIONS=NO_MAC_SETFRONTPROCESS
+ export WXPERL_OPTIONS=NO_MAC_SETFRONTPROCESS
 
 or 
 
-$ENV{WXPERL_OPTIONS} = 'NO_MAC_SETFRONTPROCESS';
+ $ENV{WXPERL_OPTIONS} = 'NO_MAC_SETFRONTPROCESS';
+
+The enviroment setting WXPERL_OPTIONS can contain multiple
+options. Options are checked for using a simple regex match.
+So
+
+ export WXPERL_OPTIONS="NO_MAC_SETFRONTPROCESS SOME_OTHER_SETTING"
+
+would evaluate as NO_MAC_SETFRONTPROCESS being set.
 
 The code that makes the SetFrontProcess call is in Wx::Mini as
 
-Wx::MacSetFrontProcess();
+ Wx::MacSetFrontProcess();
 
 so it is also straightforward to override this method if you wish.
 
@@ -375,8 +404,77 @@ Finally, any code can force the running application to become the
 front process regardless of environment settings by calling the xs
 method directly. (Note the underscore in the method name).
 
-Wx::_MacSetFrontProcess();
+ Wx::_MacSetFrontProcess();
 
+=head1 Locale Behaviour
+
+Beginning with 2.9.0 wxWidgets sets the application locale to the current
+system locale. Formally in wxWidgets 2.8.x, the locale by default was 'C'.
+
+A problem arises because in addition to loading gettext translation
+files, this affects other C calls like printf, sprintf,...
+
+Perl makes calls to these functions when formatting numbers.
+Number formatting always uses underlying C library functions.
+The statements 'use locale', or 'no locale' make no difference here.
+
+So, if your locale is 'de' then when Wx starts, the C library locale gets
+set accordingly.
+
+  use Wx;
+  print 8.3
+
+will output 8,3 to the terminal. Formatting uses ',' as the fractional
+separator.
+
+This, whilst possibly correct, isn't what most users will be expecting.
+
+If you want to set the locale to the system default you can do so explicitly.
+  
+  $app->{locale} = Wx::Locale->new( &Wx::wxLANGUAGE_DEFAULT );
+
+You can then also reset just the locale for number formatting to 'C' if
+that is what you require
+
+  use POSIX qw( setlocale LC_NUMERIC );
+
+  setlocale( LC_NUMERIC, C );
+
+This code applies equally regardless of which wxWidgets version is being
+used.
+
+
+=head1 Windows XP look
+
+For standalone (packed using PAR, Perl2Exe, Perl2App, ...)
+applications to get Windows XP look, a file named C<App.exe.manifest>
+(assuming the program is named C<App.exe>) and containing the text below
+must either be placed in the same directory as the executable file or
+compiled into the file itself. The module Win32::Exe can place a manifest
+in an executable file
+  
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+    <assemblyIdentity version="1.0.0.0" type="win32" name="Super.wxPerl.Application" />
+    <description>Super wxPerl Application</description>
+    <dependency>
+        <dependentAssembly>
+            <assemblyIdentity type="win32" 
+             name="Microsoft.Windows.Common-Controls" 
+             version="6.0.0.0" 
+             publicKeyToken="6595b64144ccf1df" 
+             language="*"
+             processorArchitecture="*" />
+        </dependentAssembly>
+    </dependency>
+    <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+        <security>
+            <requestedPrivileges>
+                <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+            </requestedPrivileges>
+        </security>
+    </trustInfo>
+  </assembly>
 
 =head1 AUTHOR
 

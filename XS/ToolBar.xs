@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: ToolBar.xs 2503 2008-11-06 00:23:45Z mbarbon $
+## RCS-ID:      $Id: ToolBar.xs 3345 2012-09-15 18:56:58Z mdootson $
 ## Copyright:   (c) 2000-2008 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -155,6 +155,9 @@ wxToolBarToolBase::SetBitmap2( bmp )
 void
 wxToolBarToolBase::SetClientData( data = 0 )
     Wx_UserDataO* data
+  CODE:
+    delete THIS->GetClientData();
+    THIS->SetClientData( data );
 
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
 
@@ -495,7 +498,6 @@ wxToolBarBase::SetToolClientData( id, data )
     Wx_UserDataO* data
   CODE:
     delete THIS->GetToolClientData( id );
-
     THIS->SetToolClientData( id, data );
 
 void

@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Frames.xs 2935 2010-07-04 11:46:58Z mbarbon $
+// RCS-ID:      $Id: Frames.xs 3486 2013-04-16 17:39:27Z mdootson $
 // Copyright:   (c) 2000-2003, 2005-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -48,7 +48,8 @@ INCLUDE: XS/ProgressDialog.xs
 INCLUDE: XS/SingleChoiceDialog.xs
 INCLUDE: XS/MultiChoiceDialog.xs
 INCLUDE: XS/FontDialog.xs
-INCLUDE: XS/FindReplaceDialog.xs
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/FindReplaceDialog.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/AboutDialog.xsp
 

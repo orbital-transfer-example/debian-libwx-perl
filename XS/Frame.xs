@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Frame.xs 3066 2011-06-06 11:11:57Z mdootson $
+## RCS-ID:      $Id: Frame.xs 3381 2012-09-27 03:14:53Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -60,10 +60,10 @@ wxFrame::Create( parent, id, title, pos = wxDefaultPosition, size = wxDefaultSiz
     long style
     wxString name
 
-#if 0
+#if WXPERL_W_VERSION_GE( 2, 8, 12 )
 
 void
-wxFrame::Command( id )
+wxFrame::ProcessCommand( id )
     int id
 
 #endif

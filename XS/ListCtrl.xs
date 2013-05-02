@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     04/02/2001
-## RCS-ID:      $Id: ListCtrl.xs 2843 2010-03-14 11:53:02Z mbarbon $
+## RCS-ID:      $Id: ListCtrl.xs 3447 2013-03-29 22:18:44Z mdootson $
 ## Copyright:   (c) 2001-2007, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -316,6 +316,7 @@ newFull( CLASS, parent, id = wxID_ANY, pos = wxDefaultPosition, size = wxDefault
   CODE:
     RETVAL = new wxPliListCtrl( CLASS, parent, id, pos, size, style,
         *validator, name );
+    wxPli_create_evthandler( aTHX_ RETVAL, CLASS );
   OUTPUT:
     RETVAL
 
@@ -377,7 +378,7 @@ wxListCtrl::FindItem( start, str, partial = false )
 long
 wxListCtrl::FindItemData( start, data )
     long start
-    long data
+    wxUIntPtr data
   CODE:
     RETVAL = THIS->FindItem( start, data );
   OUTPUT:
@@ -459,10 +460,39 @@ wxListCtrl::GetItem( id, col = -1 )
     }
   OUTPUT:
     RETVAL
+    
+#if WXPERL_W_VERSION_GE( 2, 8, 4 )
+
+wxUIntPtr
+wxListCtrl::GetItemData( item )
+    long item
+
+bool
+wxListCtrl::SetItemPtrData( item, data )
+    long item
+    wxUIntPtr data
+
+bool
+wxListCtrl::SetItemData( item, data )
+    long item
+    wxUIntPtr data
+  CODE:
+    RETVAL = THIS->SetItemPtrData( item, data);
+  OUTPUT:
+    RETVAL
+
+#else
 
 long
 wxListCtrl::GetItemData( item )
     long item
+    
+bool
+wxListCtrl::SetItemData( item, data )
+    long item
+    long data
+
+#endif
 
 wxPoint*
 wxListCtrl::GetItemPosition( item )
@@ -547,6 +577,14 @@ wxListCtrl::GetItemSpacing()
 wxString
 wxListCtrl::GetItemText( item )
     long item
+
+wxFont*
+wxListCtrl::GetItemFont( item )
+    long item
+  CODE:
+    RETVAL = new wxFont( THIS->GetItemFont( item ) );
+  OUTPUT:
+    RETVAL
 
 wxColour*
 wxListCtrl::GetItemTextColour( item )
@@ -761,11 +799,6 @@ wxListCtrl::SetItemString( index, col, label, image = -1 )
     RETVAL
 
 bool
-wxListCtrl::SetItemData( item, data )
-    long item
-    long data
-
-bool
 wxListCtrl::SetItemImage( item, image, selImage )
     long item
     int image
@@ -796,6 +829,13 @@ void
 wxListCtrl::SetItemText( item, text )
     long item
     wxString text
+
+void
+wxListCtrl::SetItemFont( item, font )
+    long item
+    wxFont* font
+  CODE:
+    THIS->SetItemFont( item, *font );
 
 void
 wxListCtrl::SetSingleStyle( style, add = true )
@@ -833,7 +873,7 @@ wxListView*
 newDefault( CLASS )
     PlClassName CLASS
   CODE:
-    RETVAL = new wxListView();
+    RETVAL = new wxPliListView( CLASS );
     wxPli_create_evthandler( aTHX_ RETVAL, CLASS );
   OUTPUT: RETVAL
 
@@ -848,7 +888,7 @@ newFull( CLASS, parent, id = wxID_ANY, pos = wxDefaultPosition, size = wxDefault
     wxValidator* validator
     wxString name
   CODE:
-    RETVAL = new wxListView( parent, id, pos, size, style,
+    RETVAL = new wxPliListView( CLASS, parent, id, pos, size, style,
         *validator, name );
     wxPli_create_evthandler( aTHX_ RETVAL, CLASS );
   OUTPUT:

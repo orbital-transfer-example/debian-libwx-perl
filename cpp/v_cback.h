@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: v_cback.h 2533 2009-03-08 19:03:35Z mbarbon $
+// RCS-ID:      $Id: v_cback.h 3402 2012-10-01 11:18:15Z mdootson $
 // Copyright:   (c) 2000-2007, 2009 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -205,6 +205,36 @@ inline wxPliVirtualCallback::wxPliVirtualCallback( const char* package )
 
 #define DEC_V_CBACK_WXFSFILEP__WXFILESYSTEM_WXSTRING( METHOD ) \
   wxFSFile* METHOD( wxFileSystem&, const wxString& )
+
+#define DEC_V_CBACK_VOID__WXLOGLEVEL_WXSTRING_WXLOGRECORDINFO( METHOD ) \
+  void METHOD( wxLogLevel, const wxString&, const wxLogRecordInfo& )
+
+#define DEF_V_CBACK_VOID__WXLOGLEVEL_WXSTRING_WXLOGRECORDINFO( CLASS, BASE, METHOD ) \
+  void CLASS::METHOD( wxLogLevel p1, const wxString& p2, const wxLogRecordInfo& p3 ) \
+  {                                                                           \
+    dTHX;                                                                     \
+    if( wxPliVirtualCallback_FindCallback( aTHX_ &m_callback, #METHOD ) )     \
+    {                                                                         \
+        wxPliVirtualCallback_CallCallback( aTHX_ &m_callback, G_VOID,         \
+                                           "iPq", int(p1), &p2, &p3, "Wx::LogRecordInfo" ); \
+    }                                                                         \
+    BASE::METHOD( p1, p2, p3 );                                               \
+  }
+
+#define DEC_V_CBACK_VOID__WXLOGLEVEL_WXSTRING( METHOD ) \
+  void METHOD( wxLogLevel, const wxString& )
+
+#define DEF_V_CBACK_VOID__WXLOGLEVEL_WXSTRING( CLASS, BASE, METHOD ) \
+  void CLASS::METHOD( wxLogLevel p1, const wxString& p2) \
+  {                                                                           \
+    dTHX;                                                                     \
+    if( wxPliVirtualCallback_FindCallback( aTHX_ &m_callback, #METHOD ) )     \
+    {                                                                         \
+        wxPliVirtualCallback_CallCallback( aTHX_ &m_callback, G_VOID,         \
+                                           "iP", int(p1), &p2); \
+    }                                                                         \
+    BASE::METHOD( p1, p2 );                                               \
+  }
 
 #define DEC_V_CBACK_VOID__WXLOGLEVEL_CWXCHARP_TIMET( METHOD ) \
   void METHOD( wxLogLevel, const wxChar*, time_t )

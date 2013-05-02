@@ -35,6 +35,7 @@ my $treelist = Wx::TreeListCtrl->new( $frame, -1) if $testtreelist;
 my $point = Wx::Point->new( 100, 100 );
 my $size = Wx::Size->new( 100, 100 );
 my $rect = Wx::Rect->new( $point, $size );
+my $region = Wx::Region->new( $rect );
 my $bitmap = Wx::Bitmap->new( 100, 100, -1 );
 my $image = Wx::Image->new( 16, 16 );
 my $locker;
@@ -91,6 +92,7 @@ check_init { Wx::Point->new( 100, 100 ) };
 check_init { Wx::Size->new( 100, 100 ) };
 check_init { Wx::Rect->new( $point, $size ) };
 check_init { Wx::Region->new( $rect ) };
+check_init { Wx::RegionIterator->new( $region ) };
 check_init { Wx::FontData->new };
 check_init { Wx::Locale->new( wxLANGUAGE_DEFAULT ) };
 my $imagelist = Wx::ImageList->new( 16, 16 );
@@ -98,7 +100,7 @@ my $imagelist2 = Wx::ImageList->new( 32, 32 );
 check_init { Wx::CaretSuspend->new( Wx::Frame->new( undef, -1, 'Moo' ) ) };
 if( Wx::wxVERSION > 2.009001 ) {
     # OSX fails to handle null window or 1
-	check_init { Wx::WindowDisabler->new(0) };
+    check_init { Wx::WindowDisabler->new(0) };
 } else {
     check_init { Wx::WindowDisabler->new };
 }
@@ -112,13 +114,17 @@ my $tid2 = $treectrl->AppendItem( $tid, 'Test child' );
 my ($tlid, $tlid1, $tlid2, $tlid3, $tlid4, $tlccomp, $tlccompkeep);
 
 if($testtreelist) {
-	$tlid = $treelist->GetRootItem;
-	$tlid1 = $treelist->AppendItem( $tlid, 'Test Child' );
-	$tlid2 = $treelist->AppendItem( $tlid, 'Test Child' );
-	check_init { Wx::PlTreeListItemComparator->new };
-	$tlccomp = Wx::PlTreeListItemComparator->new;
-	$tlccompkeep = Wx::PlTreeListItemComparator->new;
-	$treelist->SetItemComparator( Wx::PlTreeListItemComparator->new );
+    $tlid = $treelist->GetRootItem;
+    $tlid1 = $treelist->AppendItem( $tlid, 'Test Child' );
+    $tlid2 = $treelist->AppendItem( $tlid, 'Test Child' );
+    check_init { Wx::PlTreeListItemComparator->new };
+    $tlccomp = Wx::PlTreeListItemComparator->new;
+    $tlccompkeep = Wx::PlTreeListItemComparator->new;
+    $treelist->SetItemComparator( Wx::PlTreeListItemComparator->new );
+}
+
+if(defined(&Wx::UIActionSimulator::new)) {
+    check_init { Wx::UIActionSimulator->new };
 }
 
 check_init { Wx::TextAttr->new };
@@ -136,7 +142,7 @@ check_init { Wx::AcceleratorTable->new };
 check_init { Wx::PlValidator->new };
 
 if( Wx::wxVERSION > 2.009002 ) {
-	check_init { Wx::RichToolTip->new('Hello', 'Goodbye') } ;
+    check_init { Wx::RichToolTip->new('Hello', 'Goodbye') } ;
 }
 
 # Wx::Overlay / Wx::DCOverlay thread tests

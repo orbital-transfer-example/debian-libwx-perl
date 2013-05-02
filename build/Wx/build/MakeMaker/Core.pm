@@ -19,7 +19,7 @@ use vars qw(@EXPORT @subdirs);
 my @top_level_xs = qw(Wx.xs Constant.xs Controls.xs Event.xs
                       Frames.xs GDI.xs Window.xs);
 @subdirs = qw(socket dnd filesys grid help html mdi print xrc stc docview
-            calendar datetime media richtext aui dataview propgrid ribbon webview );
+            calendar datetime media richtext aui dataview propgrid ribbon webview test ipc );
 my %subdirs;
 
 Wx::build::MakeMaker::_set_is_wxPerl_tree( 1 );
@@ -131,18 +131,23 @@ sub wxWriteMakefile {
 
   my $build = Wx::build::MakeMaker::_process_mm_arguments( \%params, $has_alien );
 
+  my $minwidgets = 2.007001;
+  
   if( $build ) {
     WriteMakefile( %params );
-    unless( Alien::wxWidgets->can( 'load' ) ) {
+    unless( Alien::wxWidgets->can( 'load' )
+      && (Alien::wxWidgets->version >= $minwidgets) ) {
         print <<EOT;
+
 ======================================================================
-Alien::wxWidgets is missing, you will need to re-run Makefile.PL after
-it is installed.
+wxWidgets minimum supported version $minwidgets is missing.
+You will need to re-run Makefile.PL after it is installed.
+You must install wxWidgets using Alien::wxWidgets.
 ======================================================================
 EOT
-        sleep 3;
         open my $fh, ">> alien_wxwidgets_missing";
         print $fh "touched";
+        sleep 3;
     }
   } else {
     ExtUtils::MakeMaker::WriteEmptyMakefile( %params );

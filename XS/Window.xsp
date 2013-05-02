@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     23/05/2004
-## RCS-ID:      $Id: Window.xsp 2938 2010-07-04 12:56:48Z mbarbon $
+## RCS-ID:      $Id: Window.xsp 3379 2012-09-26 22:35:22Z mdootson $
 ## Copyright:   (c) 2000-2002, 2004-2007, 2009-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -16,6 +16,7 @@
 
 %typemap{wxWindowVariant}{simple};
 %typemap{wxMenu&}{reference};
+%typemap{wxWindowBase*}{parsed}{%wxWindow*%};
 
 %name{Wx::Window} class wxWindow {
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
@@ -107,6 +108,13 @@ wxWindow::GetScreenPositionXY()
 #if WXPERL_W_VERSION_GE( 2, 8, 0 )
     bool ToggleWindowStyle( int flag );
 #endif
+#if WXPERL_W_VERSION_GE( 2, 9, 4 )
+    bool AcceptsFocusRecursively() const;
+    bool HasFocus() const;
+    void SetFocusFromKbd();
+    bool IsDescendant( wxWindowBase *win) const;
+#endif
+
 };
 
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )

@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: typemap 3312 2012-07-13 02:02:29Z mdootson $
-## Copyright:   (c) 2000-2010 Mattia Barbon
+## RCS-ID:      $Id: typemap 3485 2013-04-16 15:28:22Z mdootson $
+## Copyright:   (c) 2000-2013 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -141,6 +141,10 @@ wxMenuBar *             O_WXOBJECT
 wxMenu *                O_WXOBJECT
 wxMenuItem *            O_WXOBJECT
 
+wxRearrangeList *       O_WXOBJECT_NAMED
+wxRearrangeCtrl *       O_WXOBJECT_NAMED
+wxRearrangeDialog *     O_WXOBJECT_NAMED
+
 wxDirFilterListCtrl *   O_WXEVTHANDLER
 wxDirCtrl *             O_WXEVTHANDLER
 wxFileCtrl *            O_WXEVTHANDLER
@@ -154,6 +158,7 @@ wxPanel *               O_WXOBJECT
 wxDialog *              O_WXOBJECT
 wxControl *             O_WXOBJECT
 wxButton *              O_WXEVTHANDLER
+wxCommandLinkButton *   O_WXEVTHANDLER
 wxStaticText *          O_WXEVTHANDLER
 wxStaticLine *          O_WXEVTHANDLER
 wxTextCtrl *            O_WXOBJECT
@@ -307,6 +312,9 @@ wxLogPassThrough *      O_NON_WXOBJECT
 wxLogStderr *           O_NON_WXOBJECT
 wxPlLog *               O_NON_WXOBJECT
 wxPlLogPassThrough *    O_NON_WXOBJECT
+wxLogRecordInfo *       O_NON_WXOBJECT
+wxPlLogFormatter *      O_NON_WXOBJECT
+wxLogFormatter *        O_NON_WXOBJECT
 
 wxLocale *              O_NON_WXOBJECT_THR
 wxLanguageInfo *        O_NON_WXOBJECT_THR
@@ -358,9 +366,11 @@ wxTreeItemId *          O_NON_WXOBJECT_THR
 wxAnimation *           O_WXOBJECT_THR
 wxFontMapper *          O_NON_WXOBJECT
 wxFontEnumerator *      O_NON_WXOBJECT_THR
+wxPlFontEnumerator *    O_NON_WXOBJECT_VXSP_THR
 wxNativeFontInfo *      O_NON_WXOBJECT_THR
 wxFont *                O_WXOBJECT_THR
 wxRegion *              O_WXOBJECT_THR
+wxRegionIterator *      O_WXOBJECT_THR
 wxIcon *                O_WXOBJECT_THR
 wxIconBundle *          O_NON_WXOBJECT
 wxIconLocation *        O_NON_WXOBJECT
@@ -491,7 +501,10 @@ wxFileConfig *          O_NON_WXOBJECT
 wxArtProvider *         O_WXOBJECT
 wxPlArtProvider *       O_WXOBJECT
 
+wxPlEventFilter *       O_NON_WXOBJECT_THR
+wxEventFilter *         O_NON_WXOBJECT_THR
 
+wxUIActionSimulator *   O_NON_WXOBJECT_THR
 
 OUTPUT
 O_WXOBJECT
@@ -503,6 +516,13 @@ O_WXOBJECT_THR
 
 O_WXEVTHANDLER
     wxPli_evthandler_2_sv( aTHX_ $arg, $var );
+    
+O_WXOBJECT_NAMED
+    wxPli_namedobject_2_sv( aTHX_ $arg, $var, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
+    
+O_WXOBJECT_NAMED_THR
+    wxPli_namedobject_2_sv( aTHX_ $arg, $var, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
+    wxPli_thread_sv_register( aTHX_ ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt}, $var, $arg );
 
 O_WXCLIENTDATACONTAINER
     wxPli_clientdatacontainer_2_sv( aTHX_ $arg, $var, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
@@ -551,6 +571,12 @@ O_WXOBJECT_THR
     $var = (${(my $t=$type)=~s/^Wx_/wx/;\$t}) wxPli_sv_2_object( aTHX_ $arg, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
 
 O_WXEVTHANDLER
+    $var = (${(my $t=$type)=~s/^Wx_/wx/;\$t}) wxPli_sv_2_object( aTHX_ $arg, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
+
+O_WXOBJECT_NAMED
+    $var = (${(my $t=$type)=~s/^Wx_/wx/;\$t}) wxPli_sv_2_object( aTHX_ $arg, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
+    
+O_WXOBJECT_NAMED_THR
     $var = (${(my $t=$type)=~s/^Wx_/wx/;\$t}) wxPli_sv_2_object( aTHX_ $arg, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
 
 O_WXCLIENTDATACONTAINER
@@ -640,6 +666,36 @@ OUTPUT
 O_NON_WXOBJECT_SELF
     $arg = ( $var == 0 ) ? &PL_sv_undef : $var->GetSelf();
     SvREFCNT_inc( $arg ); // xsubpp mortalizes it...
+
+#
+# Non Objects handled by Wx::XSP::Virtual XS++ plugin 
+#
+
+INPUT
+O_NON_WXOBJECT_VXSP
+    $var = (${(my $t=$type)=~s/^Wx_/wx/;\$t}) wxPli_sv_2_object( aTHX_ $arg, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
+
+O_NON_WXOBJECT_VXSP_THR
+    $var = (${(my $t=$type)=~s/^Wx_/wx/;\$t}) wxPli_sv_2_object( aTHX_ $arg, ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt} );
+
+
+OUTPUT
+O_NON_WXOBJECT_VXSP
+    if( $var == 0 )
+    {
+       $arg = &PL_sv_undef;
+    } else {
+       SvSetSV_nosteal( $arg, $var->GetSelf() );
+    }
+
+O_NON_WXOBJECT_VXSP_THR
+    if( $var == 0 )
+    {
+       $arg = &PL_sv_undef;
+    } else {
+       SvSetSV_nosteal( $arg, $var->GetSelf() );
+       wxPli_thread_sv_register( aTHX_ ${(my $ntt=$ntype)=~s/^(?:const\s+)?(?:Wx_|wx|wxPl)(.*?)(?:Ptr)?$/$1/g;$ntt=qq{\"Wx::$ntt\"};\$ntt}, $var, $arg );
+    }
 
 #
 # SV_null

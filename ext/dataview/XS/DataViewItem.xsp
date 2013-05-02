@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     25/11/2007
-## RCS-ID:      $Id: DataViewItem.xsp 2297 2007-11-25 12:39:35Z mbarbon $
+## RCS-ID:      $Id: DataViewItem.xsp 3347 2012-09-16 23:17:55Z mdootson $
 ## Copyright:   (c) 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -43,6 +43,15 @@
 
     bool GetBold() const;
     bool GetItalic() const;
+#if WXPERL_W_VERSION_GE( 2, 9, 4 )
+    void SetBackgroundColour(const wxColour& colour);
+    bool HasFont() const;
+    bool HasBackgroundColour() const;
+    wxColour GetBackgroundColour() const;
+    bool IsDefault() const;
+    // Return the font based on the given one with this attribute applied to it.
+    wxFont GetEffectiveFont(const wxFont& font) const;
+#endif
 };
 
 #endif

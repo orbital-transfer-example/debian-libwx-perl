@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: controls.cpp 2442 2008-08-12 22:35:24Z mbarbon $
+// RCS-ID:      $Id: controls.cpp 3340 2012-09-12 03:21:07Z mdootson $
 // Copyright:   (c) 2000-2008 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -199,6 +199,67 @@ wxListItemAttr* wxPliListCtrl::OnGetItemAttr( long item ) const
 
 #if WXPERL_W_VERSION_GE( 2, 7, 2 )
 DEF_V_CBACK_INT__LONG_LONG_const( wxPliListCtrl, wxListCtrl, OnGetItemColumnImage );
+#endif
+
+//
+// Wx::ListView implementation
+//
+
+WXPLI_IMPLEMENT_DYNAMIC_CLASS( wxPliListView, wxListView );
+
+wxString wxPliListView::OnGetItemText( long item, long column ) const
+{
+    dTHX;
+    wxPliVirtualCallback* cb = (wxPliVirtualCallback*)&m_callback;
+    if( wxPliVirtualCallback_FindCallback( aTHX_ cb, "OnGetItemText" ) )
+    {                                                                         
+        SV* ret = wxPliVirtualCallback_CallCallback( aTHX_ cb, G_SCALAR,
+                                                     "ll", item, column );
+        wxString val;
+        WXSTRING_INPUT( val, char*, ret );
+        SvREFCNT_dec( ret );
+        return val;
+    }
+
+    return wxListView::OnGetItemText( item, column );
+}
+
+int wxPliListView::OnGetItemImage( long item ) const
+{
+    dTHX;
+    wxPliVirtualCallback* cb = (wxPliVirtualCallback*)&m_callback;
+    if( wxPliVirtualCallback_FindCallback( aTHX_ cb, "OnGetItemImage" ) )           
+    {                                                                         
+        SV* ret = wxPliVirtualCallback_CallCallback( aTHX_ cb,
+                                                     G_SCALAR, "l", item );
+        int val = SvIV( ret );
+        SvREFCNT_dec( ret );
+        return val;
+    }
+
+    return wxListView::OnGetItemImage( item );
+}
+
+wxListItemAttr* wxPliListView::OnGetItemAttr( long item ) const
+{
+    dTHX;
+    wxPliVirtualCallback* cb = (wxPliVirtualCallback*)&m_callback;
+    if( wxPliVirtualCallback_FindCallback( aTHX_ cb, "OnGetItemAttr" ) )
+    {                                                                         
+        SV* ret = wxPliVirtualCallback_CallCallback( aTHX_ cb,
+                                                     G_SCALAR, "l", item );
+        wxListItemAttr* val = (wxListItemAttr*)
+            wxPli_sv_2_object( aTHX_ ret, "Wx::ListItemAttr" );
+        val = val ? new wxListItemAttr( *val ) : NULL;
+        SvREFCNT_dec( ret );
+        return val;
+    }
+
+    return wxListView::OnGetItemAttr( item );
+}
+
+#if WXPERL_W_VERSION_GE( 2, 7, 2 )
+DEF_V_CBACK_INT__LONG_LONG_const( wxPliListView, wxListView, OnGetItemColumnImage );
 #endif
 
 //
