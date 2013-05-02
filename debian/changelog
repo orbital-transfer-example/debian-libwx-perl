@@ -1,9 +1,15 @@
-libwx-perl (1:0.9911-2) UNRELEASED; urgency=low
+libwx-perl (1:0.9922-1~1.gbp03413b) UNRELEASED; urgency=low
 
+  ** SNAPSHOT build @03413b004306f1b71b4a5068d8e8628989f2e75c **
+
+  [ Salvatore Bonaccorso ]
   * Change Vcs-Git to canonical URI (git://anonscm.debian.org)
   * Change search.cpan.org based URIs to metacpan.org based URIs
 
- -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 06 Jan 2013 22:09:02 +0100
+  [ Dominique Dumont ]
+  * Imported Upstream version 0.9922
+
+ -- Dominique Dumont <dod@debian.org>  Thu, 02 May 2013 19:30:42 +0200
 
 libwx-perl (1:0.9911-1) unstable; urgency=low
 
