@@ -1,6 +1,4 @@
-libwx-perl (1:0.9922-1~1.gbp03413b) UNRELEASED; urgency=low
-
-  ** SNAPSHOT build @03413b004306f1b71b4a5068d8e8628989f2e75c **
+libwx-perl (1:0.9922-1) unstable; urgency=low
 
   [ Salvatore Bonaccorso ]
   * Change Vcs-Git to canonical URI (git://anonscm.debian.org)
@@ -8,8 +6,16 @@ libwx-perl (1:0.9922-1~1.gbp03413b) UNRELEASED; urgency=low
 
   [ Dominique Dumont ]
   * Imported Upstream version 0.9922
+  * added patch to fix Wx man page spelling errors
+  * copyright: updated year
+  * control:
+    * refreshed with cme
+    * cleaned up versioned dependencies
+    * bumped Standards-Version: 3.9.4
+    + added /me in uploader
+    - removed ryan
 
- -- Dominique Dumont <dod@debian.org>  Thu, 02 May 2013 19:30:42 +0200
+ -- Dominique Dumont <dod@debian.org>  Thu, 02 May 2013 20:43:23 +0200
 
 libwx-perl (1:0.9911-1) unstable; urgency=low
 
