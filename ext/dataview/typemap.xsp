@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     05/11/2007
-## RCS-ID:      $Id: typemap.xsp 2927 2010-06-06 08:06:10Z mbarbon $
+## RCS-ID:      $Id: typemap.xsp 3346 2012-09-16 01:10:42Z mdootson $
 ## Copyright:   (c) 2007-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -53,3 +53,11 @@
 %typemap{wxDataViewTreeCtrl*}{simple};
 %typemap{wxDataViewListStore*}{simple};
 %typemap{const wxDataViewListStore*}{simple};
+%typemap{Wx_UserDataO*}{simple};
+
+/*
+%typemap{Wx_UserDataOwxUIntPtr*}{parsed}{
+    %cpp_type{%Wx_UserDataO*%};
+    %precall_code{% reinterpret_cast<wxUIntPtr>($CVar); %};
+};
+*/

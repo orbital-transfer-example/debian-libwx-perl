@@ -4,7 +4,7 @@
 // Name:        bmpbuttn.h
 // Purpose:     interface of wxBitmapButton
 // Author:      wxWidgets team
-// RCS-ID:      $Id: bmpbuttn.h 3032 2011-03-13 21:48:58Z mbarbon $
+// RCS-ID:      $Id: bmpbuttn.h 3405 2012-10-01 15:45:12Z mdootson $
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -51,6 +51,15 @@
 %name{Wx::BitmapButton} class wxBitmapButton : public %name{Wx::Button} wxButton
 {
 public:
+    
+    /**
+      Static Constructors
+    */
+#if WXPERL_W_VERSION_GE( 2, 9, 5 )
+    
+    static wxBitmapButton* NewCloseButton(wxWindow* parent, wxWindowID winid);
+
+#endif    
     /**
         Default ctor.
     */

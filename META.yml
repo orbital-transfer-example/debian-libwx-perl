@@ -1,39 +1,38 @@
---- #YAML:1.0
-name:               Wx
-version:            0.9911
-abstract:           interface to the wxWidgets cross-platform GUI toolkit
+---
+abstract: 'interface to the wxWidgets cross-platform GUI toolkit'
 author:
-    - Mattia Barbon <mbarbon@cpan.org>
-license:            perl
-distribution_type:  module
-configure_requires:
-    Alien::wxWidgets:  0.25
+  - 'Mattia Barbon <mbarbon@cpan.org>'
 build_requires:
-    Alien::wxWidgets:     0.25
-    ExtUtils::MakeMaker:  6.48
-    ExtUtils::ParseXS:    3.15
-    ExtUtils::XSpp:       0.1602
-    File::Spec::Functions:  0.82
-    if:                   0.03
-    Test::Harness:        2.26
-    Test::More:           0.45
-requires:
-    Alien::wxWidgets:  0.25
-resources:
-    bugtracker:   http://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx
-    homepage:     http://wxperl.eu/
-    license:      http://dev.perl.org/licenses/
-    MailingList:  http://lists.perl.org/list/wxperl-users.html
-    repository:   https://wxperl.svn.sourceforge.net/svnroot/wxperl/wxPerl
-no_index:
-    directory:
-        - samples
-        - script
-    package:
-        - MY
-        - Parse::Yapp::Driver
-generated_by:       ExtUtils::MakeMaker version 6.56
+  Alien::wxWidgets: 0.25
+  ExtUtils::MakeMaker: 6.48
+  ExtUtils::ParseXS: 3.15
+  ExtUtils::XSpp: 0.1602
+  File::Spec::Functions: 0.82
+  Test::Harness: 2.26
+  Test::More: 0.45
+  if: 0.03
+configure_requires:
+  Alien::wxWidgets: 0.25
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120630'
+license: perl
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
-dynamic_config:     1
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Wx
+no_index:
+  directory:
+    - samples
+    - script
+  package:
+    - MY
+    - Parse::Yapp::Driver
+requires:
+  Alien::wxWidgets: 0.25
+resources:
+  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx
+  homepage: http://www.wxperl.it/
+  license: http://dev.perl.org/licenses/
+  repository: http://svn.code.sf.net/p/wxperl/code/wxPerl
+  x_MailingList: http://lists.perl.org/list/wxperl-users.html
+version: 0.9922

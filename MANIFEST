@@ -208,6 +208,15 @@ ext/html/XS/HtmlPrintout.xsp
 ext/html/XS/HtmlTag.xsp
 ext/html/XS/HtmlTagHandler.xsp
 ext/html/XS/HtmlWindow.xsp
+ext/ipc/cpp/ipc.h
+ext/ipc/IPC.xs
+ext/ipc/lib/Wx/IPC.pm
+ext/ipc/Makefile.PL
+ext/ipc/t/01_load.t
+ext/ipc/t/02_inheritance.t
+ext/ipc/t/03_threads.t
+ext/ipc/typemap
+ext/ipc/XS/IPC.xsp
 ext/Makefile.PL
 ext/mdi/cpp/mdi.h
 ext/mdi/lib/Wx/MDI.pm
@@ -248,6 +257,7 @@ ext/print/Print.xs
 ext/print/t/01_load.t
 ext/print/t/02_inheritance.t
 ext/print/t/03_threads.t
+ext/print/t/09_paper.t
 ext/print/typemap
 ext/print/XS/PageSetupDialog.xs
 ext/print/XS/PageSetupDialogData.xs
@@ -282,6 +292,7 @@ ext/propgrid/XS/PropertyGridPage.xsp
 ext/propgrid/XS/PropertyGridPageState.xsp
 ext/ribbon/cpp/ribbon_constants.cpp
 ext/ribbon/cpp/ribbongalleryitem.h
+ext/ribbon/cpp/toolbarbases.h
 ext/ribbon/lib/Wx/Ribbon.pm
 ext/ribbon/Makefile.PL
 ext/ribbon/Ribbon.xs
@@ -342,6 +353,18 @@ ext/stc/t/02_inheritance.t
 ext/stc/typemap
 ext/stc/XS/StyledTextCtrl.xsp
 ext/stc/XS/StyledTextEvent.xsp
+ext/test/cpp/include/perltest.h
+ext/test/cpp/src/perltest.cpp
+ext/test/lib/Wx/PerlTest.pm
+ext/test/Makefile.PL
+ext/test/PerlTest.xs
+ext/test/t/01_load.t
+ext/test/t/02_inheritance.t
+ext/test/t/03_threads.t
+ext/test/t/07_callback.t
+ext/test/typemap
+ext/test/typemap.xsp
+ext/test/XS/PerlTest.xsp
 ext/webview/cpp/webview_constants.cpp
 ext/webview/lib/Wx/WebView.pm
 ext/webview/Makefile.PL
@@ -369,6 +392,7 @@ GDI.xs
 interface/wx/bannerwindow.h
 interface/wx/bmpbuttn.h
 interface/wx/button.h
+interface/wx/commandlinkbutton.h
 interface/wx/dataview/dataviewlistctrl.h
 interface/wx/dataview/dataviewliststore.h
 interface/wx/dataview/dataviewvirtuallistmodel.h
@@ -377,8 +401,10 @@ interface/wx/grid/gridtablebase.h
 interface/wx/headercol.h
 interface/wx/headerctrl.h
 interface/wx/infobar.h
+interface/wx/rearrangectrl.h
 interface/wx/richtooltip.h
 interface/wx/treelist.h
+interface/wx/uiaction.h
 lib/Wx/Api.pod
 lib/Wx/App.pm
 lib/Wx/ArtProvider.pm
@@ -480,14 +506,15 @@ XS/DirCtrl.xsp
 XS/DirDialog.xs
 XS/Display.xsp
 XS/EditableListBox.xsp
+XS/EventFilter.xsp
 XS/EvtHandler.xs
 XS/FileCtrl.xsp
 XS/FileDialog.xs
 XS/FilePickerCtrl.xsp
-XS/FindReplaceDialog.xs
+XS/FindReplaceDialog.xsp
 XS/Font.xs
 XS/FontDialog.xs
-XS/FontEnumerator.xs
+XS/FontEnumerator.xsp
 XS/FontMapper.xs
 XS/FontPickerCtrl.xsp
 XS/Frame.xs
@@ -575,4 +602,5 @@ XS/VScrolledWindow.xsp
 XS/Wave.xs
 XS/Window.xsp
 XS/Wizard.xs
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

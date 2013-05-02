@@ -5,7 +5,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Makefile.PL 3258 2012-03-27 08:57:58Z mdootson $
+## RCS-ID:      $Id: Makefile.PL 3462 2013-04-11 12:28:19Z mdootson $
 ## Copyright:   (c) 2000-2012 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -74,9 +74,9 @@ wxWriteMakefile(
         },
         resources => {
             'license'       => 'http://dev.perl.org/licenses/',
-            'homepage'      => 'http://wxperl.eu/',
+            'homepage'      => 'http://www.wxperl.it/',
             'bugtracker'    => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx',
-            'repository'    => 'https://wxperl.svn.sourceforge.net/svnroot/wxperl/wxPerl',
+            'repository'    => 'http://svn.code.sf.net/p/wxperl/code/wxPerl',
             'MailingList'   => 'http://lists.perl.org/list/wxperl-users.html',
         },
         no_index => { directory => [ qw(samples script) ],

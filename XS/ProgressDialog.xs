@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/12/2000
-## RCS-ID:      $Id: ProgressDialog.xs 2991 2010-11-11 04:53:56Z mdootson $
+## RCS-ID:      $Id: ProgressDialog.xs 3487 2013-04-16 22:01:57Z mdootson $
 ## Copyright:   (c) 2000-2002, 2004 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -23,30 +23,81 @@ wxProgressDialog::new( title, message, maximum = 100, parent = 0, style = wxPD_A
     long style
   CODE:
     RETVAL = new wxProgressDialog( title, message, maximum, parent, style );
-  OUTPUT:
-    RETVAL
+  OUTPUT: RETVAL
+
+void
+wxProgressDialog::Resume()
 
 
-#if WXPERL_W_VERSION_GE( 2, 8, 0 )
+#if WXPERL_W_VERSION_GE( 2, 9, 1 )
+
+bool
+wxProgressDialog::Update( value = -1, newmsg = wxEmptyString )
+    int value
+    wxString newmsg
+  PREINIT:
+    bool skipval = false;
+  CODE:
+    RETVAL = THIS->Update( value, newmsg, &skipval);
+    if( skipval )
+        RETVAL = false;
+
+  OUTPUT: RETVAL
+
 
 bool 
 wxProgressDialog::Pulse( newmsg = wxEmptyString )
 	wxString newmsg
+  PREINIT:
+    bool skipval = false;    
+  CODE:
+    RETVAL = THIS->Pulse(newmsg, &skipval);
+    if( skipval )
+        RETVAL = false;
+    
+  OUTPUT: RETVAL
 
+
+int
+wxProgressDialog::GetRange()
+
+int
+wxProgressDialog::GetValue()
+
+wxString
+wxProgressDialog::GetMessage()
+
+void
+wxProgressDialog::SetRange( maximum )
+    int maximum
+
+bool
+wxProgressDialog::WasCancelled()
+
+bool
+wxProgressDialog::WasSkipped()
 
 bool
 wxProgressDialog::Show( show = true )
 	bool show
 
-#endif
+#else
 
 bool
 wxProgressDialog::Update( value = -1, newmsg = wxEmptyString )
     int value
     wxString newmsg
 
+#if WXPERL_W_VERSION_GE( 2, 8, 0 )
 
-void
-wxProgressDialog::Resume()
+bool
+wxProgressDialog::Show( show = true )
+	bool show
 
+bool 
+wxProgressDialog::Pulse( newmsg = wxEmptyString )
+	wxString newmsg
 
+#endif
+
+#endif

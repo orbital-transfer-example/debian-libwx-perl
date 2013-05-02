@@ -4,8 +4,8 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     01/10/2000
-// RCS-ID:      $Id: Wx.xs 3220 2012-03-18 03:02:46Z mdootson $
-// Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
+// RCS-ID:      $Id: Wx.xs 3486 2013-04-16 17:39:27Z mdootson $
+// Copyright:   (c) 2000-2002, 2004-2013 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
 /////////////////////////////////////////////////////////////////////////////
@@ -153,16 +153,21 @@ static int call_oninit( pTHX_ SV* This, SV* sub )
 
 int wxEntryStart( int argc, char** argv )
 {
-#if (defined(__WXDEBUG__) && wxUSE_MEMORY_TRACING) || wxUSE_DEBUG_CONTEXT
     // This seems to be necessary since there are 'rogue'
     // objects present at this point (perhaps global objects?)
     // Setting a checkpoint will ignore them as far as the
     // memory checking facility is concerned.
     // Of course you may argue that memory allocated in globals should be
     // checked, but this is a reasonable compromise.
+#if WXPERL_W_VERSION_GE( 2, 9, 3 )
+#if ( ( wxDEBUG_LEVEL > 1 ) && wxUSE_MEMORY_TRACING ) || wxUSE_DEBUG_CONTEXT
     wxDebugContext::SetCheckpoint();
 #endif
-
+#else
+#if (defined(__WXDEBUG__) && wxUSE_MEMORY_TRACING ) || wxUSE_DEBUG_CONTEXT
+    wxDebugContext::SetCheckpoint();
+#endif
+#endif
     if (!wxApp::Initialize())
         return -1;
 
@@ -248,6 +253,40 @@ BOOT:
 #else
 #define wxPliEntryStart( argc, argv ) ( wxEntryStart( (argc), (argv) ) == 0 )
 #endif
+
+bool
+EnableDefaultAssertHandler()
+  CODE:
+#if WXPERL_W_VERSION_GE( 2, 9, 3 )
+    wxSetDefaultAssertHandler();
+    RETVAL = 1;
+#else
+    RETVAL = 0;
+#endif
+  OUTPUT: RETVAL
+
+bool
+DisableAssertHandler()
+  CODE:
+#if WXPERL_W_VERSION_GE( 2, 9, 3 )
+    wxDisableAsserts();
+    RETVAL = 1;
+#else
+    RETVAL = 0;
+#endif
+  OUTPUT: RETVAL
+
+
+##// bool
+##// EnableCustomAssertHandler( handler )
+##//     SV* handler
+##//   CODE:
+##// #if WXPERL_W_VERSION_GE( 2, 9, 3 )
+##//     RETVAL = 1;
+##// #else
+##//     RETVAL = 0;
+##// #endif
+##//   OUTPUT: RETVAL
 
 bool 
 Load( bool croak_on_error = false )
@@ -465,6 +504,15 @@ _wx_optmod_webview()
 #endif
   OUTPUT: RETVAL
 
+bool
+_wx_optmod_ipc()
+  CODE:
+#if wxPERL_USE_IPC && wxUSE_IPC
+    RETVAL = TRUE;
+#else
+    RETVAL = FALSE;
+#endif
+  OUTPUT: RETVAL
 
 I32
 looks_like_number( sval )
@@ -494,8 +542,10 @@ INCLUDE: XS/TaskBarIcon.xs
 INCLUDE: XS/Config.xs
 INCLUDE: XS/Process.xs
 INCLUDE: XS/FontMapper.xs
-INCLUDE: XS/FontEnumerator.xs
 INCLUDE: XS/Wave.xs
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/FontEnumerator.xsp
+
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/ArtProvider.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/MimeTypes.xsp
@@ -513,6 +563,10 @@ INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Standard
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/Variant.xsp
 
 INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/NotificationMessage.xsp
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp XS/EventFilter.xsp
+
+INCLUDE_COMMAND: $^X -MExtUtils::XSpp::Cmd -e xspp -- -t typemap.xsp interface/wx/uiaction.h
 
 ##  //FIXME// tricky
 ##if defined(__WXMSW__)

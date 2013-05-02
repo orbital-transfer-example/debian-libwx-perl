@@ -3,7 +3,7 @@
 ## Purpose:     Wx::Ribbon and related classes
 ## Author:      Mark Dootson
 ## Created:     01/03/2012
-## SVN-ID:      $Id: Ribbon.pm 3242 2012-03-23 22:29:59Z mdootson $
+## SVN-ID:      $Id: Ribbon.pm 3342 2012-09-14 14:03:27Z mdootson $
 ## Copyright:   (c) 2012 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -38,3 +38,6 @@ package Wx::RibbonAUIArtProvider; @ISA = qw( Wx::RibbonMSWArtProvider );
 package Wx::RibbonDefaultArtProvider; @ISA = ( Wx::wxMSW() ) ? qw( Wx::RibbonMSWArtProvider ) : qw( Wx::RibbonAUIArtProvider ) ;
 
 1;
+
+
+

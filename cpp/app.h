@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: app.h 2057 2007-06-18 23:03:00Z mbarbon $
+// RCS-ID:      $Id: app.h 3430 2013-02-05 10:18:36Z mdootson $
 // Copyright:   (c) 2000-2006 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -14,6 +14,17 @@
 #undef Yield
 #endif
 
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+#include <wx/apptrait.h>
+
+class wxPerlAppTraits : public wxGUIAppTraits
+{
+public:
+    virtual void SetLocale() { }  
+};
+
+#endif
+
 class wxPliApp:public wxApp
 {
     WXPLI_DECLARE_DYNAMIC_CLASS( wxPliApp );
@@ -21,6 +32,13 @@ class wxPliApp:public wxApp
 public:
     wxPliApp( const char* package = "Wx::App" );
     ~wxPliApp();
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+    wxAppTraits* CreateTraits()
+    {
+        return (wxAppTraits*)new wxPerlAppTraits();
+    }
+#endif
 
     bool OnInit();
     int MainLoop();
@@ -42,8 +60,92 @@ public:
         ((wxPliApp*) app)->DeletePendingObjects();
     }
 
+#if ( WXPERL_W_VERSION_GE( 2, 9, 1 ) && wxDEBUG_LEVEL > 0 ) || ( WXPERL_W_VERSION_LE( 2, 9, 0) && defined(__WXDEBUG__) )    
+
+    void OnAssertFailure(const wxChar *file, int line, const wxChar *func, const wxChar *cond, const wxChar *msg)
+    {
+        dTHX;
+
+        if( wxPliVirtualCallback_FindCallback( aTHX_ &m_callback, "OnAssertFailure" ) )
+        {
+            wxPliVirtualCallback_CallCallback( aTHX_ &m_callback,
+                                               G_DISCARD|G_SCALAR,
+                                               "wiwww", file, line, func, cond, msg );
+        } else
+            wxApp::OnAssertFailure( file, line, func, cond, msg );
+    }
+#endif
+
     DEC_V_CBACK_INT__VOID( OnExit );
     DEC_V_CBACK_BOOL__BOOL( Yield );
+    
+#if ( WXPERL_W_VERSION_GE( 2, 9, 4 ) && defined(__WXOSX_COCOA__) )
+    
+    virtual void MacOpenFiles(const wxArrayString &fileNames )
+    {
+        dTHX;
+        if( wxPliFCback( aTHX_ &m_callback, "MacOpenFiles" ) )
+        {
+            AV* files;
+            files = wxPli_stringarray_2_av( aTHX_ fileNames );
+            wxPliCCback( aTHX_ &m_callback, G_DISCARD|G_SCALAR,
+                        "S", sv_2mortal( newRV_noinc( (SV*)files ) ) );
+        } else
+            wxApp::MacOpenFiles( fileNames );
+    }
+    
+    virtual void MacOpenFile(const wxString &fileName)
+    {
+        dTHX;
+        if( wxPliFCback( aTHX_ &m_callback, "MacOpenFile" ) )
+        {
+            wxPliCCback( aTHX_ &m_callback, G_DISCARD|G_SCALAR, "P", &fileName );
+        } else
+            wxApp::MacOpenFile( fileName );
+    }
+
+    virtual void MacOpenURL(const wxString &url)
+    {
+        dTHX;
+        if( wxPliFCback( aTHX_ &m_callback, "MacOpenURL" ) )
+        {
+            wxPliCCback( aTHX_ &m_callback, G_DISCARD|G_SCALAR, "P", &url );
+        } else
+            wxApp::MacOpenURL( url );
+    }
+    
+    virtual void MacPrintFile(const wxString &fileName)
+    {
+        dTHX;
+        if( wxPliFCback( aTHX_ &m_callback, "MacPrintFile" ) )
+        {
+            wxPliCCback( aTHX_ &m_callback, G_DISCARD|G_SCALAR, "P", &fileName );
+        } else
+            wxApp::MacPrintFile( fileName );
+    }    
+    
+    virtual void MacNewFile()
+    {
+        dTHX;
+        if( wxPliFCback( aTHX_ &m_callback, "MacNewFile" ) )
+        {
+            wxPliCCback( aTHX_ &m_callback, G_DISCARD|G_SCALAR, NULL );
+        } else
+            wxApp::MacNewFile();
+    }
+    
+    virtual void MacReopenApp()
+    {
+        dTHX;
+        if( wxPliFCback( aTHX_ &m_callback, "MacReopenApp" ) )
+        {
+            wxPliCCback( aTHX_ &m_callback, G_DISCARD|G_SCALAR, NULL );
+        } else
+            wxApp::MacReopenApp();
+    }      
+
+#endif
+    
 };
 
 inline wxPliApp::wxPliApp( const char* package )

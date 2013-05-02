@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: helpers.cpp 3190 2012-03-16 05:04:03Z mdootson $
+// RCS-ID:      $Id: helpers.cpp 3397 2012-09-30 02:26:07Z mdootson $
 // Copyright:   (c) 2000-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -25,6 +25,10 @@
 #if WXPERL_W_VERSION_GE( 2, 9, 0 )
     #include <wx/position.h>
 #endif
+
+// All code that uses wxPL_USE_MAGIC has been removed
+// but leave definition in case somehow some external
+// module contrives to use this
 
 #define wxPL_USE_MAGIC 1
 
@@ -52,9 +56,13 @@ struct my_magic
 {
     my_magic() : object( NULL ), deleteable( true ) { }
 
-    wxObject*  object;
+    void*      object;
     bool       deleteable;
 };
+
+#if WXPERL_P_VERSION_GE( 5, 14, 0 )
+STATIC MGVTBL my_vtbl = { 0, 0, 0, 0, 0, 0, 0, 0 };
+#endif
 
 my_magic* wxPli_get_magic( pTHX_ SV* rv )
 {
@@ -68,14 +76,19 @@ my_magic* wxPli_get_magic( pTHX_ SV* rv )
     if( !ref || SvTYPE( ref ) < SVt_PVMG )
         return NULL;
 
-    // search for '~' magic, and check the value
+    // search for '~' / PERL_MAGIC_ext magic, and check the value
+#if WXPERL_P_VERSION_GE( 5, 14, 0 )
+    MAGIC* magic = mg_findext( ref, PERL_MAGIC_ext, &my_vtbl );
+#else
     MAGIC* magic = mg_find( ref, '~' );
-
+#endif
     if( !magic )
         return NULL;
 
     return (my_magic*)magic->mg_ptr;
 }
+
+
 
 my_magic* wxPli_get_or_create_magic( pTHX_ SV* rv )
 {
@@ -91,11 +104,18 @@ my_magic* wxPli_get_or_create_magic( pTHX_ SV* rv )
     // search for '~' magic, and check the value
     MAGIC* magic;
 
-    while( !( magic = mg_find( ref, '~' ) ) )
+#if WXPERL_P_VERSION_GE( 5, 14, 0 )
+    while( !( magic = mg_findext( ref, PERL_MAGIC_ext, &my_vtbl ) ) )
+#else
+    while( !( magic = mg_find( ref, '~' ) ) ) 
+#endif
     {
         my_magic tmp;
-
-        sv_magic( ref, 0, '~', (char*)&tmp, sizeof( tmp ) );
+#if WXPERL_P_VERSION_GE( 5, 14, 0 )
+        sv_magicext( ref, NULL, PERL_MAGIC_ext, &my_vtbl, (char*)&tmp, sizeof( tmp ) );
+#else
+        sv_magic( ref, NULL, '~', (char*)&tmp, sizeof( tmp ) );
+#endif
     }
 
     return (my_magic*)magic->mg_ptr;
@@ -318,49 +338,6 @@ void wxPli_push_args( pTHX_ SV*** psp, const char* argtypes, va_list& args )
     *psp = sp;
 }
 
-#if !wxPL_USE_MAGIC
-
-// this use of static is deprecated, but we need to
-// cope with C++ compilers
-static SV* _key;
-static U32 _hash;
-
-static U32 calc_hash( const char* key, size_t klen )
-{
-    U32 h;
-    PERL_HASH( h, (char*)key, klen );
-    return h;
-}
-
-// precalculate key and hash value for "_WXTHIS"
-class wxHashModule : public wxModule {
-    DECLARE_DYNAMIC_CLASS( wxHashModule );
-public:
-    wxHashModule() {};
-
-    bool OnInit()
-    {
-        const char* kname = "_WXTHIS";
-        const int klen = 7;
-        dTHX;
-
-        _key = newSVpvn( CHAR_P kname, klen );
-        _hash = calc_hash( kname, klen );
-
-        return true;
-    };
-
-    void OnExit()
-    {
-        dTHX;
-        SvREFCNT_dec( _key );
-    };
-};
-
-IMPLEMENT_DYNAMIC_CLASS( wxHashModule, wxModule );
-
-#endif // !wxPL_USE_MAGIC
-
 // gets 'this' pointer from a blessed scalar/hash reference
 void* wxPli_sv_2_object( pTHX_ SV* scalar, const char* classname ) 
 {
@@ -377,7 +354,6 @@ void* wxPli_sv_2_object( pTHX_ SV* scalar, const char* classname )
     {
         SV* ref = SvRV( scalar );
 
-#if wxPL_USE_MAGIC
         my_magic* mg = wxPli_get_magic( aTHX_ scalar );
 
         // rationale: if this is an hash-ish object, it always
@@ -388,27 +364,6 @@ void* wxPli_sv_2_object( pTHX_ SV* scalar, const char* classname )
             return INT2PTR( void*, SvOK( ref ) ? SvIV( ref ) : 0 );
 
         return mg->object;
-#else // if !wxPL_USE_MAGIC
-        if( SvTYPE( ref ) == SVt_PVHV ) 
-        {
-            HV* hv = (HV*) ref;
-            HE* value = hv_fetch_ent( hv, _key, 0, _hash );
-
-            if( value ) 
-            {
-                SV* sv = HeVAL( value );
-                return (void*)SvIV( sv );
-            }
-            else 
-            {
-                croak( "the associative array (hash) "
-                       " does not have a '_WXTHIS' key" );
-                return NULL; // dummy, for compiler
-            }
-        }
-        else
-            return (void*)SvIV( (SV*) ref );
-#endif // wxPL_USE_MAGIC / !wxPL_USE_MAGIC
     }
     else 
     {
@@ -450,6 +405,23 @@ SV* wxPli_clientdatacontainer_2_sv( pTHX_ SV* var, wxClientDataContainer* cdc, c
     return wxPli_non_object_2_sv( aTHX_ var, cdc, klass );
 }
 
+SV* wxPli_object_2_scalarsv( pTHX_ SV* var, const wxObject* object )
+{
+    wxClassInfo *ci = object->GetClassInfo();
+    const wxChar* classname = ci->GetClassName();
+
+    char buffer[WXPL_BUF_SIZE];
+    const char* CLASS = wxPli_cpp_class_2_perl( classname, buffer );
+
+    if( strcmp( CLASS, "Wx::Object" ) == 0 ) {
+        warn( "Missing wxRTTI information, using Wx::Object as class" );
+    }
+
+    sv_setref_pv( var, CHAR_P CLASS, const_cast<wxObject*>(object) );
+
+    return var;    
+}
+
 SV* wxPli_evthandler_2_sv( pTHX_ SV* var, wxEvtHandler* cdc )
 {
     if( cdc == NULL )
@@ -466,20 +438,14 @@ SV* wxPli_evthandler_2_sv( pTHX_ SV* var, wxEvtHandler* cdc )
         return var;
     }
 
-    // blech, duplicated code
-    wxClassInfo *ci = cdc->GetClassInfo();
-    const wxChar* classname = ci->GetClassName();
-
-    char buffer[WXPL_BUF_SIZE];
-    const char* CLASS = wxPli_cpp_class_2_perl( classname, buffer );
-
-    sv_setref_pv( var, CHAR_P CLASS, cdc );
-
-    return var;
+    // fallback - return a scalarish object
+    return wxPli_object_2_scalarsv( aTHX_ var, (wxObject*)cdc );
 }
 
 SV* wxPli_object_2_sv( pTHX_ SV* var, const wxObject* object ) 
 {
+    return wxPli_namedobject_2_sv( aTHX_ var, object, NULL);
+    /*
     if( object == NULL )
     {
         sv_setsv( var, &PL_sv_undef );
@@ -499,20 +465,42 @@ SV* wxPli_object_2_sv( pTHX_ SV* var, const wxObject* object )
         return var;
     }
     
-    /* duplicated :-( */
-    wxClassInfo *ci = object->GetClassInfo();
-    const wxChar* classname = ci->GetClassName();
+    // fallback - return a scalarish object
+    return wxPli_object_2_scalarsv( aTHX_ var, object );
+    */
+}
 
-    char buffer[WXPL_BUF_SIZE];
-    const char* CLASS = wxPli_cpp_class_2_perl( classname, buffer );
-
-    if( strcmp( CLASS, "Wx::Object" ) == 0 ) {
-        warn( "Missing wxRTTI information, using Wx::Object as class" );
+SV* wxPli_namedobject_2_sv( pTHX_ SV* var, const wxObject* object, const char* package  ) 
+{
+    if( object == NULL )
+    {
+        sv_setsv( var, &PL_sv_undef );
+        return var;
     }
 
-    sv_setref_pv( var, CHAR_P CLASS, const_cast<wxObject*>(object) );
+    wxEvtHandler* evtHandler = wxDynamicCast( object, wxEvtHandler );
 
-    return var;
+    if( evtHandler && evtHandler->GetClientObject() )
+        return wxPli_evthandler_2_sv( aTHX_ var, evtHandler );
+
+    wxPliSelfRef* sr = wxPli_get_selfref( aTHX_ const_cast<wxObject*>(object), false );
+
+    if( sr && sr->m_self )
+    {
+        SvSetSV_nosteal( var, sr->m_self );
+        return var;
+    }
+    // We may name the package if the wxWidgets implementation fails to
+    // implement classinfo and calling classinfo will therefore give
+    // us a base class name rather than this class name
+    if( package )
+    {
+        sv_setref_pv( var, CHAR_P package, const_cast<wxObject*>(object) );
+        return var;
+    }
+
+    // fallback - return a scalarish object using classinfo
+    return wxPli_object_2_scalarsv( aTHX_ var, object );
 }
 
 wxPliSelfRef* wxPli_get_selfref( pTHX_ wxObject* object, bool forcevirtual )
@@ -549,18 +537,9 @@ void wxPli_attach_object( pTHX_ SV* object, void* ptr )
 
     if( SvTYPE( ref ) >= SVt_PVHV )
     {
-#if wxPL_USE_MAGIC
         my_magic* mg = wxPli_get_or_create_magic( aTHX_ object );
-
-        mg->object = (wxObject*)ptr;
-#else
-        SV* value = newSViv( (IV)ptr );
-        if( !hv_store_ent( (HV*)ref, _key, value, _hash ) )
-        {
-            SvREFCNT_dec( value );
-            croak( "error storing '_WXTHIS' value" );
-        }
-#endif
+        
+        mg->object = ptr;
     }
     else
     {
@@ -576,7 +555,6 @@ void* wxPli_detach_object( pTHX_ SV* object )
 
     if( SvTYPE( ref ) >= SVt_PVHV )
     {
-#if wxPL_USE_MAGIC
         my_magic* mg = wxPli_get_magic( aTHX_ object );
 
         if( mg )
@@ -588,20 +566,6 @@ void* wxPli_detach_object( pTHX_ SV* object )
         }
 
         return NULL;
-#else
-        HE* value = hv_fetch_ent( (HV*)ref, _key, 0, _hash );
-
-        if( value ) 
-        {
-            SV* sv = HeVAL( value );
-            void* tmp = (void*)SvIV( sv );
-
-            sv_setiv( sv, 0 );
-            return tmp;
-        }
-
-        return NULL;
-#endif
     }
     else
     {
