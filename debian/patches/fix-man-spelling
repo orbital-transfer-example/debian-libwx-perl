@@ -1,5 +1,10 @@
 Description: Fix man spelling
+Bug: https://rt.cpan.org/Ticket/Display.html?id=87939
+Forwarded: https://rt.cpan.org/Ticket/Display.html?id=87939
 Author: dod
+Reviewed-by: gregor herrmann <gregoa@debian.org>
+Last-Update: 2013-08-19
+
 --- a/Wx.pm
 +++ b/Wx.pm
 @@ -342,14 +342,14 @@
@@ -7,7 +12,7 @@ Author: dod
   Wx::DisableAssertHandler();
  
 -You may also set en enviroment variable to cause all invocations
-+You may also set an enviroment variable to cause all invocations
++You may also set an environment variable to cause all invocations
  of Wx to call Wx::EnableDefaultAssertHandler().
  
   export WXPERL_OPTIONS=ENABLE_DEFAULT_ASSERT_HANDLER
