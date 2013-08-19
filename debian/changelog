@@ -1,3 +1,11 @@
+libwx-perl (1:0.9922-2) unstable; urgency=low
+
+  * Make (build) dependency on libalien-wxwidgets-perl versioned.
+    (Closes: #719380)
+  * Update and forward fix-man-spelling patch.
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 19 Aug 2013 14:20:49 +0200
+
 libwx-perl (1:0.9922-1) unstable; urgency=low
 
   [ Salvatore Bonaccorso ]
