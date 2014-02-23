@@ -1,7 +1,6 @@
 Source: libwx-perl
 Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
-Uploaders: Roberto C. Sanchez <roberto@connexer.com>,
-           gregor herrmann <gregoa@debian.org>,
+Uploaders: gregor herrmann <gregoa@debian.org>,
            Damyan Ivanov <dmn@debian.org>,
            Chris Butler <chrisb@debian.org>,
            Dominic Hargreaves <dom@earth.li>,
