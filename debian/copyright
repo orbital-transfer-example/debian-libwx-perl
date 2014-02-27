@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Wx
 Upstream-Contact: Mattia Barbon <mbarbon@cpan.org>
-Source: https://metacpan.org/release/Wx/
+Source: https://metacpan.org/release/Wx
 
 Files: *
 Copyright: 2000-2012, Mattia Barbon <mbarbon@cpan.org>
