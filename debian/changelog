@@ -1,10 +1,15 @@
-libwx-perl (1:0.9923-1) UNRELEASED; urgency=medium
+libwx-perl (1:0.9923-1) unstable; urgency=medium
 
   * Strip trailing slash from metacpan URLs.
 
   * New upstream release.
+  * (Build-) depend on newer libalien-wxwidgets-perl to get dependency on
+    wxwidgets3.0. (Closes: #743280)
+  * Add a lintian override for a spelling mistake in a variable name.
+  * debian/copyright: fix URL of original wxWindows Library Licence.
+  * Declare compliance with Debian Policy 3.9.5.
 
- -- gregor herrmann <gregoa@debian.org>  Tue, 01 Apr 2014 18:40:05 +0200
+ -- gregor herrmann <gregoa@debian.org>  Tue, 01 Apr 2014 19:36:23 +0200
 
 libwx-perl (1:0.9922-2) unstable; urgency=low
 
