@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Window.xs 3481 2013-04-16 14:21:03Z mdootson $
+// RCS-ID:      $Id: Window.xs 3503 2013-06-19 06:39:27Z mdootson $
 // Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -1228,6 +1228,10 @@ wxWindow::Validate()
 
 void
 wxWindow::Update()
+
+void
+wxWindow::InitDialog()
+
 
 #if WXPERL_W_VERSION_GE( 2, 6, 0 )
 

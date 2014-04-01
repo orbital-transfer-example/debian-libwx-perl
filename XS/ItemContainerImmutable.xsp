@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     14/08/2007
-## RCS-ID:      $Id: ItemContainerImmutable.xsp 3142 2012-02-28 03:06:04Z mdootson $
+## RCS-ID:      $Id: ItemContainerImmutable.xsp 3504 2013-06-28 04:18:43Z mdootson $
 ## Copyright:   (c) 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -49,13 +49,13 @@ wxItemContainerImmutable::FindString( ... )
     %name{FindStringCase} int FindString( const wxString& s, bool bCase = false ) const;
 #endif
 
-#if WXPERL_W_VERSION_GE( 2, 6, 0 ) && !defined(WXPERL_IN_COMBOBOX)
+#if !defined(WXPERL_IN_COMBOBOX)
     void SetSelection( int n );
-#endif
     int GetSelection() const;
-#if WXPERL_W_VERSION_GE( 2, 6, 0 ) || defined(WXPERL_IN_COMBOBOX)
-    bool SetStringSelection( const wxString& s );
 #endif
+
+    bool SetStringSelection( const wxString& s );
     wxString GetStringSelection() const;
+
     void Select( int n );
 };
