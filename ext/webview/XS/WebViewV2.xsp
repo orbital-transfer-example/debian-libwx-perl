@@ -14,6 +14,9 @@
 %loadplugin{build::Wx::XSP::Enum};
 %loadplugin{build::Wx::XSP::Event};
 
+%EventExportTag{webview};
+%EnumExportTag{webview};
+
 %Event{%EVT_WEB_VIEW_NAVIGATING(id, func)%}
       {wxEVT_COMMAND_WEB_VIEW_NAVIGATING};
 %Event{%EVT_WEB_VIEW_NAVIGATED(id, func)%}
@@ -26,6 +29,47 @@
       {wxEVT_COMMAND_WEB_VIEW_NEWWINDOW};
 %Event{%EVT_WEB_VIEW_TITLE_CHANGED(id, func)%}
       {wxEVT_COMMAND_WEB_VIEW_TITLE_CHANGED};      
+
+
+enum wxWebViewZoom
+{
+    wxWEB_VIEW_ZOOM_TINY,
+    wxWEB_VIEW_ZOOM_SMALL,
+    wxWEB_VIEW_ZOOM_MEDIUM,
+    wxWEB_VIEW_ZOOM_LARGE,
+    wxWEB_VIEW_ZOOM_LARGEST
+};
+
+enum wxWebViewZoomType
+{
+    wxWEB_VIEW_ZOOM_TYPE_LAYOUT,
+    wxWEB_VIEW_ZOOM_TYPE_TEXT
+};
+
+enum wxWebViewNavigationError
+{
+    wxWEB_NAV_ERR_CONNECTION,
+    wxWEB_NAV_ERR_CERTIFICATE,
+    wxWEB_NAV_ERR_AUTH,
+    wxWEB_NAV_ERR_SECURITY,
+    wxWEB_NAV_ERR_NOT_FOUND,
+    wxWEB_NAV_ERR_REQUEST,
+    wxWEB_NAV_ERR_USER_CANCELLED,
+    wxWEB_NAV_ERR_OTHER
+};
+
+enum wxWebViewReloadFlags
+{
+    wxWEB_VIEW_RELOAD_DEFAULT,
+    wxWEB_VIEW_RELOAD_NO_CACHE
+};
+
+enum wxWebViewBackend
+{
+    wxWEB_VIEW_BACKEND_DEFAULT,
+    wxWEB_VIEW_BACKEND_WEBKIT,
+    wxWEB_VIEW_BACKEND_IE
+};
 
 %name{Wx::WebViewHistoryItem} class wxWebViewHistoryItem
 {
@@ -78,6 +122,20 @@ public:
            const wxString& name = wxWebViewNameStr)
         %postcall{% wxPli_create_evthandler( aTHX_ RETVAL, "Wx::WebView" ); %};
 
+    virtual void Reload(wxWebViewReloadFlags flags = wxWEB_VIEW_RELOAD_DEFAULT);
+    
+    virtual void EnableContextMenu(bool enable = true);
+    
+    virtual bool IsContextMenuEnabled() const;
+    
+    // virtual void* GetNativeBackend() const;
+    
+#if WXPERL_W_VERSION_GE( 2, 9, 5 )
+
+    virtual long Find(const wxString& text, int flags = wxWEB_VIEW_FIND_DEFAULT);
+
+#endif
+
     virtual bool Create(wxWindow* parent,
                         wxWindowID id,
                         const wxString& url = wxWebViewDefaultURLStr,
@@ -103,8 +161,6 @@ public:
     virtual void Print();
  
     /* TODO : IMP  virtual void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) = 0; */
-    
-    virtual void Reload(wxWebViewReloadFlags flags = wxWEB_VIEW_RELOAD_DEFAULT);
     
     virtual void RunScript(const wxString& javascript);
     
@@ -140,11 +196,6 @@ public:
     
     virtual void EnableHistory(bool enable = true);
 
-#if WXPERL_W_VERSION_GE( 2, 9, 5 )
-
-    virtual long Find(const wxString& text, int flags = wxWEB_VIEW_FIND_DEFAULT);
-
-#endif
     
 %{
 
@@ -237,14 +288,6 @@ public:
     const wxString& GetURL() const;
 };
 
-/*
-wxEventType wxEVT_COMMAND_WEB_VIEW_NAVIGATING;
-wxEventType wxEVT_COMMAND_WEB_VIEW_NAVIGATED;
-wxEventType wxEVT_COMMAND_WEB_VIEW_LOADED;
-wxEventType wxEVT_COMMAND_WEB_VIEW_ERROR;
-wxEventType wxEVT_COMMAND_WEB_VIEW_NEWWINDOW;
-wxEventType wxEVT_COMMAND_WEB_VIEW_TITLE_CHANGED;
-*/
 
 %name{Wx::WebViewArchiveHandler} class wxWebViewArchiveHandler : public %name{Wx::WebViewHandler} wxWebViewHandler
 {
