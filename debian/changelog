@@ -1,8 +1,10 @@
-libwx-perl (1:0.9922-3) UNRELEASED; urgency=medium
+libwx-perl (1:0.9923-1) UNRELEASED; urgency=medium
 
   * Strip trailing slash from metacpan URLs.
 
- -- gregor herrmann <gregoa@debian.org>  Thu, 27 Feb 2014 22:42:39 +0100
+  * New upstream release.
+
+ -- gregor herrmann <gregoa@debian.org>  Tue, 01 Apr 2014 18:40:05 +0200
 
 libwx-perl (1:0.9922-2) unstable; urgency=low
 
