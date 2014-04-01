@@ -1,0 +1,3 @@
+# true but since this is a variable we'd better leave it alone
+libwx-perl: spelling-error-in-binary usr/lib/perl5/auto/Wx/Wx.so resizeable resizable
+libwx-perl: spelling-error-in-binary usr/lib/perl5/auto/Wx/DataView/DataView.so resizeable resizable
