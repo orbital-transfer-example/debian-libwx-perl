@@ -5,6 +5,8 @@ TMP     =$(CURDIR)/debian/$(PACKAGE)
 
 DEBIAN_TARGETS := clean binary binary-arch binary-indep build build-arch build-indep
 
+ARCHLIB := $(shell perl -MConfig -e 'print $$Config{vendorarch}')
+
 $(DEBIAN_TARGETS):
 	dh $@ --parallel
 
@@ -15,7 +17,7 @@ override_dh_auto_install:
 	dh_auto_install
 
 	# fix permissions
-	find $(TMP)/usr/lib/perl5/Wx -type f -perm /755 -print0 | xargs -r0 chmod -v 664
+	find $(TMP)/$(ARCHLIB)/Wx -type f -perm /755 -print0 | xargs -r0 chmod -v 664
 
 	# remove bogus man page
 	rm -vf "$(TMP)/usr/share/man/man3/Wx::build::MakeMaker::Win32_MSVC.3pm"
