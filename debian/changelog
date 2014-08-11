@@ -1,3 +1,17 @@
+libwx-perl (1:0.9923-3) UNRELEASED; urgency=medium
+
+  * Use $Config{vendorarch} in debian/rules instead of /usr/lib/perl5.
+  * Refresh fix-fake-pod.patch (offset).
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 11 Aug 2014 16:11:47 +0200
+
+libwx-perl (1:0.9923-2) unstable; urgency=medium
+
+  * Use $Config{vendorarch} in debian/rules instead of /usr/lib/perl5.
+  * Refresh fix-fake-pod.patch (offset).
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 11 Aug 2014 16:05:13 +0200
+
 libwx-perl (1:0.9923-1) unstable; urgency=medium
 
   * Strip trailing slash from metacpan URLs.
