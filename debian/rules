@@ -29,7 +29,7 @@ override_dh_installexamples:
 	chmod 0644 $(TMP)/usr/share/doc/$(PACKAGE)/examples/README.txt
 	find $(TMP)/usr/share/doc/$(PACKAGE)/examples -name '*.pl' -exec chmod 0755 {} \;
 
-get_perl_wx_version: blib
+get_perl_wx_version:
 	: $(eval PERL_WX_VERSION := $(shell $(_DETECTION_CMD)))
 	@echo PERL_WX_VERSION detected as $(PERL_WX_VERSION)
 
