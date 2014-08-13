@@ -1,4 +1,4 @@
-libwx-perl (1:0.9923-2) UNRELEASED; urgency=medium
+libwx-perl (1:0.9923-2) unstable; urgency=medium
 
   [ gregor herrmann ]
   * Use $Config{vendorarch} in debian/rules instead of /usr/lib/perl5.
@@ -9,7 +9,7 @@ libwx-perl (1:0.9923-2) UNRELEASED; urgency=medium
     libalien-wxwidgets-perl, to avoid version skew between the
     packages. (Closes: #757855)
 
- -- gregor herrmann <gregoa@debian.org>  Mon, 11 Aug 2014 16:05:13 +0200
+ -- gregor herrmann <gregoa@debian.org>  Wed, 13 Aug 2014 23:23:33 +0200
 
 libwx-perl (1:0.9923-1) unstable; urgency=medium
 
