@@ -7,6 +7,8 @@ DEBIAN_TARGETS := clean binary binary-arch binary-indep build build-arch build-i
 
 ARCHLIB := $(shell perl -MConfig -e 'print $$Config{vendorarch}')
 
+_DETECTION_CMD := perl -MAlien::wxWidgets -e '$$key = Alien::wxWidgets->key; $$key =~ s/_/-/g; print "$$key";'
+
 $(DEBIAN_TARGETS):
 	dh $@ --parallel
 
@@ -22,18 +24,16 @@ override_dh_auto_install:
 	# remove bogus man page
 	rm -vf "$(TMP)/usr/share/man/man3/Wx::build::MakeMaker::Win32_MSVC.3pm"
 
-override_dh_gencontrol: get_perl_wx_version
-	dh_gencontrol -- -V'wxperl:Depends=wxperl-$(PERL_WX_VERSION)'
-
 override_dh_installexamples:
 	dh_installexamples
 	chmod 0644 $(TMP)/usr/share/doc/$(PACKAGE)/examples/README.txt
 	find $(TMP)/usr/share/doc/$(PACKAGE)/examples -name '*.pl' -exec chmod 0755 {} \;
 
-_DETECTION_CMD := perl -MAlien::wxWidgets -e '$$key = Alien::wxWidgets->key; $$key =~ s/_/-/g; print "$$key";'
-
 get_perl_wx_version: blib
 	: $(eval PERL_WX_VERSION := $(shell $(_DETECTION_CMD)))
 	@echo PERL_WX_VERSION detected as $(PERL_WX_VERSION)
+
+override_dh_gencontrol: get_perl_wx_version
+	dh_gencontrol -- -V'wxperl:Depends=wxperl-$(PERL_WX_VERSION)'
 
 .PHONY: $(DEBIAN_TARGETS) get_perl_wx_version
