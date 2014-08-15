@@ -1,3 +1,13 @@
+libwx-perl (1:0.9923-3) UNRELEASED; urgency=medium
+
+  * Add patches from Niko Tyni to handle missing wxwidgets3.0 symbol on
+    arm{el,hf}:
+    - Wx.xs: return 0 if wxPluginManager::LoadLibrary fails
+    - t/01_load.t: skip failing tests
+    Cf. #758127.
+
+ -- gregor herrmann <gregoa@debian.org>  Fri, 15 Aug 2014 16:35:11 +0200
+
 libwx-perl (1:0.9923-2) unstable; urgency=medium
 
   [ gregor herrmann ]
