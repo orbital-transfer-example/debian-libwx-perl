@@ -1,0 +1,28 @@
+From 6f28d00f4ad9db47f3c8df876e97154f07bdb206 Mon Sep 17 00:00:00 2001
+From: Niko Tyni <ntyni@debian.org>
+Date: Thu, 14 Aug 2014 22:02:18 +0000
+Subject: [PATCH 2/2] Temporarily skip tests when the 'use Wx qw(...)' fails
+
+This is a workaround for wxwidgets3.0 breakage, see
+https://bugs.debian.org/758127
+---
+ t/01_load.t | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/t/01_load.t b/t/01_load.t
+index 2237a97..c4042c9 100755
+--- a/t/01_load.t
++++ b/t/01_load.t
+@@ -11,7 +11,8 @@ my $x = wxYES;
+ ok( 1, "Exported constant" );
+ 
+ SKIP: {
+-  use Wx qw(:frame :allclasses wxNO_3D wxTAB_TRAVERSAL);
++  eval "use Wx qw(:frame :allclasses wxNO_3D wxTAB_TRAVERSAL)";
++  skip("loading :allclasses et al. failed: $@", 2) if $@;
+ 
+   $x = wxTAB_TRAVERSAL();
+   $x = wxCAPTION();
+-- 
+2.1.0.rc1
+

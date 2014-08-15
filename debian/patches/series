@@ -3,3 +3,5 @@ skip-splashfast-tests.patch
 hashbang.patch
 fix-fake-pod.patch
 spelling.patch
+0001-Fix-Wx-_load_plugin-segfaulting-when-wxPluginManager.patch
+0002-Temporarily-skip-tests-when-the-use-Wx-qw-.-fails.patch
