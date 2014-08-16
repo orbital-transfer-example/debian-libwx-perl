@@ -1,10 +1,14 @@
 libwx-perl (1:0.9923-3) UNRELEASED; urgency=medium
 
+  [ gregor herrmann ]
   * Add patches from Niko Tyni to handle missing wxwidgets3.0 symbol on
     arm{el,hf}:
     - Wx.xs: return 0 if wxPluginManager::LoadLibrary fails
     - t/01_load.t: skip failing tests
     Cf. #758127.
+
+  [ Salvatore Bonaccorso ]
+  * Update Vcs-Browser URL to cgit web frontend
 
  -- gregor herrmann <gregoa@debian.org>  Fri, 15 Aug 2014 16:35:11 +0200
 
