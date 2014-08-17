@@ -1,7 +1,8 @@
-From 6f28d00f4ad9db47f3c8df876e97154f07bdb206 Mon Sep 17 00:00:00 2001
+From 20880ed3c176b400df548c84db13355c7c7007e4 Mon Sep 17 00:00:00 2001
 From: Niko Tyni <ntyni@debian.org>
 Date: Thu, 14 Aug 2014 22:02:18 +0000
-Subject: [PATCH 2/2] Temporarily skip tests when the 'use Wx qw(...)' fails
+Subject: [PATCH 2/3] Temporarily skip tests in t/01_load.t when 'use Wx
+ qw(:allclasses)' fails
 
 This is a workaround for wxwidgets3.0 breakage, see
 https://bugs.debian.org/758127
