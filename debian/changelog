@@ -1,16 +1,22 @@
-libwx-perl (1:0.9923-3) UNRELEASED; urgency=medium
+libwx-perl (1:0.9923-3) unstable; urgency=high
 
   [ gregor herrmann ]
   * Add patches from Niko Tyni to handle missing wxwidgets3.0 symbol on
     arm{el,hf}:
     - Wx.xs: return 0 if wxPluginManager::LoadLibrary fails
     - t/01_load.t: skip failing tests
-    Cf. #758127.
+    - ext/propgrid/Makefile.PL: skip tests
+    Closes: #758127
+    High urgency to help the perl 5.20 transition
 
   [ Salvatore Bonaccorso ]
   * Update Vcs-Browser URL to cgit web frontend
 
- -- gregor herrmann <gregoa@debian.org>  Fri, 15 Aug 2014 16:35:11 +0200
+  [ Damyan Ivanov ]
+  * adapt lintian overrides with new vendorarch (m-a aware and
+    version-dependent)
+
+ -- Damyan Ivanov <dmn@debian.org>  Sun, 17 Aug 2014 19:46:33 +0000
 
 libwx-perl (1:0.9923-2) unstable; urgency=medium
 
