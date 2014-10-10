@@ -1,3 +1,13 @@
+libwx-perl (1:0.9923-4) unstable; urgency=medium
+
+  * Team upload.
+  * Remove arm* workarounds now that the gcc-4.9 issues are fixed.
+    (Closes: #758497)
+  * Make the package autopkgtestable.
+  * Upgrade to Standards-Version 3.9.6 (no changes).
+
+ -- Niko Tyni <ntyni@debian.org>  Fri, 10 Oct 2014 22:40:41 +0300
+
 libwx-perl (1:0.9923-3) unstable; urgency=high
 
   [ gregor herrmann ]
