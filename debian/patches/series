@@ -4,5 +4,3 @@ hashbang.patch
 fix-fake-pod.patch
 spelling.patch
 0001-Fix-Wx-_load_plugin-segfaulting-when-wxPluginManager.patch
-0002-Temporarily-skip-tests-in-t-01_load.t-when-use-Wx-qw.patch
-0003-Temporarily-skip-all-ext-propgrid-tests.patch
