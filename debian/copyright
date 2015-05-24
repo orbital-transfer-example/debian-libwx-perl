@@ -14,7 +14,7 @@ Copyright: 2000-2012, Mattia Barbon <mbarbon@cpan.org>
 License: Artistic or GPL-1+
 
 Files: interface/wx/*
- ext/webview/XS/WebView.xsp
+ ext/webview/XS/WebViewV*.xsp
 Copyright: wxWidgets team
 License: wxWindows
 
