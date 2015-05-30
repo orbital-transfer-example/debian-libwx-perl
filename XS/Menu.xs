@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: Menu.xs 3137 2012-02-28 00:29:39Z mdootson $
+## RCS-ID:      $Id: Menu.xs 3532 2015-03-11 01:27:54Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2008, 2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -838,8 +838,7 @@ wxMenuItem::SetBitmaps( checked, unchecked = (wxBitmap*)&wxNullBitmap )
 
 #endif
 
-#if ( defined( __WXMSW__ ) && !defined( __WXWINCE__ ) ) || \
-    defined( __WXGTK__ )
+#if !defined( __WXWINCE__ )
 
 void
 wxMenuItem::SetBitmap( bitmap )

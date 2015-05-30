@@ -6,11 +6,36 @@ use Wx::build::Utils qw(write_string);
 
 use Config;
 
-die "Please set MACOSX_DEPLOYMENT_TARGET to 10.3 or above"
-    if $ENV{MACOSX_DEPLOYMENT_TARGET} && $ENV{MACOSX_DEPLOYMENT_TARGET} < 10.3;
+if ($ENV{MACOSX_DEPLOYMENT_TARGET}) {
+  my ($dt0, $dt1, @discard) = split(/[^0-9]+/,$ENV{MACOSX_DEPLOYMENT_TARGET} );
+  if (($dt0 <= 10) && ( $dt1 < 3 )) {
+	die "Please set MACOSX_DEPLOYMENT_TARGET to 10.3 or above";
+  }
+}
 
 my $tools43 = '/Applications/Xcode.app/Contents/Developer/Tools';
 my $restoolpath = ( -d $tools43 ) ? $tools43 : '/Developer/Tools';
+
+sub get_flags {
+  my $this = shift;
+  my %config = $this->SUPER::get_flags;
+  
+  if ($config{CC} =~ /clang\+\+/ || $config{LD} =~ /clang\+\+/) {
+	my $sdkrepl = '';
+	for my $sdkversion ( qw( 10.9 10.8 10.7 10.6 ) ) {
+	  my $macossdk = qq(/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${sdkversion}.sdk);
+	  if( -d $macossdk ) {
+		$sdkrepl = 'clang++ -isysroot ' . $macossdk . ' -stdlib=libc++';
+		last;
+	  }
+	}
+	if ( $sdkrepl ) {
+	  $config{CC} =~ s/clang\+\+/$sdkrepl/g;
+	  $config{LD} =~ s/clang\+\+/$sdkrepl/g;
+	}
+  }
+  return %config;
+}
 
 sub configure_core {
   my $this = shift;

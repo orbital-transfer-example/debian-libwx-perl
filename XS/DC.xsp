@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: DC.xsp 3044 2011-03-24 16:19:55Z mdootson $
+## RCS-ID:      $Id: DC.xsp 3525 2014-10-28 01:36:38Z mdootson $
 ## Copyright:   (c) 2000-2007, 2009-2010 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -354,6 +354,13 @@ wxDC::GetMapMode()
 
 bool
 wxDC::GetOptimization()
+
+#endif
+
+#if WXPERL_W_VERSION_GE( 2, 9, 5 )
+
+double
+wxDC::GetContentScaleFactor()
 
 #endif
 

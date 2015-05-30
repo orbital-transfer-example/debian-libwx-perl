@@ -5,7 +5,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     01/10/2000
-## RCS-ID:      $Id: Makefile.PL 3462 2013-04-11 12:28:19Z mdootson $
+## RCS-ID:      $Id: Makefile.PL 3538 2015-03-11 02:36:34Z mdootson $
 ## Copyright:   (c) 2000-2012 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -80,7 +80,7 @@ wxWriteMakefile(
             'MailingList'   => 'http://lists.perl.org/list/wxperl-users.html',
         },
         no_index => { directory => [ qw(samples script) ],
-                      package   => [ qw(MY Parse::Yapp::Driver) ],
+                      package   => [ qw(MY Parse::Yapp::Driver Wx::DropTarget Wx::Droptarget) ],
         },
     },
     PMLIBDIRS         => [ 'lib', 'build' ],

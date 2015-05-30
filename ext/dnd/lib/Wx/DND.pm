@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     12/08/2001
-## RCS-ID:      $Id: DND.pm 3083 2011-07-04 16:44:05Z mdootson $
+## RCS-ID:      $Id: DND.pm 3538 2015-03-11 02:36:34Z mdootson $
 ## Copyright:   (c) 2001-2004, 2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -38,7 +38,7 @@ package Wx::DataObjectComposite;@ISA = qw(Wx::DataObject);
 package Wx::FileDataObject;     @ISA = qw(Wx::DataObjectSimple);
 package Wx::TextDataObject;     @ISA = qw(Wx::DataObjectSimple);
 package Wx::BitmapDataObject;   @ISA = qw(Wx::DataObjectSimple);
-package Wx::Droptarget;
+
 package Wx::PlDropTarget;       @ISA = qw(Wx::DropTarget);
 package Wx::TextDropTarget;     @ISA = qw(Wx::DropTarget);
 package Wx::FileDropTarget;     @ISA = qw(Wx::DropTarget);

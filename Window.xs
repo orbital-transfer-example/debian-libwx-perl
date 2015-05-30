@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     29/10/2000
-// RCS-ID:      $Id: Window.xs 3503 2013-06-19 06:39:27Z mdootson $
+// RCS-ID:      $Id: Window.xs 3525 2014-10-28 01:36:38Z mdootson $
 // Copyright:   (c) 2000-2002, 2004-2010 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -664,6 +664,13 @@ wxWindow::IsEnabled()
 
 bool
 wxWindow::IsThisEnabled()
+
+#endif
+
+#if WXPERL_W_VERSION_GE( 2, 9, 5 )
+
+double
+wxWindow::GetContentScaleFactor()
 
 #endif
 

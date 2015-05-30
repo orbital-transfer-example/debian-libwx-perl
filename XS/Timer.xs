@@ -4,8 +4,8 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     14/02/2001
-## RCS-ID:      $Id: Timer.xs 2125 2007-08-11 14:41:28Z mbarbon $
-## Copyright:   (c) 2001-2004, 2006-2007 Mattia Barbon
+## RCS-ID:      $Id: Timer.xs 3525 2014-10-28 01:36:38Z mdootson $
+## Copyright:   (c) 2001-2004, 2006-2007, 2014 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
 #############################################################################
@@ -82,6 +82,14 @@ bool
 wxTimer::Start( milliseconds = -1, oneshot = false )
     int milliseconds
     bool oneshot
+
+#if WXPERL_W_VERSION_GE( 2, 9, 5 )
+
+bool
+wxTimer::StartOnce( milliseconds = -1)
+    int milliseconds
+    
+#endif
 
 void
 wxTimer::Stop()
