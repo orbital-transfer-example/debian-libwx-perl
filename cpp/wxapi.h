@@ -4,7 +4,7 @@
 // Author:      Mattia Barbon
 // Modified by:
 // Created:     21/09/2002
-// RCS-ID:      $Id: wxapi.h 3009 2011-02-20 16:25:26Z mbarbon $
+// RCS-ID:      $Id: wxapi.h 3532 2015-03-11 01:27:54Z mdootson $
 // Copyright:   (c) 2002-2003, 2005-2011 Mattia Barbon
 // Licence:     This program is free software; you can redistribute it and/or
 //              modify it under the same terms as Perl itself
@@ -55,6 +55,18 @@ inline FILE* _wxPli_stderr() { return stderr; }
 WXPL_EXTERN_C_START
 #include <EXTERN.h>
 #include <perl.h>
+
+#if WXPERL_P_VERSION_GE( 5, 16, 0 ) && WXPERL_P_VERSION_LT( 5, 18, 0 ) && defined(__WXOSX_COCOA__)
+#ifdef dNOOP
+#undef dNOOP
+#endif
+#ifdef __cplusplus 
+#define dNOOP (void)0 
+#else 
+#define dNOOP extern int Perl___notused(void) 
+#endif 
+#endif
+
 #include <XSUB.h>
 WXPL_EXTERN_C_END
 
