@@ -1,4 +1,4 @@
-libwx-perl (1:0.9923-5) UNRELEASED; urgency=medium
+libwx-perl (1:0.9927-1) UNRELEASED; urgency=medium
 
   [ gregor herrmann ]
   * debian/copyright: fix a path to (a) file(s).
@@ -10,8 +10,9 @@ libwx-perl (1:0.9923-5) UNRELEASED; urgency=medium
   [ Axel Beckert ]
   * Add ext/webview/Makefile to debian/clean.
   * Add debian/upstream/metadata
+  * Import upstream version 0.9927
 
- -- gregor herrmann <gregoa@debian.org>  Sun, 24 May 2015 14:24:08 +0200
+ -- Axel Beckert <abe@debian.org>  Sat, 30 May 2015 18:56:06 +0200
 
 libwx-perl (1:0.9923-4) unstable; urgency=medium
 
