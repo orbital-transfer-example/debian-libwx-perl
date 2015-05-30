@@ -4,3 +4,4 @@ hashbang.patch
 fix-fake-pod.patch
 spelling.patch
 0001-Fix-Wx-_load_plugin-segfaulting-when-wxPluginManager.patch
+reproducible_output.patch

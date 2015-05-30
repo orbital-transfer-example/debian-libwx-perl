@@ -1,0 +1,70 @@
+Author: Reiner Herrmann <reiner@reiner-h.de>
+Description: Produce sorted output to get reproducible results
+
+Index: libwx-perl-0.9923/build/Wx/build/MakeMaker/Any_OS.pm
+===================================================================
+--- libwx-perl-0.9923.orig/build/Wx/build/MakeMaker/Any_OS.pm
++++ libwx-perl-0.9923/build/Wx/build/MakeMaker/Any_OS.pm
+@@ -200,6 +200,7 @@ sub postamble_core {
+   # strictly necessary, but it's better to keep them in case the
+   # dependencies here are changed
+   require Data::Dumper;
++  $Data::Dumper::Sortkeys = 1;
+   Wx::build::Utils::write_string( 'files.lst',
+                                   Data::Dumper->Dump( [ \%files ] ) );
+   # $exp and fix_alien depend on wxt_copy_files to ensure that blib/lib/Wx
+Index: libwx-perl-0.9923/build/Wx/build/Options.pm
+===================================================================
+--- libwx-perl-0.9923.orig/build/Wx/build/Options.pm
++++ libwx-perl-0.9923/build/Wx/build/Options.pm
+@@ -164,6 +164,7 @@ sub write_config_file {
+   my $file = shift;
+ 
+   require Data::Dumper;
++  $Data::Dumper::Sortkeys = 1;
+   my $str = Data::Dumper->Dump( [ { extra_libs   => $extra_libs,
+                                     extra_cflags => $extra_cflags,
+                                     alien_key    => $alien_key,
+Index: libwx-perl-0.9923/script/fix_alien_path.pl
+===================================================================
+--- libwx-perl-0.9923.orig/script/fix_alien_path.pl
++++ libwx-perl-0.9923/script/fix_alien_path.pl
+@@ -20,6 +20,8 @@ use Config;
+ use Data::Dumper;
+ use File::Spec::Functions qw(splitpath splitdir);
+ 
++$Data::Dumper::Sortkeys = 1;
++
+ # we do not care about the options, just that Alien::wxWidgets
+ # is initialized with the correct key
+ Wx::build::Options->get_makemaker_options( 'saved' );
+Index: libwx-perl-0.9923/script/make_exp_list.pl
+===================================================================
+--- libwx-perl-0.9923.orig/script/make_exp_list.pl
++++ libwx-perl-0.9923/script/make_exp_list.pl
+@@ -95,7 +95,11 @@ print OUT <<EOT;
+ 
+ package ${package};
+ 
+-push \@EXPORT_OK, qw(@{$packages{$package}{exp_ok}});
++push \@EXPORT_OK, qw(
++EOT
++print OUT join("\n", sort @{$packages{$package}{exp_ok}});
++print OUT <<EOT;
++);
+ 
+ \$EXPORT_TAGS{'everything'} = \\\@EXPORT_OK;
+ 
+@@ -104,7 +108,11 @@ EOT
+   foreach my $tag ( sort keys %{ $packages{$package}{tags} } ) {
+     next unless length $tag;
+     print OUT <<EOT;
+-\$EXPORT_TAGS{'$tag'} = [ qw(@{ $packages{$package}{tags}{$tag} }) ];
++\$EXPORT_TAGS{'$tag'} = [ qw(
++EOT
++print OUT join("\n", sort @{ $packages{$package}{tags}{$tag} });
++print OUT <<EOT;
++) ];
+ EOT
+   }
+ }
