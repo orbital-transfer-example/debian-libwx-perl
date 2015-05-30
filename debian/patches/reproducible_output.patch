@@ -1,5 +1,6 @@
 Author: Reiner Herrmann <reiner@reiner-h.de>
 Description: Produce sorted output to get reproducible results
+Bug-Debian: https://bugs.debian.org/787265
 
 Index: libwx-perl-0.9923/build/Wx/build/MakeMaker/Any_OS.pm
 ===================================================================

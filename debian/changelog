@@ -1,6 +1,11 @@
 libwx-perl (1:0.9923-5) UNRELEASED; urgency=medium
 
+  [ gregor herrmann ]
   * debian/copyright: fix a path to (a) file(s).
+
+  [ Reiner Herrmann ]
+  * Add patch to produce sorted output to get reproducible results.
+    (Closes: #787265)
 
  -- gregor herrmann <gregoa@debian.org>  Sun, 24 May 2015 14:24:08 +0200
 
