@@ -7,6 +7,9 @@ libwx-perl (1:0.9923-5) UNRELEASED; urgency=medium
   * Add patch to produce sorted output to get reproducible results.
     (Closes: #787265)
 
+  [ Axel Beckert ]
+  * Add ext/webview/Makefile to debian/clean.
+
  -- gregor herrmann <gregoa@debian.org>  Sun, 24 May 2015 14:24:08 +0200
 
 libwx-perl (1:0.9923-4) unstable; urgency=medium
