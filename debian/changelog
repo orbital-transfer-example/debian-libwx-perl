@@ -9,6 +9,7 @@ libwx-perl (1:0.9923-5) UNRELEASED; urgency=medium
 
   [ Axel Beckert ]
   * Add ext/webview/Makefile to debian/clean.
+  * Add debian/upstream/metadata
 
  -- gregor herrmann <gregoa@debian.org>  Sun, 24 May 2015 14:24:08 +0200
 
