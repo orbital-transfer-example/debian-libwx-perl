@@ -11,6 +11,8 @@ libwx-perl (1:0.9927-1) UNRELEASED; urgency=medium
   * Add ext/webview/Makefile to debian/clean.
   * Add debian/upstream/metadata
   * Import upstream version 0.9927
+  * Add lintian overrides for the two pkg-perl specific lintian warnings
+    library-package-name-for-application + application-in-library-section.
 
  -- Axel Beckert <abe@debian.org>  Sat, 30 May 2015 18:56:06 +0200
 

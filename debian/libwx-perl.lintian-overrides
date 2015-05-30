@@ -1,3 +1,6 @@
 # true but since this is a variable we'd better leave it alone
 libwx-perl: spelling-error-in-binary usr/lib/*/perl5/*/auto/Wx/Wx.so resizeable resizable
 libwx-perl: spelling-error-in-binary usr/lib/*/perl5/*/auto/Wx/DataView/DataView.so resizeable resizable
+# Indeed primarily a library
+libwx-perl: library-package-name-for-application usr/bin/wxperl_overload
+libwx-perl: application-in-library-section perl usr/bin/wxperl_overload
