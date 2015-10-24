@@ -14,6 +14,10 @@ libwx-perl (1:0.9927-1) UNRELEASED; urgency=medium
   * Add lintian overrides for the two pkg-perl specific lintian warnings
     library-package-name-for-application + application-in-library-section.
 
+  [ gregor herrmann ]
+  * Rename autopkgtest configuration file(s) as per new pkg-perl-
+    autopkgtest schema.
+
  -- Axel Beckert <abe@debian.org>  Sat, 30 May 2015 18:56:06 +0200
 
 libwx-perl (1:0.9923-4) unstable; urgency=medium
