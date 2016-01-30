@@ -18,6 +18,9 @@ libwx-perl (1:0.9927-1) UNRELEASED; urgency=medium
   * Rename autopkgtest configuration file(s) as per new pkg-perl-
     autopkgtest schema.
 
+  [ Salvatore Bonaccorso ]
+  * debian/control: Use HTTPS transport protocol for Vcs-Git URI
+
  -- Axel Beckert <abe@debian.org>  Sat, 30 May 2015 18:56:06 +0200
 
 libwx-perl (1:0.9923-4) unstable; urgency=medium
