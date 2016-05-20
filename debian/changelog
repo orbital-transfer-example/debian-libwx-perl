@@ -23,6 +23,7 @@ libwx-perl (1:0.9927-1) UNRELEASED; urgency=medium
 
   [ gregor herrmann ]
   * debian/copyright: change Copyright-Format 1.0 URL to HTTPS.
+  * debian/upstream/metadata: change GitHub/CPAN URL(s) to HTTPS.
 
  -- Axel Beckert <abe@debian.org>  Sat, 30 May 2015 18:56:06 +0200
 
