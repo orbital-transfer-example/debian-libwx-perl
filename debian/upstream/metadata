@@ -1,6 +1,6 @@
 ---
 Archive: CPAN
-Bug-Database: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx
+Bug-Database: https://rt.cpan.org/NoAuth/Bugs.html?Dist=Wx
 Contact: Mattia Barbon <mbarbon@cpan.org>
 Name: Wx
 Repository: http://svn.code.sf.net/p/wxperl/code/wxPerl
