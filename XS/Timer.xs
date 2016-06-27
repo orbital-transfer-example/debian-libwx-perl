@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     14/02/2001
-## RCS-ID:      $Id: Timer.xs 3525 2014-10-28 01:36:38Z mdootson $
+## RCS-ID:      $Id: Timer.xs 3544 2015-12-20 14:53:36Z mdootson $
 ## Copyright:   (c) 2001-2004, 2006-2007, 2014 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -94,3 +94,7 @@ wxTimer::StartOnce( milliseconds = -1)
 void
 wxTimer::Stop()
 
+void
+wxTimer::Notify()
+  CODE:
+    THIS->wxTimer::Notify();

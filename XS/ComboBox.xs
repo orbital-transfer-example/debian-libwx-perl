@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     31/10/2000
-## RCS-ID:      $Id: ComboBox.xs 3532 2015-03-11 01:27:54Z mdootson $
+## RCS-ID:      $Id: ComboBox.xs 3541 2015-03-26 18:04:11Z mdootson $
 ## Copyright:   (c) 2000-2004, 2006-2008, 2010-2011, 2014-2015 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
