@@ -1,7 +1,6 @@
-libwx-perl (1:0.9927-1) UNRELEASED; urgency=medium
+libwx-perl (1:0.9927-1) unstable; urgency=medium
 
-  [ gregor herrmann ]
-  * debian/copyright: fix a path to (a) file(s).
+  * Team upload.
 
   [ Reiner Herrmann ]
   * Add patch to produce sorted output to get reproducible results.
@@ -15,17 +14,19 @@ libwx-perl (1:0.9927-1) UNRELEASED; urgency=medium
     library-package-name-for-application + application-in-library-section.
 
   [ gregor herrmann ]
+  * debian/copyright: fix a path to (a) file(s).
   * Rename autopkgtest configuration file(s) as per new pkg-perl-
     autopkgtest schema.
+  * debian/copyright: change Copyright-Format 1.0 URL to HTTPS.
+  * debian/upstream/metadata: change GitHub/CPAN URL(s) to HTTPS.
 
   [ Salvatore Bonaccorso ]
   * debian/control: Use HTTPS transport protocol for Vcs-Git URI
 
-  [ gregor herrmann ]
-  * debian/copyright: change Copyright-Format 1.0 URL to HTTPS.
-  * debian/upstream/metadata: change GitHub/CPAN URL(s) to HTTPS.
+  [ intrigeri ]
+  * Declare compliance with Standards-Version 3.9.8.
 
- -- Axel Beckert <abe@debian.org>  Sat, 30 May 2015 18:56:06 +0200
+ -- intrigeri <intrigeri@debian.org>  Mon, 27 Jun 2016 16:54:06 +0000
 
 libwx-perl (1:0.9923-4) unstable; urgency=medium
 
