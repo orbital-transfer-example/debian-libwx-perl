@@ -1,4 +1,4 @@
-libwx-perl (1:0.9927-1) unstable; urgency=medium
+libwx-perl (1:0.9928-1) unstable; urgency=medium
 
   * Team upload.
 
@@ -25,8 +25,9 @@ libwx-perl (1:0.9927-1) unstable; urgency=medium
 
   [ intrigeri ]
   * Declare compliance with Standards-Version 3.9.8.
+  * Imported upstream version 0.9928.
 
- -- intrigeri <intrigeri@debian.org>  Mon, 27 Jun 2016 16:54:06 +0000
+ -- intrigeri <intrigeri@debian.org>  Mon, 27 Jun 2016 15:11:25 +0000
 
 libwx-perl (1:0.9923-4) unstable; urgency=medium
 
