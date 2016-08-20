@@ -2,11 +2,11 @@ Source: libwx-perl
 Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: gregor herrmann <gregoa@debian.org>,
            Damyan Ivanov <dmn@debian.org>,
-           Chris Butler <chrisb@debian.org>,
            Dominic Hargreaves <dom@earth.li>,
            Alessandro Ghedini <ghedo@debian.org>,
            Dominique Dumont <dod@debian.org>
 Section: perl
+Testsuite: autopkgtest-pkg-perl
 Priority: optional
 Build-Depends: debhelper (>= 9.20120312~),
                perl,
@@ -22,7 +22,6 @@ Standards-Version: 3.9.8
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libwx-perl.git
 Vcs-Git: https://anonscm.debian.org/git/pkg-perl/packages/libwx-perl.git
 Homepage: http://wxperl.sourceforge.net/
-Testsuite: autopkgtest-pkg-perl
 
 Package: libwx-perl
 Architecture: any
@@ -35,4 +34,3 @@ Description: interface to wxWidgets cross-platform GUI toolkit
  wxPerl is an extension module allowing the creation of GUI (Graphical
  User Interface) Perl programs using the wxWidgets toolkit. It serves as a Perl
  wrapper around wxWidgets.
-
