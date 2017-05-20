@@ -1,0 +1,20 @@
+Description: comment out "use encoding"
+ which is fatal in perl 5.25.x
+Origin: vendor
+Bug: https://rt.cpan.org/Ticket/Display.html?id=115097
+Bug-Debian: https://bugs.debian.org/826452
+Author: gregor herrmann <gregoa@debian.org>
+Last-Update: 2017-05-20
+Applied-Upstream: r3548, 0.9929
+
+--- a/t/18_unicode.t
++++ b/t/18_unicode.t
+@@ -5,7 +5,7 @@
+ use lib './t';
+ use Tests_Helper qw(in_frame);
+ use Test::More 'tests' => 12;
+-use encoding qw(iso-8859-1);
++#use encoding qw(iso-8859-1);
+ use Encode qw(is_utf8);
+ 
+ my $ascii   = 'Abcde';
