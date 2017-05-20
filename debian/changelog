@@ -1,3 +1,10 @@
+libwx-perl (1:0.9928-3) unstable; urgency=medium
+
+  * Add patch encoding-pragma.patch to disable "use encoding" which is a
+    fatal error since Perl 5.25.x. (Closes: #826452)
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 20 May 2017 13:47:09 +0200
+
 libwx-perl (1:0.9928-2) unstable; urgency=medium
 
   * Remove Chris Butler from Uploaders. Thanks for your work!
