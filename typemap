@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     29/10/2000
-## RCS-ID:      $Id: typemap.tmpl 3521 2014-05-12 10:09:20Z mdootson $
+## RCS-ID:      $Id: typemap 3550 2017-04-10 02:39:52Z mdootson $
 ## Copyright:   (c) 2000-2013 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -64,6 +64,7 @@ wxUpdateUIMode          T_ENUM
 wxWindowVariant         T_ENUM
 wxImageResizeQuality    T_ENUM
 wxAlignment             T_ENUM
+wxScrollbarVisibility   T_ENUM
 
 wxFindReplaceDialogStyles T_ENUM
 wxFindReplaceFlags      T_ENUM

@@ -4,7 +4,7 @@
 ## Author:      Mattia Barbon
 ## Modified by:
 ## Created:     02/12/2000
-## RCS-ID:      $Id: ScrolledWindow.xs 2285 2007-11-11 21:31:54Z mbarbon $
+## RCS-ID:      $Id: ScrolledWindow.xs 3550 2017-04-10 02:39:52Z mdootson $
 ## Copyright:   (c) 2000-2003, 2005-2007 Mattia Barbon
 ## Licence:     This program is free software; you can redistribute it and/or
 ##              modify it under the same terms as Perl itself
@@ -86,6 +86,15 @@ void
 wxScrolledWindow::EnableScrolling( xScrolling, yScrolling )
     bool xScrolling
     bool yScrolling
+    
+#if WXPERL_W_VERSION_GE( 2, 9, 0 )
+
+void
+wxScrolledWindow::ShowScrollbars( horz, vert )
+    wxScrollbarVisibility horz
+    wxScrollbarVisibility vert
+
+#endif
 
 void
 wxScrolledWindow::GetScrollPixelsPerUnit()
