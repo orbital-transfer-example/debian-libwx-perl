@@ -9,6 +9,8 @@ ARCHLIB := $(shell perl -MConfig -e 'print $$Config{vendorarch}')
 
 _DETECTION_CMD := perl -MAlien::wxWidgets -e '$$key = Alien::wxWidgets->key; $$key =~ s/_/-/g; print "$$key";'
 
+export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
+
 $(DEBIAN_TARGETS):
 	dh $@ --parallel
 
