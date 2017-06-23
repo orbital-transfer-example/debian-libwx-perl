@@ -1,3 +1,18 @@
+libwx-perl (1:0.9932-1) unstable; urgency=medium
+
+  * New upstream version 0.9932.
+  * Refresh reproducible_output.patch (offset).
+  * Drop encoding-pragma.patch, unescaped_left_brace.patch.
+    Both fixed upstream.
+  * Drop unneeded version constraint from build dependency.
+  * Use HTTPS for some URLs in debian/{copyright,upstream/metadata}.
+    Thanks to duck.
+  * Add more fixes to spelling.patch.
+  * Set bindnow linker flag in debian/rules.
+  * Declare compliance with Debian Policy 4.0.0.
+
+ -- gregor herrmann <gregoa@debian.org>  Fri, 23 Jun 2017 21:13:00 +0200
+
 libwx-perl (1:0.9928-3) unstable; urgency=medium
 
   * Add patch encoding-pragma.patch to disable "use encoding" which is a
