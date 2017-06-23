@@ -12,7 +12,7 @@ our $alien_key = 'XXXALIENXXX';
     $Wx::dlls = XXXDLLSXXX;
 }
 
-$VERSION = '0.9928'; # bootstrap will catch wrong versions
+$VERSION = '0.9932'; # bootstrap will catch wrong versions
 $XS_VERSION = $VERSION;
 $VERSION = eval $VERSION;
 
@@ -71,6 +71,11 @@ sub _alien_path {
       $wx_path = "$_/Alien/wxWidgets/XXXALIENDXXX/lib";
       last;
     }
+  }
+  
+  if( $wx_path && $^O =~ /mswin/i ) {
+     require Win32;
+     $wx_path = Win32::GetShortPathName( $wx_path );
   }
 }
 
