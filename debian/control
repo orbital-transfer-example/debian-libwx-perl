@@ -11,7 +11,7 @@ Priority: optional
 Build-Depends: debhelper (>= 9.20120312~),
                perl,
                libalien-wxwidgets-perl (>= 0.65+dfsg-3),
-               libextutils-xspp-perl (>= 0.1602),
+               libextutils-xspp-perl,
                libtest-pod-perl,
                libyaml-perl,
                x11-xkb-utils,
