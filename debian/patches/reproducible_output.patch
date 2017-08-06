@@ -35,27 +35,36 @@ Bug-Debian: https://bugs.debian.org/787265
  Wx::build::Options->get_makemaker_options( 'saved' );
 --- a/script/make_exp_list.pl
 +++ b/script/make_exp_list.pl
-@@ -95,7 +95,11 @@
+@@ -15,6 +15,8 @@
+ # @EXPORT_OK and %EXPORT_TAGS for Wx.pm (constants in Constant.xs)
+ #
+ 
++use List::Util qw(uniq);
++
+ my $ext = shift @ARGV;
+ 
+ my $parser;
+@@ -95,7 +97,11 @@ print OUT <<EOT;
  
  package ${package};
  
 -push \@EXPORT_OK, qw(@{$packages{$package}{exp_ok}});
 +push \@EXPORT_OK, qw(
 +EOT
-+print OUT join("\n", sort @{$packages{$package}{exp_ok}});
++print OUT join("\n", sort(uniq(@{$packages{$package}{exp_ok}})));
 +print OUT <<EOT;
 +);
  
  \$EXPORT_TAGS{'everything'} = \\\@EXPORT_OK;
  
-@@ -104,7 +108,11 @@
+@@ -104,7 +110,11 @@ EOT
    foreach my $tag ( sort keys %{ $packages{$package}{tags} } ) {
      next unless length $tag;
      print OUT <<EOT;
 -\$EXPORT_TAGS{'$tag'} = [ qw(@{ $packages{$package}{tags}{$tag} }) ];
 +\$EXPORT_TAGS{'$tag'} = [ qw(
 +EOT
-+print OUT join("\n", sort @{ $packages{$package}{tags}{$tag} });
++print OUT join("\n", sort(uniq(@{ $packages{$package}{tags}{$tag} })));
 +print OUT <<EOT;
 +) ];
  EOT
