@@ -1,3 +1,11 @@
+libwx-perl (1:0.9932-2) unstable; urgency=medium
+
+  * Team upload.
+  * Try harder to make the package build reproducibly, by sorting EXPORT_OK
+    in Wx_Exp.pm.
+
+ -- intrigeri <intrigeri@debian.org>  Sun, 06 Aug 2017 22:15:25 +0000
+
 libwx-perl (1:0.9932-1) unstable; urgency=medium
 
   * New upstream version 0.9932.
