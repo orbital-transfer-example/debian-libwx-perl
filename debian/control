@@ -3,7 +3,6 @@ Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: gregor herrmann <gregoa@debian.org>,
            Damyan Ivanov <dmn@debian.org>,
            Dominic Hargreaves <dom@earth.li>,
-           Alessandro Ghedini <ghedo@debian.org>,
            Dominique Dumont <dod@debian.org>
 Section: perl
 Testsuite: autopkgtest-pkg-perl
