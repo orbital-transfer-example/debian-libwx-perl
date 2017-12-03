@@ -1,6 +1,10 @@
 libwx-perl (1:0.9932-3) UNRELEASED; urgency=medium
 
+  [ Alex Muntada ]
   * Remove inactive pkg-perl members from Uploaders.
+
+  [ Damyan Ivanov ]
+  * declare conformance with Policy 4.1.2 (no changes needed)
 
  -- Alex Muntada <alexm@debian.org>  Sun, 08 Oct 2017 17:36:06 +0200
 
