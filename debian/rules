@@ -14,8 +14,9 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 $(DEBIAN_TARGETS):
 	dh $@ --parallel
 
+# xvfb-run defaults to 8-bit colour depth, which causes some tests to fail.
 override_dh_auto_test:
-	xvfb-run -a dh_auto_test --max-parallel=1
+	xvfb-run -s '-screen 0 640x480x16' -a dh_auto_test --max-parallel=1
 
 override_dh_auto_install:
 	dh_auto_install

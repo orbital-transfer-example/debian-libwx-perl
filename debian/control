@@ -3,13 +3,14 @@ Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
 Uploaders: gregor herrmann <gregoa@debian.org>,
            Damyan Ivanov <dmn@debian.org>,
            Dominic Hargreaves <dom@earth.li>,
-           Dominique Dumont <dod@debian.org>
+           Dominique Dumont <dod@debian.org>,
+           Olly Betts <olly@survex.com>
 Section: perl
 Testsuite: autopkgtest-pkg-perl
 Priority: optional
 Build-Depends: debhelper (>= 9.20120312~),
                perl,
-               libalien-wxwidgets-perl (>= 0.65+dfsg-3),
+               libalien-wxwidgets-perl (>= 0.69+dfsg-2~),
                libextutils-xspp-perl,
                libtest-pod-perl,
                libyaml-perl,
@@ -28,7 +29,7 @@ Depends: ${perl:Depends},
          ${shlibs:Depends},
          ${misc:Depends},
          ${wxperl:Depends},
-         libalien-wxwidgets-perl (>= 0.65+dfsg~)
+         libalien-wxwidgets-perl (>= 0.69+dfsg-2~)
 Description: interface to wxWidgets cross-platform GUI toolkit
  wxPerl is an extension module allowing the creation of GUI (Graphical
  User Interface) Perl programs using the wxWidgets toolkit. It serves as a Perl

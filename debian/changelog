@@ -1,4 +1,4 @@
-libwx-perl (1:0.9932-3) UNRELEASED; urgency=medium
+libwx-perl (1:0.9932-3) unstable; urgency=medium
 
   [ Alex Muntada ]
   * Remove inactive pkg-perl members from Uploaders.
@@ -9,7 +9,13 @@ libwx-perl (1:0.9932-3) UNRELEASED; urgency=medium
   [ Salvatore Bonaccorso ]
   * Update Vcs-* headers for switch to salsa.debian.org
 
- -- Alex Muntada <alexm@debian.org>  Sun, 08 Oct 2017 17:36:06 +0200
+  [ Olly Betts ]
+  * Update version on libalien-wxwidgets-perl dependency and build-dependency
+    to ensure GTK3 flavour of wxWidgets is used in both cases.
+  * Tell xvfb to use a 16-bit colour display for running tests - the default
+    8-bit colour causes some tests to fail.
+
+ -- Olly Betts <olly@survex.com>  Wed, 04 Apr 2018 10:41:11 +1200
 
 libwx-perl (1:0.9932-2) unstable; urgency=medium
 
