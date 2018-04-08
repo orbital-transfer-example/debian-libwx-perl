@@ -1,3 +1,9 @@
+libwx-perl (1:0.9932-4) UNRELEASED; urgency=medium
+
+  * Fix autopkgtest failures with xvfb configuration (Closes: #895189)
+
+ -- Niko Tyni <ntyni@debian.org>  Sun, 08 Apr 2018 16:49:22 +0300
+
 libwx-perl (1:0.9932-3) unstable; urgency=medium
 
   [ Alex Muntada ]
