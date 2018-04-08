@@ -1,0 +1,5 @@
+# as with debian/rules
+#
+# this needs pkg-perl-autopkgtest >= 0.44 to work
+
+PKG_PERL_XVFB_SERVER_ARGS="-screen 0 640x480x16"
