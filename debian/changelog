@@ -1,8 +1,11 @@
-libwx-perl (1:0.9932-4) UNRELEASED; urgency=medium
+libwx-perl (1:0.9932-4) unstable; urgency=medium
 
+  * Team upload.
   * Fix autopkgtest failures with xvfb configuration (Closes: #895189)
+  * Break older (GTK2) versions of libwx-scintilla-perl and
+    libwx-glcanvas-perl. (Closes: #895134)
 
- -- Niko Tyni <ntyni@debian.org>  Sun, 08 Apr 2018 16:49:22 +0300
+ -- Niko Tyni <ntyni@debian.org>  Fri, 13 Apr 2018 19:46:18 +0300
 
 libwx-perl (1:0.9932-3) unstable; urgency=medium
 
