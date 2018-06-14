@@ -1,3 +1,16 @@
+libwx-perl (1:0.9932-5) UNRELEASED; urgency=medium
+
+  * Replace reproducible_output.patch with 2 patches from openSUSE.
+    Thanks to Stefan Brüns for the bug report with the pointer.
+    (Closes: #901544)
+  * Declare compliance with Debian Policy 4.1.4.
+  * Bump debhelper compatibility level to 10.
+  * Remove '--parallel' from default target in debian/rules as it's the
+    default now for debhelper.
+  * Fix typo in description in fix-fake-pod.patch.
+
+ -- gregor herrmann <gregoa@debian.org>  Thu, 14 Jun 2018 22:24:24 +0200
+
 libwx-perl (1:0.9932-4) unstable; urgency=medium
 
   * Team upload.
