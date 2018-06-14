@@ -4,5 +4,6 @@ hashbang.patch
 fix-fake-pod.patch
 spelling.patch
 0001-Fix-Wx-_load_plugin-segfaulting-when-wxPluginManager.patch
-reproducible_output.patch
+0001-Sort-output-of-dumped-dictionaries-for-reproducible-.patch
+0002-Provide-overload-methods-to-XSpp-in-sorted-order.patch
 gtk3.patch
