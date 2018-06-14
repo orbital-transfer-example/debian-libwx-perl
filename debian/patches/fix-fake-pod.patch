@@ -1,4 +1,4 @@
-Description: fix =pod usege where '=for comment' is meant
+Description: fix =pod usage where '=for comment' is meant
  Having it as POD makes it into man page, which is incomplete and useless
 Author: Damyan Ivanov <dmn@debian.org>
 Bug: https://rt.cpan.org/Ticket/Display.html?id=70362
