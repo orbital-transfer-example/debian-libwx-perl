@@ -12,7 +12,7 @@ _DETECTION_CMD := perl -MAlien::wxWidgets -e '$$key = Alien::wxWidgets->key; $$k
 export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
 
 $(DEBIAN_TARGETS):
-	dh $@ --parallel
+	dh $@
 
 # xvfb-run defaults to 8-bit colour depth, which causes some tests to fail.
 override_dh_auto_test:
