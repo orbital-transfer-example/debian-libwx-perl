@@ -1,6 +1,6 @@
 libwx-perl (1:0.9932-5) UNRELEASED; urgency=medium
 
-  * Replace reproducible_output.patch with 2 patches from openSUSE.
+  * Replace reproducible_output.patch with 5 patches from openSUSE.
     Thanks to Stefan Brüns for the bug report with the pointer.
     (Closes: #901544)
   * Declare compliance with Debian Policy 4.1.4.
