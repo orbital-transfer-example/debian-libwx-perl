@@ -1,7 +1,7 @@
 From bebdd9566fb806cb29aeaa8256658f583def4f48 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Stefan=20Br=C3=83=C2=BCns?= <stefan.bruens@rwth-aachen.de>
 Date: Sun, 19 Mar 2017 05:45:08 +0100
-Subject: [PATCH] fix incomplete Wx_Exp.pm due to missing dependecy in
+Subject: [PATCH] fix incomplete Wx_Exp.pm due to missing dependency in
  generated Makefile
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
