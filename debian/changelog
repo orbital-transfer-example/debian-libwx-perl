@@ -1,4 +1,4 @@
-libwx-perl (1:0.9932-5) UNRELEASED; urgency=medium
+libwx-perl (1:0.9932-5) unstable; urgency=medium
 
   * Replace reproducible_output.patch with 5 patches from openSUSE.
     Thanks to Stefan Brüns for the bug report with the pointer.
@@ -9,7 +9,7 @@ libwx-perl (1:0.9932-5) UNRELEASED; urgency=medium
     default now for debhelper.
   * Fix typo in description in fix-fake-pod.patch.
 
- -- gregor herrmann <gregoa@debian.org>  Thu, 14 Jun 2018 22:24:24 +0200
+ -- gregor herrmann <gregoa@debian.org>  Wed, 27 Jun 2018 20:51:40 +0200
 
 libwx-perl (1:0.9932-4) unstable; urgency=medium
 
