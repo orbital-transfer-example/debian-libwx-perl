@@ -6,4 +6,7 @@ spelling.patch
 0001-Fix-Wx-_load_plugin-segfaulting-when-wxPluginManager.patch
 0001-Sort-output-of-dumped-dictionaries-for-reproducible-.patch
 0002-Provide-overload-methods-to-XSpp-in-sorted-order.patch
+0003-Define-overload-constants-in-sorted-order.patch
+0004-Define-enum-values-in-sorted-order.patch
+0001-fix-incomplete-Wx_Exp.pm-due-to-missing-dependecy-in.patch
 gtk3.patch
