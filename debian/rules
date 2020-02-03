@@ -39,4 +39,8 @@ get_perl_wx_version:
 override_dh_gencontrol: get_perl_wx_version
 	dh_gencontrol -- -V'wxperl:Depends=wxperl-$(PERL_WX_VERSION)'
 
-.PHONY: $(DEBIAN_TARGETS) get_perl_wx_version
+.PHONY: $(DEBIAN_TARGETS) get_perl_wx_version build-indep build-arch
+
+build-indep:
+
+build-arch: build
