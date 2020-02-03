@@ -1,3 +1,9 @@
+libwx-perl (1:0.9932-6) UNRELEASED; urgency=medium
+
+  * Bump debhelper from old 10 to 12.
+
+ -- Debian Janitor <janitor@jelmer.uk>  Mon, 03 Feb 2020 04:00:32 +0000
+
 libwx-perl (1:0.9932-5) unstable; urgency=medium
 
   * Replace reproducible_output.patch with 5 patches from openSUSE.
