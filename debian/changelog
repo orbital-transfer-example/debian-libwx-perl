@@ -2,6 +2,8 @@ libwx-perl (1:0.9932-6) UNRELEASED; urgency=medium
 
   * Bump debhelper from old 10 to 12.
   * Set debhelper-compat version in Build-Depends.
+  * Remove obsolete fields Contact, Name from debian/upstream/metadata
+    (already present in machine-readable debian/copyright).
 
  -- Debian Janitor <janitor@jelmer.uk>  Mon, 03 Feb 2020 04:00:32 +0000
 
