@@ -9,7 +9,8 @@ Section: perl
 Testsuite: autopkgtest-pkg-perl
 Priority: optional
 Build-Depends: debhelper-compat (= 12),
-               perl,
+               perl-xs-dev,
+               perl:native,
                libalien-wxwidgets-perl (>= 0.69+dfsg-2~),
                libextutils-xspp-perl,
                libtest-pod-perl,
