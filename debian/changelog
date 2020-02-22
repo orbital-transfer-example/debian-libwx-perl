@@ -9,6 +9,7 @@ libwx-perl (1:0.9932-6) UNRELEASED; urgency=medium
 
   [ gregor herrmann ]
   * debian/control: update Build-Depends for cross builds.
+  * debian/watch: use uscan version 4.
 
  -- Debian Janitor <janitor@jelmer.uk>  Mon, 03 Feb 2020 04:00:32 +0000
 
