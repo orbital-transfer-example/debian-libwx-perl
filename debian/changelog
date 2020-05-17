@@ -10,6 +10,7 @@ libwx-perl (1:0.9932-6) UNRELEASED; urgency=medium
   [ gregor herrmann ]
   * debian/control: update Build-Depends for cross builds.
   * debian/watch: use uscan version 4.
+  * Update 'DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow' to '=+all'.
 
  -- Debian Janitor <janitor@jelmer.uk>  Mon, 03 Feb 2020 04:00:32 +0000
 
