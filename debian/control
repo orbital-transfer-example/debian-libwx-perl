@@ -33,6 +33,7 @@ Depends: ${perl:Depends},
          libalien-wxwidgets-perl (>= 0.69+dfsg-2~)
 Breaks: libwx-scintilla-perl (<< 0.39-4),
         libwx-glcanvas-perl (<< 0.09-4)
+Multi-Arch: same
 Description: interface to wxWidgets cross-platform GUI toolkit
  wxPerl is an extension module allowing the creation of GUI (Graphical
  User Interface) Perl programs using the wxWidgets toolkit. It serves as a Perl
