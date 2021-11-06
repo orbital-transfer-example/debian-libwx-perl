@@ -13,12 +13,12 @@ Build-Depends: debhelper-compat (= 13),
                perl:native,
                libalien-wxwidgets-perl,
                libextutils-xspp-perl,
-               libtest-pod-perl,
-               libyaml-perl,
-               x11-xkb-utils,
-               xauth,
-               xfonts-base,
-               xvfb
+               libtest-pod-perl <!nocheck>,
+               libyaml-perl <!nocheck>,
+               x11-xkb-utils <!nocheck>,
+               xauth <!nocheck>,
+               xfonts-base <!nocheck>,
+               xvfb <!nocheck>
 Standards-Version: 4.6.0
 Vcs-Browser: https://salsa.debian.org/perl-team/modules/packages/libwx-perl
 Vcs-Git: https://salsa.debian.org/perl-team/modules/packages/libwx-perl.git
