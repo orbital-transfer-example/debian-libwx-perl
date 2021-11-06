@@ -1,4 +1,4 @@
-libwx-perl (1:0.9932-6) UNRELEASED; urgency=medium
+libwx-perl (1:0.9932-6) unstable; urgency=medium
 
   [ Debian Janitor ]
   * Bump debhelper from old 10 to 12.
@@ -22,7 +22,15 @@ libwx-perl (1:0.9932-6) UNRELEASED; urgency=medium
     * libwx-perl: Drop versioned constraint on libwx-glcanvas-perl and
       libwx-scintilla-perl in Breaks.
 
- -- Debian Janitor <janitor@jelmer.uk>  Mon, 03 Feb 2020 04:00:32 +0000
+  [ gregor herrmann ]
+  * debian/rules: make usage of $Config{vendorarch}
+    cross-build-compatible.
+  * Declare compliance with Debian Policy 4.6.0.
+  * Set Rules-Requires-Root: no.
+  * Bump debhelper-compat to 13.
+  * Annotate test-only build dependencies with <!nocheck>.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 06 Nov 2021 01:47:36 +0100
 
 libwx-perl (1:0.9932-5) unstable; urgency=medium
 
