@@ -26,12 +26,12 @@ Homepage: http://wxperl.sourceforge.net/
 
 Package: libwx-perl
 Architecture: any
+Multi-Arch: same
 Depends: ${perl:Depends},
          ${shlibs:Depends},
          ${misc:Depends},
          ${wxperl:Depends},
          libalien-wxwidgets-perl
-Multi-Arch: same
 Description: interface to wxWidgets cross-platform GUI toolkit
  wxPerl is an extension module allowing the creation of GUI (Graphical
  User Interface) Perl programs using the wxWidgets toolkit. It serves as a Perl
