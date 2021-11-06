@@ -12,6 +12,16 @@ libwx-perl (1:0.9932-6) UNRELEASED; urgency=medium
   * debian/watch: use uscan version 4.
   * Update 'DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow' to '=+all'.
 
+  [ Debian Janitor ]
+  * Apply multi-arch hints.
+    + libwx-perl: Add Multi-Arch: same.
+  * Remove constraints unnecessary since buster
+    * Build-Depends: Drop versioned constraint on libalien-wxwidgets-perl.
+    * libwx-perl: Drop versioned constraint on libalien-wxwidgets-perl
+      in Depends.
+    * libwx-perl: Drop versioned constraint on libwx-glcanvas-perl and
+      libwx-scintilla-perl in Breaks.
+
  -- Debian Janitor <janitor@jelmer.uk>  Mon, 03 Feb 2020 04:00:32 +0000
 
 libwx-perl (1:0.9932-5) unstable; urgency=medium
