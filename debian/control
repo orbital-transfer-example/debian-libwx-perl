@@ -9,12 +9,12 @@ Section: perl
 Testsuite: autopkgtest-pkg-perl
 Priority: optional
 Build-Depends: debhelper-compat (= 13),
-               perl-xs-dev,
-               perl:native,
                libalien-wxwidgets-perl,
                libextutils-xspp-perl,
                libtest-pod-perl <!nocheck>,
                libyaml-perl <!nocheck>,
+               perl-xs-dev,
+               perl:native,
                x11-xkb-utils <!nocheck>,
                xauth <!nocheck>,
                xfonts-base <!nocheck>,
@@ -28,9 +28,9 @@ Rules-Requires-Root: no
 Package: libwx-perl
 Architecture: any
 Multi-Arch: same
-Depends: ${perl:Depends},
+Depends: ${misc:Depends},
+         ${perl:Depends},
          ${shlibs:Depends},
-         ${misc:Depends},
          ${wxperl:Depends},
          libalien-wxwidgets-perl
 Description: interface to wxWidgets cross-platform GUI toolkit
