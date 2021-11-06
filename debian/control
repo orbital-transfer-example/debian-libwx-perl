@@ -8,7 +8,7 @@ Uploaders: gregor herrmann <gregoa@debian.org>,
 Section: perl
 Testsuite: autopkgtest-pkg-perl
 Priority: optional
-Build-Depends: debhelper-compat (= 12),
+Build-Depends: debhelper-compat (= 13),
                perl-xs-dev,
                perl:native,
                libalien-wxwidgets-perl,
