@@ -1,3 +1,12 @@
+libwx-perl (1:0.9932-7) unstable; urgency=medium
+
+  * Add patch to fix regression with perl >= 5.35.9.
+    Thanks to Niko Tyni for the patch! (Closes: #1014295)
+  * Declare compliance with Debian Policy 4.6.1.
+  * Refresh lintian overrides.
+
+ -- gregor herrmann <gregoa@debian.org>  Fri, 15 Jul 2022 21:19:56 +0200
+
 libwx-perl (1:0.9932-6) unstable; urgency=medium
 
   [ Debian Janitor ]
