@@ -10,3 +10,4 @@ spelling.patch
 0004-Define-enum-values-in-sorted-order.patch
 0001-fix-incomplete-Wx_Exp.pm-due-to-missing-dependecy-in.patch
 gtk3.patch
+0001-Explicitly-return-a-string-SV-from-Wx-InputStream-RE.patch
