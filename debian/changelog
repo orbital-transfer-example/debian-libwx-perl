@@ -1,3 +1,9 @@
+libwx-perl (1:0.9932-8) UNRELEASED; urgency=medium
+
+  * Add patch from wxWidgets 3.2.
+
+ -- gregor herrmann <gregoa@debian.org>  Thu, 15 Sep 2022 19:26:18 +0200
+
 libwx-perl (1:0.9932-7) unstable; urgency=medium
 
   * Add patch to fix regression with perl >= 5.35.9.
