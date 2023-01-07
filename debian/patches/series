@@ -12,3 +12,4 @@ spelling.patch
 gtk3.patch
 0001-Explicitly-return-a-string-SV-from-Wx-InputStream-RE.patch
 wxwidgets_3.2.patch
+wxwidgets3.2-1.patch
