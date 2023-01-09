@@ -11,5 +11,5 @@ spelling.patch
 0001-fix-incomplete-Wx_Exp.pm-due-to-missing-dependecy-in.patch
 gtk3.patch
 0001-Explicitly-return-a-string-SV-from-Wx-InputStream-RE.patch
-wxwidgets_3.2.patch
-wxwidgets3.2-1.patch
+wxWidgets_3.2_MakeMaker.patch
+wxWidgets_3.2_port.patch
