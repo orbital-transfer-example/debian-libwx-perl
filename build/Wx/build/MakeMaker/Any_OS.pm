@@ -122,7 +122,7 @@ sub depend_core {
 
   my %files = $this->files_to_install();
   my %depend = ( _depend_common( $this ),
-                 $exp              => join( ' ', $this->files_with_constants, ),
+                 $exp              => join( ' ', $this->files_with_constants, 'subdirs', ),
                  'wxt_fix_alien'   => 'pm_to_blib',
                  'pm_to_blib'      => 'wxt_copy_files',
                  'blibdirs'        => 'wxt_copy_files',
@@ -200,6 +200,8 @@ sub postamble_core {
   # strictly necessary, but it's better to keep them in case the
   # dependencies here are changed
   require Data::Dumper;
+  # sort output for reproducible builds
+  $Data::Dumper::Sortkeys = 1;
   Wx::build::Utils::write_string( 'files.lst',
                                   Data::Dumper->Dump( [ \%files ] ) );
   # $exp and fix_alien depend on wxt_copy_files to ensure that blib/lib/Wx

@@ -322,7 +322,7 @@ Please see F<docs/INSTALL.pod> in source package.
 
 For wxWidgets 2.9.3 and greater, Wx can switch runtime assertions on
 and off. In wxWidgets 2.9.x and above, there are three levels of
-debuging
+debugging
 
 0 - No debug assertions
 1 - Low cost debug assertions
@@ -342,14 +342,14 @@ you can switch assertions off again by using
 
  Wx::DisableAssertHandler();
 
-You may also set en enviroment variable to cause all invocations
+You may also set an environment variable to cause all invocations
 of Wx to call Wx::EnableDefaultAssertHandler().
 
  export WXPERL_OPTIONS=ENABLE_DEFAULT_ASSERT_HANDLER
 
 This may be useful during tests.
 
-The enviroment setting WXPERL_OPTIONS can contain multiple
+The environment setting WXPERL_OPTIONS can contain multiple
 options. Options are checked for using a simple regex match.
 So
 
@@ -386,7 +386,7 @@ or
 
  $ENV{WXPERL_OPTIONS} = 'NO_MAC_SETFRONTPROCESS';
 
-The enviroment setting WXPERL_OPTIONS can contain multiple
+The environment setting WXPERL_OPTIONS can contain multiple
 options. Options are checked for using a simple regex match.
 So
 

@@ -24,6 +24,7 @@ wxWriteMakefile( NAME            => 'Wx::Perl::SplashFast',
                  AUTHOR          => 'Graciliano M. P. <gm@virtuasites.com.br>',
                  VERSION_FROM    => 'SplashFast.pm',
                  WX_CORE_LIB     => ' ',
+                 test => {TESTS => ' ',},
                 );
 
 }

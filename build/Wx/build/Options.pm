@@ -163,6 +163,8 @@ sub write_config_file {
   my $file = shift;
 
   require Data::Dumper;
+  # sort output for reproducible builds
+  $Data::Dumper::Sortkeys = 1;
   my $str = Data::Dumper->Dump( [ { extra_libs   => $extra_libs,
                                     extra_cflags => $extra_cflags,
                                     alien_key    => $alien_key,

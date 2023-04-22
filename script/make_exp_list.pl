@@ -22,6 +22,11 @@ my %packages;
 my $tag;
 my $package;
 
+sub unique_sorted {
+  my %v = %{ { map { ($_ => 1) } @{$_[0]} } };
+  sort keys %v;
+}
+
 sub add_to_exports {
   my( $values, $tags ) = @_;
 
@@ -91,11 +96,12 @@ package Wx::Wx_Exp; # for RPM
 EOT
 
 foreach my $package ( sort keys %packages ) {
-print OUT <<EOT;
+  my @exp = unique_sorted( $packages{$package}{exp_ok} );
+  print OUT <<EOT;
 
 package ${package};
 
-push \@EXPORT_OK, qw(@{$packages{$package}{exp_ok}});
+push \@EXPORT_OK, qw(@exp);
 
 \$EXPORT_TAGS{'everything'} = \\\@EXPORT_OK;
 
@@ -103,8 +109,9 @@ EOT
 
   foreach my $tag ( sort keys %{ $packages{$package}{tags} } ) {
     next unless length $tag;
+    my @pkgtags = unique_sorted( $packages{$package}{tags}{$tag} );
     print OUT <<EOT;
-\$EXPORT_TAGS{'$tag'} = [ qw(@{ $packages{$package}{tags}{$tag} }) ];
+\$EXPORT_TAGS{'$tag'} = [ qw(@pkgtags) ];
 EOT
   }
 }

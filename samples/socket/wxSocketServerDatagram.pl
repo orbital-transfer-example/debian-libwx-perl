@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 #############################################################################
 ## Name:        samples/socket/wxSocketServerDatagram.pl
 ## Purpose:     wxDatagramSocket demo

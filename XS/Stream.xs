@@ -97,6 +97,7 @@ Wx_InputStream::READLINE()
     if( THIS->Eof() ) { XSRETURN_UNDEF; }
     RETVAL = newSViv( 0 );
     buff = SvPV_nolen( RETVAL );
+    SvPOK_on( RETVAL );
 
     while( THIS->CanRead() && THIS->Read( &c, 1 ).LastRead() != 0 )
     {

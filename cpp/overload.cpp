@@ -145,7 +145,7 @@ void wxPli_overload_error( pTHX_ const char* function,
                            wxPliPrototype* prototypes[] )
 {
     dXSARGS; // restore the mark we implicitly popped in dMARK!
-    SV* message = newSVpv( "Availble methods:\n", 0 );
+    SV* message = newSVpv( "Available methods:\n", 0 );
     sv_2mortal( message );
 
     for( int j = 0; prototypes[j]; ++j )
