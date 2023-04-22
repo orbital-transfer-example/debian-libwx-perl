@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 #############################################################################
 ## Name:        samples/socket/wxSocketClient.pl
 ## Purpose:     wxSocketClient minimal demo

@@ -422,7 +422,10 @@ _load_plugin( string, int flags = 0 /* to be compatible with dl_load_file */ )
 #endif
 #endif
     wxDynamicLibrary *lib = wxPluginManager::LoadLibrary( string, wxDL_VERBATIM );
-    RETVAL = PTR2IV( lib->GetLibHandle() );
+    if (lib)
+        RETVAL = PTR2IV( lib->GetLibHandle() );
+    else
+        RETVAL = 0;
   OUTPUT:
     RETVAL
 

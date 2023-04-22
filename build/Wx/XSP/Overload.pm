@@ -85,13 +85,13 @@ sub post_process {
             $node->add_methods( ExtUtils::XSpp::Node::Raw->new( rows => [ '#include "cpp/overload.h"' ] ) );
         }
 
-        foreach my $method_name ( @ovl_methods ) {
+        foreach my $method_name ( sort @ovl_methods ) {
             _add_overload( $self, $node, $all_methods{$method_name} );
         }
     }
 }
 
-=pod
+=for comment
 
 void
 wxCaret::Move( ... )

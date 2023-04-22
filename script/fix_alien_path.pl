@@ -30,6 +30,8 @@ my $key = Alien::wxWidgets->key;
 my $version = Alien::wxWidgets->version;
 my @libs = Alien::wxWidgets->library_keys;
 my %libs; @libs{@libs} = Alien::wxWidgets->shared_libraries( @libs );
+# sort output for reproducible builds
+$Data::Dumper::Sortkeys = 1;
 my $libs = Data::Dumper::Dumper( \%libs );
 
 my $keyd;

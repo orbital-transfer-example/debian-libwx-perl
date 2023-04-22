@@ -174,7 +174,7 @@ EOT
 
 EOT
 
-    foreach my $i ( grep { $name2type{$_} ne '1' } keys %name2type ) {
+    foreach my $i ( grep { $name2type{$_} ne '1' } sort keys %name2type ) {
       print $out <<EOT;
 #define wxPliOvl${i} "$name2type{$i}"
 EOT

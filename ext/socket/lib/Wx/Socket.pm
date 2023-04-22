@@ -205,7 +205,7 @@ And only after this use:
     ## SetEventHandler
     EVT_SOCKET($handler, $id , sub{...} )
 
-To make the events easier to use, all the proccess is automatic,
+To make the events easier to use, all the process is automatic,
 and you just use:
 
     EVT_SOCKET_INPUT($handler , $socket , sub{...} )

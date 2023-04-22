@@ -45,7 +45,8 @@ sub post_process {
     ( my $name = File::Basename::basename( $parser->current_file ) ) =~ tr/./_/;
     my $file = "xspp/const_$name.h";
     my @defines;
-    while( my( $k, $v ) = each %constants ) {
+    foreach my $k (sort keys %constants) {
+        my $v = $constants{$k};
         if( $v->[0] ) {
             push @defines, "#ifdef $v->[0]",
                            "    r( $k );",
