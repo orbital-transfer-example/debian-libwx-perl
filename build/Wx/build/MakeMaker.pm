@@ -128,7 +128,7 @@ BEGIN {
     local $_ = $Config{osname};
 
     # Win32
-    m/MSWin32/ and do {
+    0 && m/MSWin32/ and do {
       local $_ = File::Basename::basename( $Config{cc} );
 
       m/^cl/i  and $package_to_use = 'Win32_MSVC'  and last SWITCH;
@@ -209,7 +209,7 @@ sub check_core_lib {
 sub get_core_lib {
   my( $this, @libs ) = @_;
 
-  return join ' ', Alien::wxWidgets->libraries( @libs );
+  return join ' ', ':nosearch', Alien::wxWidgets->libraries( @libs ), ':search';
 }
 
 our $is_core = 0;
